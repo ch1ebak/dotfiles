@@ -1,0 +1,4 @@
+TagLib: String::copyFromUTF16() - Invalid UTF16 string. BOM is broken.
+TagLib: String::copyFromUTF16() - Invalid UTF16 string. BOM is broken.
+TagLib: ID3v2.4 no longer supports the frame type TDAT.  It will be discarded from the tag.
+TagLib: Could not open file /home/kd/Music/Taylor Swift/evermore (deluxe version)/1-01 - willow.flac
