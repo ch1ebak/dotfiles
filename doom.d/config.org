@@ -1,6 +1,6 @@
 #+TITLE: Config - Doom Emacs
 #+AUTHOR: Karolina Derwich
-#+PROPERTY: header-args :tangle config.el
++PROPERTY: header-args :tangle config.el
 
 * TABLE OF CONTENTS :toc:
 - [[#browser][Browser]]
@@ -34,7 +34,7 @@
 
 #+BEGIN_SRC emacs-lisp
 
-;; (setq browse-url-browser-function 'eww-browse-url)
+(setq browse-url-browser-function 'eww-browse-url)
 
 #+END_SRC
 
@@ -43,7 +43,7 @@
 #+BEGIN_SRC emacs-lisp
 
 ;; https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-than-3-months
-(defun ja/year-calendar (&optional year)
+(defun kd/year-calendar (&optional year)
   (interactive)
   (require 'calendar)
   (let* (
@@ -75,7 +75,7 @@
     (goto-char (point-min))
     (setq buffer-read-only t)))
 
-(defun ja/scroll-year-calendar-forward (&optional arg event)
+(defun kd/scroll-year-calendar-forward (&optional arg event)
   "Scroll the yearly calendar by year in a forward direction."
   (interactive (list (prefix-numeric-value current-prefix-arg)
                      last-nonmenu-event))
@@ -85,21 +85,21 @@
     (unless (zerop arg)
       (let* (
               (year (+ displayed-year arg)))
-        (ja/year-calendar year)))
+        (kd/year-calendar year)))
     (goto-char (point-min))
     (run-hooks 'calendar-move-hook)))
 
-(defun ja/scroll-year-calendar-backward (&optional arg event)
+(defun kd/scroll-year-calendar-backward (&optional arg event)
   "Scroll the yearly calendar by year in a backward direction."
   (interactive (list (prefix-numeric-value current-prefix-arg)
                      last-nonmenu-event))
-  (ja/scroll-year-calendar-forward (- (or arg 1)) event))
+  (kd/scroll-year-calendar-forward (- (or arg 1)) event))
 
 (map! :leader
-      :desc "Scroll year calendar backward" "<left>" #'ja/scroll-year-calendar-backward
-      :desc "Scroll year calendar forward" "<right>" #'ja/scroll-year-calendar-forward)
+      :desc "Scroll year calendar backward" "<left>" #'kd/scroll-year-calendar-backward
+      :desc "Scroll year calendar forward" "<right>" #'kd/scroll-year-calendar-forward)
 
-(defalias 'year-calendar 'ja/year-calendar)
+(defalias 'year-calendar 'kd/year-calendar)
 
 #+END_SRC
 * Calfw
@@ -444,10 +444,10 @@ List of keybindings (SPC h b b)")
             (mu4e-compose-signature . (concat "Formal Signature\n" "Emacs 25, org-mode 9, mu4e 1.0\n"))
             (mu4e-compose-format-flowed . t)
             (smtpmail-queue-dir . "~/Maildir/acc1-gmail/queue/cur")
-            (message-send-mail-function . smtpmail-send-it)
+            (message-send-mail-function 'smtpmail-send-it)
             (smtpmail-smtp-user . "acc1")
             (smtpmail-starttls-credentials . (("smtp.disroot.org" 587 nil nil)))
-            (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
+            (smtpmail-auth-credentials . (expand-file-name "~/.emacs.d/mu4e/.mbsyncpass-acc1.gpg"))
             (smtpmail-default-smtp-server . "smtp.disroot.org")
             (smtpmail-smtp-server . "smtp.disroot.org")
             (smtpmail-smtp-service . 587)
@@ -468,7 +468,16 @@ List of keybindings (SPC h b b)")
 
 #+BEGIN_SRC emacs-lisp
 
-(setq org-directory "~/Dokumenty/org/org-agenda")
+(after! org
+  (setq org-directory "~/nc/Org/"
+        org-log-done 'time
+        org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
+          '((sequence
+             "TODO(t)"           ; A task that is ready to be tackled
+             "WAIT(w)"           ; Something is holding up this task
+             "|"                 ; The pipe necessary to separate "active" states and "inactive" states
+             "DONE(d)"           ; Task has been completed
+             "CANCELLED(c)" )))) ; Task has been cancelled
 
 #+END_SRC
 
@@ -575,8 +584,8 @@ List of keybindings (SPC h b b)")
 
 #+BEGIN_SRC emacs-lisp
 
-(setq doom-theme 'doom-catppuccin)
-(setq fancy-splash-image "~/.doom.d/gura.png")
+(setq doom-theme 'doom-one)
+;; (setq fancy-splash-image "~/.doom.d/gura.png")
 
 #+END_SRC
 

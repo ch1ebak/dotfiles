@@ -1,7 +1,7 @@
-;; (setq browse-url-browser-function 'eww-browse-url)
+(setq browse-url-browser-function 'eww-browse-url)
 
 ;; https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-than-3-months
-(defun ja/year-calendar (&optional year)
+(defun kd/year-calendar (&optional year)
   (interactive)
   (require 'calendar)
   (let* (
@@ -33,7 +33,7 @@
     (goto-char (point-min))
     (setq buffer-read-only t)))
 
-(defun ja/scroll-year-calendar-forward (&optional arg event)
+(defun kd/scroll-year-calendar-forward (&optional arg event)
   "Scroll the yearly calendar by year in a forward direction."
   (interactive (list (prefix-numeric-value current-prefix-arg)
                      last-nonmenu-event))
@@ -43,21 +43,21 @@
     (unless (zerop arg)
       (let* (
               (year (+ displayed-year arg)))
-        (ja/year-calendar year)))
+        (kd/year-calendar year)))
     (goto-char (point-min))
     (run-hooks 'calendar-move-hook)))
 
-(defun ja/scroll-year-calendar-backward (&optional arg event)
+(defun kd/scroll-year-calendar-backward (&optional arg event)
   "Scroll the yearly calendar by year in a backward direction."
   (interactive (list (prefix-numeric-value current-prefix-arg)
                      last-nonmenu-event))
-  (ja/scroll-year-calendar-forward (- (or arg 1)) event))
+  (kd/scroll-year-calendar-forward (- (or arg 1)) event))
 
 (map! :leader
-      :desc "Scroll year calendar backward" "<left>" #'ja/scroll-year-calendar-backward
-      :desc "Scroll year calendar forward" "<right>" #'ja/scroll-year-calendar-forward)
+      :desc "Scroll year calendar backward" "<left>" #'kd/scroll-year-calendar-backward
+      :desc "Scroll year calendar forward" "<right>" #'kd/scroll-year-calendar-forward)
 
-(defalias 'year-calendar 'ja/year-calendar)
+(defalias 'year-calendar 'kd/year-calendar)
 
 (use-package! calfw)
 (use-package! calfw-org)
@@ -339,7 +339,16 @@ List of keybindings (SPC h b b)")
                                         ("/acc1-gmail/[acc1].drafts"    . ?d)
                                         ))))))
 
-(setq org-directory "~/Dokumenty/org/org-agenda")
+(after! org
+  (setq org-directory "~/nc/Org/"
+        org-log-done 'time
+        org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
+          '((sequence
+             "TODO(t)"           ; A task that is ready to be tackled
+             "WAIT(w)"           ; Something is holding up this task
+             "|"                 ; The pipe necessary to separate "active" states and "inactive" states
+             "DONE(d)"           ; Task has been completed
+             "CANCELLED(c)" )))) ; Task has been cancelled
 
 (defun org-archive-done-tasks ()
   (interactive)
@@ -404,8 +413,8 @@ List of keybindings (SPC h b b)")
 
 (setq shell-file-name "/bin/fish")
 
-(setq doom-theme 'doom-catppuccin)
-(setq fancy-splash-image "~/.doom.d/gura.png")
+(setq doom-theme 'doom-one)
+;; (setq fancy-splash-image "~/.doom.d/gura.png")
 
 (setq frame-resize-pixelwise t)
 (setq display-line-numbers-type t)
