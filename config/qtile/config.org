@@ -52,8 +52,7 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 keys = [
      # Apps
     Key([mod], "w", lazy.spawn("firefox"), desc="Launch firefox"),
-    Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'"), desc="Launch emacsclient"),
-    Key([mod, "shift"], "e", lazy.spawn("emacs"), desc="Launch emacs"),
+    Key([mod], "e", lazy.spawn("emacs"), desc="Launch emacs"),
     Key([mod], "a", lazy.spawn("pcmanfm"), desc="Launch pcmanfm"),
     Key([mod], "d", lazy.spawn("signal-desktop"), desc="Launch signal"),
     Key([mod], "g", lazy.spawn("brave"), desc="Launch brave"),
@@ -64,6 +63,33 @@ keys = [
     # Rofi
     Key([mod, "shift"], "q", lazy.spawn("rofi -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu"), desc="Rofi Power Menu"),
     Key([mod], "s", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
+
+    #KeyChord-emacs
+         KeyChord([mod],"e", [
+             Key([], "e",
+                 lazy.spawn("emacsclient -c -a 'emacs'"),
+                 desc='Launch Emacs'
+                 ),
+             Key([], "d",
+                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"),
+                 desc='Launch dired inside Emacs'
+                 ),
+             Key([], "m",
+                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(mu4e)'"),
+                 desc='Launch mu4e inside Emacs'
+                 ),
+             Key([], "n",
+                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(elfeed)'"),
+                 desc='Launch elfeed inside Emacs'
+                 ),
+             Key([], "s",
+                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(eshell)'"),
+                 desc='Launch the eshell inside Emacs'
+                 ),
+             Key([], "v",
+                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"),
+                 desc='Launch vterm inside Emacs'),
+                 ]),
 
     # App control
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -82,8 +108,9 @@ keys = [
     Key([mod], 'Escape', lazy.screen.togglegroup()),
 
     # Switch between screens
-    Key([mod], "z", lazy.to_screen(1)),
-    Key([mod], "c", lazy.to_screen(0)),
+    Key([mod], "z", lazy.to_screen(2)),
+    Key([mod], "c", lazy.to_screen(1)),
+    Key([mod], "x", lazy.to_screen(0)),
 
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -133,33 +160,17 @@ keys = [
 
 from libqtile.config import Group, Match
 
-groups = [Group("1", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
+groups = [
+       Group("1", label="", layout='monadtall', matches=[Match(wm_class=["signal", "discord", "teams", "ferdi"])]),
        Group("2", label="", layout='monadtall', matches=[Match(wm_class=["brave"])]),
-       Group("3", label="", layout='monadtall', matches=[Match(wm_class=["signal", "discord", "teams", "ferdi"])]),
-       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["kitty", "alacritty", "termite"])]),
+       Group("3", label="", layout='monadtall', matches=[Match(wm_class=["kitty", "alacritty", "termite"])]),
+       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
        Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm", "calibre", "catfish"])]),
-       Group("6", label="", layout='max', matches=[Match(wm_class=["steam", "lutris", "heroic"])]),
-       Group("7", label="", layout='max', matches=[Match(wm_class=["virt-manager", "gimp"])]),
+       Group("6", label="", layout='max', matches=[Match(wm_class=["steam", "lutris", "heroic","virt-manager","virtualbox", "gimp"])]),
+       Group("7", label="", layout='max'),
        Group("8", label="", layout='monadtall', matches=[Match(wm_class=["deadbeef", "spotify"])]),
-       Group("9", label="", layout='monadwide', matches=[Match(wm_class=["vlc", "mpv"])])]
-
-#groups = [Group("1", label="", layout='monadtall', matches=[Match(wm_class=["signal", "discord", "teams"])]),
-#         Group("2", label="", layout='monadtall'),
-#         Group("3", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
-#         Group("4", label="", layout='monadtall', matches=[Match(wm_class=["kitty"])]),
-#         Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm", "calibre", "catfish"])]),
-#         Group("6", label="", layout='max', matches=[Match(wm_class=["virt-manager", "gimp"])]),
-#         Group("7", label="", layout='monadtall'),
-#         Group("8", label="", layout='monadwide', matches=[Match(wm_class=["qutebrowser"])])]
-
-# groups = [Group("1", label="emacs", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
-         # Group("2", label="www", layout='monadtall', matches=[Match(wm_class=["brave"])]),
-         # Group("3", label="chat", layout='monadtall', matches=[Match(wm_class=["discord", "signal" "telegram"])]),
-         # Group("4", label="term", layout='monadtall', matches=[Match(wm_class=["kitty", "alacritty", "termite"])]),
-         # Group("5", label="file", layout='monadtall', matches=[Match(wm_class=["pcmanfm", "calibre", "catfish"])]),
-         # Group("6", label="gfk", layout='max', matches=[Match(wm_class=["virt-manager", "gimp"])]),
-         # Group("7", label="audio", layout='monadtall', matches=[Match(wm_class=["deadbeef"])]),
-         # Group("8", label="video", layout='monadwide', matches=[Match(wm_class=["vlc", "mpv"])])]
+       Group("9", label="", layout='monadwide', matches=[Match(wm_class=["vlc", "mpv"])])
+       ]
 
 for i in range(len(groups)):
     keys.append(Key([mod], str((i)), lazy.group[str(i)].toscreen()))
@@ -256,7 +267,6 @@ layout_theme = {"border_width": 2,
 layouts = [
     layout.MonadWide(**layout_theme),
     layout.MonadTall(**layout_theme),
-    layout.Bsp(**layout_theme),
     layout.Max(**layout_theme),
     layout.Floating(**layout_theme)
 ]
@@ -295,7 +305,6 @@ screens = [
                        ),
               widget.GroupBox(
                        fontsize = 21,
-                       # fontsize = 11,
                        margin_y = 3,
                        margin_x = 0,
                        padding_y = 5,
@@ -333,19 +342,14 @@ screens = [
                        linewidth = 0,
                        padding = 5,
                        ),
-              widget.Systray(),
-              widget.Sep(
-                       linewidth = 0,
-                       padding = 5,
-                       ),
               widget.TextBox(
                        text = "|",
                        fontsize = 12,
                        foreground = colors[2],
                        ),
               widget.Net(
-                      interface = "wlo1",
-                      format = '{down} ↓↑ {up}',
+                      interface = "wlan0",
+                      format = '  {down} ↓↑ {up}',
                       padding = 5,
                       ),
               widget.Sep(
@@ -358,6 +362,7 @@ screens = [
                       foreground = colors[2],
                       ),
               widget.Memory(
+                      format = '  {MemUsed: .0f}{mm}',
                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e bpytop')},
                       padding = 5
                       ),
@@ -371,8 +376,10 @@ screens = [
                       foreground = colors[2],
                       ),
               widget.CPU(
-                      padding = 5
-                   ),
+                      padding = 5,
+                      mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e bpytop')},
+                      format = '  {load_percent}%',
+                      ),
               widget.Sep(
                       linewidth = 0,
                       padding = 5,
@@ -385,7 +392,7 @@ screens = [
               widget.Wttr(
                        padding = 5,
                        location={'Pleszew': 'Pleszew'},
-                       # mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e curl wttr.in/pleszew')}
+                       format = '  %t'
                        ),
               widget.Sep(
                        linewidth = 0,
@@ -397,12 +404,19 @@ screens = [
                        foreground = colors[2],
                        ),
               widget.Clock(
-                       format = "%d.%m.%y - %H:%M "
+                       format = "  %d.%m.%y - %H:%M ",
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e calcure')},
                        ),
               widget.Sep(
                        linewidth = 0,
                        padding = 5,
                        ),
+              widget.TextBox(
+                       text = "|",
+                       fontsize = 12,
+                       foreground = colors[2],
+                       ),
+              widget.Systray(),
               widget.CurrentLayoutIcon(
                        custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
                        padding = 5,
@@ -412,7 +426,6 @@ screens = [
                        linewidth = 0,
                        padding = 5,
                        ),
-              widget.Notify(foreground="FF0000", fontsize=18, font="Anonymous Pro"),
             ], 24, ), ),
     Screen(
         top=bar.Bar(
@@ -465,7 +478,7 @@ screens = [
                        foreground = colors[2],
                        ),
               widget.Clock(
-                       format = "%d.%m.%y - %H:%M "
+                       format = "  %d.%m.%y - %H:%M ",
                        ),
               widget.Sep(
                        linewidth = 0,
@@ -532,7 +545,7 @@ screens = [
                        foreground = colors[2],
                        ),
               widget.Clock(
-                       format = "%d.%m.%y - %H:%M "
+                       format = "  %d.%m.%y - %H:%M ",
                        ),
               widget.Sep(
                        linewidth = 0,
@@ -616,13 +629,13 @@ auto_minimize = True
 
 @hook.subscribe.startup_once
 def autostart():
-    qtile.cmd_spawn("nitrogen --restore")
-    qtile.cmd_spawn("picom")
-    qtile.cmd_spawn("udiskie -a")
-    qtile.cmd_spawn("nm-applet")
-    qtile.cmd_spawn("volumeicon")
-    qtile.cmd_spawn("/usr/bin/emacs --daemon")
-    qtile.cmd_spawn("xrandr --output eDP1 --off --output DP1 --mode 1280x1024 --pos 0x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off --output HDMI-1-0 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off")
+    qtile.cmd_spawn("nitrogen --restore &")
+    qtile.cmd_spawn("udiskie -a &")
+    # qtile.cmd_spawn("nm-applet &")
+    qtile.cmd_spawn("volumeicon &")
+    qtile.cmd_spawn("connman-gtk &")
+    qtile.cmd_spawn("/usr/bin/emacs --daemon &")
+    qtile.cmd_spawn("xrandr --output eDP1 --mode 1920x1080 --pos 3200x0 --rotate normal --output DP1 --mode 1280x1024 --pos 0x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off --output HDMI-1-0 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off")
 
     for p in processes:
         subprocess.Popen(p)
