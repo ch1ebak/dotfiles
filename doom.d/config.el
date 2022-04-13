@@ -74,8 +74,7 @@ Open buffer list    (SPC b i)\
 Open the eshell     (SPC e s)\
 \nOpen dired file manager (SPC d d)   \
 List of keybindings (SPC h b b)")
-  ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
-  (setq dashboard-startup-banner "~/.doom.d/gura.png")  ;; use custom image as banner
+  (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-items '((recents . 5)
                           (agenda . 5 )

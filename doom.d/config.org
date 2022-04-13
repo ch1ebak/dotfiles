@@ -1,6 +1,6 @@
 #+TITLE: Config - Doom Emacs
 #+AUTHOR: Karolina Derwich
-+PROPERTY: header-args :tangle config.el
+#+PROPERTY: header-args :tangle config.el
 
 * TABLE OF CONTENTS :toc:
 - [[#browser][Browser]]
@@ -127,8 +127,7 @@ Open buffer list    (SPC b i)\
 Open the eshell     (SPC e s)\
 \nOpen dired file manager (SPC d d)   \
 List of keybindings (SPC h b b)")
-  ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
-  (setq dashboard-startup-banner "~/.doom.d/gura.png")  ;; use custom image as banner
+  (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-items '((recents . 5)
                           (agenda . 5 )
@@ -444,10 +443,10 @@ List of keybindings (SPC h b b)")
             (mu4e-compose-signature . (concat "Formal Signature\n" "Emacs 25, org-mode 9, mu4e 1.0\n"))
             (mu4e-compose-format-flowed . t)
             (smtpmail-queue-dir . "~/Maildir/acc1-gmail/queue/cur")
-            (message-send-mail-function 'smtpmail-send-it)
+            (message-send-mail-function . smtpmail-send-it)
             (smtpmail-smtp-user . "acc1")
             (smtpmail-starttls-credentials . (("smtp.disroot.org" 587 nil nil)))
-            (smtpmail-auth-credentials . (expand-file-name "~/.emacs.d/mu4e/.mbsyncpass-acc1.gpg"))
+            (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
             (smtpmail-default-smtp-server . "smtp.disroot.org")
             (smtpmail-smtp-server . "smtp.disroot.org")
             (smtpmail-smtp-service . 587)
