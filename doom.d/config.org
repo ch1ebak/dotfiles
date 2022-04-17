@@ -3,6 +3,7 @@
 #+PROPERTY: header-args :tangle config.el
 
 * TABLE OF CONTENTS :toc:
+- [[#all-the-icons][All the icons]]
 - [[#browser][Browser]]
 - [[#calendar][Calendar]]
 - [[#calfw][Calfw]]
@@ -10,6 +11,7 @@
 - [[#elfeed][Elfeed]]
 - [[#emms][EMMS]]
 - [[#epub][EPUB]]
+- [[#erc][ERC]]
 - [[#expand-region][Expand region]]
 - [[#exwm][EXWM]]
   - [[#window-manager][window manager]]
@@ -26,9 +28,22 @@
   - [[#org-notify][org notify]]
   - [[#org-roam][org roam]]
 - [[#pandoc-mode][Pandoc-mode]]
+- [[#rainbow-mode][Rainbow mode]]
 - [[#shell][Shell]]
 - [[#theme][Theme]]
 - [[#other][Other]]
+
+* All the icons
+
+#+begin_src emacs-lisp
+
+(when (display-graphic-p)
+  (require 'all-the-icons))
+;; or
+(use-package all-the-icons
+  :if (display-graphic-p))
+
+#+end_src
 
 * Browser
 
@@ -119,6 +134,7 @@
   :init      ;; tweak dashboard config before loading it
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 (setq doom-fallback-buffer "*dashboard*")
   (setq dashboard-banner-logo-title "\nKEYBINDINGS:\
 \nFind file               (SPC .)     \
@@ -208,6 +224,28 @@ List of keybindings (SPC h b b)")
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 
 #+END_SRC
+
+* ERC
+
+#+begin_src emacs-lisp
+
+(map! :leader
+      (:prefix ("e". "evaluate/ERC/EWW")
+       :desc "Launch ERC with TLS connection" "E" #'erc-tls))
+
+(setq erc-server "irc.libera.chat"
+      erc-nick "anilorak"
+      erc-track-shorten-start 24
+      erc-autojoin-channels-alist '(("irc.libera.chat" "#emacs" "#linux"))
+      erc-kill-buffer-on-part t
+      erc-fill-column 100
+      erc-fill-function 'erc-fill-static
+      erc-fill-static-center 20
+      ;; erc-auto-query 'bury
+      )
+
+
+#+end_src
 
 * Expand region
 
@@ -570,6 +608,16 @@ List of keybindings (SPC h b b)")
 (add-hook 'org-mode-hook 'pandoc-mode)
 
 #+END_SRC
+
+* Rainbow mode
+
+#+begin_src emacs-lisp
+
+;; (define-globalized-minor-mode global-rainbow-mode rainbow-mode
+  ;; (lambda () (rainbow-mode 1)))
+;; (global-rainbow-mode 1 )
+
+#+end_src
 
 * Shell
 

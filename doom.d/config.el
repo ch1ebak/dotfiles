@@ -1,3 +1,9 @@
+(when (display-graphic-p)
+  (require 'all-the-icons))
+;; or
+(use-package all-the-icons
+  :if (display-graphic-p))
+
 (setq browse-url-browser-function 'eww-browse-url)
 
 ;; https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-than-3-months
@@ -66,6 +72,7 @@
   :init      ;; tweak dashboard config before loading it
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 (setq doom-fallback-buffer "*dashboard*")
   (setq dashboard-banner-logo-title "\nKEYBINDINGS:\
 \nFind file               (SPC .)     \
@@ -136,6 +143,21 @@ List of keybindings (SPC h b b)")
        :desc "Emms play next track" "n" #'emms-next))
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
+(map! :leader
+      (:prefix ("e". "evaluate/ERC/EWW")
+       :desc "Launch ERC with TLS connection" "E" #'erc-tls))
+
+(setq erc-server "irc.libera.chat"
+      erc-nick "anilorak"
+      erc-track-shorten-start 24
+      erc-autojoin-channels-alist '(("irc.libera.chat" "#emacs" "#linux"))
+      erc-kill-buffer-on-part t
+      erc-fill-column 100
+      erc-fill-function 'erc-fill-static
+      erc-fill-static-center 20
+      ;; erc-auto-query 'bury
+      )
 
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
@@ -409,6 +431,10 @@ List of keybindings (SPC h b b)")
   (org-roam-setup))
 
 (add-hook 'org-mode-hook 'pandoc-mode)
+
+;; (define-globalized-minor-mode global-rainbow-mode rainbow-mode
+  ;; (lambda () (rainbow-mode 1)))
+;; (global-rainbow-mode 1 )
 
 (setq shell-file-name "/bin/fish")
 

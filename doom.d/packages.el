@@ -69,3 +69,8 @@
 (package! calfw)
 (package! calfw-org)
 (package! nov)
+(package! all-the-icons)
+(package! undo-tree)
+(package! dimmer)
+(package! dired-hacks)
+(package! dashboard)
