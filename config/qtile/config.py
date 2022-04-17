@@ -17,13 +17,9 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 keys = [
      # Apps
-    Key([mod], "w", lazy.spawn("firefox"), desc="Launch firefox"),
-    Key([mod], "e", lazy.spawn("emacs"), desc="Launch emacs"),
+    Key([mod], "w", lazy.spawn("librewolf"), desc="Launch LibreWolf"),
     Key([mod], "a", lazy.spawn("pcmanfm"), desc="Launch pcmanfm"),
     Key([mod], "d", lazy.spawn("signal-desktop"), desc="Launch signal"),
-    Key([mod], "g", lazy.spawn("brave"), desc="Launch brave"),
-    Key([mod], "r", lazy.spawn("keepassxc"), desc="Launch keepassxc"),
-    Key([mod], "v", lazy.spawn("catfish"), desc="catfish"),
     Key([mod], "Return", lazy.spawn("kitty"), desc="Launch terminal"),
 
     # Rofi
@@ -32,8 +28,12 @@ keys = [
 
     #KeyChord-emacs
          KeyChord([mod],"e", [
-             Key([], "e",
+             Key([], "c",
                  lazy.spawn("emacsclient -c -a 'emacs'"),
+                 desc='Launch Emacsclient'
+                 ),
+             Key([], "e",
+                 lazy.spawn("emacs"),
                  desc='Launch Emacs'
                  ),
              Key([], "d",
@@ -124,12 +124,12 @@ groups = [
        Group("1", label="", layout='monadtall', matches=[Match(wm_class=["signal", "discord", "teams", "ferdi"])]),
        Group("2", label="", layout='monadtall', matches=[Match(wm_class=["brave"])]),
        Group("3", label="", layout='monadtall', matches=[Match(wm_class=["kitty", "alacritty", "termite"])]),
-       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
+       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["emacs", "geany"])]),
        Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm", "calibre", "catfish"])]),
-       Group("6", label="", layout='max', matches=[Match(wm_class=["steam", "lutris", "heroic","virt-manager","virtualbox", "gimp"])]),
-       Group("7", label="", layout='max'),
+       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["steam", "lutris", "heroic","virt-manager","virtualbox", "gimp"])]),
+       Group("7", label="", layout='monadtall'),
        Group("8", label="", layout='monadtall', matches=[Match(wm_class=["deadbeef", "spotify"])]),
-       Group("9", label="", layout='monadwide', matches=[Match(wm_class=["vlc", "mpv"])])
+       Group("9", label="", layout='monadtall', matches=[Match(wm_class=["vlc", "mpv"])])
        ]
 
 for i in range(len(groups)):
@@ -544,8 +544,7 @@ auto_minimize = True
 @hook.subscribe.startup_once
 def autostart():
     qtile.cmd_spawn("nitrogen --restore &")
-    qtile.cmd_spawn("udiskie -a &")
-    # qtile.cmd_spawn("nm-applet &")
+    qtile.cmd_spawn("picom")
     qtile.cmd_spawn("volumeicon &")
     qtile.cmd_spawn("connman-gtk &")
     qtile.cmd_spawn("/usr/bin/emacs --daemon &")
