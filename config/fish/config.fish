@@ -79,6 +79,9 @@ alias grubreload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 ## Merge Xresources
 alias merge='xrdb -merge ~/.Xresources'
 
+## Mount
+alias mountvm='doas mount -t 9p -o trans=virtio /sharepoint share'
+
 ## mkdir
 alias mkdir='mkdir -pv'
 
