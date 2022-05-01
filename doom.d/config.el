@@ -73,7 +73,7 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-(setq doom-fallback-buffer "*dashboard*")
+  (setq doom-fallback-buffer "*dashboard*")
   (setq dashboard-banner-logo-title "\nKEYBINDINGS:\
 \nFind file               (SPC .)     \
 Open buffer list    (SPC b i)\
@@ -81,7 +81,8 @@ Open buffer list    (SPC b i)\
 Open the eshell     (SPC e s)\
 \nOpen dired file manager (SPC d d)   \
 List of keybindings (SPC h b b)")
-  (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
+  ;; (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
+  (setq dashboard-banner-logo-title "stan emacs")
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-items '((recents . 5)
                           (agenda . 5 )
@@ -121,9 +122,13 @@ List of keybindings (SPC h b b)")
                      ("https://feeds.feedburner.com/ItsFoss" linux)
                      ("https://www.linuxjournal.com/" linux)
                      ("https://stare.pro/" tech)
+                     ("https://antyweb.pl" tech)
                      ("https://www.masteringemacs.org/" emacs)
                      ("https://jembendell.com/" nature)
-                     ("https://consensus911.org/" nature)
+                     ("https://consensus911.org/" conspiracy)
+                     ("https://gamingonlinux.com/" linux)
+                     ("https://9to5linux.com/" linux)
+                     ("https://lwn.net/" linux)
                      ("https://www.g-central.com/feed/" watch))))
 
 (emms-all)
@@ -438,7 +443,7 @@ List of keybindings (SPC h b b)")
 
 (setq shell-file-name "/bin/fish")
 
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-dracula)
 ;; (setq fancy-splash-image "~/.doom.d/gura.png")
 
 (setq frame-resize-pixelwise t)
