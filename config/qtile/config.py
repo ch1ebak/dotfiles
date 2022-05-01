@@ -17,7 +17,7 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 keys = [
      # Apps
-    Key([mod], "w", lazy.spawn("librewolf"), desc="Launch LibreWolf"),
+    Key([mod], "w", lazy.spawn("firefox"), desc="Launch firefox"),
     Key([mod], "a", lazy.spawn("pcmanfm"), desc="Launch pcmanfm"),
     Key([mod], "d", lazy.spawn("signal-desktop"), desc="Launch signal"),
     Key([mod], "Return", lazy.spawn("kitty"), desc="Launch terminal"),
@@ -122,12 +122,12 @@ from libqtile.config import Group, Match
 
 groups = [
        Group("1", label="", layout='monadtall', matches=[Match(wm_class=["signal", "discord", "teams", "ferdi"])]),
-       Group("2", label="", layout='monadtall', matches=[Match(wm_class=["brave"])]),
+       Group("2", label="", layout='monadtall', matches=[Match(wm_class=["brave", "qutebrowser"])]),
        Group("3", label="", layout='monadtall', matches=[Match(wm_class=["kitty", "alacritty", "termite"])]),
-       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["emacs", "geany"])]),
-       Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm", "calibre", "catfish"])]),
-       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["steam", "lutris", "heroic","virt-manager","virtualbox", "gimp"])]),
-       Group("7", label="", layout='monadtall'),
+       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["emacs", "geany", "libreoffice"])]),
+       Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm", "calibre", "catfish", "feh", "shotwell"])]),
+       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["steam", "lutris", "heroic"])]),
+       Group("7", label="", layout='monadtall', matches=[Match(wm_class=["virt-manager","virtualbox", "gimp"])]),
        Group("8", label="", layout='monadtall', matches=[Match(wm_class=["deadbeef", "spotify"])]),
        Group("9", label="", layout='monadtall', matches=[Match(wm_class=["vlc", "mpv"])])
        ]
@@ -205,10 +205,11 @@ layout_theme = {"border_width": 2,
                 }
 
 layouts = [
-    layout.MonadWide(**layout_theme),
+    # layout.MonadWide(**layout_theme),
     layout.MonadTall(**layout_theme),
+    layout.Bsp(**layout_theme),
     layout.Max(**layout_theme),
-    layout.Floating(**layout_theme)
+    # layout.Floating(**layout_theme)
 ]
 
 widget_defaults = dict(

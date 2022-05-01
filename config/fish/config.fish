@@ -21,9 +21,10 @@ set BROWSER "firefox"
 ### EYE CANDY
 
 ## Color themes
-# set -Ux FZF_DEFAULT_OPTS "--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
-# set theme_color_scheme dracula
-set theme_color_scheme catppuccin
+# fzf
+set -Ux FZF_DEFAULT_OPTS "--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
+set theme_color_scheme dracula
+# set theme_color_scheme catppuccin
 
 ## Fetch
 # pfetch
@@ -46,12 +47,12 @@ alias yaysyu='yay -Syu'                          # update standard pkgs and AUR 
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages
 alias packagelist='sudo pacman -Qe > packages.txt'
 
-# void - xbps and xi
-alias gp='doas xbps-install'
-alias rp='doas xbps-remove -R'
-alias cleanup='doas xbps-remove -Oo'
-alias xi='doas xi'
-alias xsu='doas xbps-install -Su'
+##void - xbps and xi
+# alias gp='doas xbps-install'
+# alias rp='doas xbps-remove -R'
+# alias cleanup='doas xbps-remove -Oo'
+# alias xi='doas xi'
+# alias xsu='doas xbps-install -Su'
 
 ## Bpytop
 alias bt='bpytop'
@@ -72,6 +73,8 @@ alias emacsd='/usr/bin/emacs --daemon &'
 alias doom='~/.emacs.d/bin/doom sync'
 alias doomup='~/.emacs.d/bin/doom upgrade'
 alias kemacs='killall emacs'
+alias mu4emu='time mu init --maildir=~/Maildir/ --my-address=address'
+alias mu4emb='time mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a'
 
 ## grub
 alias grubreload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
@@ -85,6 +88,10 @@ alias mountvm='doas mount -t 9p -o trans=virtio /sharepoint share'
 ## mkdir
 alias mkdir='mkdir -pv'
 
+## Reboot
+alias reboot='sudo reboot'
+alias shutdown='sudo shutdown now'
+
 ## Root priviledges
 alias sudo='doas'
 
@@ -96,3 +103,6 @@ alias tsl='sudo timeshift --list'
 alias wpl='curl wttr.in/pleszew'
 alias wpo='curl wttr.in/poznan'
 alias wv='curl wttr.in/irvine'
+
+## Picom
+alias kap='killall picom'
