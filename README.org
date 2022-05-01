@@ -1,13 +1,13 @@
 #+TITLE: README
 #+AUTHOR: ch1ebak
 
-| A              | B               |
-|----------------+-----------------|
-| window manager | qtile           |
-| shell          | fish            |
-| terminal       | kitty/alacritty |
-| text editor    | doom emacs      |
-| music player   | ncmpcpp         |
-| launcher       | rofi            |
-| notifications  | dunst           |
-| theme          | catppuccin      |
+| A              | B                  |
+|----------------+--------------------|
+| window manager | qtile              |
+| shell          | fish/bash          |
+| terminal       | kitty              |
+| text editor    | doom emacs/geany   |
+| music player   | ncmpcpp            |
+| launcher       | rofi               |
+| notifications  | dunst              |
+| theme          | catppuccin/dracula |
