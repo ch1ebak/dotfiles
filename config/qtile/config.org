@@ -51,45 +51,58 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 keys = [
      # Apps
-    Key([mod], "w", lazy.spawn("firefox"), desc="Launch firefox"),
+    Key([mod], "w", lazy.spawn("firefox-nightly"), desc="Launch firefox"),
     Key([mod], "a", lazy.spawn("pcmanfm"), desc="Launch pcmanfm"),
     Key([mod], "d", lazy.spawn("signal-desktop"), desc="Launch signal"),
     Key([mod], "Return", lazy.spawn("kitty"), desc="Launch terminal"),
+    Key([mod], "p", lazy.spawn("slock"), desc="Launch lock screen"),
 
     # Rofi
-    Key([mod, "shift"], "q", lazy.spawn("rofi -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu"), desc="Rofi Power Menu"),
+    Key([mod, "shift"], "p", lazy.spawn("rofi -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu"), desc="Rofi Power Menu"),
     Key([mod], "s", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
 
     #KeyChord-emacs
          KeyChord([mod],"e", [
-             Key([], "c",
-                 lazy.spawn("emacsclient -c -a 'emacs'"),
-                 desc='Launch Emacsclient'
-                 ),
-             Key([], "e",
-                 lazy.spawn("emacs"),
-                 desc='Launch Emacs'
-                 ),
-             Key([], "d",
-                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"),
-                 desc='Launch dired inside Emacs'
-                 ),
-             Key([], "m",
-                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(mu4e)'"),
-                 desc='Launch mu4e inside Emacs'
-                 ),
-             Key([], "n",
-                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(elfeed)'"),
-                 desc='Launch elfeed inside Emacs'
-                 ),
-             Key([], "s",
-                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(eshell)'"),
-                 desc='Launch the eshell inside Emacs'
-                 ),
-             Key([], "v",
-                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"),
-                 desc='Launch vterm inside Emacs'),
-                 ]),
+              Key([], "e",
+                  lazy.spawn("emacsclient -c -a 'emacs'"),
+                  desc='Launch Emacsclient'
+                  ),
+              Key([], "d",
+                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"),
+                  desc='Launch dired inside Emacs'
+                  ),
+#              Key([], "c",
+#                  lazy.spawn("emacs"),
+#                  desc='Launch Emacs'
+#                  ),
+#              Key([], "h",
+#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(hackernews)'"),
+#                  desc='Launch the hacker news inside Emacs'
+#                  ),
+              Key([], "m",
+                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(mu4e)'"),
+                  desc='Launch mu4e inside Emacs'
+                  ),
+#              Key([], "n",
+#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(elfeed)'"),
+#                  desc='Launch elfeed inside Emacs'
+#                  ),
+#              Key([], "p",
+#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(pocket-reader)'"),
+#                  desc='Launch the pocket reader inside Emacs'
+#                  ),
+#              Key([], "s",
+#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(eshell)'"),
+#                  desc='Launch the eshell inside Emacs'
+#                  ),
+#              Key([], "t",
+#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(mastodon)'"),
+#                  desc='Launch the mastodon inside Emacs'
+#                  ),
+              Key([], "v",
+                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"),
+                  desc='Launch vterm inside Emacs'),
+                  ]),
 
     # App control
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -154,6 +167,8 @@ keys = [
 
 #+END_SRC
 
+#+RESULTS:
+
 * Groups
 
 #+BEGIN_SRC python
@@ -162,9 +177,9 @@ from libqtile.config import Group, Match
 
 groups = [
        Group("1", label="", layout='monadtall', matches=[Match(wm_class=["signal", "discord", "teams", "ferdi"])]),
-       Group("2", label="", layout='monadtall', matches=[Match(wm_class=["brave", "qutebrowser"])]),
-       Group("3", label="", layout='monadtall', matches=[Match(wm_class=["kitty", "alacritty", "termite"])]),
-       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["emacs", "geany", "libreoffice"])]),
+       Group("2", label="", layout='monadtall', matches=[Match(wm_class=["brave"])]),
+       Group("3", label="", layout='monadtall', matches=[Match(wm_class=["kitty", "alacritty"])]),
+       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["geany", "libreoffice"])]),
        Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm", "calibre", "catfish", "feh", "shotwell"])]),
        Group("6", label="", layout='monadtall', matches=[Match(wm_class=["steam", "lutris", "heroic"])]),
        Group("7", label="", layout='monadtall', matches=[Match(wm_class=["virt-manager","virtualbox", "gimp"])]),
@@ -185,29 +200,69 @@ for i in range(len(groups)):
 
 #+BEGIN_SRC python
 
-## Monochrome
+# Catpuccin
 #colors = [
-# ["#000000", "#000000"],  # 0 background
-# ["#6b6b6b", "#6b6b6b"],  # 1 foreground
-# ["#c4c4c4", "#c4c4c4"],  # 2 background lighter
-# ["#b3b3b3", "#b3b3b3"],  # 3 red
-# ["#999999", "#999999"],  # 4 green
-# ["#717171", "#717171"],  # 5 yellow
-# ["#8a8a8a", "#8a8a8a"],  # 6 blue
-# ["#b5cabb", "#b5cabb"],  # 7 magenta
-# ["#202020", "#202020"],  # 8 cyan
-# ["#464646", "#464646"],  # 9 grey
-# ["#f8f8f8", "#f8f8f8"],  # 10 white
-# ["#eeeeee", "#eeeeee"],  # 11 orange
-# ["#7c7c7c", "#7c7c7c"],  # 12 super cyan
-# ["#adadad", "#adadad"],  # 13 super blue
-# ["#c0c0c0", "#c0c0c0"],  # 14 super dark background
-# ["#99ac9e", "#99ac9e"]   # 15 slate grey
+#   ["#1a1823", "#1a1823"],  # 0 background
+#   ["#6e6c7e", "#6e6c7e"],  # 1 foreground
+#   ["#302d42", "#302d42"],  # 2 background lighter
+#   ["#f28fad", "#f28fad"],  # 3 red
+#   ["#abe9b3", "#abe9b3"],  # 4 green
+#   ["#fae3b0", "#fae3b0"],  # 5 yellow
+#   ["#96cdfb", "#96cdfb"],  # 6 blue
+#   ["#e8a2af", "#e8a2af"],  # 7 maroon
+#   ["#89dceb", "#89dceb"],  # 8 cyan
+#   ["#c3bac6", "#c3bac6"],  # 9 grey
+#   ["#d9e0ee", "#d9e0ee"],  # 10 white
+#   ["#f8bd96", "#f8bd96"],  # 11 orange
+#   ["#8fbcbb", "#8fbcbb"],  # 12 super cyan
+#   ["#c9cbff", "#c9cbff"],  # 13 super blue
+#   ["#131020", "#131020"],  # 14 super dark background
+#   ["#988ba2", "#988ba2"]   # 15 slate grey
 #]
+
+## Dracula
+#colors = [
+# ["#282a36", "#282a36"],  # 0 background
+# ["#f8f8f2", "#f8f8f2"],  # 1 foreground
+# ["#6272a4", "#6272a4"],  # 2 background lighter
+# ["#ff5555", "#ff5555"],  # 3 red
+# ["#50fa7b", "#50fa7b"],  # 4 green
+# ["#f1fa8c", "#f1fa8c"],  # 5 yellow
+# ["#8be9fd", "#8be9fd"],  # 6 blue
+# ["#ff79c6", "#ff79c6"],  # 7 magenta
+# ["#8be9fd", "#8be9fd"],  # 8 cyan
+# ["#44475a", "#44475a"],  # 9 grey
+# ["#f8f8f2", "#f8f8f2"],  # 10 white
+# ["#ffb86c", "#ffb86c"],  # 11 orange
+# ["#8be9fd", "#8be9fd"],  # 12 super cyan
+# ["#8be9fd", "#8be9fd"],  # 13 super blue
+# ["#44475a", "#44475a"],  # 14 super dark background
+# ["#6272a4", "#6272a4"]   # 15 slate grey
+#]
+
+## Graphite
+colors = [
+ ["#212121", "#212121"],  # 0 background
+ ["#6b6b6b", "#6b6b6b"],  # 1 foreground
+ ["#2c2c2c", "#2c2c2c"],  # 2 background lighter
+ ["#b3b3b3", "#b3b3b3"],  # 3 red
+ ["#999999", "#999999"],  # 4 green
+ ["#717171", "#717171"],  # 5 yellow
+ ["#8a8a8a", "#8a8a8a"],  # 6 blue
+ ["#b5cabb", "#b5cabb"],  # 7 magenta
+ ["#202020", "#202020"],  # 8 cyan
+ ["#464646", "#464646"],  # 9 grey
+ ["#f8f8f8", "#f8f8f8"],  # 10 white
+ ["#eeeeee", "#eeeeee"],  # 11 orange
+ ["#7c7c7c", "#7c7c7c"],  # 12 super cyan
+ ["#adadad", "#adadad"],  # 13 super blue
+ ["#2196f3", "#2196f3"],  # 14 super dark background
+ ["#e0e0e0", "#e0e0e0"]   # 15 slate grey
+]
 
 # Nord
 #colors = [
-# ["#2e3440", "#2e3440"],  # 0 background
+# ["#242831", "#242831"],  # 0 background
 # ["#f8f8f2", "#f8f8f2"],  # 1 foreground
 # ["#3b4252", "#3b4252"],  # 2 background lighter
 # ["#bf616a", "#bf616a"],  # 3 red
@@ -221,29 +276,9 @@ for i in range(len(groups)):
 # ["#d08770", "#d08770"],  # 11 orange
 # ["#8fbcbb", "#8fbcbb"],  # 12 super cyan
 # ["#5e81ac", "#5e81ac"],  # 13 super blue
-# ["#242831", "#242831"],  # 14 super dark background
+# ["#2e3440", "#2e3440"],  # 14 super dark background
 # ["#708090", "#708090"]   # 15 slate grey
 # ]
-
-# Catpuccin
-colors = [
-   ["#1a1823", "#1a1823"],  # 0 background
-   ["#6e6c7e", "#6e6c7e"],  # 1 foreground
-   ["#302d42", "#302d42"],  # 2 background lighter
-   ["#f28fad", "#f28fad"],  # 3 red
-   ["#abe9b3", "#abe9b3"],  # 4 green
-   ["#fae3b0", "#fae3b0"],  # 5 yellow
-   ["#96cdfb", "#96cdfb"],  # 6 blue
-   ["#e8a2af", "#e8a2af"],  # 7 maroon
-   ["#89dceb", "#89dceb"],  # 8 cyan
-   ["#c3bac6", "#c3bac6"],  # 9 grey
-   ["#d9e0ee", "#d9e0ee"],  # 10 white
-   ["#f8bd96", "#f8bd96"],  # 11 orange
-   ["#8fbcbb", "#8fbcbb"],  # 12 super cyan
-   ["#c9cbff", "#c9cbff"],  # 13 super blue
-   ["#131020", "#131020"],  # 14 super dark background
-   ["#988ba2", "#988ba2"]   # 15 slate grey
-]
 
 #+END_SRC
 
@@ -266,7 +301,7 @@ layout_theme = {"border_width": 2,
 layouts = [
     # layout.MonadWide(**layout_theme),
     layout.MonadTall(**layout_theme),
-    layout.Bsp(**layout_theme),
+    layout.Columns(**layout_theme),
     layout.Max(**layout_theme),
     # layout.Floating(**layout_theme)
 ]
@@ -630,10 +665,11 @@ auto_minimize = True
 @hook.subscribe.startup_once
 def autostart():
     qtile.cmd_spawn("nitrogen --restore &")
-    qtile.cmd_spawn("picom")
+    # qtile.cmd_spawn("picom &")
     qtile.cmd_spawn("volumeicon &")
     qtile.cmd_spawn("connman-gtk &")
     qtile.cmd_spawn("/usr/bin/emacs --daemon &")
+    qtile.cmd_spawn("qbittorrent &")
     qtile.cmd_spawn("xrandr --output eDP1 --mode 1920x1080 --pos 3200x0 --rotate normal --output DP1 --mode 1280x1024 --pos 0x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off --output HDMI-1-0 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off")
 
     for p in processes:
