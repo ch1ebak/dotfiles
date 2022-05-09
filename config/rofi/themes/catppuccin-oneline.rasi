@@ -1,0 +1,106 @@
+/*******************************************************************************
+ * ROFI ONELINE THEME USING THE NORD COLOR PALETTE 
+ * User                 : LR-Tech               
+ * Theme Repo           : https://github.com/lr-tech/rofi-themes-collection
+ * Nord Project Repo    : https://github.com/arcticicestudio/nord
+ *******************************************************************************/
+
+* {
+    font:   "mononoki Nerd Font Bold 10";
+
+    nord0:     #1a1823;
+    nord1:     #6e6c7e;
+    nord2:     #302d42;
+    nord3:     #131020;
+
+    nord4:     #f28fad;
+    nord5:     #abe9b3;
+    nord6:     #fae3b0;
+
+    nord7:     #96cdfb;
+    nord8:     #e8a2af;
+    nord9:     #89dceb;
+    nord10:    #c3bac6;
+    nord11:    #d9e0ee;
+
+    nord12:    #f8bd96;
+    nord13:    #8fbcbb;
+    nord14:    #c9cbff;
+    nord15:    #988ba2;
+
+    background-color:   transparent;
+    text-color:         @nord15;
+    accent-color:       @nord8;
+
+    margin:     0px;
+    padding:    1px;
+    spacing:    0px;
+}
+
+window {
+    location:           north;
+    width:              100%;
+    background-color:   @nord0;
+    children:           [ mainbox,message ];
+}
+
+mainbox {
+    orientation:    horizontal;
+    children:       [ inputbar,listview ];
+}
+
+inputbar {
+    width:      25%;
+    padding:    1px 8px;
+    spacing:    8px;
+    children:   [ prompt, entry ];
+}
+
+prompt, entry, element-text, element-icon {
+    vertical-align: 0.5;
+}
+
+prompt {
+    text-color: @nord15;
+}
+
+listview {
+    layout: horizontal;
+}
+
+element {
+    padding:    1px 8px;
+    spacing:    4px;
+}
+
+element normal urgent {
+    text-color: @nord15;
+}
+
+element normal active {
+    text-color: @nord15;
+}
+
+element selected {
+    text-color: @nord0;
+}
+
+element selected normal {
+    background-color:   @accent-color;
+}
+
+element selected urgent {
+    background-color:   @nord13;
+}
+
+element selected active {
+    background-color:   @nord8;
+}
+
+element-icon {
+    size:   0.75em;
+}
+
+element-text {
+    text-color: inherit;
+}
