@@ -65,15 +65,21 @@
 
 (defalias 'year-calendar 'kd/year-calendar)
 
-(use-package! calfw)
-(use-package! calfw-org)
+(require 'calibredb)
+(setq calibredb-root-dir "~/Calibre Library")
+(setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
+(setq calibredb-library-alist '(("~/Calibre Library")))
+(setq sql-sqlite-program "/usr/bin/sqlite3")
+(setq calibredb-program "/usr/bin/calibredb")
+(setq calibredb-id-width 4)
+(setq calibredb-size-show t)
+(setq calibredb-format-all-the-icons t)
+(setq calibredb-fetch-metadata-source-list '("Goodreads" "Amazon.com"))
 
 (use-package dashboard
   :init      ;; tweak dashboard config before loading it
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-  (setq doom-fallback-buffer "*dashboard*")
   (setq dashboard-banner-logo-title "\nKEYBINDINGS:\
 \nFind file               (SPC .)     \
 Open buffer list    (SPC b i)\
@@ -81,18 +87,51 @@ Open buffer list    (SPC b i)\
 Open the eshell     (SPC e s)\
 \nOpen dired file manager (SPC d d)   \
 List of keybindings (SPC h b b)")
-  ;; (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
-  (setq dashboard-banner-logo-title "stan emacs")
+  (setq dashboard-startup-banner "~/.doom.d/themes/doomEmacs.svg")  ;; use custom image as banner
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-items '((recents . 5)
-                          (agenda . 5 )
-                          (bookmarks . 5)
-                          (projects . 5)
-                          ))
+                          (agenda . 5 )))
   :config
   (dashboard-setup-startup-hook)
   (dashboard-modify-heading-icons '((recents . "file-text")
                                     (bookmarks . "book"))))
+
+(setq doom-fallback-buffer "*dashboard*")
+
+(require 'dimmer)
+(dimmer-configure-which-key)
+(dimmer-configure-helm)
+(dimmer-mode t)
+
+(evil-define-key 'normal dired-mode-map
+  (kbd "M-RET") 'dired-display-file
+  (kbd "h") 'dired-up-directory
+  (kbd "l") 'dired-open-file ; use dired-find-file instead of dired-open.
+  (kbd "m") 'dired-mark
+  (kbd "t") 'dired-toggle-marks
+  (kbd "u") 'dired-unmark
+  (kbd "C") 'dired-do-copy
+  (kbd "D") 'dired-do-delete
+  (kbd "J") 'dired-goto-file
+  (kbd "M") 'dired-do-chmod
+  (kbd "O") 'dired-do-chown
+  (kbd "P") 'dired-do-print
+  (kbd "R") 'dired-do-rename
+  (kbd "T") 'dired-do-touch
+  (kbd "Y") 'dired-copy-filenamecopy-filename-as-kill ; copies filename to kill ring.
+  (kbd "+") 'dired-create-directory
+  (kbd "-") 'dired-up-directory
+  (kbd "% l") 'dired-downcase
+  (kbd "% u") 'dired-upcase
+  (kbd "; d") 'epa-dired-do-decrypt
+  (kbd "; e") 'epa-dired-do-encrypt)
+(setq dired-open-extensions '(("gif" . "sxiv")
+                              ("jpg" . "sxiv")
+                              ("png" . "sxiv")
+                              ("mkv" . "vlc")
+                              ("mp4" . "vlc")))
+(setq delete-by-moving-to-trash t
+      trash-directory "~/.local/share/Trash/files/")
 
 (require 'elfeed-goodies)
 (elfeed-goodies/setup)
@@ -129,23 +168,9 @@ List of keybindings (SPC h b b)")
                      ("https://gamingonlinux.com/" linux)
                      ("https://9to5linux.com/" linux)
                      ("https://lwn.net/" linux)
+                     ("https://omgubuntu.co.uk/" linux)
+                     ("https://existentialcomics.com/rss.xml" comics)
                      ("https://www.g-central.com/feed/" watch))))
-
-(emms-all)
-(emms-default-players)
-(emms-mode-line 1)
-(emms-playing-time 1)
-(setq emms-source-file-default-directory "~/Muzyka/"
-      emms-playlist-buffer-name "*Muzyka*"
-      emms-info-asynchronously t
-      emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
-(map! :leader
-      (:prefix ("a" . "EMMS audio player")
-       :desc "Go to emms playlist" "a" #'emms-playlist-mode-go
-       :desc "Emms pause track" "x" #'emms-pause
-       :desc "Emms stop track" "s" #'emms-stop
-       :desc "Emms play previous track" "p" #'emms-previous
-       :desc "Emms play next track" "n" #'emms-next))
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 
@@ -166,41 +191,6 @@ List of keybindings (SPC h b b)")
 
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
-
-;(require 'exwm)
-;(require 'exwm-config)
-;(exwm-config-default)
-;(require 'exwm-randr)
-;(setq exwm-randr-workspace-output-plist '(0 "HDMI-0"))
-;(add-hook 'exwm-randr-screen-change-hook
-;          (lambda ()
-;            (start-process-shell-command
-;             "xrandr" nil "xrandr --output HDMI-0 00mode 1920x1080 --pos 0x0 --rotate normal ")))
-;(exwm-randr-enable)
-;; (require 'exwm-systemtray)
-;; (exwm-systemtray-enable)
-
-;; (server-start)
-;(defvar efs/polybar-process nil
-;  "Holds the process of the running Polybar instance, if any")
-;(defun efs/kill-panel ()
-;  (interactive)
-;  (when efs/polybar-process
-;    (ignore-errors
-;      (kill-process efs/polybar-process)))
-;  (setq efs/polybar-process nil))
-;(defun efs/start-panel ()
-;  (interactive)
-;  (efs/kill-panel)
-;  (setq efs/polybar-process (start-process-shell-command "polybar" nil "polybar panel")))
-;(defun efs/send-polybar-hook (module-name hook-index)
-;  (start-process-shell-command "polybar-msg" nil (format "polybar-msg hook %s %s" module-name hook-index)))
-;(defun efs/send-polybar-exwm-workspace ()
-;  (efs/send-polybar-hook "exwm-workspace" 1))
-;;; Update panel indicator when workspace changes
-;(add-hook 'exwm-workspace-switch-hook #'efs/send-polybar-exwm-workspace)
-
-;(use-package flight-attendant)
 
 (setq doom-font (font-spec :family "mononoki Nerd Font" :size 12)
       doom-variable-pitch-font (font-spec :family "Cantarell" :size 12)
@@ -243,6 +233,11 @@ List of keybindings (SPC h b b)")
   :after ivy
   :init
   (ivy-rich-mode 1))
+
+(use-package mastodon
+  :ensure t)
+(setq mastodon-instance-url "https://mastodon.social"
+      mastodon-active-user "2137")
 
 (defun toggle-maximize-buffer () "Maximize buffer"
   (interactive)
@@ -365,6 +360,8 @@ List of keybindings (SPC h b b)")
                                         ("/acc1-gmail/[acc1].drafts"    . ?d)
                                         ))))))
 
+(setq org-books-file "~/Dokumenty/org/my-list.org")
+
 (after! org
   (setq org-directory "~/nc/Org/"
         org-log-done 'time
@@ -437,14 +434,22 @@ List of keybindings (SPC h b b)")
 
 (add-hook 'org-mode-hook 'pandoc-mode)
 
-;; (define-globalized-minor-mode global-rainbow-mode rainbow-mode
-  ;; (lambda () (rainbow-mode 1)))
-;; (global-rainbow-mode 1 )
-
 (setq shell-file-name "/bin/fish")
 
-(setq doom-theme 'doom-dracula)
-;; (setq fancy-splash-image "~/.doom.d/gura.png")
+(setq doom-theme 'doom-zenburn)
+(setq fancy-splash-image "~/.doom.d/themes/doomEmacs.svg")
+
+(require 'twittering-mode)
+      (setq twittering-use-master-password t)
+      (setq twittering-cert-file "/etc/ssl/certs/ca-bundle.crt")
+      (setq twittering-allow-insecure-server-cert t)
+      (setq twittering-icon-mode t)
+      (setq twittering-use-icon-storage t)
+      (setq twittering-display-remaining t)
+(defalias 'epa--decode-coding-string 'decode-coding-string)
+
+(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
 
 (setq frame-resize-pixelwise t)
 (setq display-line-numbers-type t)
+(setq org-hide-emphasis-markers t)
