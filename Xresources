@@ -1,0 +1,81 @@
+!! Color schemes
+
+! Catppuccin
+! *background: #1E1E2E
+! *foreground: #D9E0EE
+! *color0: #6E6C7E
+! *color8: #988BA2
+! *color1: #F28FAD
+! *color9: #F28FAD
+! *color2: #ABE9B3
+! *color10: #ABE9B3
+! *color3: #FAE3B0
+! *color11:  #FAE3B0
+! *color4: #96CDFB
+! *color12: #96CDFB
+! *color5: #DDB6F2
+! *color13: #DDB6F2
+! *color6: #F5C2E7
+! *color14: #F5C2E7
+! *color7: #C3BAC6
+! *color15: #D9E0EE
+
+! Dracula
+! *.foreground: #F8F8F2
+! *.background: #282A36
+! *.color0:     #000000
+! *.color8:     #4D4D4D
+! *.color1:     #FF5555
+! *.color9:     #FF6E67
+! *.color2:     #50FA7B
+! *.color10:    #5AF78E
+! *.color3:     #F1FA8C
+! *.color11:    #F4F99D
+! *.color4:     #BD93F9
+! *.color12:    #CAA9FA
+! *.color5:     #FF79C6
+! *.color13:    #FF92D0
+! *.color6:     #8BE9FD
+! *.color14:    #9AEDFE
+! *.color7:     #BFBFBF
+! *.color15:    #E6E6E6
+
+! Graphite
+*.foreground:   #e4e4e4
+*.background:   #303030
+*.color0:       #1c1c1c
+*.color8:       #303030
+*.color1:       #af005f
+*.color9:       #af5f87
+*.color2:       #1c5f5f
+*.color10:      #008787
+*.color3:       #af871c
+*.color11:      #dfaf00
+*.color4:       #1c5f87
+*.color12:      #5f87af
+*.color5:       #5f1c5f
+*.color13:      #875f87
+*.color6:       #005f87
+*.color14:      #0087af
+*.color7:       #afafaf
+*.color15:      #e4e4e4
+
+! Nord
+! *.foreground: #D8DEE9
+! *.background: #2E3440
+! *.color0: #3B4252
+! *.color1: #BF616A
+! *.color2: #A3BE8C
+! *.color3: #EBCB8B
+! *.color4: #81A1C1
+! *.color5: #B48EAD
+! *.color6: #88C0D0
+! *.color7: #E5E9F0
+! *.color8: #4C566A
+! *.color9: #BF616A
+! *.color10: #A3BE8C
+! *.color11: #EBCB8B
+! *.color12: #81A1C1
+! *.color13: #B48EAD
+! *.color14: #8FBCBB
+! *.color15: #ECEFF4
