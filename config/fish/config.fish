@@ -3,12 +3,12 @@ if status is-interactive
 end
 
 ### PATH
-# ~/.config/fish/config.fish
+export PATH="$PATH:$HOME/.config/fish/config.fish"
 export PATH="$HOME/.emacs.d/bin:$PATH"
 set -e fish_user_paths
 set -U fish_user_paths $HOME/.local/bin $HOME/Applications $fish_user_paths
-export PATH="$PATH:$HOME/.spicetify"
-fish_add_path /home/kd/.spicetify
+# export PATH="$PATH:$HOME/.spicetify"
+# fish_add_path /home/kd/.spicetify
 
 ### EXPORTS
 set -g fish_greeting
@@ -21,10 +21,9 @@ set BROWSER "firefox"
 ### EYE CANDY
 
 ## Color themes
-# fzf
-set -Ux FZF_DEFAULT_OPTS "--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
-set theme_color_scheme dracula
-# set theme_color_scheme catppuccin
+# set theme_color_scheme dracula
+# set theme_color_scheme nord
+set theme_color_scheme catppuccin
 
 ## Fetch
 # pfetch
@@ -48,11 +47,11 @@ alias cleanup='sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages
 alias packagelist='sudo pacman -Qe > packages.txt'
 
 ##void - xbps and xi
-# alias gp='doas xbps-install'
-# alias rp='doas xbps-remove -R'
-# alias cleanup='doas xbps-remove -Oo'
-# alias xi='doas xi'
-# alias xsu='doas xbps-install -Su'
+# alias gp='sudo xbps-install'
+# alias rp='sudo xbps-remove -R'
+# alias cleanup='sudo xbps-remove -Oo'
+# alias xi='sudo xi'
+# alias xsu='sudo xbps-install -Su'
 
 ## Bpytop
 alias bt='bpytop'
@@ -60,49 +59,63 @@ alias bt='bpytop'
 ## Calendar
 alias cal='calcure'
 
-## Changing "ls" to "exa"
-alias ls='exa -al --color=always --group-directories-first' # my preferred listing
-
 ## confirm before overwriting something
 alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
 
 ## Emacs
+alias em='/usr/bin/emacs -nw'
 alias emacsd='/usr/bin/emacs --daemon &'
+alias kemacs='killall emacs'
+
+# Doom Emacs
 alias doom='~/.emacs.d/bin/doom sync'
 alias doomup='~/.emacs.d/bin/doom upgrade'
-alias kemacs='killall emacs'
-alias mu4emu='time mu init --maildir=~/Maildir/ --my-address=address'
+alias doomdoc='~/.emacs.d/bin/doom doctor'
+alias doomrec='~/.emacs.d/bin/doom build'
+
+# MU4E
+alias mu4emu='time mu init --maildir=~/Dokumenty/org/Maildir/ --my-address=yellowparenti@disroot.org'
 alias mu4emb='time mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a'
 
 ## grub
 alias grubreload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
+## Htop
+alias ht='htop'
+
+## Changing "ls" to "exa"
+alias ls='ls -la --color=always --group-directories-first' # my preferred listing
+
 ## Merge Xresources
 alias merge='xrdb -merge ~/.Xresources'
 
 ## Mount
-alias mountvm='doas mount -t 9p -o trans=virtio /sharepoint share'
+alias mountvm='sudo mount -t 9p -o trans=virtio /sharepoint share'
 
 ## mkdir
 alias mkdir='mkdir -pv'
+
+## Picom
+alias kap='killall picom'
 
 ## Reboot
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown now'
 
-## Root priviledges
-alias sudo='doas'
-
 ## Timeshift
 alias tsc='sudo timeshift --create'
 alias tsl='sudo timeshift --list'
+
+## Uptime
+alias upt='uptime'
+
+## youtube-dl
+alias ydla='youtube-dl --extract-audio --audio-format best'
+alias ydlv='youtube-dl -f bestvideo+bestaudio'
 
 ## Weather
 alias wpl='curl wttr.in/pleszew'
 alias wpo='curl wttr.in/poznan'
 alias wv='curl wttr.in/irvine'
-
-## Picom
-alias kap='killall picom'
