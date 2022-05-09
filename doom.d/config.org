@@ -508,7 +508,7 @@ List of keybindings (SPC h b b)")
 #+BEGIN_SRC emacs-lisp
 
 (after! org
-  (setq org-directory "~/nc/Org/"
+  (setq org-directory "~/Dokumenty/org/"
         org-log-done 'time
         org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
           '((sequence
@@ -623,6 +623,9 @@ List of keybindings (SPC h b b)")
 
 #+BEGIN_SRC emacs-lisp
 
+;; (setq doom-theme 'catppuccin)
+;; (setq doom-theme 'doom-dracula)
+;; (setq doom-theme 'doom-nerd)
 (setq doom-theme 'doom-zenburn)
 (setq fancy-splash-image "~/.doom.d/themes/doomEmacs.svg")
 
