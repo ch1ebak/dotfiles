@@ -15,5 +15,19 @@
 * Catppuccin
 
 #+CAPTION: Catppuccin
-#+ATTR_HTML: :alt Catppuccin :title Catppuccin Scrot :align left
+#+ATTR_HTML: :alt Catppuccin :title Catppuccin :align left
 [[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/catppuccin.jpg]]
+
+* Dracula - work in progress
+
+* Graphite
+
+#+CAPTION: Graphite
+#+ATTR_HTML: :alt Graphite :title Graphite :align left
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/graphite.png]]
+
+* Nord
+
+#+CAPTION: Catppuccin
+#+ATTR_HTML: :alt Nord :title Nord :align left
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/nord.png]]
