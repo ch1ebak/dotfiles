@@ -1,5 +1,5 @@
 #+TITLE: Config
-#+AUTHOR: Karolina Derwich
+#+AUTHOR: ch1ebak
 #+PROPERTY: header-ags :tangle config.py
 
 * TABLE OF CONTENTS :toc:
@@ -176,12 +176,12 @@ keys = [
 from libqtile.config import Group, Match
 
 groups = [
-       Group("1", label="", layout='monadtall', matches=[Match(wm_class=["signal", "discord", "teams", "ferdi"])]),
+       Group("1", label="", layout='Columns', matches=[Match(wm_class=["qutebrowser", "signal", "discord", "teams", "ferdi"])]),
        Group("2", label="", layout='monadtall', matches=[Match(wm_class=["brave"])]),
        Group("3", label="", layout='monadtall', matches=[Match(wm_class=["kitty", "alacritty"])]),
-       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["geany", "libreoffice"])]),
-       Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm", "calibre", "catfish", "feh", "shotwell"])]),
-       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["steam", "lutris", "heroic"])]),
+       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["emacs", "emacsclient", "leafpad", "geany", "libreoffice"])]),
+       Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm", "calibre", "catfish", "feh", "shotwell", "czkawka", "szyszka"])]),
+       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["steam", "lutris", "heroic", "airshipper", "veloren"])]),
        Group("7", label="", layout='monadtall', matches=[Match(wm_class=["virt-manager","virtualbox", "gimp"])]),
        Group("8", label="", layout='monadtall', matches=[Match(wm_class=["deadbeef", "spotify"])]),
        Group("9", label="", layout='monadtall', matches=[Match(wm_class=["vlc", "mpv"])])
@@ -224,20 +224,20 @@ for i in range(len(groups)):
 #colors = [
 # ["#282a36", "#282a36"],  # 0 background
 # ["#f8f8f2", "#f8f8f2"],  # 1 foreground
-# ["#6272a4", "#6272a4"],  # 2 background lighter
+# ["#282a36", "#282a36"],  # 2 background lighter
 # ["#ff5555", "#ff5555"],  # 3 red
-# ["#50fa7b", "#50fa7b"],  # 4 green
+# ["#50fa7b#", "#50fa7b"],  # 4 green
 # ["#f1fa8c", "#f1fa8c"],  # 5 yellow
-# ["#8be9fd", "#8be9fd"],  # 6 blue
-# ["#ff79c6", "#ff79c6"],  # 7 magenta
-# ["#8be9fd", "#8be9fd"],  # 8 cyan
-# ["#44475a", "#44475a"],  # 9 grey
-# ["#f8f8f2", "#f8f8f2"],  # 10 white
-# ["#ffb86c", "#ffb86c"],  # 11 orange
-# ["#8be9fd", "#8be9fd"],  # 12 super cyan
+# ["#bd93f9", "#bd93f9"],  # 6 blue
+# ["#5af78e", "#5af78e"],  # 7 magenta
+# ["#f4f99d", "#f4f99d"],  # 8 cyan
+# ["#bfbfbf", "#bfbfbf"],  # 9 grey
+# ["#e6e6e6", "#e6e6e6"],  # 10 white
+# ["#caa9fa", "#caa9fa"],  # 11 orange
+# ["#ff92d0", "#ff92d0"],  # 12 super cyan
 # ["#8be9fd", "#8be9fd"],  # 13 super blue
-# ["#44475a", "#44475a"],  # 14 super dark background
-# ["#6272a4", "#6272a4"]   # 15 slate grey
+# ["#9aedfe", "#9aedfe"],  # 14 super dark background
+# ["#bfbfbf", "#bfbfbf"]   # 15 slate grey
 #]
 
 ## Graphite

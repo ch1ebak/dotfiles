@@ -134,12 +134,12 @@ keys = [
 from libqtile.config import Group, Match
 
 groups = [
-       Group("1", label="", layout='monadtall', matches=[Match(wm_class=["signal", "discord", "teams", "ferdi"])]),
+       Group("1", label="", layout='Columns', matches=[Match(wm_class=["qutebrowser", "signal", "discord", "teams", "ferdi"])]),
        Group("2", label="", layout='monadtall', matches=[Match(wm_class=["brave"])]),
        Group("3", label="", layout='monadtall', matches=[Match(wm_class=["kitty", "alacritty"])]),
-       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["geany", "libreoffice"])]),
-       Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm", "calibre", "catfish", "feh", "shotwell"])]),
-       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["steam", "lutris", "heroic"])]),
+       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["emacs", "emacsclient", "leafpad", "geany", "libreoffice"])]),
+       Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm", "calibre", "catfish", "feh", "shotwell", "czkawka", "szyszka"])]),
+       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["steam", "lutris", "heroic", "airshipper", "veloren"])]),
        Group("7", label="", layout='monadtall', matches=[Match(wm_class=["virt-manager","virtualbox", "gimp"])]),
        Group("8", label="", layout='monadtall', matches=[Match(wm_class=["deadbeef", "spotify"])]),
        Group("9", label="", layout='monadtall', matches=[Match(wm_class=["vlc", "mpv"])])
@@ -152,24 +152,24 @@ for i in range(len(groups)):
     )
 
 # Catpuccin
-#colors = [
-#   ["#1a1823", "#1a1823"],  # 0 background
-#   ["#6e6c7e", "#6e6c7e"],  # 1 foreground
-#   ["#302d42", "#302d42"],  # 2 background lighter
-#   ["#f28fad", "#f28fad"],  # 3 red
-#   ["#abe9b3", "#abe9b3"],  # 4 green
-#   ["#fae3b0", "#fae3b0"],  # 5 yellow
-#   ["#96cdfb", "#96cdfb"],  # 6 blue
-#   ["#e8a2af", "#e8a2af"],  # 7 maroon
-#   ["#89dceb", "#89dceb"],  # 8 cyan
-#   ["#c3bac6", "#c3bac6"],  # 9 grey
-#   ["#d9e0ee", "#d9e0ee"],  # 10 white
-#   ["#f8bd96", "#f8bd96"],  # 11 orange
-#   ["#8fbcbb", "#8fbcbb"],  # 12 super cyan
-#   ["#c9cbff", "#c9cbff"],  # 13 super blue
-#   ["#131020", "#131020"],  # 14 super dark background
-#   ["#988ba2", "#988ba2"]   # 15 slate grey
-#]
+# colors = [
+  # ["#1a1823", "#1a1823"],  # 0 background
+  # ["#6e6c7e", "#6e6c7e"],  # 1 foreground
+  # ["#302d42", "#302d42"],  # 2 background lighter
+  # ["#f28fad", "#f28fad"],  # 3 red
+  # ["#abe9b3", "#abe9b3"],  # 4 green
+  # ["#fae3b0", "#fae3b0"],  # 5 yellow
+  # ["#96cdfb", "#96cdfb"],  # 6 blue
+  # ["#e8a2af", "#e8a2af"],  # 7 maroon
+  # ["#89dceb", "#89dceb"],  # 8 cyan
+  # ["#c3bac6", "#c3bac6"],  # 9 grey
+  # ["#d9e0ee", "#d9e0ee"],  # 10 white
+  # ["#f8bd96", "#f8bd96"],  # 11 orange
+  # ["#8fbcbb", "#8fbcbb"],  # 12 super cyan
+  # ["#c9cbff", "#c9cbff"],  # 13 super blue
+  # ["#131020", "#131020"],  # 14 super dark background
+  # ["#988ba2", "#988ba2"]   # 15 slate grey
+# ]
 
 ## Dracula
 #colors = [
@@ -212,7 +212,7 @@ colors = [
 ]
 
 # Nord
-#colors = [
+# colors = [
 # ["#242831", "#242831"],  # 0 background
 # ["#f8f8f2", "#f8f8f2"],  # 1 foreground
 # ["#3b4252", "#3b4252"],  # 2 background lighter
