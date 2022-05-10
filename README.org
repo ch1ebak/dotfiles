@@ -15,3 +15,5 @@
 * Catppuccin
 
 #+CAPTION: Catppuccin
+#+ATTR_HTML: :alt Catppuccin :title Catppuccin Scrot :align left
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/catppuccin.jpg]]
