@@ -77,16 +77,16 @@
 ## graphite
 
  [urgency_low]
-     background = "#212121"
-     foreground = "#6b6b6b"
+     background = "#101010"
+     foreground = "#b9b9b9"
 
  [urgency_normal]
-     background = "#212121"
-     foreground = "#6b6b6b"
+     background = "#101010"
+     foreground = "#b9b9b9"
 
  [urgency_critical]
-     background = "#212121"
-     foreground = "#6b6b6b"
+     background = "#101010"
+     foreground = "#b9b9b9"
 
 
 ## nord
