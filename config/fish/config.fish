@@ -2,36 +2,94 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-### PATH
+### OPTIONS
+
+## Path
 export PATH="$PATH:$HOME/.config/fish/config.fish"
 export PATH="$HOME/.emacs.d/bin:$PATH"
 set -e fish_user_paths
 set -U fish_user_paths $HOME/.local/bin $HOME/Applications $fish_user_paths
-# export PATH="$PATH:$HOME/.spicetify"
-# fish_add_path /home/kd/.spicetify
 
-### EXPORTS
+## Exports
 set -g fish_greeting
 set TERM "kitty"
 set EDITOR "emacsclient -t -a ''"
 set VISUAL "emacsclient -c -a emacs"
 set BROWSER "firefox"
 
+## Keybindings
+function fish_user_key_bindings
+  fish_vi_key_bindings
+end
+
+## Functions needed for !! and !$
+function __history_previous_command
+  switch (commandline -t)
+  case "!"
+    commandline -t $history[1]; commandline -f repaint
+  case "*"
+    commandline -i !
+  end
+end
+
+function __history_previous_command_arguments
+  switch (commandline -t)
+  case "!"
+    commandline -t ""
+    commandline -f history-token-search-backward
+  case "*"
+    commandline -i '$'
+  end
+end
+# The bindings for !! and !$
+if [ $fish_key_bindings = "fish_vi_key_bindings" ];
+  bind -Minsert ! __history_previous_command
+  bind -Minsert '$' __history_previous_command_arguments
+else
+  bind ! __history_previous_command
+  bind '$' __history_previous_command_arguments
+end
+
 
 ### EYE CANDY
 
-## Color themes
-# set theme_color_scheme dracula
-# set theme_color_scheme nord
-set theme_color_scheme catppuccin
-
 ## Fetch
 # pfetch
+# ppfetch
 # neofetch
 colorscript random
 
 # Starship
 starship init fish | source
+
+## Autocomplete and highlight colors
+# Catppuccin
+# set fish_color_normal '#dadae8'
+# set fish_color_autosuggestion '#6e6c7e'
+# set fish_color_command '#a4b9ef'
+# set fish_color_error '#e38c8f'
+# set fish_color_param '#f2cecf'
+
+# Dracula
+# set fish_color_normal '#f8f8f2'
+# set fish_color_autosuggestion '#6272a4'
+# set fish_color_command '#8be9fd'
+# set fish_color_error '#ff5555'
+# set fish_color_param '#bd93f9'
+
+# Graphite
+set fish_color_normal '#f7f7f7'
+set fish_color_autosuggestion '#525252'
+set fish_color_command '#f7f7f7'
+set fish_color_error '#bf616a'
+set fish_color_param '#f7f7f7'
+
+# Nord
+# set fish_color_normal '#eceff4'
+# set fish_color_autosuggestion '#4c566a'
+# set fish_color_command '#eceff4'
+# set fish_color_error '#bf616a'
+# set fish_color_param '#eceff4'
 
 
 ### ALIASES
@@ -44,7 +102,7 @@ alias ry='yay -Rns'
 alias pacsyu='sudo pacman -Syu'                  # update only standard pkgs
 alias yaysyu='yay -Syu'                          # update standard pkgs and AUR pkgs (yay)
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages
-alias packagelist='sudo pacman -Qe > packages.txt'
+alias pkglist='sudo pacman -Qqe > ~/Dokumenty/kodowanie/packages.txt'
 
 ##void - xbps and xi
 # alias gp='sudo xbps-install'
@@ -55,9 +113,6 @@ alias packagelist='sudo pacman -Qe > packages.txt'
 
 ## Bpytop
 alias bt='bpytop'
-
-## Calendar
-alias cal='calcure'
 
 ## confirm before overwriting something
 alias cp="cp -i"
@@ -82,14 +137,14 @@ alias mu4emb='time mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a'
 ## grub
 alias grubreload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
-## Htop
-alias ht='htop'
-
 ## Changing "ls" to "exa"
 alias ls='ls -la --color=always --group-directories-first' # my preferred listing
 
 ## Merge Xresources
 alias merge='xrdb -merge ~/.Xresources'
+
+## Mixer
+alias mixer='ncpamixer'
 
 ## Mount
 alias mountvm='sudo mount -t 9p -o trans=virtio /sharepoint share'
