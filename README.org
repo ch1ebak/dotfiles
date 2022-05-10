@@ -1,8 +1,6 @@
 #+TITLE: README
 #+AUTHOR: ch1ebak
 
-| A              | B                                |
-|----------------+----------------------------------|
 | window manager | qtile                            |
 | shell          | fish/bash                        |
 | terminal       | kitty                            |
@@ -16,18 +14,21 @@
 
 #+CAPTION: Catppuccin
 #+ATTR_HTML: :alt Catppuccin :title Catppuccin :align left
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/catppuccin.jpg]]
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/catppuccin0.jpg]]
 
 * Dracula - work in progress
+#+CAPTION: Dracula
+#+ATTR_HTML: :alt Dracula :title Dracula :align left
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/dracula0.jpg]]
 
 * Graphite
 
 #+CAPTION: Graphite
 #+ATTR_HTML: :alt Graphite :title Graphite :align left
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/graphite.jpg]]
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/graphite0.jpg]]
 
 * Nord
 
 #+CAPTION: Catppuccin
 #+ATTR_HTML: :alt Nord :title Nord :align left
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/nord.png]]
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/nord0.jpg]]
