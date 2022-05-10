@@ -1,6 +1,6 @@
 #+TITLE: Config
 #+AUTHOR: Karolina Derwich
-#+PROPERTY: header-args :tangle config.py
+#+PROPERTY: header-ags :tangle config.py
 
 * TABLE OF CONTENTS :toc:
 - [[#imports][Imports]]
@@ -242,22 +242,22 @@ for i in range(len(groups)):
 
 ## Graphite
 colors = [
- ["#212121", "#212121"],  # 0 background
- ["#6b6b6b", "#6b6b6b"],  # 1 foreground
- ["#2c2c2c", "#2c2c2c"],  # 2 background lighter
- ["#b3b3b3", "#b3b3b3"],  # 3 red
- ["#999999", "#999999"],  # 4 green
- ["#717171", "#717171"],  # 5 yellow
- ["#8a8a8a", "#8a8a8a"],  # 6 blue
- ["#b5cabb", "#b5cabb"],  # 7 magenta
- ["#202020", "#202020"],  # 8 cyan
- ["#464646", "#464646"],  # 9 grey
- ["#f8f8f8", "#f8f8f8"],  # 10 white
- ["#eeeeee", "#eeeeee"],  # 11 orange
- ["#7c7c7c", "#7c7c7c"],  # 12 super cyan
- ["#adadad", "#adadad"],  # 13 super blue
- ["#2196f3", "#2196f3"],  # 14 super dark background
- ["#e0e0e0", "#e0e0e0"]   # 15 slate grey
+ ["#101010", "#101010"],  # 0 background
+ ["#b9b9b9", "#b9b9b9"],  # 1 foreground
+ ["#101010", "#101010"],  # 2 background lighter
+ ["#525252", "#525252"],  # 3 red
+ ["#7c7c7c", "#7c7c7c"],  # 4 green
+ ["#7c7c7c", "#7c7c7c"],  # 5 yellow
+ ["#8e8e8e", "#8e8e8e"],  # 6 blue
+ ["#8e8e8e", "#8e8e8e"],  # 7 magenta
+ ["#a0a0a0", "#a0a0a0"],  # 8 cyan
+ ["#a0a0a0", "#a0a0a0"],  # 9 grey
+ ["#686868", "#686868"],  # 10 white
+ ["#686868", "#686868"],  # 11 orange
+ ["#747474", "#747474"],  # 12 super cyan
+ ["#747474", "#747474"],  # 13 super blue
+ ["#868686", "#868686"],  # 14 super dark background
+ ["#868686", "#868686"]   # 15 slate grey
 ]
 
 # Nord
