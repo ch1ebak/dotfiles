@@ -8,25 +8,25 @@
 * {
     font:   "mononoki Nerd Font Bold 10";
 
-    nord0:     #212121;
-    nord1:     #6e6c7e;
-    nord2:     #302d42;
-    nord3:     #131020;
+    nord0:     #101010;
+    nord1:     #525252;
+    nord2:     #7c7c7c;
+    nord3:     #7c7c7c;
 
-    nord4:     #f28fad;
-    nord5:     #abe9b3;
-    nord6:     #fae3b0;
+    nord4:     #8e8e8e;
+    nord5:     #8e8e8e;
+    nord6:     #a0a0a0;
 
-    nord7:     #96cdfb;
-    nord8:     #e0e0e0;
-    nord9:     #89dceb;
-    nord10:    #c3bac6;
-    nord11:    #d9e0ee;
+    nord7:     #8e8e8e;
+    nord8:     #a0a0a0;
+    nord9:     #a0a0a0;
+    nord10:    #686868;
+    nord11:    #686868;
 
-    nord12:    #f8bd96;
-    nord13:    #8fbcbb;
-    nord14:    #c9cbff;
-    nord15:    #6b6b6b;
+    nord12:    #747474;
+    nord13:    #747474;
+    nord14:    #868686;
+    nord15:    #868686;
 
     background-color:   transparent;
     text-color:         @nord15;
