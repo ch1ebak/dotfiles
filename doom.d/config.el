@@ -363,7 +363,7 @@ List of keybindings (SPC h b b)")
 (setq org-books-file "~/Dokumenty/org/my-list.org")
 
 (after! org
-  (setq org-directory "~/nc/Org/"
+  (setq org-directory "~/Dokumenty/org/"
         org-log-done 'time
         org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
           '((sequence
@@ -436,7 +436,10 @@ List of keybindings (SPC h b b)")
 
 (setq shell-file-name "/bin/fish")
 
-(setq doom-theme 'doom-zenburn)
+;; (setq doom-theme 'catppuccin)
+;; (setq doom-theme 'doom-dracula)
+;; (setq doom-theme 'doom-nord)
+(setq doom-theme 'doom-one)
 (setq fancy-splash-image "~/.doom.d/themes/doomEmacs.svg")
 
 (require 'twittering-mode)
