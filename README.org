@@ -24,7 +24,7 @@
 
 #+CAPTION: Graphite
 #+ATTR_HTML: :alt Graphite :title Graphite :align left
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/graphite.png]]
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/graphite.jpg]]
 
 * Nord
 
