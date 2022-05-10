@@ -7,14 +7,14 @@
 # base16 colors but with variable names that 
 # reflect what the color is mainly used for
 
-bg_default = "#282c34"          # main shade darkest
-bg_lighter = "#353b45"
-bg_selection = "#3e4451"
+bg_default = "#101010"          # main shade darkest
+bg_lighter = "#525252"
+bg_selection = "#7c7c7c"
 # "#545862"
-fg_disabled = "#565c64"
-fg_default = "#abb2bf"
+fg_disabled = "#b9b9b9"
+fg_default = "#f7f7f7"
 # "#b6bdca"
-bg_lightest = "#c8ccd4"         # main shade lightest
+bg_lightest = "#101010"         # main shade lightest
 fg_error = "#e06c75"            # red
 # "#d19a66"                     # orange
 bg_hint = "#e5c07b"             # yellow
