@@ -6,8 +6,12 @@
 | window manager | qtile                            |
 | shell          | fish/bash                        |
 | terminal       | kitty                            |
-| text editor    | doom emacs/geany                 |
-| music player   | ncmpcpp                          |
+| text editor    | doom emacs|
 | launcher       | rofi                             |
 | notifications  | dunst                            |
 | theme          | catppuccin/dracula/graphite/nord |
+
+
+* Catppuccin
+
+#+CAPTION: Catppuccin
