@@ -109,6 +109,10 @@ alias mountvm='sudo mount -t 9p -o trans=virtio /sharepoint share'
 ## mkdir
 alias mkdir='mkdir -pv'
 
+## Neovim
+alias vim='nvim'
+alias neovim='nvim'
+
 ## Picom
 alias kap='killall picom'
 
