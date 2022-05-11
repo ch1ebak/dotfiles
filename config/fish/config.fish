@@ -54,10 +54,11 @@ end
 ### EYE CANDY
 
 ## Fetch
+# colorscript random
+# neofetch
 # pfetch
 # ppfetch
-# neofetch
-colorscript random
+starfetch
 
 # Starship
 starship init fish | source
@@ -119,6 +120,15 @@ alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
 
+## Curl
+alias ccs='curl cheat.sh'
+alias cip='curl ifconfig.co'
+alias cnws='curl pl.getnews.tech'
+alias cbtc='curl rate.sx'
+alias cwpl='curl wttr.in/pleszew'
+alias cwpo='curl wttr.in/poznan'
+alias cwv='curl wttr.in/irvine'
+
 ## Emacs
 alias em='/usr/bin/emacs -nw'
 alias emacsd='/usr/bin/emacs --daemon &'
@@ -169,8 +179,3 @@ alias upt='uptime'
 ## youtube-dl
 alias ydla='youtube-dl --extract-audio --audio-format best'
 alias ydlv='youtube-dl -f bestvideo+bestaudio'
-
-## Weather
-alias wpl='curl wttr.in/pleszew'
-alias wpo='curl wttr.in/poznan'
-alias wv='curl wttr.in/irvine'
