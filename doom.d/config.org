@@ -626,7 +626,7 @@ List of keybindings (SPC h b b)")
 ;; (setq doom-theme 'catppuccin)
 ;; (setq doom-theme 'doom-dracula)
 ;; (setq doom-theme 'doom-nord)
-(setq doom-theme 'doom-one)
+(setq doom-theme 'graphite)
 (setq fancy-splash-image "~/.doom.d/themes/doomEmacs.svg")
 
 #+END_SRC
