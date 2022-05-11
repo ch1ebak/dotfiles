@@ -1,0 +1,199 @@
+### OPTIONS
+
+env:
+  TERM: xterm-256color
+window:
+    x: 10
+    y: 10
+dynamic_padding: true
+opacity: 1.0
+
+title: Alacritty
+class:
+    instance: Alacritty
+    general: Alacritty
+
+scrolling:
+  history: 2000
+
+font:
+  normal:
+    family: Mononoki Nerd Font
+    style: Regular
+  bold:
+    family: Mononoki Nerd Font
+    style: Bold
+  italic:
+    family: Mononoki Nerd Font
+    style: Italic
+  bold_italic:
+    family: Mononoki Nerd Font
+    style: Bold Italic
+size: 10.0
+
+offset:
+  x: 0
+  y: 1
+
+draw_bold_text_with_bright_colors: true
+
+
+### COLOR SCHEMES
+
+# Catppuccin
+# colors:
+  # primary:
+    # background: '0x1E1D2F'
+    # foreground: '0xD9E0EE'
+  # cursor:
+    # text: '0x1E1D2F'
+    # cursor: '0xF5E0DC'
+  # normal:
+    # black:   '0x6E6C7E'
+    # red:     '0xF28FAD'
+    # green:   '0xABE9B3'
+    # yellow:  '0xFAE3B0'
+    # blue:    '0x96CDFB'
+    # magenta: '0xF5C2E7'
+    # cyan:    '0x89DCEB'
+    # white:   '0xD9E0EE'
+  # bright:
+    # black:   '0x988BA2'
+    # red:     '0xF28FAD'
+    # green:   '0xABE9B3'
+    # yellow:  '0xFAE3B0'
+    # blue:    '0x96CDFB'
+    # magenta: '0xF5C2E7'
+    # cyan:    '0x89DCEB'
+    # white:   '0xD9E0EE'
+  # indexed_colors:
+    # - { index: 16, color: '0xF8BD96' }
+    # - { index: 17, color: '0xF5E0DC' }
+
+# Dracula
+# colors:
+  # primary:
+    # background: '#282a36'
+    # foreground: '#f8f8f2'
+    # bright_foreground: '#ffffff'
+  # cursor:
+    # text: CellBackground
+    # cursor: CellForeground
+  # vi_mode_cursor:
+    # text: CellBackground
+    # cursor: CellForeground
+  # search:
+    # matches:
+      # foreground: '#44475a'
+      # background: '#50fa7b'
+    # focused_match:
+      # foreground: '#44475a'
+      # background: '#ffb86c'
+    # bar:
+      # background: '#282a36'
+      # foreground: '#f8f8f2'
+  # hints:
+    # start:
+      # foreground: '#282a36'
+      # background: '#f1fa8c'
+    # end:
+      # foreground: '#f1fa8c'
+      # background: '#282a36'
+  # line_indicator:
+    # foreground: None
+    # background: None
+  # selection:
+    # text: CellForeground
+    # background: '#44475a'
+  # normal:
+    # black: '#21222c'
+    # red: '#ff5555'
+    # green: '#50fa7b'
+    # yellow: '#f1fa8c'
+    # blue: '#bd93f9'
+    # magenta: '#ff79c6'
+    # cyan: '#8be9fd'
+    # white: '#f8f8f2'
+  # bright:
+    # black: '#6272a4'
+    # red: '#ff6e6e'
+    # green: '#69ff94'
+    # yellow: '#ffffa5'
+    # blue: '#d6acff'
+    # magenta: '#ff92df'
+    # cyan: '#a4ffff'
+    # white: '#ffffff'
+
+# Graphite
+colors:
+  primary:
+    background: '0x101010'
+    foreground: '0xb9b9b9'
+  normal:
+    black:   '0x101010'
+    red:     '0x7c7c7c'
+    green:   '0x8e8e8e'
+    yellow:  '0xa0a0a0'
+    blue:    '0x686868'
+    magenta: '0x747474'
+    cyan:    '0x868686'
+    white:   '0xb9b9b9'
+  bright:
+    black:   '0x525252'
+    red:     '0x7c7c7c'
+    green:   '0x8e8e8e'
+    yellow:  '0xa0a0a0'
+    blue:    '0x686868'
+    magenta: '0x747474'
+    cyan:    '0x868686'
+    white:   '0xf7f7f7'
+
+# Nord
+# colors:
+  # primary:
+    # background: '#2e3440'
+    # foreground: '#d8dee9'
+    # dim_foreground: '#a5abb6'
+  # cursor:
+    # text: '#2e3440'
+    # cursor: '#d8dee9'
+  # vi_mode_cursor:
+    # text: '#2e3440'
+    # cursor: '#d8dee9'
+  # selection:
+    # text: CellForeground
+    # background: '#4c566a'
+  # search:
+    # matches:
+      # foreground: CellBackground
+      # background: '#88c0d0'
+    # bar:
+      # background: '#434c5e'
+      # foreground: '#d8dee9'
+  # normal:
+    # black: '#3b4252'
+    # red: '#bf616a'
+    # green: '#a3be8c'
+    # yellow: '#ebcb8b'
+    # blue: '#81a1c1'
+    # magenta: '#b48ead'
+    # cyan: '#88c0d0'
+    # white: '#e5e9f0'
+  # bright:
+    # black: '#4c566a'
+    # red: '#bf616a'
+    # green: '#a3be8c'
+    # yellow: '#ebcb8b'
+    # blue: '#81a1c1'
+    # magenta: '#b48ead'
+    # cyan: '#8fbcbb'
+    # white: '#eceff4'
+  # dim:
+    # black: '#373e4d'
+    # red: '#94545d'
+    # green: '#809575'
+    # yellow: '#b29e75'
+    # blue: '#68809a'
+    # magenta: '#8c738c'
+    # cyan: '#6d96a5'
+    # white: '#aeb3bb'
