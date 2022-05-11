@@ -3,8 +3,25 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# alias ls='ls --color=auto'
-# PS1='[\u@\h \W]\$ '
+### Options
+
+## Path
+if [ -d "$HOME/.bin" ] ;
+  then PATH="$HOME/.bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ] ;
+  then PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -d "$HOME/Applications" ] ;
+  then PATH="$HOME/Applications:$PATH"
+fi
+
+## Vi mode
+set -o vi
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
 
 
 ### EYE CANDY
@@ -13,9 +30,11 @@
 eval "$(starship init bash)"
 
 ## Fetch
-# pfetch
+# colorscript random
 # neofetch
-colorscript random
+# pfetch
+# ppfetch
+starfetch
 
 ## Starship
 eval "$(starship init bash)"
@@ -31,7 +50,7 @@ alias ry='yay -Rns'
 alias pacsyu='sudo pacman -Syu'                  # update only standard pkgs
 alias yaysyu='yay -Syu'                          # update standard pkgs and AUR pkgs (yay)
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages
-alias packagelist='sudo pacman -Qe > packages.txt'
+alias pkglist='sudo pacman -Qqe > ~/Dokumenty/kodowanie/packages.txt'
 
 ##void - xbps and xi
 # alias gp='sudo xbps-install'
@@ -43,13 +62,19 @@ alias packagelist='sudo pacman -Qe > packages.txt'
 ## Bpytop
 alias bt='bpytop'
 
-## Calendar
-alias cal='calcure'
-
 ## confirm before overwriting something
 alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
+
+## Curl
+alias ccs='curl cheat.sh'
+alias cip='curl ifconfig.co'
+alias cnws='curl pl.getnews.tech'
+alias cbtc='curl rate.sx'
+alias cwpl='curl wttr.in/pleszew'
+alias cwpo='curl wttr.in/poznan'
+alias cwv='curl wttr.in/irvine'
 
 ## Emacs
 alias em='/usr/bin/emacs -nw'
@@ -69,14 +94,14 @@ alias mu4emb='time mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a'
 ## grub
 alias grubreload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
-## Htop
-alias ht='htop'
-
 ## Changing "ls" to "exa"
 alias ls='ls -la --color=always --group-directories-first' # my preferred listing
 
 ## Merge Xresources
 alias merge='xrdb -merge ~/.Xresources'
+
+## Mixer
+alias mixer='ncpamixer'
 
 ## Mount
 alias mountvm='sudo mount -t 9p -o trans=virtio /sharepoint share'
@@ -101,8 +126,3 @@ alias upt='uptime'
 ## youtube-dl
 alias ydla='youtube-dl --extract-audio --audio-format best'
 alias ydlv='youtube-dl -f bestvideo+bestaudio'
-
-## Weather
-alias wpl='curl wttr.in/pleszew'
-alias wpo='curl wttr.in/poznan'
-alias wv='curl wttr.in/irvine'
