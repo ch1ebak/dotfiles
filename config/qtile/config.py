@@ -17,65 +17,32 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 keys = [
      # Apps
-    Key([mod], "w", lazy.spawn("firefox-nightly"), desc="Launch firefox"),
-    Key([mod], "a", lazy.spawn("pcmanfm"), desc="Launch pcmanfm"),
-    Key([mod], "d", lazy.spawn("signal-desktop"), desc="Launch signal"),
-    Key([mod], "Return", lazy.spawn("kitty"), desc="Launch terminal"),
-    Key([mod], "p", lazy.spawn("slock"), desc="Launch lock screen"),
+    Key([mod], "Return", lazy.spawn("kitty"), desc="Launch kitty"),
+    Key([mod, "shift"], "Return", lazy.spawn("alacritty"), desc="Launch alacritty"),
 
-    # Rofi
+    Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"), desc="Dired"),
+    Key([mod, "shift"], "a", lazy.spawn("pcmanfm"), desc="Launch pcmanfm"),
+
+    Key([mod], "d", lazy.spawn("signal-desktop"), desc="Launch signal"),
+    Key([mod, "shift"], "d", lazy.spawn("emacsclient -c -a 'emacs' --eval '(mu4e)'"), desc="Mu4e"),
+
+    Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'"), desc='Launch Emacsclient'),
+    Key([mod, "shift"], "e", lazy.spawn("kitty -e nvim"), desc='Launch neovim'),
+
+    Key([mod], "p", lazy.spawn("slock"), desc="Launch lock screen"),
     Key([mod, "shift"], "p", lazy.spawn("rofi -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu"), desc="Rofi Power Menu"),
+
+    Key([mod], "r", lazy.spawn("keepassxc"), desc="Launch keepassxc"),
+
     Key([mod], "s", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
 
-    #KeyChord-emacs
-         KeyChord([mod],"e", [
-              Key([], "e",
-                  lazy.spawn("emacsclient -c -a 'emacs'"),
-                  desc='Launch Emacsclient'
-                  ),
-              Key([], "d",
-                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"),
-                  desc='Launch dired inside Emacs'
-                  ),
-#              Key([], "c",
-#                  lazy.spawn("emacs"),
-#                  desc='Launch Emacs'
-#                  ),
-#              Key([], "h",
-#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(hackernews)'"),
-#                  desc='Launch the hacker news inside Emacs'
-#                  ),
-              Key([], "m",
-                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(mu4e)'"),
-                  desc='Launch mu4e inside Emacs'
-                  ),
-#              Key([], "n",
-#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(elfeed)'"),
-#                  desc='Launch elfeed inside Emacs'
-#                  ),
-#              Key([], "p",
-#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(pocket-reader)'"),
-#                  desc='Launch the pocket reader inside Emacs'
-#                  ),
-#              Key([], "s",
-#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(eshell)'"),
-#                  desc='Launch the eshell inside Emacs'
-#                  ),
-#              Key([], "t",
-#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(mastodon)'"),
-#                  desc='Launch the mastodon inside Emacs'
-#                  ),
-              Key([], "v",
-                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"),
-                  desc='Launch vterm inside Emacs'),
-                  ]),
+    Key([mod], "w", lazy.spawn("firefox-nightly"), desc="Launch firefox"),
+    Key([mod, "shift"], "w", lazy.spawn("qutebrowser"), desc="Launch qutebrowser"),
 
     # App control
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    #Key([mod], "r", lazy.spawncmd(),
-    #    desc="Spawn a command using a prompt widget"),
 
     # Switch between groups
     Key([], 'XF86Back', lazy.screen.prev_group(skip_managed=True, )),
@@ -131,18 +98,28 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
 ]
 
-from libqtile.config import Group, Match
+# groups = [
+       # Group("1", label="", layout='monadwide', matches=[Match(wm_class=["signal", "discord", "teams"])]),
+       # Group("2", label="", layout='monadtall'),
+       # Group("3", label="", layout='monadtall'),
+       # Group("4", label="", layout='monadtall'),
+       # Group("5", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "catfish", "shotwell", "czkawka", "szyszka"])]),
+       # Group("6", label="", layout='monadtall', matches=[Match(wm_class=["steam", "lutris", "heroic", "airshipper", "veloren"])]),
+       # Group("7", label="", layout='monadtall', matches=[Match(wm_class=["virt-manager","virtualbox", "gimp"])]),
+       # Group("8", label="", layout='monadtall', matches=[Match(wm_class=["deadbeef", "spotify"])]),
+       # Group("9", label="", layout='monadtall', matches=[Match(wm_class=["vlc", "mpv"])])
+       # ]
 
 groups = [
-       Group("1", label="", layout='Columns', matches=[Match(wm_class=["qutebrowser", "signal", "discord", "teams", "ferdi"])]),
-       Group("2", label="", layout='monadtall', matches=[Match(wm_class=["brave"])]),
-       Group("3", label="", layout='monadtall', matches=[Match(wm_class=["kitty", "alacritty"])]),
-       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["emacs", "emacsclient", "leafpad", "geany", "libreoffice"])]),
-       Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm", "calibre", "catfish", "feh", "shotwell", "czkawka", "szyszka"])]),
-       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["steam", "lutris", "heroic", "airshipper", "veloren"])]),
-       Group("7", label="", layout='monadtall', matches=[Match(wm_class=["virt-manager","virtualbox", "gimp"])]),
-       Group("8", label="", layout='monadtall', matches=[Match(wm_class=["deadbeef", "spotify"])]),
-       Group("9", label="", layout='monadtall', matches=[Match(wm_class=["vlc", "mpv"])])
+       Group("1", label="", layout='monadwide', matches=[Match(wm_class=["signal", "discord", "teams"])]),
+       Group("2", label="", layout='monadtall'),
+       Group("3", label="", layout='monadtall'),
+       Group("4", label="", layout='monadtall'),
+       Group("5", label="", layout='monadtall'),
+       Group("6", label="", layout='monadtall'),
+       Group("7", label="", layout='monadtall'),
+       Group("8", label="", layout='monadtall'),
+       Group("9", label="", layout='monadtall', matches=[Match(wm_class=["vlc", "mpv"])])
        ]
 
 for i in range(len(groups)):
@@ -238,7 +215,7 @@ layout_theme = {"border_width": 2,
                 }
 
 layouts = [
-    # layout.MonadWide(**layout_theme),
+    layout.MonadWide(**layout_theme),
     layout.MonadTall(**layout_theme),
     layout.Columns(**layout_theme),
     layout.Max(**layout_theme),
@@ -578,12 +555,12 @@ auto_minimize = True
 @hook.subscribe.startup_once
 def autostart():
     qtile.cmd_spawn("nitrogen --restore &")
-    # qtile.cmd_spawn("picom &")
+    qtile.cmd_spawn("picom &")
     qtile.cmd_spawn("volumeicon &")
     qtile.cmd_spawn("connman-gtk &")
     qtile.cmd_spawn("/usr/bin/emacs --daemon &")
     qtile.cmd_spawn("qbittorrent &")
-    qtile.cmd_spawn("xrandr --output eDP1 --mode 1920x1080 --pos 3200x0 --rotate normal --output DP1 --mode 1280x1024 --pos 0x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off --output HDMI-1-0 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off")
+    qtile.cmd_spawn("xrandr --output eDP1 --mode 1920x1080 --pos 2880x0 --rotate normal --output DP1 --mode 1280x960 --pos 0x0 --rotate left --output HDMI1 --off --output VIRTUAL1 --off --output HDMI-1-0 --primary --mode 1920x1080 --pos 960x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off")
 
     for p in processes:
         subprocess.Popen(p)

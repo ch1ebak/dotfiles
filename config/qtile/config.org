@@ -1,24 +1,10 @@
-#+TITLE: Config
+#+TITLE: Config - Qtile
 #+AUTHOR: ch1ebak
-#+PROPERTY: header-ags :tangle config.py
+#+PROPERTY: header-args :tangle config.py
 
-* TABLE OF CONTENTS :toc:
-- [[#imports][Imports]]
-- [[#exports][Exports]]
-- [[#key-bindings][Key bindings]]
-- [[#groups][Groups]]
-- [[#layouts][Layouts]]
-  - [[#colors][colors]]
-  - [[#theme-global-settings][theme (global settings)]]
-  - [[#layout-types][layout types]]
-- [[#widgets][Widgets]]
-  - [[#global-settings][global settings]]
-- [[#screens][Screens]]
-- [[#other-settings][Other settings]]
-- [[#autostart][Autostart]]
+* IMPORTS
 
-* Imports
-#+BEGIN_SRC python
+#+begin_src python
 
 import os
 import re
@@ -33,83 +19,52 @@ from libqtile.utils import guess_terminal
 from typing import List  # noqa: F401from typing import List  # noqa: F401
 from libqtile.widget import spacer
 
-#+END_SRC
+#+end_src
 
-* Exports
 
-#+BEGIN_SRC python
+* DEFAULTS
+
+#+begin_src python
 
 mod = "mod4"
 terminal = guess_terminal("kitty")
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
-#+END_SRC
+#+end_src
 
-* Key bindings
 
-#+BEGIN_SRC python
+* KEYBINDINGS
+
+#+begin_src python
 
 keys = [
      # Apps
-    Key([mod], "w", lazy.spawn("firefox-nightly"), desc="Launch firefox"),
-    Key([mod], "a", lazy.spawn("pcmanfm"), desc="Launch pcmanfm"),
-    Key([mod], "d", lazy.spawn("signal-desktop"), desc="Launch signal"),
-    Key([mod], "Return", lazy.spawn("kitty"), desc="Launch terminal"),
-    Key([mod], "p", lazy.spawn("slock"), desc="Launch lock screen"),
+    Key([mod], "Return", lazy.spawn("kitty"), desc="Launch kitty"),
+    Key([mod, "shift"], "Return", lazy.spawn("alacritty"), desc="Launch alacritty"),
 
-    # Rofi
+    Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"), desc="Dired"),
+    Key([mod, "shift"], "a", lazy.spawn("pcmanfm"), desc="Launch pcmanfm"),
+
+    Key([mod], "d", lazy.spawn("signal-desktop"), desc="Launch signal"),
+    Key([mod, "shift"], "d", lazy.spawn("emacsclient -c -a 'emacs' --eval '(mu4e)'"), desc="Mu4e"),
+
+    Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'"), desc='Launch Emacsclient'),
+    Key([mod, "shift"], "e", lazy.spawn("kitty -e nvim"), desc='Launch neovim'),
+
+    Key([mod], "p", lazy.spawn("slock"), desc="Launch lock screen"),
     Key([mod, "shift"], "p", lazy.spawn("rofi -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu"), desc="Rofi Power Menu"),
+
+    Key([mod], "r", lazy.spawn("keepassxc"), desc="Launch keepassxc"),
+
     Key([mod], "s", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
 
-    #KeyChord-emacs
-         KeyChord([mod],"e", [
-              Key([], "e",
-                  lazy.spawn("emacsclient -c -a 'emacs'"),
-                  desc='Launch Emacsclient'
-                  ),
-              Key([], "d",
-                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"),
-                  desc='Launch dired inside Emacs'
-                  ),
-#              Key([], "c",
-#                  lazy.spawn("emacs"),
-#                  desc='Launch Emacs'
-#                  ),
-#              Key([], "h",
-#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(hackernews)'"),
-#                  desc='Launch the hacker news inside Emacs'
-#                  ),
-              Key([], "m",
-                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(mu4e)'"),
-                  desc='Launch mu4e inside Emacs'
-                  ),
-#              Key([], "n",
-#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(elfeed)'"),
-#                  desc='Launch elfeed inside Emacs'
-#                  ),
-#              Key([], "p",
-#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(pocket-reader)'"),
-#                  desc='Launch the pocket reader inside Emacs'
-#                  ),
-#              Key([], "s",
-#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(eshell)'"),
-#                  desc='Launch the eshell inside Emacs'
-#                  ),
-#              Key([], "t",
-#                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(mastodon)'"),
-#                  desc='Launch the mastodon inside Emacs'
-#                  ),
-              Key([], "v",
-                  lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"),
-                  desc='Launch vterm inside Emacs'),
-                  ]),
+    Key([mod], "w", lazy.spawn("firefox-nightly"), desc="Launch firefox"),
+    Key([mod, "shift"], "w", lazy.spawn("qutebrowser"), desc="Launch qutebrowser"),
 
     # App control
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    #Key([mod], "r", lazy.spawncmd(),
-    #    desc="Spawn a command using a prompt widget"),
 
     # Switch between groups
     Key([], 'XF86Back', lazy.screen.prev_group(skip_managed=True, )),
@@ -165,26 +120,35 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
 ]
 
-#+END_SRC
+#+end_src
 
-#+RESULTS:
 
-* Groups
+* GROUPS
 
-#+BEGIN_SRC python
+#+begin_src python
 
-from libqtile.config import Group, Match
+# groups = [
+       # Group("1", label="", layout='monadwide', matches=[Match(wm_class=["signal", "discord", "teams"])]),
+       # Group("2", label="", layout='monadtall'),
+       # Group("3", label="", layout='monadtall'),
+       # Group("4", label="", layout='monadtall'),
+       # Group("5", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "catfish", "shotwell", "czkawka", "szyszka"])]),
+       # Group("6", label="", layout='monadtall', matches=[Match(wm_class=["steam", "lutris", "heroic", "airshipper", "veloren"])]),
+       # Group("7", label="", layout='monadtall', matches=[Match(wm_class=["virt-manager","virtualbox", "gimp"])]),
+       # Group("8", label="", layout='monadtall', matches=[Match(wm_class=["deadbeef", "spotify"])]),
+       # Group("9", label="", layout='monadtall', matches=[Match(wm_class=["vlc", "mpv"])])
+       # ]
 
 groups = [
-       Group("1", label="", layout='Columns', matches=[Match(wm_class=["qutebrowser", "signal", "discord", "teams", "ferdi"])]),
-       Group("2", label="", layout='monadtall', matches=[Match(wm_class=["brave"])]),
-       Group("3", label="", layout='monadtall', matches=[Match(wm_class=["kitty", "alacritty"])]),
-       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["emacs", "emacsclient", "leafpad", "geany", "libreoffice"])]),
-       Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm", "calibre", "catfish", "feh", "shotwell", "czkawka", "szyszka"])]),
-       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["steam", "lutris", "heroic", "airshipper", "veloren"])]),
-       Group("7", label="", layout='monadtall', matches=[Match(wm_class=["virt-manager","virtualbox", "gimp"])]),
-       Group("8", label="", layout='monadtall', matches=[Match(wm_class=["deadbeef", "spotify"])]),
-       Group("9", label="", layout='monadtall', matches=[Match(wm_class=["vlc", "mpv"])])
+       Group("1", label="", layout='monadwide', matches=[Match(wm_class=["signal", "discord", "teams"])]),
+       Group("2", label="", layout='monadtall'),
+       Group("3", label="", layout='monadtall'),
+       Group("4", label="", layout='monadtall'),
+       Group("5", label="", layout='monadtall'),
+       Group("6", label="", layout='monadtall'),
+       Group("7", label="", layout='monadtall'),
+       Group("8", label="", layout='monadtall'),
+       Group("9", label="", layout='monadtall', matches=[Match(wm_class=["vlc", "mpv"])])
        ]
 
 for i in range(len(groups)):
@@ -193,51 +157,51 @@ for i in range(len(groups)):
         Key([mod, "shift"], str((i)), lazy.window.togroup(str(i), switch_group=True))
     )
 
-    #+END_SRC
+#+end_src
 
-* Layouts
-** colors
 
-#+BEGIN_SRC python
+* COLOR SCHEMES
+
+#+begin_src python
 
 # Catpuccin
-#colors = [
-#   ["#1a1823", "#1a1823"],  # 0 background
-#   ["#6e6c7e", "#6e6c7e"],  # 1 foreground
-#   ["#302d42", "#302d42"],  # 2 background lighter
-#   ["#f28fad", "#f28fad"],  # 3 red
-#   ["#abe9b3", "#abe9b3"],  # 4 green
-#   ["#fae3b0", "#fae3b0"],  # 5 yellow
-#   ["#96cdfb", "#96cdfb"],  # 6 blue
-#   ["#e8a2af", "#e8a2af"],  # 7 maroon
-#   ["#89dceb", "#89dceb"],  # 8 cyan
-#   ["#c3bac6", "#c3bac6"],  # 9 grey
-#   ["#d9e0ee", "#d9e0ee"],  # 10 white
-#   ["#f8bd96", "#f8bd96"],  # 11 orange
-#   ["#8fbcbb", "#8fbcbb"],  # 12 super cyan
-#   ["#c9cbff", "#c9cbff"],  # 13 super blue
-#   ["#131020", "#131020"],  # 14 super dark background
-#   ["#988ba2", "#988ba2"]   # 15 slate grey
-#]
+# colors = [
+  # ["#1a1823", "#1a1823"],  # 0 background
+  # ["#6e6c7e", "#6e6c7e"],  # 1 foreground
+  # ["#302d42", "#302d42"],  # 2 background lighter
+  # ["#f28fad", "#f28fad"],  # 3 red
+  # ["#abe9b3", "#abe9b3"],  # 4 green
+  # ["#fae3b0", "#fae3b0"],  # 5 yellow
+  # ["#96cdfb", "#96cdfb"],  # 6 blue
+  # ["#e8a2af", "#e8a2af"],  # 7 maroon
+  # ["#89dceb", "#89dceb"],  # 8 cyan
+  # ["#c3bac6", "#c3bac6"],  # 9 grey
+  # ["#d9e0ee", "#d9e0ee"],  # 10 white
+  # ["#f8bd96", "#f8bd96"],  # 11 orange
+  # ["#8fbcbb", "#8fbcbb"],  # 12 super cyan
+  # ["#c9cbff", "#c9cbff"],  # 13 super blue
+  # ["#131020", "#131020"],  # 14 super dark background
+  # ["#988ba2", "#988ba2"]   # 15 slate grey
+# ]
 
 ## Dracula
 #colors = [
 # ["#282a36", "#282a36"],  # 0 background
 # ["#f8f8f2", "#f8f8f2"],  # 1 foreground
-# ["#282a36", "#282a36"],  # 2 background lighter
+# ["#6272a4", "#6272a4"],  # 2 background lighter
 # ["#ff5555", "#ff5555"],  # 3 red
-# ["#50fa7b#", "#50fa7b"],  # 4 green
+# ["#50fa7b", "#50fa7b"],  # 4 green
 # ["#f1fa8c", "#f1fa8c"],  # 5 yellow
-# ["#bd93f9", "#bd93f9"],  # 6 blue
-# ["#5af78e", "#5af78e"],  # 7 magenta
-# ["#f4f99d", "#f4f99d"],  # 8 cyan
-# ["#bfbfbf", "#bfbfbf"],  # 9 grey
-# ["#e6e6e6", "#e6e6e6"],  # 10 white
-# ["#caa9fa", "#caa9fa"],  # 11 orange
-# ["#ff92d0", "#ff92d0"],  # 12 super cyan
+# ["#8be9fd", "#8be9fd"],  # 6 blue
+# ["#ff79c6", "#ff79c6"],  # 7 magenta
+# ["#8be9fd", "#8be9fd"],  # 8 cyan
+# ["#44475a", "#44475a"],  # 9 grey
+# ["#f8f8f2", "#f8f8f2"],  # 10 white
+# ["#ffb86c", "#ffb86c"],  # 11 orange
+# ["#8be9fd", "#8be9fd"],  # 12 super cyan
 # ["#8be9fd", "#8be9fd"],  # 13 super blue
-# ["#9aedfe", "#9aedfe"],  # 14 super dark background
-# ["#bfbfbf", "#bfbfbf"]   # 15 slate grey
+# ["#44475a", "#44475a"],  # 14 super dark background
+# ["#6272a4", "#6272a4"]   # 15 slate grey
 #]
 
 ## Graphite
@@ -261,7 +225,7 @@ colors = [
 ]
 
 # Nord
-#colors = [
+# colors = [
 # ["#242831", "#242831"],  # 0 background
 # ["#f8f8f2", "#f8f8f2"],  # 1 foreground
 # ["#3b4252", "#3b4252"],  # 2 background lighter
@@ -280,11 +244,12 @@ colors = [
 # ["#708090", "#708090"]   # 15 slate grey
 # ]
 
-#+END_SRC
+#+end_src
 
-** theme (global settings)
 
-#+BEGIN_SRC python
+* LAYOUTS
+
+#+begin_src python
 
 layout_theme = {"border_width": 2,
                 "margin": 5,
@@ -292,26 +257,20 @@ layout_theme = {"border_width": 2,
                 "border_normal": colors[0]
                 }
 
-#+END_SRC
-
-** layout types
-
-#+BEGIN_SRC python
-
 layouts = [
-    # layout.MonadWide(**layout_theme),
+    layout.MonadWide(**layout_theme),
     layout.MonadTall(**layout_theme),
     layout.Columns(**layout_theme),
     layout.Max(**layout_theme),
     # layout.Floating(**layout_theme)
 ]
 
-#+END_SRC
+#+end_src
 
-* Widgets
-** global settings
 
-#+BEGIN_SRC python
+* WIDGETS
+
+#+begin_src python
 
 widget_defaults = dict(
     # font='CozetteVector Bold',
@@ -324,11 +283,12 @@ widget_defaults = dict(
 
 extension_defaults = widget_defaults.copy()
 
-#+END_SRC
+#+end_src
 
-* Screens
 
-#+BEGIN_SRC python
+* SCREENS
+
+#+begin_src python
 
 screens = [
   Screen(
@@ -598,12 +558,12 @@ screens = [
                 ], 24), ),
 ]
 
-#+END_SRC
+#+end_src
 
-#+RESULTS:
 
-* Other settings
-#+BEGIN_SRC python
+* OPTIONS
+
+#+begin_src python
 
 def window_to_prev_group(qtile):
     if qtile.currentWindow is not None:
@@ -656,24 +616,32 @@ reconfigure_screens = True
 # focus, should we respect this or not?
 auto_minimize = True
 
-#+END_SRC
+#+end_src
 
-* Autostart
 
-#+BEGIN_SRC python
+* AUTOSTART
+
+#+begin_src python
 
 @hook.subscribe.startup_once
 def autostart():
     qtile.cmd_spawn("nitrogen --restore &")
-    # qtile.cmd_spawn("picom &")
+    qtile.cmd_spawn("picom &")
     qtile.cmd_spawn("volumeicon &")
     qtile.cmd_spawn("connman-gtk &")
     qtile.cmd_spawn("/usr/bin/emacs --daemon &")
     qtile.cmd_spawn("qbittorrent &")
-    qtile.cmd_spawn("xrandr --output eDP1 --mode 1920x1080 --pos 3200x0 --rotate normal --output DP1 --mode 1280x1024 --pos 0x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off --output HDMI-1-0 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off")
+    qtile.cmd_spawn("xrandr --output eDP1 --mode 1920x1080 --pos 2880x0 --rotate normal --output DP1 --mode 1280x960 --pos 0x0 --rotate left --output HDMI1 --off --output VIRTUAL1 --off --output HDMI-1-0 --primary --mode 1920x1080 --pos 960x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off")
 
     for p in processes:
         subprocess.Popen(p)
+
+#+end_src
+
+
+* FOOTNOTES
+
+#+begin_src python
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
@@ -685,4 +653,4 @@ def autostart():
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
 
-#+END_SRC
+#+end_src
