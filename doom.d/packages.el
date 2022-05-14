@@ -50,9 +50,11 @@
 ;(unpin! t)
 
 (package! calibredb)
+(package! dash)
 (package! dashboard)
 (package! dimmer)
 (package! dired+)
+(package! dired-open)
 (package! elfeed-goodies)
 (package! elpher)
 (package! evil-tutor)
