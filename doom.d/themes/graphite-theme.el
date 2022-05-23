@@ -46,28 +46,28 @@ Can be an integer to determine the exact padding."
   "A dark theme inspired by Atom One Dark."
 
   ;; name        default   256           16
-  ((bg         '("#101010" "black"       "black"  ))
+  ((bg         '("#21242b" "black"       "black"  ))
    (fg         '("#b9b9b9" "#bfbfbf"     "brightwhite"  ))
 
    ;; These are off-color variants of bg/fg, used primarily for `solaire-mode',
    ;; but can also be useful as a basis for subtle highlights (e.g. for hl-line
    ;; or region), especially when paired with the `doom-darken', `doom-lighten',
    ;; and `doom-blend' helper functions.
-   (bg-alt     '("#21242b" "black"       "black"        ))
+   (bg-alt     '("#101010" "black"       "black"        ))
    (fg-alt     '("#5B6268" "#2d2d2d"     "white"        ))
 
    ;; These should represent a spectrum from bg to fg, where base0 is a starker
    ;; bg and base8 is a starker fg. For example, if bg is light grey and fg is
    ;; dark grey, base0 should be white and base8 should be black.
    (base0      '("#1B2229" "black"       "black"        ))
-   (base1      '("#1c1f24" "#1e1e1e"     "brightblack"  ))
-   (base2      '("#202328" "#2e2e2e"     "brightblack"  ))
-   (base3      '("#23272e" "#262626"     "brightblack"  ))
-   (base4      '("#3f444a" "#3f3f3f"     "brightblack"  ))
-   (base5      '("#5B6268" "#525252"     "brightblack"  ))
-   (base6      '("#73797e" "#6b6b6b"     "brightblack"  ))
-   (base7      '("#9ca0a4" "#979797"     "brightblack"  ))
-   (base8      '("#DFDFDF" "#dfdfdf"     "white"        ))
+   (base1      '("#b9b9b9" "#f7f7f7"     "brightblack"  ))
+   (base2      '("#868686" "#868686"     "brightblack"  ))
+   (base3      '("#747474" "#747474"     "brightblack"  ))
+   (base4      '("#686868" "#686868"     "brightblack"  ))
+   (base5      '("#a0a0a0" "#a0a0a0"     "brightblack"  ))
+   (base6      '("#8e8e8e" "#8e8e8e"     "brightblack"  ))
+   (base7      '("#7c7c7c" "#7c7c7c"     "brightblack"  ))
+   (base8      '("#101010" "#525252"     "white"        ))
 
    (grey       base4)
    (red        '("#ff6c6b" "#ff6655" "red"          ))

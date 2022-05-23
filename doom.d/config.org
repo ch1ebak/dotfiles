@@ -1,29 +1,33 @@
 #+TITLE: Config - Doom Emacs
 #+AUTHOR: ch1ebak
+#+STARTUP: folded
 #+PROPERTY: header-args :tangle config.el
 
 * TABLE OF CONTENTS :toc:
 - [[#all-the-icons][All the icons]]
+  - [[#all-the-icons---ivy][All the icons - ivy]]
 - [[#browser][Browser]]
 - [[#calendar][Calendar]]
-- [[#calibredb][Calibredb]]
 - [[#dashboard][Dashboard]]
 - [[#dimmer][Dimmer]]
 - [[#dired][Dired]]
 - [[#elfeed][Elfeed]]
+- [[#emms][EMMS]]
 - [[#epub][EPUB]]
 - [[#erc][ERC]]
 - [[#expand-region][Expand region]]
 - [[#fonts][Fonts]]
 - [[#ivy][Ivy]]
+  - [[#ivy-postframe][Ivy Postframe]]
+  - [[#ivy-youtube][Ivy Youtube]]
 - [[#mastodon][Mastodon]]
 - [[#maximize-buffer][Maximize buffer]]
+- [[#modeline][Modeline]]
 - [[#mu4e][MU4E]]
 - [[#org-books][Org books]]
 - [[#org-mode][ORG MODE]]
   - [[#directory][directory]]
   - [[#done][done]]
-  - [[#org-bullets][org bullets]]
   - [[#org-notify][org notify]]
   - [[#org-roam][org roam]]
 - [[#pandoc-mode][Pandoc-mode]]
@@ -42,6 +46,34 @@
 ;; or
 (use-package all-the-icons
   :if (display-graphic-p))
+
+#+end_src
+
+** All the icons - ivy
+
+#+begin_src emacs-lisp
+
+;; Whether display the icons
+(setq all-the-icons-ivy-rich-icon t)
+
+;; Whether display the colorful icons.
+;; It respects `all-the-icons-color-icons'.
+(setq all-the-icons-ivy-rich-color-icon t)
+
+;; The icon size
+(setq all-the-icons-ivy-rich-icon-size 1.0)
+
+;; Whether support project root
+(setq all-the-icons-ivy-rich-project t)
+
+;; Maximum truncation width of annotation fields.
+;; This value is adjusted depending on the `window-width'.
+(setq all-the-icons-ivy-rich-field-width 80)
+
+;; Slow Rendering
+;; If you experience a slow down in performance when rendering multiple icons simultaneously,
+;; you can try setting the following variable
+(setq inhibit-compacting-font-caches t)
 
 #+end_src
 
@@ -118,23 +150,6 @@
 
 #+END_SRC
 
-* Calibredb
-
-#+begin_src emacs-lisp
-
-(require 'calibredb)
-(setq calibredb-root-dir "~/Calibre Library")
-(setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
-(setq calibredb-library-alist '(("~/Calibre Library")))
-(setq sql-sqlite-program "/usr/bin/sqlite3")
-(setq calibredb-program "/usr/bin/calibredb")
-(setq calibredb-id-width 4)
-(setq calibredb-size-show t)
-(setq calibredb-format-all-the-icons t)
-(setq calibredb-fetch-metadata-source-list '("Goodreads" "Amazon.com"))
-
-#+end_src
-
 * Dashboard
 
 #+BEGIN_SRC emacs-lisp
@@ -203,10 +218,15 @@ List of keybindings (SPC h b b)")
 (setq dired-open-extensions '(("gif" . "sxiv")
                               ("jpg" . "sxiv")
                               ("png" . "sxiv")
+                              ("pdf" . "zathura")
+                              ("flac" . "vlc")
+                              ("avi" . "vlc")
                               ("mkv" . "vlc")
                               ("mp4" . "vlc")))
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
 
 #+end_src
 
@@ -221,14 +241,17 @@ List of keybindings (SPC h b b)")
 (setq elfeed-feeds (quote
                     (
                      ("https://www.androidpolice.com/feed/" android)
+                     ("https://hackaday.com/blog/feed/" bezpieczeństwo)
                      ("https://feeds.feedburner.com/TheHackersNews" bezpieczeństwo)
                      ("http://feeds.feedburner.com/niebezpiecznik/" bezpieczeństwo)
                      ("http://feeds.feedburner.com/Torrentfreak" bezpieczeństwo)
+                     ("https://restoreprivacy.com/feed/" bezpieczeństwo)
                      ("https://zaufanatrzeciastrona.pl/feed/" bezpieczeństwo)
                      ("https://hyperreal.info/rss.xml" drzewa)
                      ("https://climateandeconomy.com/feed/" ekologia)
+                     ("https://insideclimatenews.org/feed/" ekologia)
                      ("https://jembendell.com/feed" ekologia)
-                     ("https://www.masteringemacs.org/feed" emacs)
+                     ("https://planet.emacslife.com/atom.xml" emacs)
                      ("http://feeds.the-ebook-reader.com/feedburner/cmWU" ereader)
                      ("http://goodereader.com/blog/feed/" ereader)
                      ("http://rss.swiatczytnikow.pl/SwiatCzytnikow" ereader)
@@ -237,10 +260,13 @@ List of keybindings (SPC h b b)")
                      ("https://existentialcomics.com/rss.xml" komiksy)
                      ("http://queer.pl/rss/" lgbt)
                      ("https://9to5linux.com/feed/atom" linux)
+                     ("https://artixlinux.org/feed.php" linux)
                      ("https://distrowatch.com/news/dw.xml" linux)
                      ("https://www.linuxjournal.com/rss_feeds" linux)
+                     ("https://linuxman.co/feed/" linux)
                      ("https://lwn.net/headlines/newrss" linux)
                      ("https://omgubuntu.co.uk/feed" linux)
+                     ("https://static.fsf.org/fsforg/rss/news.xml" opensource)
                      ("https://www.eff.org/rss/updates.xml" opensource)
                      ("https://feeds.feedburner.com/ItsFoss" opensource)
                      ("https://opensource.com/rss.xml" opensource)
@@ -256,9 +282,28 @@ List of keybindings (SPC h b b)")
                      ("https://stare.pro/" tech)
                      ("https://consensus911.org/" teorie spiskowe)
                      ("https://www.g-central.com/feed/" zegarki)
+                     ("https://digdeeper.neocities.org/atom.xml" niewiem)
                      )))
 
 #+END_SRC
+
+* EMMS
+
+#+begin_src emacs-lisp
+
+(setq emms-source-file-default-directory "~/Muzyka/"
+      emms-playlist-buffer-name "*Music*"
+      emms-info-asynchronously t
+      emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
+(map! :leader
+      (:prefix ("a" . "EMMS audio player")
+       :desc "Go to emms playlist" "a" #'emms-playlist-mode-go
+       :desc "Emms pause track" "x" #'emms-pause
+       :desc "Emms stop track" "s" #'emms-stop
+       :desc "Emms play previous track" "p" #'emms-previous
+       :desc "Emms play next track" "n" #'emms-next))
+
+#+end_src
 
 * EPUB
 #+BEGIN_SRC emacs-lisp
@@ -271,21 +316,13 @@ List of keybindings (SPC h b b)")
 
 #+begin_src emacs-lisp
 
-(map! :leader
-      (:prefix ("e". "evaluate/ERC/EWW")
-       :desc "Launch ERC with TLS connection" "E" #'erc-tls))
-
 (setq erc-server "irc.libera.chat"
-      erc-nick "anilorak"
-      erc-track-shorten-start 24
-      erc-autojoin-channels-alist '(("irc.libera.chat" "#emacs" "#linux"))
+      erc-nick "anilorak"    ; Change this!
+      erc-user-full-name "anilorak"  ; And this!
+      erc-track-shorten-start 8
+      erc-autojoin-channels-alist '(("irc.libera.chat" "#systemcrafters" "#distrotube" "#artix" "#emacs"))
       erc-kill-buffer-on-part t
-      erc-fill-column 100
-      erc-fill-function 'erc-fill-static
-      erc-fill-static-center 20
-      ;; erc-auto-query 'bury
-      )
-
+            erc-auto-query 'bury)
 
 #+end_src
 
@@ -334,6 +371,8 @@ List of keybindings (SPC h b b)")
 (use-package ivy
   :diminish
   :bind (("C-s" . swiper)
+         ("C-S-o" . counsel-rhythmbox)
+         ("C-{" . counsel-rhythmbox-playpause-current-song)
          :map ivy-minibuffer-map
          ("TAB" . ivy-alt-done)
          ("C-l" . ivy-alt-done)
@@ -348,12 +387,50 @@ List of keybindings (SPC h b b)")
          ("C-d" . ivy-reverse-i-search-kill))
   :config
   (ivy-mode 1))
+
 (use-package ivy-rich
   :after ivy
   :init
   (ivy-rich-mode 1))
 
+
+(use-package counsel
+  :bind (("C-M-j" . 'counsel-switch-buffer)
+         :map minibuffer-local-map
+         ("C-r" . 'counsel-minibuffer-history))
+  :custom
+  (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
+  :config
+  (counsel-mode 1))
+
 #+END_SRC
+
+** Ivy Postframe
+
+#+begin_src emacs-lisp
+
+(require 'ivy-posframe)
+;; display at `ivy-posframe-style'
+(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
+(ivy-posframe-mode 1)
+
+#+end_src
+
+** Ivy Youtube
+
+#+begin_src emacs-lisp
+
+(setq ivy-youtube-key "AIzaSyBIoWmx9EONMNEYkSSpXzuyPHjgTdWpGfc")
+;;start ivy-youtube.el
+(autoload 'ivy-youtube "ivy-youtube" nil t)
+(global-set-key (kbd "C-c y") 'ivy-youtube) ;; bind hotkey
+
+;;set default browser for you will use to play videos/default generic
+;; (setq browse-url-browser-function 'browse-url-generic)
+;; (setq browse-url-generic-program "firefox-open-url")
+(setq ivy-youtube-play-at "/usr/bin/vlc")
+
+#+end_src
 
 * Mastodon
 
@@ -382,120 +459,84 @@ List of keybindings (SPC h b b)")
 
 #+END_SRC
 
+* Modeline
+
+#+begin_src emacs-lisp
+
+(setq doom-modeline-counsel-rhythmbox t)
+(setq doom-modeline-buffer-name t)
+
+#+end_src
+
 * MU4E
 
 #+BEGIN_SRC emacs-lisp
 
-(require 'org-mime)
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e/")
-(require 'mu4e)
-(setq mu4e-maildir (expand-file-name "~/Maildir"))
-; get mail
-(setq mu4e-get-mail-command "mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a"
-  ;; mu4e-html2text-command "w3m -T text/html" ;;using the default mu4e-shr2text
-  mu4e-view-prefer-html t
-  mu4e-update-interval 180
-  mu4e-headers-auto-update t
-  mu4e-compose-signature-auto-include nil
-  mu4e-compose-format-flowed t)
-;; to view selected message in the browser, no signin, just html mail
-(add-to-list 'mu4e-view-actions
-  '("ViewInBrowser" . mu4e-action-view-in-browser) t)
-;; enable inline images
-(setq mu4e-view-show-images t)
-;; use imagemagick, if available
-(when (fboundp 'imagemagick-register-types)
-  (imagemagick-register-types))
-;; every new email composition gets its own frame!
-(setq mu4e-compose-in-new-frame t)
-;; don't save message to Sent Messages, IMAP takes care of this
-(setq mu4e-sent-messages-behavior 'delete)
-(add-hook 'mu4e-view-mode-hook #'visual-line-mode)
-;; <tab> to navigate to links, <RET> to open them in browser
-(add-hook 'mu4e-view-mode-hook
-  (lambda()
-;; try to emulate some of the eww key-bindings
-(local-set-key (kbd "<RET>") 'mu4e~view-browse-url-from-binding)
-(local-set-key (kbd "<tab>") 'shr-next-link)
-(local-set-key (kbd "<backtab>") 'shr-previous-link)))
-;; from https://www.reddit.com/r/emacs/comments/bfsck6/mu4e_for_dummies/elgoumx
-(add-hook 'mu4e-headers-mode-hook
-      (defun my/mu4e-change-headers ()
-        (interactive)
-        (setq mu4e-headers-fields
-              `((:human-date . 25) ;; alternatively, use :date
-                (:flags . 6)
-                (:from . 22)
-                (:thread-subject . ,(- (window-body-width) 70)) ;; alternatively, use :subject
-                (:size . 7)))))
-;; if you use date instead of human-date in the above, use this setting
-;; give me ISO(ish) format date-time stamps in the header list
-;(setq mu4e-headers-date-format "%Y-%m-%d %H:%M")
-;; spell check
-(add-hook 'mu4e-compose-mode-hook
-    (defun my-do-compose-stuff ()
-       "My settings for message composition."
-       (visual-line-mode)
-       (org-mu4e-compose-org-mode)
-           (use-hard-newlines -1)
-       (flyspell-mode)))
-(require 'smtpmail)
-;;rename files when moving
-;;NEEDED FOR MBSYNC
-(setq mu4e-change-filenames-when-moving t)
-;;set up queue for offline email
-;;use mu mkdir  ~/Maildir/acc/queue to set up first
-(setq smtpmail-queue-mail nil)  ;; start in normal mode
-;;from the info manual
-(setq mu4e-attachment-dir  "~/Pobrane")
-(setq message-kill-buffer-on-exit t)
-(setq mu4e-compose-dont-reply-to-self t)
-(require 'org-mu4e)
-;; convert org mode to HTML automatically
-(setq org-mu4e-convert-to-html t)
-;;from vxlabs config
-;; show full addresses in view message (instead of just names)
-;; toggle per name with M-RET
-(setq mu4e-view-show-addresses 't)
-;; don't ask when quitting
-(setq mu4e-confirm-quit nil)
-;; mu4e-context
-(setq mu4e-context-policy 'pick-first)
-(setq mu4e-compose-context-policy 'always-ask)
-(setq mu4e-contexts
-  (list
-   (make-mu4e-context
-    :name "work" ;;for acc1-gmail
-    :enter-func (lambda () (mu4e-message "Entering context work"))
-    :leave-func (lambda () (mu4e-message "Leaving context work"))
-    :match-func (lambda (msg)
-                  (when msg
-                (mu4e-message-contact-field-matches
-                 msg '(:from :to :cc :bcc) "yellowparenti@disroot.org")))
-    :vars '((user-mail-address . "yellowparenti@disroot.org")
-            (user-full-name . "User Account1")
-            (mu4e-sent-folder . "/acc1-gmail/[acc1].Sent Mail")
-            (mu4e-drafts-folder . "/acc1-gmail/[acc1].drafts")
-            (mu4e-trash-folder . "/acc1-gmail/[acc1].Bin")
-            (mu4e-compose-signature . (concat "Formal Signature\n" "Emacs 25, org-mode 9, mu4e 1.0\n"))
-            (mu4e-compose-format-flowed . t)
-            (smtpmail-queue-dir . "~/Maildir/acc1-gmail/queue/cur")
-            (message-send-mail-function . smtpmail-send-it)
-            (smtpmail-smtp-user . "acc1")
-            (smtpmail-starttls-credentials . (("smtp.disroot.org" 587 nil nil)))
-            (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
-            (smtpmail-default-smtp-server . "smtp.disroot.org")
-            (smtpmail-smtp-server . "smtp.disroot.org")
-            (smtpmail-smtp-service . 587)
-            (smtpmail-debug-info . t)
-            (smtpmail-debug-verbose . t)
-            (mu4e-maildir-shortcuts . ( ("/acc1-gmail/INBOX"            . ?i)
-                                        ("/acc1-gmail/[acc1].Sent Mail" . ?s)
-                                        ("/acc1-gmail/[acc1].Bin"       . ?t)
-                                        ("/acc1-gmail/[acc1].All Mail"  . ?a)
-                                        ("/acc1-gmail/[acc1].Starred"   . ?r)
-                                        ("/acc1-gmail/[acc1].drafts"    . ?d)
-                                        ))))))
+(use-package mu4e
+  :ensure nil
+  :config
+
+  (setq mu4e-get-mail-command "mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a")
+  (setq mu4e-root-maildir (expand-file-name "~/Dokumenty/Maildir"))
+
+  ;; This is set to 't' to avoid mail syncing issues when using mbsync
+  (setq mu4e-change-filenames-when-moving t)
+
+  ;; Updates
+  (setq mu4e-update-interval 180)
+  (setq mu4e-headers-auto-update t)
+
+  ;; Configure the function to use for sending mail
+  (setq message-send-mail-function 'smtpmail-send-it)
+
+  ;; Only ask if a context hasn't been previously picked
+  (setq mu4e-compose-context-policy 'ask-if-none)
+
+  ;; Make sure plain text mails flow correctly for recipients
+  (setq mu4e-compose-format-flowed t)
+
+  ;; enable inline images
+  (setq mu4e-view-show-images t)
+  ;; use imagemagick, if available
+  (when (fboundp 'imagemagick-register-types)
+    (imagemagick-register-types))
+
+  ;; Accounts
+  (setq mu4e-contexts
+        (list
+       ;; Private account
+       (make-mu4e-context
+        :name "Gmail" ;; for gmail
+        :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
+        :vars '((user-mail-address . "k.derwich96@gmail.com")
+                (user-full-name    . "Karolina Derwich")
+                (smtpmail-smtp-server  . "smtp.gmail.com")
+                (smtpmail-smtp-service . 465)
+                (smtpmail-stream-type  . ssl)
+                (mu4e-drafts-folder  . "/Gmail/Drafts")
+                (mu4e-sent-folder  . "/Gmail/Sent")
+                (mu4e-refile-folder  . "/Gmail/Inbox")
+                (mu4e-trash-folder  . "/Gmail/Trash")))
+
+       ;; Shopping account
+       (make-mu4e-context
+        :name "Outlook" ;; for outlook
+        :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Outlook" (mu4e-message-field msg :maildir))))
+        :vars '((user-mail-address . "k.derwich@outlook.com")
+                (user-full-name    . "Karolina Derwich")
+                (smtpmail-smtp-server  . "smtp-mail.outlook.com")
+                (smtpmail-smtp-service . 587)
+                (smtpmail-stream-type  . ssl)
+                (mu4e-drafts-folder  . "/Outlook/Drafts")
+                (mu4e-sent-folder  . "/Outlook/Sent Items")
+                (mu4e-refile-folder  . "/Outlook/Inbox")
+                (mu4e-trash-folder  . "/Outlook/Deleted Items"))))))
 
 #+END_SRC
 
@@ -522,6 +563,18 @@ List of keybindings (SPC h b b)")
              "|"                 ; The pipe necessary to separate "active" states and "inactive" states
              "DONE(d)"           ; Task has been completed
              "CANCELLED(c)" )))) ; Task has been cancelled
+  (setq org-agenda-files
+        '("~/Dokumenty/org/org-roam/20211206160944-org_agenda.org"
+          "~/Dokumenty/org/org-roam/20220515174754-reccuring.org"
+          "~/Dokumenty/org/org-roam/20220515174922-important_dates.org"))
+  (setq org-tag-alist
+    '((:startgroup)
+       ; Put mutually exclusive tags here
+       (:endgroup)
+       ("@errand" . ?E)
+       ("@home" . ?H)
+       ("@uni" . ?U)
+       ("@doc" . ?D)))
 
 #+END_SRC
 
@@ -536,15 +589,6 @@ List of keybindings (SPC h b b)")
      (org-archive-subtree)
      (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
    "/DONE" 'tree))
-
-#+END_SRC
-
-** org bullets
-
-#+BEGIN_SRC emacs-lisp
-
-(use-package org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 #+END_SRC
 
@@ -628,11 +672,13 @@ List of keybindings (SPC h b b)")
 
 #+BEGIN_SRC emacs-lisp
 
+(setq doom-theme 'tron-legacy)
 ;; (setq doom-theme 'catppuccin)
 ;; (setq doom-theme 'doom-dracula)
 ;; (setq doom-theme 'doom-nord)
-(setq doom-theme 'doom-one)
-(setq fancy-splash-image "~/.doom.d/themes/doomEmacs.svg")
+
+;; (setq fancy-splash-image "~/.doom.d/splash/doomDracula.svg")
+;; (setq fancy-splash-image "~/.doom.d/splash/doomOne.svg")
 
 #+END_SRC
 
