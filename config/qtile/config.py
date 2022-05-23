@@ -12,32 +12,33 @@ from typing import List  # noqa: F401from typing import List  # noqa: F401
 from libqtile.widget import spacer
 
 mod = "mod4"
-terminal = guess_terminal("kitty")
+# terminal = guess_terminal("kitty")
+terminal = guess_terminal("alacritty")
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 keys = [
      # Apps
-    Key([mod], "Return", lazy.spawn("kitty"), desc="Launch kitty"),
-    Key([mod, "shift"], "Return", lazy.spawn("alacritty"), desc="Launch alacritty"),
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
 
-    Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"), desc="Dired"),
+    Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"), desc="Launch Dired"),
     Key([mod, "shift"], "a", lazy.spawn("pcmanfm"), desc="Launch pcmanfm"),
 
     Key([mod], "d", lazy.spawn("signal-desktop"), desc="Launch signal"),
-    Key([mod, "shift"], "d", lazy.spawn("emacsclient -c -a 'emacs' --eval '(mu4e)'"), desc="Mu4e"),
 
     Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'"), desc='Launch Emacsclient'),
-    Key([mod, "shift"], "e", lazy.spawn("kitty -e nvim"), desc='Launch neovim'),
+    Key([mod, "shift"], "e", lazy.spawn("emacs"), desc='Launch emacs'),
+
+    Key([mod], "m", lazy.spawn("rhythmbox"), desc="Launch rhythmbox"),
 
     Key([mod], "p", lazy.spawn("slock"), desc="Launch lock screen"),
-    Key([mod, "shift"], "p", lazy.spawn("rofi -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu"), desc="Rofi Power Menu"),
+    Key([mod, "shift"], "p", lazy.spawn("rofi -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu"), desc="Launch Rofi Power Menu"),
 
     Key([mod], "r", lazy.spawn("keepassxc"), desc="Launch keepassxc"),
 
     Key([mod], "s", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
 
     Key([mod], "w", lazy.spawn("firefox-nightly"), desc="Launch firefox"),
-    Key([mod, "shift"], "w", lazy.spawn("qutebrowser"), desc="Launch qutebrowser"),
+    Key([mod, "shift"], "w", lazy.spawn("firefox-esr"), desc="Launch Firefox ESR"),
 
     # App control
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -113,12 +114,12 @@ keys = [
 groups = [
        Group("1", label="", layout='monadwide', matches=[Match(wm_class=["signal", "discord", "teams"])]),
        Group("2", label="", layout='monadtall'),
-       Group("3", label="", layout='monadtall'),
+       Group("3", label="", layout='monadtall', matches=[Match(wm_class=["alacritty"])]),
        Group("4", label="", layout='monadtall'),
        Group("5", label="", layout='monadtall'),
        Group("6", label="", layout='monadtall'),
        Group("7", label="", layout='monadtall'),
-       Group("8", label="", layout='monadtall'),
+       Group("8", label="", layout='monadtall', matches=[Match(wm_class=["spotify", "rhythmbox"])]),
        Group("9", label="", layout='monadtall', matches=[Match(wm_class=["vlc", "mpv"])])
        ]
 
@@ -129,24 +130,24 @@ for i in range(len(groups)):
     )
 
 # Catpuccin
-# colors = [
-  # ["#1a1823", "#1a1823"],  # 0 background
-  # ["#6e6c7e", "#6e6c7e"],  # 1 foreground
-  # ["#302d42", "#302d42"],  # 2 background lighter
-  # ["#f28fad", "#f28fad"],  # 3 red
-  # ["#abe9b3", "#abe9b3"],  # 4 green
-  # ["#fae3b0", "#fae3b0"],  # 5 yellow
-  # ["#96cdfb", "#96cdfb"],  # 6 blue
-  # ["#e8a2af", "#e8a2af"],  # 7 maroon
-  # ["#89dceb", "#89dceb"],  # 8 cyan
-  # ["#c3bac6", "#c3bac6"],  # 9 grey
-  # ["#d9e0ee", "#d9e0ee"],  # 10 white
-  # ["#f8bd96", "#f8bd96"],  # 11 orange
-  # ["#8fbcbb", "#8fbcbb"],  # 12 super cyan
-  # ["#c9cbff", "#c9cbff"],  # 13 super blue
-  # ["#131020", "#131020"],  # 14 super dark background
-  # ["#988ba2", "#988ba2"]   # 15 slate grey
-# ]
+#colors = [
+ #["#1a1823", "#1a1823"],  # 0 background
+ #["#6e6c7e", "#6e6c7e"],  # 1 foreground
+ #["#302d42", "#302d42"],  # 2 background lighter
+ #["#f28fad", "#f28fad"],  # 3 red
+ #["#abe9b3", "#abe9b3"],  # 4 green
+ #["#fae3b0", "#fae3b0"],  # 5 yellow
+ #["#96cdfb", "#96cdfb"],  # 6 blue
+ #["#e8a2af", "#e8a2af"],  # 7 maroon
+ #["#89dceb", "#89dceb"],  # 8 cyan
+ #["#c3bac6", "#c3bac6"],  # 9 grey
+ #["#d9e0ee", "#d9e0ee"],  # 10 white
+ #["#f8bd96", "#f8bd96"],  # 11 orange
+ #["#8fbcbb", "#8fbcbb"],  # 12 super cyan
+ #["#c9cbff", "#c9cbff"],  # 13 super blue
+ #["#131020", "#131020"],  # 14 super dark background
+ #["#988ba2", "#988ba2"]   # 15 slate grey
+#]
 
 ## Dracula
 #colors = [
@@ -560,6 +561,7 @@ def autostart():
     qtile.cmd_spawn("connman-gtk &")
     qtile.cmd_spawn("/usr/bin/emacs --daemon &")
     qtile.cmd_spawn("qbittorrent &")
+    qtile.cmd_spawn("keepassxc &")
     qtile.cmd_spawn("xrandr --output eDP1 --mode 1920x1080 --pos 2880x0 --rotate normal --output DP1 --mode 1280x960 --pos 0x0 --rotate left --output HDMI1 --off --output VIRTUAL1 --off --output HDMI-1-0 --primary --mode 1920x1080 --pos 960x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off")
 
     for p in processes:
