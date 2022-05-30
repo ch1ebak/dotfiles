@@ -26,7 +26,14 @@
 ;; you can try setting the following variable
 (setq inhibit-compacting-font-caches t)
 
-(setq browse-url-browser-function 'eww-browse-url)
+(all-the-icons-ivy-rich-mode 1)
+(setq all-the-icons-ivy-rich-icon t)
+(setq all-the-icons-ivy-rich-color-icon t)
+(setq all-the-icons-ivy-rich-project t)
+
+
+
+;; (setq browse-url-browser-function 'eww-browse-url)
 
 ;; https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-than-3-months
 (defun kd/year-calendar (&optional year)
@@ -86,6 +93,16 @@
       :desc "Scroll year calendar forward" "<right>" #'kd/scroll-year-calendar-forward)
 
 (defalias 'year-calendar 'kd/year-calendar)
+
+ (use-package counsel
+   :bind (("C-M-j" . 'counsel-switch-buffer)
+          :map minibuffer-local-map
+          ("C-r" . 'counsel-minibuffer-history))
+   :custom
+   (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
+   :config
+   (counsel-mode 1))
+(global-set-key (kbd "C-c k") 'counsel-rg)
 
 (use-package dashboard
   :init      ;; tweak dashboard config before loading it
@@ -153,51 +170,95 @@ List of keybindings (SPC h b b)")
 (elfeed-goodies/setup)
 (setq elfeed-goodies/entry-pane-size 0.5)
 (add-hook 'elfeed-show-mode-hook 'visual-line-mode)
+(defun elfeed-mark-all-as-read ()
+      (interactive)
+      (mark-whole-buffer)
+      (elfeed-search-untag-all-unread))
 (setq elfeed-feeds (quote
                     (
+                     ;; Android
                      ("https://www.androidpolice.com/feed/" android)
+                     ;; Bezpieczeństwo
                      ("https://hackaday.com/blog/feed/" bezpieczeństwo)
                      ("https://feeds.feedburner.com/TheHackersNews" bezpieczeństwo)
                      ("http://feeds.feedburner.com/niebezpiecznik/" bezpieczeństwo)
-                     ("http://feeds.feedburner.com/Torrentfreak" bezpieczeństwo)
+                     ("https://torrentfreak.com/feed/" bezpieczeństwo)
                      ("https://restoreprivacy.com/feed/" bezpieczeństwo)
                      ("https://zaufanatrzeciastrona.pl/feed/" bezpieczeństwo)
+                     ;; Drzewa
                      ("https://hyperreal.info/rss.xml" drzewa)
+                     ;; Ekologia
                      ("https://climateandeconomy.com/feed/" ekologia)
                      ("https://insideclimatenews.org/feed/" ekologia)
                      ("https://jembendell.com/feed" ekologia)
+                     ;; Emacs
                      ("https://planet.emacslife.com/atom.xml" emacs)
+                     ("http://pragmaticemacs.com/feed/" emacs)
+                     ("https://sachachua.com/blog/category/emacs-news/feed" emacs)
+                     ;; Ereader
                      ("http://feeds.the-ebook-reader.com/feedburner/cmWU" ereader)
                      ("http://goodereader.com/blog/feed/" ereader)
                      ("http://rss.swiatczytnikow.pl/SwiatCzytnikow" ereader)
+                     ;; Gaming
                      ("https://www.gamingonlinux.com/article_rss.php" gaming)
                      ("http://pcgamer.com/feed" gaming)
+                     ;; Komiksy
                      ("https://existentialcomics.com/rss.xml" komiksy)
+                     ("https://xkcd.com/atom.xml" comics)
+                     ;; LGBT
+                     ("https://www.autostraddle.com/feed" lgbt)
+                     ("https://www.afterellen.com/feed" lgbt)
+                     ("https://lesbrary.com/feed" lgbt)
                      ("http://queer.pl/rss/" lgbt)
+                     ;; Linux
                      ("https://9to5linux.com/feed/atom" linux)
                      ("https://artixlinux.org/feed.php" linux)
                      ("https://distrowatch.com/news/dw.xml" linux)
-                     ("https://www.linuxjournal.com/rss_feeds" linux)
+                     ("http://feeds.feedburner.com/linuxpl-news" linux)
+                     ("https://www.linuxjournal.com/node/feed" linux)
                      ("https://linuxman.co/feed/" linux)
                      ("https://lwn.net/headlines/newrss" linux)
                      ("https://omgubuntu.co.uk/feed" linux)
+                     ("https://sysdfree.wordpress.com/feed" linux)
+                     ("https://unixsheikh.com/feed.rss" linux)
+                     ;; Newsy
+                     ("http://www.gazetaprawna.pl/rss.xml" newsy)
+                     ;; Open source
+                     ("https://fossforce.com/feed/" opensource)
                      ("https://static.fsf.org/fsforg/rss/news.xml" opensource)
                      ("https://www.eff.org/rss/updates.xml" opensource)
                      ("https://feeds.feedburner.com/ItsFoss" opensource)
                      ("https://opensource.com/rss.xml" opensource)
+                     ;; Płeć
                      ("http://codziennikfeministyczny.pl/feed/" płeć)
+                     ;; Psychatria
                      ("https://antipsychiatry.net/" psychatria)
                      ("http://www.antipsychiatry.org/" psychatria)
+                     ;; Reddit
+                     ("https://www.reddit.com/r/commandline.rss" reddit)
+                     ("https://www.reddit.com/r/emacs.rss" reddit)
+                     ("https://www.reddit.com/r/unixporn/?f=flair_name%3A%22Material%22" reddit)
+                     ("https://www.reddit.com/r/unixporn/?f=flair_name%3A%22Material%22.rss" reddit)
+                     ;; Socjalizm
+                     ("https://marxistsociology.org/feed/" socjalizm)
                      ("https://odrodzenie.fr/feed/" socjalizm)
                      ("https://postep.org.pl/feed" socjalizm)
                      ("http://strajk.eu/feed/" socjalizm)
                      ("http://feeds.soundcloud.com/users/soundcloud:users:284471201/sounds.rss" socjalizm)
+                     ;; Socjologia
+                     ("https://feeds.feedburner.com/EverydaySociologyBlog" socjologia)
+                     ("http://www.sociologylens.net/feed" socjologia)
+                     ;; Tech
                      ("https://antyweb.pl/feed" tech)
-                     ("https://news.ycombinator.com/item?id=16908241" tech)
+                     ("https://kernal.eu/feed" tech)
+                     ("https://hnrss.org/frontpage" tech)
+                     ("https://sadgrl.online/feed.xml" tech)
                      ("https://stare.pro/" tech)
+                     ("https://www.wired.com/feed/rss" tech)
+                     ;; Teorie spiskowe
                      ("https://consensus911.org/" teorie spiskowe)
+                     ;; Zegarki
                      ("https://www.g-central.com/feed/" zegarki)
-                     ("https://digdeeper.neocities.org/atom.xml" niewiem)
                      )))
 
 (setq emms-source-file-default-directory "~/Muzyka/"
@@ -265,25 +326,24 @@ List of keybindings (SPC h b b)")
   :config
   (ivy-mode 1))
 
-(use-package ivy-rich
-  :after ivy
-  :init
-  (ivy-rich-mode 1))
-
-
-(use-package counsel
-  :bind (("C-M-j" . 'counsel-switch-buffer)
-         :map minibuffer-local-map
-         ("C-r" . 'counsel-minibuffer-history))
-  :custom
-  (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
-  :config
-  (counsel-mode 1))
+ (use-package ivy-rich
+   :after ivy
+   :init
+   (ivy-rich-mode 1))
+ (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+ (setq ivy-rich-path-style 'abbrev)
 
 (require 'ivy-posframe)
 ;; display at `ivy-posframe-style'
 (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
 (ivy-posframe-mode 1)
+
+(use-package ivy-todo :ensure t
+  :bind ("C-c t" . ivy-todo)
+  :commands ivy-todo
+  :config
+  (setq ivy-todo-file "/home/kd/Dokumenty/org/org-roam/20220527183456-inbox.org")
+  (setq ivy-todo-default-tags '("TODO")))
 
 (setq ivy-youtube-key "AIzaSyBIoWmx9EONMNEYkSSpXzuyPHjgTdWpGfc")
 ;;start ivy-youtube.el
@@ -314,7 +374,8 @@ List of keybindings (SPC h b b)")
 (setq doom-modeline-buffer-name t)
 
 (use-package mu4e
-  :ensure nil
+  :ensure t
+  :defer 10
   :config
 
   (setq mu4e-get-mail-command "mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a")
@@ -324,7 +385,7 @@ List of keybindings (SPC h b b)")
   (setq mu4e-change-filenames-when-moving t)
 
   ;; Updates
-  (setq mu4e-update-interval 180)
+  (setq mu4e-update-interval 120)
   (setq mu4e-headers-auto-update t)
 
   ;; Configure the function to use for sending mail
@@ -341,6 +402,20 @@ List of keybindings (SPC h b b)")
   ;; use imagemagick, if available
   (when (fboundp 'imagemagick-register-types)
     (imagemagick-register-types))
+
+  ;; Use Ivy for mu4e completions (maildir folders, etc)
+  (setq mu4e-completing-read-function #'ivy-completing-read)
+
+  ;; setup some handy shortcuts
+  (setq mu4e-maildir-shortcuts
+        '(("/Gmail/Sent"         . ?g)
+          ("/Outlook/Sent Items" . ?o)))
+
+  (add-to-list 'mu4e-bookmarks
+          (make-mu4e-bookmark
+           :name "All Inboxes"
+           :query "maildir:/Gmail/Inbox OR maildir:/Outlook/Inbox"
+           :key ?a))
 
   ;; Accounts
   (setq mu4e-contexts
@@ -460,13 +535,53 @@ List of keybindings (SPC h b b)")
   (org-roam-db-autosync-mode)
   (org-roam-setup))
 
-(add-hook 'org-mode-hook 'pandoc-mode)
+(setq org-agenda-height nil
+      org-agenda-time-grid '((daily today require-timed) "----------------------" nil)
+      org-agenda-skip-scheduled-if-done t
+      org-agenda-skip-deadline-if-done t
+      org-agenda-include-deadlines t
+      org-agenda-include-diary t
+      org-agenda-block-separator nil
+      org-agenda-compact-blocks t
+      org-agenda-start-with-log-mode t)
+
+(setq org-agenda-custom-commands
+      '(("z" "Super zaen view"
+         ((agenda "" ((org-agenda-span 'day)
+                      (org-super-agenda-groups
+                       '((:name "Inbox"
+                                :todo "TODO"
+                                :order 1)))))
+          (alltodo "" ((org-agenda-overriding-header "")
+                       (org-super-agenda-groups
+                        ' (:name "Dom"
+                                 :tag "dom"
+                                 :order 2)
+                          (:name "Uniwersytet"
+                                 :tag "uni"
+                                 :order 3)
+                          (:name "Lekarz"
+                                 :tag "doc"
+                                 :order 4)
+                          (:name "Ważne daty"
+                                 :tag "important"
+                                 :order 5)
+                          (:name "Powtarzające się"
+                                 :tag "rec"
+                                 :order 6))))))))
 
 (setq shell-file-name "/bin/fish")
 
-(setq doom-theme 'tron-legacy)
+;; from http://emacswiki.org/emacs/InsertingTodaysDate
+(defun insert-todays-date (arg)
+  (interactive "U")
+  (insert (if arg
+              (format-time-string "%d-%m-%Y")
+            (format-time-string "%Y-%m-%d"))))
+
+;; (setq doom-theme 'doom-henna)
 ;; (setq doom-theme 'catppuccin)
-;; (setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-dracula)
 ;; (setq doom-theme 'doom-nord)
 
 ;; (setq fancy-splash-image "~/.doom.d/splash/doomDracula.svg")
@@ -482,8 +597,14 @@ List of keybindings (SPC h b b)")
 (defalias 'epa--decode-coding-string 'decode-coding-string)
 
 (add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
+(defun td/visual-fill-setup ()
+  "Center the column 100 characters wide."
+  (setq-local visual-fill-column-width 150
+              visual-fill-column-center-text nil)
+  (visual-fill-column-mode 1))
 
 (setq frame-resize-pixelwise t)
 (setq display-line-numbers-type t)
 (setq org-hide-emphasis-markers t)
 (setq auth-sources '("~/.authinfo.gpg"))
+(global-set-key (kbd "C-x w") 'delete-frame)

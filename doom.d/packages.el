@@ -49,24 +49,48 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
+;; A
+(package! all-the-icons-ivy-rich)
+
+;; C
 (package! counsel-css)
+
+;; D
 (package! dash)
 (package! dashboard)
 (package! dimmer)
 (package! dired+)
 (package! dired-hacks)
 (package! dired-open)
+
+;; E
 (package! elfeed-goodies)
 (package! emmet-mode)
+
+;; I
 (package! ivy-posframe)
+(package! ivy-todo)
 (package! ivy-youtube)
+
+;; M
 (package! mastodon)
+
+;; N
 (package! nov)
 (package! npm-mode)
+
+;; O
 (package! org-books)
 (package! org-mime)
 (package! org-notify)
-(package! pandoc-mode)
+(package! org-super-agenda)
+(package! ox-pandoc)
+
+;; P
 (package! pocket-reader)
+
+;; S
 (package! smtpmail)
+
+;; V
 (package! visual-fill-column)
