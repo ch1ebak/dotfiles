@@ -3,8 +3,8 @@
 
 | window manager | qtile                            |
 | shell          | fish/bash                        |
-| terminal       | kitty                            |
-| text editor    | doom emacs|
+| terminal       | kitty/alacritty                  |
+| text editor    | doom emacs/neovim                |
 | launcher       | rofi                             |
 | notifications  | dunst                            |
 | theme          | catppuccin/dracula/graphite/nord |
