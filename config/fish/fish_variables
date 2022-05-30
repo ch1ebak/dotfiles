@@ -1,11 +1,15 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dcolor\x3dfg\x3a\x23f8f8f2\x2cbg\x3a\x23282a36\x2chl\x3a\x23bd93f9\x20\x2d\x2dcolor\x3dfg\x2b\x3a\x23f8f8f2\x2cbg\x2b\x3a\x2344475a\x2chl\x2b\x3a\x23bd93f9\x20\x2d\x2dcolor\x3dinfo\x3a\x23ffb86c\x2cprompt\x3a\x2350fa7b\x2cpointer\x3a\x23ff79c6\x20\x2d\x2dcolor\x3dmarker\x3a\x23ff79c6\x2cspinner\x3a\x23ffb86c\x2cheader\x3a\x236272a4
 SETUVAR __fish_initialized:3400
 SETUVAR _fisher_catppuccin_2F_fish_files:/home/kd/\x2econfig/fish/conf\x2ed/catppuccin\x2efish
+SETUVAR _fisher_dracula_2F_fish_files:/home/kd/\x2econfig/fish/conf\x2ed/dracula\x2efish
 SETUVAR _fisher_franciscolourenco_2F_done_files:/home/kd/\x2econfig/fish/conf\x2ed/done\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:/home/kd/\x2econfig/fish/functions/fisher\x2efish\x1e/home/kd/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_jorgebucaran_2F_spark_2E_fish_files:/home/kd/\x2econfig/fish/functions/spark\x2efish\x1e/home/kd/\x2econfig/fish/completions/spark\x2efish
-SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ecatppuccin/fish\x1efranciscolourenco/done\x1ejorgebucaran/spark\x2efish
+SETUVAR _fisher_laughedelic_2F_pisces_files:/home/kd/\x2econfig/fish/functions/_pisces_append\x2efish\x1e/home/kd/\x2econfig/fish/functions/_pisces_backspace\x2efish\x1e/home/kd/\x2econfig/fish/functions/_pisces_bind_pair\x2efish\x1e/home/kd/\x2econfig/fish/functions/_pisces_complete\x2efish\x1e/home/kd/\x2econfig/fish/functions/_pisces_insert_identical\x2efish\x1e/home/kd/\x2econfig/fish/functions/_pisces_insert_left\x2efish\x1e/home/kd/\x2econfig/fish/functions/_pisces_insert_right\x2efish\x1e/home/kd/\x2econfig/fish/functions/_pisces_jump\x2efish\x1e/home/kd/\x2econfig/fish/functions/_pisces_lookup\x2efish\x1e/home/kd/\x2econfig/fish/functions/_pisces_remove\x2efish\x1e/home/kd/\x2econfig/fish/functions/_pisces_should_insert\x2efish\x1e/home/kd/\x2econfig/fish/functions/_pisces_skip\x2efish\x1e/home/kd/\x2econfig/fish/conf\x2ed/pisces\x2efish
+SETUVAR _fisher_plugins:franciscolourenco/done\x1ejorgebucaran/spark\x2efish\x1ejorgebucaran/fisher\x1ecatppuccin/fish\x1edracula/fish\x1elaughedelic/pisces\x1esmh/base16\x2dshell\x2dfish
+SETUVAR _fisher_smh_2F_base16_2D_shell_2D_fish_files:/home/kd/\x2econfig/fish/functions/base16\x2efish
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:blue
@@ -28,10 +32,11 @@ SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrbl
 SETUVAR fish_color_status:red
 SETUVAR fish_color_user:brgreen
 SETUVAR fish_color_valid_path:\x2d\x2dunderline
-SETUVAR fish_key_bindings:fish_default_key_bindings
+SETUVAR fish_key_bindings:fish_vi_key_bindings
 SETUVAR fish_pager_color_completion:normal
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:cyan\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
 SETUVAR fish_user_paths:/home/kd/\x2elocal/bin\x1e/home/kd/Applications
+SETUVAR pisces_pairs:\x28\x2c\x29\x1e\x5b\x2c\x5d\x1e\x7b\x2c\x7d\x1e\x22\x2c\x22\x1e\x27\x2c\x27

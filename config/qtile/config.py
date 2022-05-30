@@ -12,7 +12,6 @@ from typing import List  # noqa: F401from typing import List  # noqa: F401
 from libqtile.widget import spacer
 
 mod = "mod4"
-# terminal = guess_terminal("kitty")
 terminal = guess_terminal("alacritty")
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
@@ -37,8 +36,8 @@ keys = [
 
     Key([mod], "s", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
 
-    Key([mod], "w", lazy.spawn("firefox-nightly"), desc="Launch firefox"),
-    Key([mod, "shift"], "w", lazy.spawn("firefox-esr"), desc="Launch Firefox ESR"),
+    Key([mod], "w", lazy.spawn("firefox-esr"), desc="Launch Firefox"),
+    Key([mod, "shift"], "w", lazy.spawn("brave"), desc="Launch Brave"),
 
     # App control
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -131,87 +130,87 @@ for i in range(len(groups)):
 
 # Catpuccin
 #colors = [
- #["#1a1823", "#1a1823"],  # 0 background
- #["#6e6c7e", "#6e6c7e"],  # 1 foreground
- #["#302d42", "#302d42"],  # 2 background lighter
- #["#f28fad", "#f28fad"],  # 3 red
- #["#abe9b3", "#abe9b3"],  # 4 green
- #["#fae3b0", "#fae3b0"],  # 5 yellow
- #["#96cdfb", "#96cdfb"],  # 6 blue
- #["#e8a2af", "#e8a2af"],  # 7 maroon
- #["#89dceb", "#89dceb"],  # 8 cyan
- #["#c3bac6", "#c3bac6"],  # 9 grey
- #["#d9e0ee", "#d9e0ee"],  # 10 white
- #["#f8bd96", "#f8bd96"],  # 11 orange
- #["#8fbcbb", "#8fbcbb"],  # 12 super cyan
- #["#c9cbff", "#c9cbff"],  # 13 super blue
- #["#131020", "#131020"],  # 14 super dark background
- #["#988ba2", "#988ba2"]   # 15 slate grey
+ #["#1a1823", "#1a1823"],  # 0
+ #["#6e6c7e", "#6e6c7e"],  # 1
+ #["#302d42", "#302d42"],  # 2
+ #["#f28fad", "#f28fad"],  # 3
+ #["#f8bd96", "#f8bd96"],  # 4
+ #["#abe9b3", "#abe9b3"],  # 5
+ #["#96cdfb", "#96cdfb"],  # 6
+ #["#e8a2af", "#e8a2af"],  # 7
+ #["#89dceb", "#89dceb"],  # 8
+ #["#c3bac6", "#c3bac6"],  # 9
+ #["#d9e0ee", "#d9e0ee"],  # 10
+ #["#fae3b0", "#fae3b0"],  # 11
+ #["#8fbcbb", "#8fbcbb"],  # 12
+ #["#c9cbff", "#c9cbff"],  # 13
+ #["#131020", "#131020"],  # 14
+ #["#988ba2", "#988ba2"]   # 15
 #]
 
 ## Dracula
-#colors = [
-# ["#282a36", "#282a36"],  # 0 background
-# ["#f8f8f2", "#f8f8f2"],  # 1 foreground
-# ["#6272a4", "#6272a4"],  # 2 background lighter
-# ["#ff5555", "#ff5555"],  # 3 red
-# ["#50fa7b", "#50fa7b"],  # 4 green
-# ["#f1fa8c", "#f1fa8c"],  # 5 yellow
-# ["#8be9fd", "#8be9fd"],  # 6 blue
-# ["#ff79c6", "#ff79c6"],  # 7 magenta
-# ["#8be9fd", "#8be9fd"],  # 8 cyan
-# ["#44475a", "#44475a"],  # 9 grey
-# ["#f8f8f2", "#f8f8f2"],  # 10 white
-# ["#ffb86c", "#ffb86c"],  # 11 orange
-# ["#8be9fd", "#8be9fd"],  # 12 super cyan
-# ["#8be9fd", "#8be9fd"],  # 13 super blue
-# ["#44475a", "#44475a"],  # 14 super dark background
-# ["#6272a4", "#6272a4"]   # 15 slate grey
-#]
-
-## Graphite
 colors = [
- ["#101010", "#101010"],  # 0 background
- ["#b9b9b9", "#b9b9b9"],  # 1 foreground
- ["#101010", "#101010"],  # 2 background lighter
- ["#525252", "#525252"],  # 3 red
- ["#7c7c7c", "#7c7c7c"],  # 4 green
- ["#7c7c7c", "#7c7c7c"],  # 5 yellow
- ["#8e8e8e", "#8e8e8e"],  # 6 blue
- ["#8e8e8e", "#8e8e8e"],  # 7 magenta
- ["#a0a0a0", "#a0a0a0"],  # 8 cyan
- ["#a0a0a0", "#a0a0a0"],  # 9 grey
- ["#686868", "#686868"],  # 10 white
- ["#686868", "#686868"],  # 11 orange
- ["#747474", "#747474"],  # 12 super cyan
- ["#747474", "#747474"],  # 13 super blue
- ["#868686", "#868686"],  # 14 super dark background
- ["#868686", "#868686"]   # 15 slate grey
+ ["#282a36", "#282a36"],  # 0
+ ["#BD93F9", "#BD93F9"],  # 1
+ ["#44475a", "#44475a"],  # 2
+ ["#ff5555", "#ff5555"],  # 3
+ ["#50fa7b", "#50fa7b"],  # 4
+ ["#f1fa8c", "#f1fa8c"],  # 5
+ ["#8be9fd", "#8be9fd"],  # 6
+ ["#ff79c6", "#ff79c6"],  # 7
+ ["#8be9fd", "#8be9fd"],  # 8
+ ["#6272a4", "#6272a4"],  # 9
+ ["#f8f8f2", "#f8f8f2"],  # 10
+ ["#ffb86c", "#ffb86c"],  # 11
+ ["#8be9fd", "#8be9fd"],  # 12
+ ["#8be9fd", "#8be9fd"],  # 13
+ ["#f8f8f2", "#f8f8f2"],  # 14
+ ["#bfbfbf", "#bfbfbf"]   # 15
 ]
 
+## Graphite
+#colors = [
+ #["#101010", "#101010"],  # 0
+ #["#b9b9b9", "#b9b9b9"],  # 1
+ #["#101010", "#101010"],  # 2
+ #["#525252", "#525252"],  # 3
+ #["#7c7c7c", "#7c7c7c"],  # 4
+ #["#7c7c7c", "#7c7c7c"],  # 5
+ #["#8e8e8e", "#8e8e8e"],  # 6
+ #["#8e8e8e", "#8e8e8e"],  # 7
+ #["#a0a0a0", "#a0a0a0"],  # 8
+ #["#a0a0a0", "#a0a0a0"],  # 9
+ #["#686868", "#686868"],  # 10
+ #["#686868", "#686868"],  # 11
+ #["#747474", "#747474"],  # 12
+ #["#747474", "#747474"],  # 13
+ #["#868686", "#868686"],  # 14
+ #["#868686", "#868686"]   # 15
+#]
+
 # Nord
-# colors = [
-# ["#242831", "#242831"],  # 0 background
-# ["#f8f8f2", "#f8f8f2"],  # 1 foreground
-# ["#3b4252", "#3b4252"],  # 2 background lighter
-# ["#bf616a", "#bf616a"],  # 3 red
-# ["#a3be8c", "#a3be8c"],  # 4 green
-# ["#ebcb8b", "#ebcb8b"],  # 5 yellow
-# ["#81a1c1", "#81a1c1"],  # 6 blue
-# ["#b48ead", "#b48ead"],  # 7 magenta
-# ["#88c0d0", "#88c0d0"],  # 8 cyan
-# ["#4c566a", "#4c566a"],  # 9 grey
-# ["#e5e9f0", "#e5e9f0"],  # 10 white
-# ["#d08770", "#d08770"],  # 11 orange
-# ["#8fbcbb", "#8fbcbb"],  # 12 super cyan
-# ["#5e81ac", "#5e81ac"],  # 13 super blue
-# ["#2e3440", "#2e3440"],  # 14 super dark background
-# ["#708090", "#708090"]   # 15 slate grey
-# ]
+#colors = [
+ #["#242831", "#242831"],  # 0
+ #["#f8f8f2", "#f8f8f2"],  # 1
+ #["#3b4252", "#3b4252"],  # 2
+ #["#bf616a", "#bf616a"],  # 3
+ #["#a3be8c", "#a3be8c"],  # 4
+ #["#ebcb8b", "#ebcb8b"],  # 5
+ #["#81a1c1", "#81a1c1"],  # 6
+ #["#b48ead", "#b48ead"],  # 7
+ #["#88c0d0", "#88c0d0"],  # 8
+ #["#4c566a", "#4c566a"],  # 9
+ #["#e5e9f0", "#e5e9f0"],  # 10
+ #["#d08770", "#d08770"],  # 11
+ #["#8fbcbb", "#8fbcbb"],  # 12
+ #["#5e81ac", "#5e81ac"],  # 13
+ #["#2e3440", "#2e3440"],  # 14
+ #["#708090", "#708090"]   # 15
+#]
 
 layout_theme = {"border_width": 2,
-                "margin": 5,
-                "border_focus": colors[9],
+                "margin": 8,
+                "border_focus": colors[1],
                 "border_normal": colors[0]
                 }
 
@@ -220,7 +219,6 @@ layouts = [
     layout.MonadTall(**layout_theme),
     layout.Columns(**layout_theme),
     layout.Max(**layout_theme),
-    # layout.Floating(**layout_theme)
 ]
 
 widget_defaults = dict(
@@ -254,16 +252,21 @@ screens = [
                        rounded = False,
                        highlight_color = colors[9],
                        highlight_method = "line",
-                       this_current_screen_border = colors[15],
+                       this_current_screen_border = colors[4],
                        this_screen_border = colors[15],
                        other_current_screen_border = colors[15],
-                       other_screen_border = colors[9],
+                       other_screen_border = colors[1],
                        foreground = colors[15],
                        background = colors[0]
                        ),
               widget.Sep(
                        linewidth = 0,
                        padding = 5,
+                       ),
+              widget.TextBox(
+                       text = "|",
+                       fontsize = 12,
+                       foreground = colors[4],
                        ),
               widget.Prompt(
                        prompt = prompt,
@@ -284,7 +287,7 @@ screens = [
               widget.TextBox(
                        text = "|",
                        fontsize = 12,
-                       foreground = colors[2],
+                       foreground = colors[7],
                        ),
               widget.Net(
                       interface = "wlan0",
@@ -298,7 +301,7 @@ screens = [
               widget.TextBox(
                       text = "|",
                       fontsize = 12,
-                      foreground = colors[2],
+                      foreground = colors[4],
                       ),
               widget.Memory(
                       format = '  {MemUsed: .0f}{mm}',
@@ -312,7 +315,7 @@ screens = [
               widget.TextBox(
                       text = "|",
                       fontsize = 12,
-                      foreground = colors[2],
+                      foreground = colors[7],
                       ),
               widget.CPU(
                       padding = 5,
@@ -326,7 +329,7 @@ screens = [
               widget.TextBox(
                       text = "|",
                       fontsize = 12,
-                      foreground = colors[2],
+                      foreground = colors[4],
                       ),
               widget.Wttr(
                        padding = 5,
@@ -340,7 +343,7 @@ screens = [
               widget.TextBox(
                        text = "|",
                        fontsize = 12,
-                       foreground = colors[2],
+                       foreground = colors[7],
                        ),
               widget.Clock(
                        format = "  %d.%m.%y - %H:%M ",
@@ -353,7 +356,7 @@ screens = [
               widget.TextBox(
                        text = "|",
                        fontsize = 12,
-                       foreground = colors[2],
+                       foreground = colors[4],
                        ),
               widget.Systray(),
               widget.CurrentLayoutIcon(
@@ -385,16 +388,21 @@ screens = [
                        rounded = False,
                        highlight_color = colors[9],
                        highlight_method = "line",
-                       this_current_screen_border = colors[15],
+                       this_current_screen_border = colors[4],
                        this_screen_border = colors[15],
                        other_current_screen_border = colors[15],
-                       other_screen_border = colors[9],
+                       other_screen_border = colors[1],
                        foreground = colors[15],
                        background = colors[0]
                        ),
               widget.Sep(
                        linewidth = 0,
                        padding = 5,
+                       ),
+              widget.TextBox(
+                       text = "|",
+                       fontsize = 12,
+                       foreground = colors[4],
                        ),
               widget.WindowName(
                        padding = 5,
@@ -414,7 +422,7 @@ screens = [
               widget.TextBox(
                        text = "|",
                        fontsize = 12,
-                       foreground = colors[2],
+                       foreground = colors[7],
                        ),
               widget.Clock(
                        format = "  %d.%m.%y - %H:%M ",
@@ -452,16 +460,21 @@ screens = [
                        rounded = False,
                        highlight_color = colors[9],
                        highlight_method = "line",
-                       this_current_screen_border = colors[15],
+                       this_current_screen_border = colors[4],
                        this_screen_border = colors[15],
                        other_current_screen_border = colors[15],
-                       other_screen_border = colors[9],
+                       other_screen_border = colors[1],
                        foreground = colors[15],
                        background = colors[0]
                        ),
               widget.Sep(
                        linewidth = 0,
                        padding = 5,
+                       ),
+              widget.TextBox(
+                       text = "|",
+                       fontsize = 12,
+                       foreground = colors[4],
                        ),
               widget.WindowName(
                        padding = 5,
@@ -481,7 +494,7 @@ screens = [
               widget.TextBox(
                        text = "|",
                        fontsize = 12,
-                       foreground = colors[2],
+                       foreground = colors[7],
                        ),
               widget.Clock(
                        format = "  %d.%m.%y - %H:%M ",
@@ -556,7 +569,7 @@ auto_minimize = True
 @hook.subscribe.startup_once
 def autostart():
     qtile.cmd_spawn("nitrogen --restore &")
-    qtile.cmd_spawn("picom &")
+    qtile.cmd_spawn("picom --experimental-backend -b")
     qtile.cmd_spawn("volumeicon &")
     qtile.cmd_spawn("connman-gtk &")
     qtile.cmd_spawn("/usr/bin/emacs --daemon &")

@@ -1,34 +1,34 @@
 /*******************************************************************************
- * ROFI ONELINE THEME USING THE CATPPUCCIN COLOR PALETTE
- * User                 : LR-Tech               
+ * ROFI ONELINE THEME USING THE GRAPHITE COLOR PALETTE
+ * User                 : LR-Tech
  *******************************************************************************/
 
 * {
     font:   "mononoki Nerd Font Bold 10";
 
-    catppuccin0:     #1a1823;
-    catppuccin1:     #6e6c7e;
-    catppuccin2:     #302d42;
-    catppuccin3:     #131020;
+    graphite0:     #101010;
+    graphite1:     #525252;
+    graphite2:     #7c7c7c;
+    graphite3:     #7c7c7c;
 
-    catppuccin4:     #f28fad;
-    catppuccin5:     #abe9b3;
-    catppuccin6:     #fae3b0;
+    graphite4:     #8e8e8e;
+    graphite5:     #8e8e8e;
+    graphite6:     #a0a0a0;
 
-    catppuccin7:     #96cdfb;
-    catppuccin8:     #e8a2af;
-    catppuccin9:     #89dceb;
-    catppuccin10:    #c3bac6;
-    catppuccin11:    #d9e0ee;
+    graphite7:     #8e8e8e;
+    graphite8:     #a0a0a0;
+    graphite9:     #a0a0a0;
+    graphite10:    #686868;
+    graphite11:    #686868;
 
-    catppuccin12:    #f8bd96;
-    catppuccin13:    #8fbcbb;
-    catppuccin14:    #c9cbff;
-    catppuccin15:    #988ba2;
+    graphite12:    #747474;
+    graphite13:    #747474;
+    graphite14:    #868686;
+    graphite15:    #868686;
 
     background-color:   transparent;
-    text-color:         @catppuccin15;
-    accent-color:       @catppuccin8;
+    text-color:         @graphite15;
+    accent-color:       @graphite8;
 
     margin:     0px;
     padding:    1px;
@@ -38,7 +38,7 @@
 window {
     location:           north;
     width:              100%;
-    background-color:   @catppuccin0;
+    background-color:   @graphite0;
     children:           [ mainbox,message ];
 }
 
@@ -59,7 +59,7 @@ prompt, entry, element-text, element-icon {
 }
 
 prompt {
-    text-color: @catppuccin15;
+    text-color: @graphite15;
 }
 
 listview {
@@ -72,15 +72,15 @@ element {
 }
 
 element normal urgent {
-    text-color: @catppuccin15;
+    text-color: @graphite15;
 }
 
 element normal active {
-    text-color: @catppuccin15;
+    text-color: @graphite15;
 }
 
 element selected {
-    text-color: @catppuccin0;
+    text-color: @graphite0;
 }
 
 element selected normal {
@@ -88,11 +88,11 @@ element selected normal {
 }
 
 element selected urgent {
-    background-color:   @catppuccin13;
+    background-color:   @graphite13;
 }
 
 element selected active {
-    background-color:   @catppuccin8;
+    background-color:   @graphite8;
 }
 
 element-icon {

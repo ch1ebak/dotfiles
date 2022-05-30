@@ -1,34 +1,26 @@
 /*******************************************************************************
- * ROFI ONELINE THEME USING THE CATPPUCCIN COLOR PALETTE
+ * ROFI ONELINE THEME USING THE DRACULA COLOR PALETTE
  * User                 : LR-Tech               
  *******************************************************************************/
 
 * {
     font:   "mononoki Nerd Font Bold 10";
 
-    catppuccin0:     #1a1823;
-    catppuccin1:     #6e6c7e;
-    catppuccin2:     #302d42;
-    catppuccin3:     #131020;
-
-    catppuccin4:     #f28fad;
-    catppuccin5:     #abe9b3;
-    catppuccin6:     #fae3b0;
-
-    catppuccin7:     #96cdfb;
-    catppuccin8:     #e8a2af;
-    catppuccin9:     #89dceb;
-    catppuccin10:    #c3bac6;
-    catppuccin11:    #d9e0ee;
-
-    catppuccin12:    #f8bd96;
-    catppuccin13:    #8fbcbb;
-    catppuccin14:    #c9cbff;
-    catppuccin15:    #988ba2;
+    dracula0:     #282a36;
+    dracula1:     #44475a;
+    dracula2:     #f8f8f2;
+    dracula3:     #6272a4;
+    dracula4:    #8be9fd;
+    dracula5:     #50fa7b;
+    dracula6:     #ffb86c;
+    dracula7:     #ff79c6;
+    dracula8:    #bd93f9;
+    dracula9:     #ff5555;
+    dracula10:     #f1fa8c;
 
     background-color:   transparent;
-    text-color:         @catppuccin15;
-    accent-color:       @catppuccin8;
+    text-color:         @dracula2;
+    accent-color:       @dracula7;
 
     margin:     0px;
     padding:    1px;
@@ -38,7 +30,7 @@
 window {
     location:           north;
     width:              100%;
-    background-color:   @catppuccin0;
+    background-color:   @dracula0;
     children:           [ mainbox,message ];
 }
 
@@ -59,7 +51,7 @@ prompt, entry, element-text, element-icon {
 }
 
 prompt {
-    text-color: @catppuccin15;
+    text-color: @dracula5;
 }
 
 listview {
@@ -72,15 +64,15 @@ element {
 }
 
 element normal urgent {
-    text-color: @catppuccin15;
+    text-color: @dracula9;
 }
 
 element normal active {
-    text-color: @catppuccin15;
+    text-color: @accent-color;
 }
 
 element selected {
-    text-color: @catppuccin0;
+    text-color: @dracula0;
 }
 
 element selected normal {
@@ -88,11 +80,11 @@ element selected normal {
 }
 
 element selected urgent {
-    background-color:   @catppuccin13;
+    background-color:   @dracula7;
 }
 
 element selected active {
-    background-color:   @catppuccin8;
+    background-color:   @dracula3;
 }
 
 element-icon {

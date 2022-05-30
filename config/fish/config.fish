@@ -7,6 +7,7 @@ end
 ## Path
 export PATH="$PATH:$HOME/.config/fish/config.fish"
 export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="/usr/bin/sxiv:$PATH"
 set -e fish_user_paths
 set -U fish_user_paths $HOME/.local/bin $HOME/Applications $fish_user_paths
 
@@ -54,11 +55,11 @@ end
 ### EYE CANDY
 
 ## Fetch
-# colorscript random
+colorscript random
 # neofetch
 # pfetch
 # ppfetch
-starfetch
+# starfetch
 
 # Starship
 starship init fish | source
@@ -72,18 +73,18 @@ starship init fish | source
 # set fish_color_param '#f2cecf'
 
 # Dracula
-# set fish_color_normal '#f8f8f2'
-# set fish_color_autosuggestion '#6272a4'
-# set fish_color_command '#8be9fd'
-# set fish_color_error '#ff5555'
-# set fish_color_param '#bd93f9'
+set fish_color_normal '#f8f8f2'
+set fish_color_autosuggestion '#6272a4'
+set fish_color_command '#8be9fd'
+set fish_color_error '#ff5555'
+set fish_color_param '#bd93f9'
 
 # Graphite
-set fish_color_normal '#f7f7f7'
-set fish_color_autosuggestion '#525252'
-set fish_color_command '#f7f7f7'
-set fish_color_error '#bf616a'
-set fish_color_param '#f7f7f7'
+# set fish_color_normal '#f7f7f7'
+# set fish_color_autosuggestion '#525252'
+# set fish_color_command '#f7f7f7'
+# set fish_color_error '#bf616a'
+# set fish_color_param '#f7f7f7'
 
 # Nord
 # set fish_color_normal '#eceff4'
@@ -100,8 +101,8 @@ alias gp='sudo pacman -S'
 alias rp='sudo pacman -R'
 alias gy='yay -S'
 alias ry='yay -Rns'
-alias pacsyu='sudo pacman -Syu'                  # update only standard pkgs
-alias yaysyu='yay -Syu'                          # update standard pkgs and AUR pkgs (yay)
+alias pacup='sudo pacman -Syu'                  # update only standard pkgs
+alias yayup='yay -Syu'                          # update standard pkgs and AUR pkgs (yay)
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages
 alias pkglist='sudo pacman -Qqe > ~/Dokumenty/kodowanie/packages.txt'
 
@@ -141,7 +142,7 @@ alias doomdoc='~/.emacs.d/bin/doom doctor'
 alias doomrec='~/.emacs.d/bin/doom build'
 
 # MU4E
-alias mu4emu='time mu init --maildir=~/Dokumenty/org/Maildir/ --my-address=yellowparenti@disroot.org'
+alias mu4emu='time mu init --maildir=~/Dokumenty/org/Maildir/'
 alias mu4emb='time mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a'
 
 ## grub
@@ -162,6 +163,10 @@ alias mountvm='sudo mount -t 9p -o trans=virtio /sharepoint share'
 ## mkdir
 alias mkdir='mkdir -pv'
 
+## Neovim
+alias vim='nvim'
+alias neovim='nvim'
+
 ## Picom
 alias kap='killall picom'
 
@@ -172,6 +177,7 @@ alias shutdown='sudo shutdown now'
 ## Timeshift
 alias tsc='sudo timeshift --create'
 alias tsl='sudo timeshift --list'
+alias tgui='sudo timeshift-gtk'
 
 ## Uptime
 alias upt='uptime'
