@@ -131,8 +131,8 @@ colors:
     # foreground: '0xb9b9b9'
   # normal:
     # black:   '0x101010'
-    # red:     '0x7c7c7c'
-    # green:   '0x8e8e8e'
+    # red:     '0xff6655'
+    # green:   '0x1abc9c'
     # yellow:  '0xa0a0a0'
     # blue:    '0x686868'
     # magenta: '0x747474'
@@ -140,8 +140,8 @@ colors:
     # white:   '0xb9b9b9'
   # bright:
     # black:   '0x525252'
-    # red:     '0x7c7c7c'
-    # green:   '0x8e8e8e'
+    # red:     '0xff6655'
+    # green:   '0x1abc9c'
     # yellow:  '0xa0a0a0'
     # blue:    '0x686868'
     # magenta: '0x747474'
