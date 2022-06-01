@@ -55,11 +55,11 @@ end
 ### EYE CANDY
 
 ## Fetch
-colorscript random
+# colorscript random
 # neofetch
 # pfetch
 # ppfetch
-# starfetch
+starfetch
 
 # Starship
 starship init fish | source
@@ -100,7 +100,7 @@ set fish_color_param '#bd93f9'
 alias gp='sudo pacman -S'
 alias rp='sudo pacman -R'
 alias gy='yay -S'
-alias ry='yay -Rns'
+alias ry='yay -R'
 alias pacup='sudo pacman -Syu'                  # update only standard pkgs
 alias yayup='yay -Syu'                          # update standard pkgs and AUR pkgs (yay)
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages
@@ -169,6 +169,7 @@ alias neovim='nvim'
 
 ## Picom
 alias kap='killall picom'
+alias picom='picom --experimental-backend -b'
 
 ## Reboot
 alias reboot='sudo reboot'
