@@ -40,68 +40,74 @@
 
 ## catppuccin
 
-# [urgency_low]
-    # background = "#1a1823"
-    # foreground = "#6e6c7e"
-    # frame_color = "#988ba2"
-
-# [urgency_normal]
-    # background = "#1a1823"
-    # foreground = "#6e6c7e"
-    # frame_color = "#fae3b0"
-
-# [urgency_critical]
-    # background = "#1a1823"
-    # foreground = "#6e6c7e"
-    # frame_color = "#f28fad"
+#[urgency_low]
+#   background = "#1a1823"
+#   foreground = "#6e6c7e"
+#
+#[urgency_normal]
+#   background = "#1a1823"
+#   foreground = "#6e6c7e"
+#
+#[urgency_critical]
+#   background = "#1a1823"
+#   foreground = "#6e6c7e"
 
 
 ## dracula
 
-[urgency_low]
-   background = "#282a36"
-   foreground = "#6272a4"
-   frame_color = "#282a36"
-
-[urgency_normal]
-   background = "#282a36"
-   foreground = "#bd93f9"
-   frame_color = "#ffb86c"
-
-[urgency_critical]
-   background = "#ff5555"
-   foreground = "#f8f8f2"
-   frame_color = "#ff5555"
+#[urgency_low]
+#   background = "#282a36"
+#   foreground = "#6272a4"
+#
+#[urgency_normal]
+#   background = "#282a36"
+#   foreground = "#bd93f9"
+#
+#[urgency_critical]
+#   background = "#ff5555"
+#   foreground = "#f8f8f2"
 
 
-## graphite
+## gruvbox
 
- # [urgency_low]
-     # background = "#101010"
-     # foreground = "#b9b9b9"
-
- # [urgency_normal]
-     # background = "#101010"
-     # foreground = "#b9b9b9"
-
- # [urgency_critical]
-     # background = "#101010"
-     # foreground = "#b9b9b9"
+#[urgency_low]
+#   background = "#282828"
+#   foreground = "#ebdbb2"
+#
+#[urgency_normal]
+#   background = "#282828"
+#   foreground = "#ebdbb2"
+#
+#[urgency_critical]
+#   background = "#282828"
+#   foreground = "#ebdbb2"
 
 
 ## nord
 
 #[urgency_low]
-#    background = "#242831"
-#    foreground = "#f8f8f2"
-#    frame_color = "#708090"
+#   background = "#242831"
+#   foreground = "#f8f8f2"
 #
 #[urgency_normal]
-#    background = "#242831"
-#    foreground = "#f8f8f2"
-#    frame_color = "#ebcb8b"
+#   background = "#242831"
+#   foreground = "#f8f8f2"
 #
 #[urgency_critical]
-#    background = "#242831"
-#    foreground = "#f8f8f2"
-#    frame_color = "#bf616a"
+#   background = "#242831"
+#   foreground = "#f8f8f2"
+
+
+## one dark
+
+[urgency_low]
+   background = "#282c34"
+   foreground = "#bbc2cf"
+
+[urgency_normal]
+   background = "#282c34"
+   foreground = "#bbc2cf"
+
+[urgency_critical]
+   background = "#282c34"
+   foreground = "#bbc2cf"
