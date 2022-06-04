@@ -12,12 +12,13 @@ from typing import List  # noqa: F401from typing import List  # noqa: F401
 from libqtile.widget import spacer
 
 mod = "mod4"
-terminal = guess_terminal("alacritty")
+terminal = guess_terminal("kitty")
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 keys = [
      # Apps
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod, "control"], "Return", lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"), desc="Launch VTerm"),
 
     Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"), desc="Launch Dired"),
     Key([mod, "shift"], "a", lazy.spawn("pcmanfm"), desc="Launch pcmanfm"),
@@ -44,27 +45,18 @@ keys = [
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 
-    # Switch between groups
-    Key([], 'XF86Back', lazy.screen.prev_group(skip_managed=True, )),
-    Key([], 'XF86Forward', lazy.screen.next_group(skip_managed=True, )),
-    Key([mod], 'XF86Back', lazy.screen.prev_group(skip_managed=True, )),
-    Key([mod], 'XF86Forward', lazy.screen.next_group(skip_managed=True, )),
-    Key([mod], 'Left', lazy.screen.prev_group(skip_managed=True, )),
-    Key([mod], 'Right', lazy.screen.next_group(skip_managed=True, )),
-    Key([mod], 'Escape', lazy.screen.togglegroup()),
-
     # Switch between screens
     Key([mod], "z", lazy.to_screen(2)),
     Key([mod], "c", lazy.to_screen(1)),
     Key([mod], "x", lazy.to_screen(0)),
 
     # Switch between windows
-    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(),
-        desc="Move window focus to other window"),
+    Key([mod], "h", lazy.layout.down(), desc="Move focus down"),
+    Key([mod], "l", lazy.layout.up(), desc="Move focus up"),
+
+    # Switch between groups
+    Key([mod], 'j', lazy.screen.prev_group(skip_managed=True, )),
+    Key([mod], 'k', lazy.screen.next_group(skip_managed=True, )),
 
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
@@ -91,7 +83,7 @@ keys = [
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    Key([mod, "control"], "Return", lazy.layout.toggle_split(),
+    Key(["shift", "control"], "Return", lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack"),
 
     # Toggle between different layouts as defined below
@@ -113,7 +105,7 @@ keys = [
 groups = [
        Group("1", label="", layout='monadwide', matches=[Match(wm_class=["signal", "discord", "teams"])]),
        Group("2", label="", layout='monadtall'),
-       Group("3", label="", layout='monadtall', matches=[Match(wm_class=["alacritty"])]),
+       Group("3", label="", layout='monadtall'),
        Group("4", label="", layout='monadtall'),
        Group("5", label="", layout='monadtall'),
        Group("6", label="", layout='monadtall'),
@@ -128,89 +120,109 @@ for i in range(len(groups)):
         Key([mod, "shift"], str((i)), lazy.window.togroup(str(i), switch_group=True))
     )
 
-# Catpuccin
+# Catppuccin
 #colors = [
- #["#1a1823", "#1a1823"],  # 0
- #["#6e6c7e", "#6e6c7e"],  # 1
- #["#302d42", "#302d42"],  # 2
- #["#f28fad", "#f28fad"],  # 3
- #["#f8bd96", "#f8bd96"],  # 4
- #["#abe9b3", "#abe9b3"],  # 5
- #["#96cdfb", "#96cdfb"],  # 6
- #["#e8a2af", "#e8a2af"],  # 7
- #["#89dceb", "#89dceb"],  # 8
- #["#c3bac6", "#c3bac6"],  # 9
- #["#d9e0ee", "#d9e0ee"],  # 10
- #["#fae3b0", "#fae3b0"],  # 11
- #["#8fbcbb", "#8fbcbb"],  # 12
- #["#c9cbff", "#c9cbff"],  # 13
- #["#131020", "#131020"],  # 14
- #["#988ba2", "#988ba2"]   # 15
+ #["#1E1E2E", "#1E1E2E"],  # 0
+ #["#89b4fa", "#89b4fa"],  # 1
+ #["#313244", "#313244"],  # 2
+ #["#f38ba8", "#f38ba8"],  # 3
+ #["#94e2d5", "#94e2d5"],  # 4
+ #["#f9e2af", "#f9e2af"],  # 5
+ #["#b4befe", "#b4befe"],  # 6
+ #["#f5e0dc", "#f5e0dc"],  # 7
+ #["#f5c2e7", "#f5c2e7"],  # 8
+ #["#44475a", "#44475a"],  # 9
+ #["#89dceb", "#89dceb"],  # 10
+ #["#fab387", "#fab387"],  # 11
+ #["#74c7ec", "#74c7ec"],  # 12
+ #["#a6e3a1", "#a6e3a1"],  # 13
+ #["#cba6f7", "#cba6f7"],  # 14
+ #["#cdd6f4", "#cdd6f4"]   # 15
 #]
 
 ## Dracula
-colors = [
- ["#282a36", "#282a36"],  # 0
- ["#BD93F9", "#BD93F9"],  # 1
- ["#44475a", "#44475a"],  # 2
- ["#ff5555", "#ff5555"],  # 3
- ["#50fa7b", "#50fa7b"],  # 4
- ["#f1fa8c", "#f1fa8c"],  # 5
- ["#8be9fd", "#8be9fd"],  # 6
- ["#ff79c6", "#ff79c6"],  # 7
- ["#8be9fd", "#8be9fd"],  # 8
- ["#6272a4", "#6272a4"],  # 9
- ["#f8f8f2", "#f8f8f2"],  # 10
- ["#ffb86c", "#ffb86c"],  # 11
- ["#8be9fd", "#8be9fd"],  # 12
- ["#8be9fd", "#8be9fd"],  # 13
- ["#f8f8f2", "#f8f8f2"],  # 14
- ["#bfbfbf", "#bfbfbf"]   # 15
-]
-
-## Graphite
 #colors = [
- #["#101010", "#101010"],  # 0
- #["#b9b9b9", "#b9b9b9"],  # 1
- #["#101010", "#101010"],  # 2
- #["#525252", "#525252"],  # 3
- #["#7c7c7c", "#7c7c7c"],  # 4
- #["#7c7c7c", "#7c7c7c"],  # 5
- #["#8e8e8e", "#8e8e8e"],  # 6
- #["#8e8e8e", "#8e8e8e"],  # 7
- #["#a0a0a0", "#a0a0a0"],  # 8
- #["#a0a0a0", "#a0a0a0"],  # 9
- #["#686868", "#686868"],  # 10
- #["#686868", "#686868"],  # 11
- #["#747474", "#747474"],  # 12
- #["#747474", "#747474"],  # 13
- #["#868686", "#868686"],  # 14
- #["#868686", "#868686"]   # 15
+ #["#282a36", "#282a36"],  # 0
+ #["#f8f8f2", "#f8f8f2"],  # 1
+ #["#44475a", "#44475a"],  # 2
+ #["#ff5555", "#ff5555"],  # 3
+ #["#50fa7b", "#50fa7b"],  # 4
+ #["#f1fa8c", "#f1fa8c"],  # 5
+ #["#8be9fd", "#8be9fd"],  # 6
+ #["#bfbfbf", "#bfbfbf"],  # 7
+ #["#8be9fd", "#8be9fd"],  # 8
+ #["#6272a4", "#6272a4"],  # 9
+ #["#ff79c6", "#ff79c6"],  # 10
+ #["#ffb86c", "#ffb86c"],  # 11
+ #["#8be9fd", "#8be9fd"],  # 12
+ #["#8be9fd", "#8be9fd"],  # 13
+ #["#BD93F9", "#BD93F9"],  # 14
+ #["#f8f8f2", "#f8f8f2"]   # 15
+#]
+
+## Gruvbox
+#colors = [
+ #["#282828", "#282828"],  # 0
+ #["#ebdbb2", "#ebdbb2"],  # 1
+ #["#928374", "#928374"],  # 2
+ #["#b16286", "#b16286"],  # 3
+ #["#d79921", "#d79921"],  # 4
+ #["#d3869b", "#d3869b"],  # 5
+ #["#458588", "#458588"],  # 6
+ #["#a89984", "#a89984"],  # 7
+ #["#458588", "#458588"],  # 8
+ #["#83a598", "#83a598"],  # 9
+ #["#cc241d", "#cc241d"],  # 10
+ #["#fabd2f", "#fabd2f"],  # 11
+ #["#458588", "#458588"],  # 12
+ #["#458588", "#458588"],  # 13
+ #["#98971a", "#98971a"],  # 14
+ #["#ebdbb2", "#ebdbb2"]   # 15
 #]
 
 # Nord
 #colors = [
  #["#242831", "#242831"],  # 0
- #["#f8f8f2", "#f8f8f2"],  # 1
- #["#3b4252", "#3b4252"],  # 2
+ #["#81a1c1", "#81a1c1"],  # 1
+ #["#2e3440", "#2e3440"],  # 2
  #["#bf616a", "#bf616a"],  # 3
  #["#a3be8c", "#a3be8c"],  # 4
  #["#ebcb8b", "#ebcb8b"],  # 5
- #["#81a1c1", "#81a1c1"],  # 6
- #["#b48ead", "#b48ead"],  # 7
+ #["#f8f8f2", "#f8f8f2"],  # 6
+ #["#3b4252", "#3b4252"],  # 7
  #["#88c0d0", "#88c0d0"],  # 8
  #["#4c566a", "#4c566a"],  # 9
  #["#e5e9f0", "#e5e9f0"],  # 10
- #["#d08770", "#d08770"],  # 11
- #["#8fbcbb", "#8fbcbb"],  # 12
+ #["#8fbcbb", "#8fbcbb"],  # 11
+ #["#d08770", "#d08770"],  # 12
  #["#5e81ac", "#5e81ac"],  # 13
- #["#2e3440", "#2e3440"],  # 14
+ #["#b48ead", "#b48ead"],  # 14
  #["#708090", "#708090"]   # 15
 #]
 
+## One dark
+colors = [
+ ["#282c34", "#282c34"],  # 0
+ ["#bbc2cf", "#bbc2cf"],  # 1
+ ["#21242b", "#21242b"],  # 2
+ ["#ff6c6b", "#ff6c6b"],  # 3
+ ["#98be65", "#98be65"],  # 4
+ ["#ECBE7B", "#ECBE7B"],  # 5
+ ["#51afef", "#51afef"],  # 6
+ ["#5B6268", "#5B6268"],  # 7
+ ["#da8548", "#da8548"],  # 8
+ ["#5B6268", "#5B6268"],  # 9
+ ["#c678dd", "#c678dd"],  # 10
+ ["#a9a1e1", "#a9a1e1"],  # 11
+ ["#51afef", "#51afef"],  # 12
+ ["#2257A0", "#2257A0"],  # 13
+ ["#51afef", "#51afef"],  # 14
+ ["#bbc2cf", "#bbc2cf"]   # 15
+]
+
 layout_theme = {"border_width": 2,
                 "margin": 8,
-                "border_focus": colors[1],
+                "border_focus": colors[14],
                 "border_normal": colors[0]
                 }
 
@@ -240,6 +252,11 @@ screens = [
                        linewidth = 0,
                        padding = 6,
                        ),
+              widget.TextBox(
+                       text = "",
+                       fontsize = 12,
+                       foreground = colors[10],
+                       ),
               widget.GroupBox(
                        fontsize = 21,
                        margin_y = 3,
@@ -252,21 +269,21 @@ screens = [
                        rounded = False,
                        highlight_color = colors[9],
                        highlight_method = "line",
-                       this_current_screen_border = colors[4],
-                       this_screen_border = colors[15],
-                       other_current_screen_border = colors[15],
-                       other_screen_border = colors[1],
+                       this_current_screen_border = colors[15],
+                       this_screen_border = colors[7],
+                       other_current_screen_border = colors[7],
+                       other_screen_border = colors[15],
                        foreground = colors[15],
                        background = colors[0]
+                       ),
+              widget.TextBox(
+                       text = "",
+                       fontsize = 12,
+                       foreground = colors[4],
                        ),
               widget.Sep(
                        linewidth = 0,
                        padding = 5,
-                       ),
-              widget.TextBox(
-                       text = "|",
-                       fontsize = 12,
-                       foreground = colors[4],
                        ),
               widget.Prompt(
                        prompt = prompt,
@@ -285,76 +302,96 @@ screens = [
                        padding = 5,
                        ),
               widget.TextBox(
-                       text = "|",
+                       text = "",
                        fontsize = 12,
-                       foreground = colors[7],
+                       foreground = colors[10],
                        ),
               widget.Net(
                       interface = "wlan0",
                       format = '  {down} ↓↑ {up}',
+                      foreground = colors[15],
                       padding = 5,
                       ),
+              widget.TextBox(
+                       text = "",
+                       fontsize = 12,
+                       foreground = colors[4],
+                       ),
               widget.Sep(
                       linewidth = 0,
                       padding = 5,
                       ),
               widget.TextBox(
-                      text = "|",
+                      text = "",
                       fontsize = 12,
-                      foreground = colors[4],
+                      foreground = colors[10],
                       ),
               widget.Memory(
                       format = '  {MemUsed: .0f}{mm}',
                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e bpytop')},
+                      foreground = colors[15],
                       padding = 5
                       ),
+              widget.TextBox(
+                       text = "",
+                       fontsize = 12,
+                       foreground = colors[4],
+                       ),
               widget.Sep(
                       linewidth = 0,
                       padding = 5,
                       ),
               widget.TextBox(
-                      text = "|",
+                      text = "",
                       fontsize = 12,
-                      foreground = colors[7],
+                      foreground = colors[10],
                       ),
               widget.CPU(
                       padding = 5,
                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e bpytop')},
+                      foreground = colors[15],
                       format = '  {load_percent}%',
                       ),
+              widget.TextBox(
+                       text = "",
+                       fontsize = 12,
+                       foreground = colors[4],
+                       ),
               widget.Sep(
                       linewidth = 0,
                       padding = 5,
                       ),
               widget.TextBox(
-                      text = "|",
+                      text = "",
                       fontsize = 12,
-                      foreground = colors[4],
+                      foreground = colors[10],
                       ),
               widget.Wttr(
                        padding = 5,
                        location={'Pleszew': 'Pleszew'},
+                       foreground = colors[15],
                        format = '  %t'
                        ),
+              widget.TextBox(
+                       text = "",
+                       fontsize = 12,
+                       foreground = colors[4],
+                       ),
               widget.Sep(
                        linewidth = 0,
                        padding = 5,
                        ),
               widget.TextBox(
-                       text = "|",
+                       text = "",
                        fontsize = 12,
-                       foreground = colors[7],
+                       foreground = colors[10],
                        ),
               widget.Clock(
-                       format = "  %d.%m.%y - %H:%M ",
-                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e calcure')},
-                       ),
-              widget.Sep(
-                       linewidth = 0,
-                       padding = 5,
+                       format = "  %d.%m.%y - %H:%M",
+                       foreground = colors[15],
                        ),
               widget.TextBox(
-                       text = "|",
+                       text = "",
                        fontsize = 12,
                        foreground = colors[4],
                        ),
@@ -376,8 +413,13 @@ screens = [
                        linewidth = 0,
                        padding = 6,
                        ),
+              widget.TextBox(
+                       text = "",
+                       fontsize = 12,
+                       foreground = colors[10],
+                       ),
               widget.GroupBox(
-                       fontsize = 20,
+                       fontsize = 21,
                        margin_y = 3,
                        margin_x = 0,
                        padding_y = 5,
@@ -388,21 +430,21 @@ screens = [
                        rounded = False,
                        highlight_color = colors[9],
                        highlight_method = "line",
-                       this_current_screen_border = colors[4],
-                       this_screen_border = colors[15],
-                       other_current_screen_border = colors[15],
-                       other_screen_border = colors[1],
+                       this_current_screen_border = colors[15],
+                       this_screen_border = colors[7],
+                       other_current_screen_border = colors[7],
+                       other_screen_border = colors[15],
                        foreground = colors[15],
                        background = colors[0]
+                       ),
+              widget.TextBox(
+                       text = "",
+                       fontsize = 12,
+                       foreground = colors[4],
                        ),
               widget.Sep(
                        linewidth = 0,
                        padding = 5,
-                       ),
-              widget.TextBox(
-                       text = "|",
-                       fontsize = 12,
-                       foreground = colors[4],
                        ),
               widget.WindowName(
                        padding = 5,
@@ -420,16 +462,18 @@ screens = [
                        padding = 5,
                        ),
               widget.TextBox(
-                       text = "|",
+                       text = "",
                        fontsize = 12,
-                       foreground = colors[7],
+                       foreground = colors[10],
                        ),
               widget.Clock(
-                       format = "  %d.%m.%y - %H:%M ",
+                       format = "  %d.%m.%y - %H:%M",
+                       foreground = colors[15],
                        ),
-              widget.Sep(
-                       linewidth = 0,
-                       padding = 5,
+              widget.TextBox(
+                       text = "",
+                       fontsize = 12,
+                       foreground = colors[4],
                        ),
               widget.CurrentLayoutIcon(
                        custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
@@ -448,8 +492,13 @@ screens = [
                        linewidth = 0,
                        padding = 6,
                        ),
+              widget.TextBox(
+                       text = "",
+                       fontsize = 12,
+                       foreground = colors[10],
+                       ),
               widget.GroupBox(
-                       fontsize = 20,
+                       fontsize = 21,
                        margin_y = 3,
                        margin_x = 0,
                        padding_y = 5,
@@ -460,21 +509,21 @@ screens = [
                        rounded = False,
                        highlight_color = colors[9],
                        highlight_method = "line",
-                       this_current_screen_border = colors[4],
-                       this_screen_border = colors[15],
-                       other_current_screen_border = colors[15],
-                       other_screen_border = colors[1],
+                       this_current_screen_border = colors[15],
+                       this_screen_border = colors[7],
+                       other_current_screen_border = colors[7],
+                       other_screen_border = colors[15],
                        foreground = colors[15],
                        background = colors[0]
+                       ),
+              widget.TextBox(
+                       text = "",
+                       fontsize = 12,
+                       foreground = colors[4],
                        ),
               widget.Sep(
                        linewidth = 0,
                        padding = 5,
-                       ),
-              widget.TextBox(
-                       text = "|",
-                       fontsize = 12,
-                       foreground = colors[4],
                        ),
               widget.WindowName(
                        padding = 5,
@@ -492,16 +541,18 @@ screens = [
                        padding = 5,
                        ),
               widget.TextBox(
-                       text = "|",
+                       text = "",
                        fontsize = 12,
-                       foreground = colors[7],
+                       foreground = colors[10],
                        ),
               widget.Clock(
-                       format = "  %d.%m.%y - %H:%M ",
+                       format = "  %d.%m.%y - %H:%M",
+                       foreground = colors[15],
                        ),
-              widget.Sep(
-                       linewidth = 0,
-                       padding = 5,
+              widget.TextBox(
+                       text = "",
+                       fontsize = 12,
+                       foreground = colors[4],
                        ),
               widget.CurrentLayoutIcon(
                        custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
