@@ -57,7 +57,6 @@
 
 ;; D
 (package! dash)
-(package! dashboard)
 (package! dimmer)
 (package! dired+)
 (package! dired-hacks)
@@ -66,14 +65,11 @@
 ;; E
 (package! elfeed-goodies)
 (package! emmet-mode)
+(package! emacsql)
 
 ;; I
 (package! ivy-posframe)
 (package! ivy-todo)
-(package! ivy-youtube)
-
-;; M
-(package! mastodon)
 
 ;; N
 (package! nov)
@@ -83,14 +79,17 @@
 (package! org-books)
 (package! org-mime)
 (package! org-notify)
-(package! org-super-agenda)
+(package! org-sticky-header)
 (package! ox-pandoc)
 
-;; P
-(package! pocket-reader)
+;; R
+(package! request)
 
 ;; S
 (package! smtpmail)
 
 ;; V
 (package! visual-fill-column)
+
+;; W
+(package! wallabag :recipe (:host github :repo "chenyanming/wallabag.el" :files ("*.el" "*.alist" "*.css")))

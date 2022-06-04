@@ -31,8 +31,6 @@
 (setq all-the-icons-ivy-rich-color-icon t)
 (setq all-the-icons-ivy-rich-project t)
 
-
-
 ;; (setq browse-url-browser-function 'eww-browse-url)
 
 ;; https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-than-3-months
@@ -104,28 +102,6 @@
    (counsel-mode 1))
 (global-set-key (kbd "C-c k") 'counsel-rg)
 
-(use-package dashboard
-  :init      ;; tweak dashboard config before loading it
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-  (setq dashboard-banner-logo-title "\nKEYBINDINGS:\
-\nFind file               (SPC .)     \
-Open buffer list    (SPC b i)\
-\nFind recent files       (SPC f r)   \
-Open the eshell     (SPC e s)\
-\nOpen dired file manager (SPC d d)   \
-List of keybindings (SPC h b b)")
-  (setq dashboard-startup-banner "~/.doom.d/themes/doomEmacs.svg")  ;; use custom image as banner
-  (setq dashboard-center-content nil) ;; set to 't' for centered content
-  (setq dashboard-items '((recents . 5)
-                          (agenda . 5 )))
-  :config
-  (dashboard-setup-startup-hook)
-  (dashboard-modify-heading-icons '((recents . "file-text")
-                                    (bookmarks . "book"))))
-
-(setq doom-fallback-buffer "*dashboard*")
-
 (require 'dimmer)
 (dimmer-configure-which-key)
 (dimmer-configure-helm)
@@ -195,11 +171,13 @@ List of keybindings (SPC h b b)")
                      ("https://planet.emacslife.com/atom.xml" emacs)
                      ("http://pragmaticemacs.com/feed/" emacs)
                      ("https://sachachua.com/blog/category/emacs-news/feed" emacs)
+                     ("https://blog.tecosaur.com/tmio/rss.xml" emacs)
                      ;; Ereader
                      ("http://feeds.the-ebook-reader.com/feedburner/cmWU" ereader)
                      ("http://goodereader.com/blog/feed/" ereader)
                      ("http://rss.swiatczytnikow.pl/SwiatCzytnikow" ereader)
                      ;; Gaming
+                     ("blog.bioware.com/feed/" gaming)
                      ("https://www.gamingonlinux.com/article_rss.php" gaming)
                      ("http://pcgamer.com/feed" gaming)
                      ;; Komiksy
@@ -231,15 +209,23 @@ List of keybindings (SPC h b b)")
                      ("https://opensource.com/rss.xml" opensource)
                      ;; Płeć
                      ("http://codziennikfeministyczny.pl/feed/" płeć)
+                     ;; Podcasty
+                     ("https://feeds.buzzsprout.com/1890340.rss" podcast)
+                     ("https://revolutionaryleftradio.libsyn.com/rss" podcast)
+                     ("https://feeds.soundcloud.com/users/soundcloud:users:407338935/sounds.rss" podcast)
+                     ("https://feeds.soundcloud.com/users/soundcloud:users:672423809/sounds.rss" podcast)
                      ;; Psychatria
                      ("https://antipsychiatry.net/" psychatria)
                      ("http://www.antipsychiatry.org/" psychatria)
+                     ("https://www.psypost.org/feed" psychatria/psychologia)
+                     ("http://rss.sciam.com/ScientificAmerican-Global" psychatria/psychologia)
                      ;; Reddit
                      ("https://www.reddit.com/r/commandline.rss" reddit)
                      ("https://www.reddit.com/r/emacs.rss" reddit)
                      ("https://www.reddit.com/r/unixporn/?f=flair_name%3A%22Material%22" reddit)
                      ("https://www.reddit.com/r/unixporn/?f=flair_name%3A%22Material%22.rss" reddit)
                      ;; Socjalizm
+                     ("https://instytut-marksa.org/feed/" socjalizm)
                      ("https://marxistsociology.org/feed/" socjalizm)
                      ("https://odrodzenie.fr/feed/" socjalizm)
                      ("https://postep.org.pl/feed" socjalizm)
@@ -354,11 +340,6 @@ List of keybindings (SPC h b b)")
 ;; (setq browse-url-browser-function 'browse-url-generic)
 ;; (setq browse-url-generic-program "firefox-open-url")
 (setq ivy-youtube-play-at "/usr/bin/vlc")
-
-(use-package mastodon
-  :ensure t)
-(setq mastodon-instance-url "https://mastodon.social"
-      mastodon-active-user "2137")
 
 (defun toggle-maximize-buffer () "Maximize buffer"
   (interactive)
@@ -535,42 +516,12 @@ List of keybindings (SPC h b b)")
   (org-roam-db-autosync-mode)
   (org-roam-setup))
 
-(setq org-agenda-height nil
-      org-agenda-time-grid '((daily today require-timed) "----------------------" nil)
-      org-agenda-skip-scheduled-if-done t
-      org-agenda-skip-deadline-if-done t
-      org-agenda-include-deadlines t
-      org-agenda-include-diary t
-      org-agenda-block-separator nil
-      org-agenda-compact-blocks t
-      org-agenda-start-with-log-mode t)
+(require 'org-sticky-header)
 
-(setq org-agenda-custom-commands
-      '(("z" "Super zaen view"
-         ((agenda "" ((org-agenda-span 'day)
-                      (org-super-agenda-groups
-                       '((:name "Inbox"
-                                :todo "TODO"
-                                :order 1)))))
-          (alltodo "" ((org-agenda-overriding-header "")
-                       (org-super-agenda-groups
-                        ' (:name "Dom"
-                                 :tag "dom"
-                                 :order 2)
-                          (:name "Uniwersytet"
-                                 :tag "uni"
-                                 :order 3)
-                          (:name "Lekarz"
-                                 :tag "doc"
-                                 :order 4)
-                          (:name "Ważne daty"
-                                 :tag "important"
-                                 :order 5)
-                          (:name "Powtarzające się"
-                                 :tag "rec"
-                                 :order 6))))))))
+(require 'rainbow-mode)
+(rainbow-mode t)
 
-(setq shell-file-name "/bin/fish")
+(setq shell-file-name "bash")
 
 ;; from http://emacswiki.org/emacs/InsertingTodaysDate
 (defun insert-todays-date (arg)
@@ -579,13 +530,11 @@ List of keybindings (SPC h b b)")
               (format-time-string "%d-%m-%Y")
             (format-time-string "%Y-%m-%d"))))
 
-;; (setq doom-theme 'doom-henna)
 ;; (setq doom-theme 'catppuccin)
-(setq doom-theme 'doom-dracula)
+;; (setq doom-theme 'doom-dracula)
+;; (setq doom-theme 'doom-gruvbox)
 ;; (setq doom-theme 'doom-nord)
-
-;; (setq fancy-splash-image "~/.doom.d/splash/doomDracula.svg")
-;; (setq fancy-splash-image "~/.doom.d/splash/doomOne.svg")
+(setq doom-theme 'doom-one)
 
 (require 'twittering-mode)
       (setq twittering-use-master-password t)
@@ -602,6 +551,17 @@ List of keybindings (SPC h b b)")
   (setq-local visual-fill-column-width 150
               visual-fill-column-center-text nil)
   (visual-fill-column-mode 1))
+
+(use-package wallabag
+  :defer t
+  :config
+  (setq wallabag-host "https://app.wallabag.it")
+  (setq wallabag-username "nfwmb@proton.me")
+  (setq wallabag-password "x6la!AXF~YdUo|5K~f(!")
+  (setq wallabag-clientid "18268_2jnq88gnsgo4w4o0w0k8ssoo80csk8g4o0swww480kow0044kk")
+  (setq wallabag-secret "kmli6zdxzhckg8wg4wokwk40w88k0wokg8s8sos0c4g0cokcw")
+  (add-hook 'wallabag-after-render-hook 'wallabag-search-update-and-clear-filter)
+  )
 
 (setq frame-resize-pixelwise t)
 (setq display-line-numbers-type t)
