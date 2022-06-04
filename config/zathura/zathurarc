@@ -15,7 +15,8 @@ set recolor-keephue             "true"
 
 ### Color schemes
 
-# include base16
 # include catppuccin
-include dracula
+# include dracula
+# include gruvbox
 # include nord
+include onedark
