@@ -34,49 +34,48 @@ Xft.lcdfilter: lcdfilter
 ! *color15: #D9E0EE
 
 ! Dracula
-Sxiv.background: #282A36
-Sxiv.foreground: #F8F8F2
-*.background: #282A36
-*.foreground: #F8F8F2
-*.color0:     #000000
-*.color8:     #4D4D4D
-*.color1:     #FF5555
-*.color9:     #FF6E67
-*.color2:     #50FA7B
-*.color10:    #5AF78E
-*.color3:     #F1FA8C
-*.color11:    #F4F99D
-*.color4:     #BD93F9
-*.color12:    #CAA9FA
-*.color5:     #FF79C6
-*.color13:    #FF92D0
-*.color6:     #8BE9FD
-*.color14:    #9AEDFE
-*.color7:     #BFBFBF
-*.color15:    #E6E6E6
+! Sxiv.background: #282A36
+! Sxiv.foreground: #F8F8F2
+! *.background: #282A36
+! *.foreground: #F8F8F2
+! *.color0:     #000000
+! *.color8:     #4D4D4D
+! *.color1:     #FF5555
+! *.color9:     #FF6E67
+! *.color2:     #50FA7B
+! *.color10:    #5AF78E
+! *.color3:     #F1FA8C
+! *.color11:    #F4F99D
+! *.color4:     #BD93F9
+! *.color12:    #CAA9FA
+! *.color5:     #FF79C6
+! *.color13:    #FF92D0
+! *.color6:     #8BE9FD
+! *.color14:    #9AEDFE
+! *.color7:     #BFBFBF
+! *.color15:    #E6E6E6
 
-! Graphite
-! Sxiv.background: #101010
-! Sxiv.foreground: #b9b9b9
-! *.background:   #101010
-! *.foreground:   #b9b9b9
-! *.cursorColor:  #b9b9b9
-! *.color0:       #101010
-! *.color8:       #525252
-! *.color1:       #7c7c7c
-! *.color9:       #7c7c7c
-! *.color2:       #8e8e8e
-! *.color10:      #8e8e8e
-! *.color3:       #a0a0a0
-! *.color11:      #a0a0a0
-! *.color4:       #686868
-! *.color12:      #686868
-! *.color5:       #747474
-! *.color13:      #747474
-! *.color6:       #868686
-! *.color14:      #868686
-! *.color7:       #b9b9b9
-! *.color15:      #f7f7f7
+! Gruvbox
+! Sxiv.background: #282828
+! Sxiv.foreground: #ebdbb2
+! *background: #282828
+! *foreground: #ebdbb2
+! *color0:  #282828
+! *color8:  #928374
+! *color1:  #cc241d
+! *color9:  #fb4934
+! *color2:  #98971a
+! *color10: #b8bb26
+! *color3:  #d79921
+! *color11: #fabd2f
+! *color4:  #458588
+! *color12: #83a598
+! *color5:  #b16286
+! *color13: #d3869b
+! *color6:  #689d6a
+! *color14: #8ec07c
+! *color7:  #a89984
+! *color15: #ebdbb2
 
 ! Nord
 ! Sxiv.background: #2E3440
@@ -99,3 +98,25 @@ Sxiv.foreground: #F8F8F2
 ! *.color14: #8FBCBB
 ! *.color7: #E5E9F0
 ! *.color15: #ECEFF4
+
+! One Dark
+Sxiv.background: #282c34
+Sxiv.foreground: #bbc2cf
+*.background:    #282c34
+*.foreground:    #bbc2cf
+*.color0:        #282c34
+*.color8:        #5C6370
+*.color1:        #ff6c6b
+*.color9:        #ff6c6b
+*.color2:        #98be65
+*.color10:       #98be65
+*.color3:        #da8548
+*.color11:       #da8548
+*.color4:        #51afef
+*.color12:       #51afef
+*.color5:        #c678dd
+*.color13:       #c678dd
+*.color6:        #46D9FF
+*.color14:       #46D9FF
+*.color7:        #9ca0a4
+*.color15:       #DFDFDF
