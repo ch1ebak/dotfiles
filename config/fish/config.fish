@@ -54,16 +54,6 @@ end
 
 ### EYE CANDY
 
-## Fetch
-# colorscript random
-# neofetch
-# pfetch
-# ppfetch
-starfetch
-
-# Starship
-starship init fish | source
-
 ## Autocomplete and highlight colors
 # Catppuccin
 # set fish_color_normal '#dadae8'
@@ -73,18 +63,18 @@ starship init fish | source
 # set fish_color_param '#f2cecf'
 
 # Dracula
-set fish_color_normal '#f8f8f2'
-set fish_color_autosuggestion '#6272a4'
-set fish_color_command '#8be9fd'
-set fish_color_error '#ff5555'
-set fish_color_param '#bd93f9'
+# set fish_color_normal '#f8f8f2'
+# set fish_color_autosuggestion '#6272a4'
+# set fish_color_command '#8be9fd'
+# set fish_color_error '#ff5555'
+# set fish_color_param '#bd93f9'
 
-# Graphite
-# set fish_color_normal '#f7f7f7'
-# set fish_color_autosuggestion '#525252'
-# set fish_color_command '#f7f7f7'
-# set fish_color_error '#bf616a'
-# set fish_color_param '#f7f7f7'
+# Gruvbox
+# set fish_color_normal '#ebdbb2'
+# set fish_color_autosuggestion '#83a598'
+# set fish_color_command '#98971a'
+# set fish_color_error '#cc241d'
+# set fish_color_param '#d3869b'
 
 # Nord
 # set fish_color_normal '#eceff4'
@@ -93,10 +83,28 @@ set fish_color_param '#bd93f9'
 # set fish_color_error '#bf616a'
 # set fish_color_param '#eceff4'
 
+# One Dark
+set fish_color_normal '#bbc2cf'
+set fish_color_autosuggestion '#51afef'
+set fish_color_command '#98be65'
+set fish_color_error '#ff6c6b'
+set fish_color_param '#da8548'
+
+
+## Fetch
+colorscript random
+# neofetch
+# pfetch
+# ppfetch
+# starfetch
+
+# Starship
+starship init fish | source
+
 
 ### ALIASES
 
-## arch - pacman and yay
+# arch - pacman and yay
 alias gp='sudo pacman -S'
 alias rp='sudo pacman -R'
 alias gy='yay -S'
@@ -105,32 +113,21 @@ alias pacup='sudo pacman -Syu'                  # update only standard pkgs
 alias yayup='yay -Syu'                          # update standard pkgs and AUR pkgs (yay)
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages
 alias pkglist='sudo pacman -Qqe > ~/Dokumenty/kodowanie/packages.txt'
+alias pkgcount='pacman -Q | wc -l'
 
-##void - xbps and xi
-# alias gp='sudo xbps-install'
-# alias rp='sudo xbps-remove -R'
-# alias cleanup='sudo xbps-remove -Oo'
-# alias xi='sudo xi'
-# alias xsu='sudo xbps-install -Su'
-
-## Bpytop
+# Bpytop
 alias bt='bpytop'
 
-## confirm before overwriting something
+# confirm before overwriting something
 alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
 
-## Curl
-alias ccs='curl cheat.sh'
-alias cip='curl ifconfig.co'
-alias cnws='curl pl.getnews.tech'
-alias cbtc='curl rate.sx'
+# Curl
 alias cwpl='curl wttr.in/pleszew'
 alias cwpo='curl wttr.in/poznan'
-alias cwv='curl wttr.in/irvine'
 
-## Emacs
+# Emacs
 alias em='/usr/bin/emacs -nw'
 alias emacsd='/usr/bin/emacs --daemon &'
 alias kemacs='killall emacs'
@@ -145,44 +142,36 @@ alias doomrec='~/.emacs.d/bin/doom build'
 alias mu4emu='time mu init --maildir=~/Dokumenty/org/Maildir/'
 alias mu4emb='time mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a'
 
-## grub
+# grub
 alias grubreload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
-## Changing "ls" to "exa"
+# Changing "ls" to "exa"
 alias ls='ls -la --color=always --group-directories-first' # my preferred listing
 
-## Merge Xresources
+# Merge Xresources
 alias merge='xrdb -merge ~/.Xresources'
 
-## Mixer
+# Mixer
 alias mixer='ncpamixer'
 
-## Mount
+# Mount
 alias mountvm='sudo mount -t 9p -o trans=virtio /sharepoint share'
 
-## mkdir
+# mkdir
 alias mkdir='mkdir -pv'
 
-## Neovim
-alias vim='nvim'
-alias neovim='nvim'
-
-## Picom
+# Picom
 alias kap='killall picom'
 alias picom='picom --experimental-backend -b'
 
-## Reboot
+# Reboot
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown now'
 
-## Timeshift
+# Timeshift
 alias tsc='sudo timeshift --create'
 alias tsl='sudo timeshift --list'
 alias tgui='sudo timeshift-gtk'
 
-## Uptime
+# Uptime
 alias upt='uptime'
-
-## youtube-dl
-alias ydla='youtube-dl --extract-audio --audio-format best'
-alias ydlv='youtube-dl -f bestvideo+bestaudio'
