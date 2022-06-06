@@ -16,16 +16,16 @@
 #+ATTR_HTML: :alt Catppuccin :title Catppuccin :align left
 [[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/catppuccin0.jpg]]
 
-* Dracula - work in progress
+* Dracula
 #+CAPTION: Dracula
 #+ATTR_HTML: :alt Dracula :title Dracula :align left
 [[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/dracula0.jpg]]
 
-* Graphite
+* One Dark
 
-#+CAPTION: Graphite
-#+ATTR_HTML: :alt Graphite :title Graphite :align left
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/graphite0.jpg]]
+#+CAPTION: One Dark
+#+ATTR_HTML: :alt One Dark :title One Dark :align left
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/onedark0.jpg]]
 
 * Nord
 
