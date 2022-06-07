@@ -182,7 +182,7 @@
                      ("http://pcgamer.com/feed" gaming)
                      ;; Komiksy
                      ("https://existentialcomics.com/rss.xml" komiksy)
-                     ("https://xkcd.com/atom.xml" comics)
+                     ("https://xkcd.com/atom.xml" komiksy)
                      ;; LGBT
                      ("https://www.autostraddle.com/feed" lgbt)
                      ("https://www.afterellen.com/feed" lgbt)
@@ -201,6 +201,7 @@
                      ("https://unixsheikh.com/feed.rss" linux)
                      ;; Newsy
                      ("http://www.gazetaprawna.pl/rss.xml" newsy)
+                     ("https://allthatsinteresting.com/tag/news/feed" newsy)
                      ;; Open source
                      ("https://fossforce.com/feed/" opensource)
                      ("https://static.fsf.org/fsforg/rss/news.xml" opensource)
@@ -219,11 +220,6 @@
                      ("http://www.antipsychiatry.org/" psychatria)
                      ("https://www.psypost.org/feed" psychatria/psychologia)
                      ("http://rss.sciam.com/ScientificAmerican-Global" psychatria/psychologia)
-                     ;; Reddit
-                     ("https://www.reddit.com/r/commandline.rss" reddit)
-                     ("https://www.reddit.com/r/emacs.rss" reddit)
-                     ("https://www.reddit.com/r/unixporn/?f=flair_name%3A%22Material%22" reddit)
-                     ("https://www.reddit.com/r/unixporn/?f=flair_name%3A%22Material%22.rss" reddit)
                      ;; Socjalizm
                      ("https://instytut-marksa.org/feed/" socjalizm)
                      ("https://marxistsociology.org/feed/" socjalizm)
@@ -231,6 +227,8 @@
                      ("https://postep.org.pl/feed" socjalizm)
                      ("http://strajk.eu/feed/" socjalizm)
                      ("http://feeds.soundcloud.com/users/soundcloud:users:284471201/sounds.rss" socjalizm)
+                     ("https://krytykapolityczna.pl/feed/" socjalizm)
+                     ("https://jacobin.com/feed/" socjalizm)
                      ;; Socjologia
                      ("https://feeds.feedburner.com/EverydaySociologyBlog" socjologia)
                      ("http://www.sociologylens.net/feed" socjologia)
@@ -261,14 +259,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 
-(setq erc-server "irc.libera.chat"
-      erc-nick "anilorak"    ; Change this!
-      erc-user-full-name "anilorak"  ; And this!
-      erc-track-shorten-start 8
-      erc-autojoin-channels-alist '(("irc.libera.chat" "#systemcrafters" "#distrotube" "#artix" "#emacs"))
-      erc-kill-buffer-on-part t
-            erc-auto-query 'bury)
-
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
@@ -281,16 +271,6 @@
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
-;; (def-package! highlight-indent-guides
-  ;; :commands highlight-indent-guides-mode
-  ;; :hook (prog-mode . highlight-indent-guides-mode)
-  ;; :config
-  ;; (setq highlight-indent-guides-method 'character
-        ;; highlight-indent-guides-character ?/->
-        ;; highlight-indent-guides-delay 0.01
-        ;; highlight-indent-guides-responsive 'top
-        ;; highlight-indent-guides-auto-enabled nil
-        ;; ))
 
 (use-package ivy
   :diminish
@@ -328,18 +308,8 @@
   :bind ("C-c t" . ivy-todo)
   :commands ivy-todo
   :config
-  (setq ivy-todo-file "/home/kd/Dokumenty/org/org-roam/20220527183456-inbox.org")
+  (setq ivy-todo-file "~/Dokumenty/org/org-roam/20220527183456-inbox.org")
   (setq ivy-todo-default-tags '("TODO")))
-
-(setq ivy-youtube-key "AIzaSyBIoWmx9EONMNEYkSSpXzuyPHjgTdWpGfc")
-;;start ivy-youtube.el
-(autoload 'ivy-youtube "ivy-youtube" nil t)
-(global-set-key (kbd "C-c y") 'ivy-youtube) ;; bind hotkey
-
-;;set default browser for you will use to play videos/default generic
-;; (setq browse-url-browser-function 'browse-url-generic)
-;; (setq browse-url-generic-program "firefox-open-url")
-(setq ivy-youtube-play-at "/usr/bin/vlc")
 
 (defun toggle-maximize-buffer () "Maximize buffer"
   (interactive)
@@ -389,13 +359,13 @@
 
   ;; setup some handy shortcuts
   (setq mu4e-maildir-shortcuts
-        '(("/Gmail/Sent"         . ?g)
-          ("/Outlook/Sent Items" . ?o)))
+        '(("/gmail/Sent"         . ?g)
+          ("/outlook/Sent Items" . ?o)))
 
   (add-to-list 'mu4e-bookmarks
           (make-mu4e-bookmark
            :name "All Inboxes"
-           :query "maildir:/Gmail/Inbox OR maildir:/Outlook/Inbox"
+           :query "maildir:/gmail/Inbox OR maildir:/outlook/Inbox"
            :key ?a))
 
   ;; Accounts
@@ -403,37 +373,37 @@
         (list
        ;; Private account
        (make-mu4e-context
-        :name "Gmail" ;; for gmail
+        :name "gmail" ;; for gmail
         :match-func
           (lambda (msg)
             (when msg
-              (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
-        :vars '((user-mail-address . "k.derwich96@gmail.com")
-                (user-full-name    . "Karolina Derwich")
+              (string-prefix-p "/gmail" (mu4e-message-field msg :maildir))))
+        :vars '((user-mail-address . "")
+                (user-full-name    . "")
                 (smtpmail-smtp-server  . "smtp.gmail.com")
                 (smtpmail-smtp-service . 465)
                 (smtpmail-stream-type  . ssl)
-                (mu4e-drafts-folder  . "/Gmail/Drafts")
-                (mu4e-sent-folder  . "/Gmail/Sent")
-                (mu4e-refile-folder  . "/Gmail/Inbox")
-                (mu4e-trash-folder  . "/Gmail/Trash")))
+                (mu4e-drafts-folder  . "/gmail/Drafts")
+                (mu4e-sent-folder  . "/gmail/Sent")
+                (mu4e-refile-folder  . "/gmail/Inbox")
+                (mu4e-trash-folder  . "/gmail/Trash")))
 
        ;; Shopping account
        (make-mu4e-context
-        :name "Outlook" ;; for outlook
+        :name "outlook" ;; for outlook
         :match-func
           (lambda (msg)
             (when msg
-              (string-prefix-p "/Outlook" (mu4e-message-field msg :maildir))))
-        :vars '((user-mail-address . "k.derwich@outlook.com")
-                (user-full-name    . "Karolina Derwich")
+              (string-prefix-p "/outlook" (mu4e-message-field msg :maildir))))
+        :vars '((user-mail-address . "")
+                (user-full-name    . "")
                 (smtpmail-smtp-server  . "smtp-mail.outlook.com")
                 (smtpmail-smtp-service . 587)
                 (smtpmail-stream-type  . ssl)
-                (mu4e-drafts-folder  . "/Outlook/Drafts")
-                (mu4e-sent-folder  . "/Outlook/Sent Items")
-                (mu4e-refile-folder  . "/Outlook/Inbox")
-                (mu4e-trash-folder  . "/Outlook/Deleted Items"))))))
+                (mu4e-drafts-folder  . "/outlook/Drafts")
+                (mu4e-sent-folder  . "/outlook/Sent Items")
+                (mu4e-refile-folder  . "/outlook/Inbox")
+                (mu4e-trash-folder  . "/outlook/Deleted Items"))))))
 
 (setq org-books-file "~/Dokumenty/org/my-list.org")
 
@@ -521,7 +491,7 @@
 (require 'rainbow-mode)
 (rainbow-mode t)
 
-(setq shell-file-name "bash")
+(setq shell-file-name "/usr/bin/fish")
 
 ;; from http://emacswiki.org/emacs/InsertingTodaysDate
 (defun insert-todays-date (arg)
@@ -538,10 +508,12 @@
 
 (require 'twittering-mode)
       (setq twittering-use-master-password t)
+      (setq twittering-private-info-file "~/.emacs.d/twitter/.twittering-mode.gpg")
       (setq twittering-cert-file "/etc/ssl/certs/ca-bundle.crt")
       (setq twittering-allow-insecure-server-cert t)
       (setq twittering-icon-mode t)
       (setq twittering-use-icon-storage t)
+      (setq twittering-icon-storage-file "~/.emacs.d/twitter/.twittering-mode-icons.gz")
       (setq twittering-display-remaining t)
 (defalias 'epa--decode-coding-string 'decode-coding-string)
 

@@ -1,36 +1,26 @@
 /*******************************************************************************
- * ROFI ONELINE THEME USING THE NORD COLOR PALETTE 
- * User                 : LR-Tech               
- * Theme Repo           : https://github.com/lr-tech/rofi-themes-collection
- * Nord Project Repo    : https://github.com/arcticicestudio/nord
+ * ROFI ONELINE THEME USING THE NORD COLOR PALETTE
+ * User                 : LR-Tech
  *******************************************************************************/
 
 * {
     font:   "mononoki Nerd Font Bold 10";
 
-    nord0:     #2e3440;
-    nord1:     #3b4252;
-    nord2:     #434c5e;
-    nord3:     #4c566a;
-
-    nord4:     #d8dee9;
-    nord5:     #e5e9f0;
-    nord6:     #eceff4;
-
-    nord7:     #8fbcbb;
-    nord8:     #88c0d0;
-    nord9:     #81a1c1;
-    nord10:    #5e81ac;
-    nord11:    #bf616a;
-
-    nord12:    #d08770;
-    nord13:    #ebcb8b;
-    nord14:    #a3be8c;
-    nord15:    #b48ead;
+    nord0:     #2E3440;
+    nord1:     #4C566A;
+    nord2:     #ECEFF4;
+    nord3:     #81A1C1;
+    nord4:     #88C0D0;
+    nord5:     #A3BE8C;
+    nord6:     #EBCB8B;
+    nord7:     #B48EAD;
+    nord8:     #B48EAD;
+    nord9:     #BF616A;
+    nord10:    #EBCB8B;
 
     background-color:   transparent;
-    text-color:         @nord4;
-    accent-color:       @nord8;
+    text-color:         @nord2;
+    accent-color:       @nord7;
 
     margin:     0px;
     padding:    1px;
@@ -61,7 +51,7 @@ prompt, entry, element-text, element-icon {
 }
 
 prompt {
-    text-color: @accent-color;
+    text-color: @nord5;
 }
 
 listview {
@@ -74,7 +64,7 @@ element {
 }
 
 element normal urgent {
-    text-color: @nord13;
+    text-color: @nord9;
 }
 
 element normal active {
@@ -90,11 +80,11 @@ element selected normal {
 }
 
 element selected urgent {
-    background-color:   @nord13;
+    background-color:   @nord7;
 }
 
 element selected active {
-    background-color:   @nord8;
+    background-color:   @nord3;
 }
 
 element-icon {

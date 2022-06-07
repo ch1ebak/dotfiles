@@ -7,28 +7,20 @@
     font:   "mononoki Nerd Font Bold 10";
 
     catppuccin0:     #1a1823;
-    catppuccin1:     #6e6c7e;
-    catppuccin2:     #302d42;
-    catppuccin3:     #131020;
-
-    catppuccin4:     #f28fad;
-    catppuccin5:     #abe9b3;
-    catppuccin6:     #fae3b0;
-
-    catppuccin7:     #96cdfb;
-    catppuccin8:     #e8a2af;
-    catppuccin9:     #89dceb;
-    catppuccin10:    #c3bac6;
-    catppuccin11:    #d9e0ee;
-
-    catppuccin12:    #f8bd96;
-    catppuccin13:    #8fbcbb;
-    catppuccin14:    #c9cbff;
-    catppuccin15:    #988ba2;
+    catppuccin1:     #302d42;
+    catppuccin2:     #6c7086;
+    catppuccin3:     #96cdfb;
+    catppuccin4:     #89b4fa;
+    catppuccin5:     #94e2d5;
+    catppuccin6:     #f8bd96;
+    catppuccin7:     #cba6f7;
+    catppuccin8:     #f28fad;
+    catppuccin9:     #DDB6F2;
+    catppuccin10:    #fae3b0;
 
     background-color:   transparent;
-    text-color:         @catppuccin15;
-    accent-color:       @catppuccin8;
+    text-color:         @catppuccin2;
+    accent-color:       @catppuccin7;
 
     margin:     0px;
     padding:    1px;
@@ -59,7 +51,7 @@ prompt, entry, element-text, element-icon {
 }
 
 prompt {
-    text-color: @catppuccin15;
+    text-color: @catppuccin5;
 }
 
 listview {
@@ -72,11 +64,11 @@ element {
 }
 
 element normal urgent {
-    text-color: @catppuccin15;
+    text-color: @catppuccin9;
 }
 
 element normal active {
-    text-color: @catppuccin15;
+    text-color: @accent-color;
 }
 
 element selected {
@@ -88,11 +80,11 @@ element selected normal {
 }
 
 element selected urgent {
-    background-color:   @catppuccin13;
+    background-color:   @catppuccin7;
 }
 
 element selected active {
-    background-color:   @catppuccin8;
+    background-color:   @catppuccin3;
 }
 
 element-icon {

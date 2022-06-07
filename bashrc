@@ -58,10 +58,8 @@ eval "$(starship init bash)"
 
 # Fetch
 colorscript random
-# neofetch
-# pfetch
-# ppfetch
 # starfetch
+# treefetch
 
 
 ### ALIASES
@@ -85,10 +83,6 @@ alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
 
-# Curl
-alias cwpl='curl wttr.in/pleszew'
-alias cwpo='curl wttr.in/poznan'
-
 # Emacs
 alias em='/usr/bin/emacs -nw'
 alias emacsd='/usr/bin/emacs --daemon &'
@@ -101,7 +95,7 @@ alias doomdoc='~/.emacs.d/bin/doom doctor'
 alias doomrec='~/.emacs.d/bin/doom build'
 
 # MU4E
-alias mu4emu='time mu init --maildir=~/Dokumenty/org/Maildir/'
+alias mu4emu='time mu init --maildir=~/Dokumenty/Maildir/'
 alias mu4emb='time mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a'
 
 # grub

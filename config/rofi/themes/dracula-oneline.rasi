@@ -10,17 +10,17 @@
     dracula1:     #44475a;
     dracula2:     #f8f8f2;
     dracula3:     #6272a4;
-    dracula4:    #8be9fd;
+    dracula4:     #8be9fd;
     dracula5:     #50fa7b;
     dracula6:     #ffb86c;
-    dracula7:     #ff79c6;
-    dracula8:    #bd93f9;
+    dracula7:     #bd93f9;
+    dracula8:     #ff79c6;
     dracula9:     #ff5555;
-    dracula10:     #f1fa8c;
+    dracula10:    #f1fa8c;
 
     background-color:   transparent;
     text-color:         @dracula2;
-    accent-color:       @dracula7;
+    accent-color:       @dracula8;
 
     margin:     0px;
     padding:    1px;

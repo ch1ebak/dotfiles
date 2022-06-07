@@ -234,7 +234,6 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    # font='CozetteVector Bold',
     font='mononoki Nerd Font Bold',
     fontsize=11,
     padding=5,

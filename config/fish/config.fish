@@ -85,18 +85,16 @@ end
 
 # One Dark
 set fish_color_normal '#bbc2cf'
-set fish_color_autosuggestion '#51afef'
-set fish_color_command '#98be65'
+set fish_color_autosuggestion '#5C6370'
+set fish_color_command '#51afef'
 set fish_color_error '#ff6c6b'
-set fish_color_param '#da8548'
+set fish_color_param '#98be65'
 
 
 ## Fetch
 colorscript random
-# neofetch
-# pfetch
-# ppfetch
 # starfetch
+# treefetch
 
 # Starship
 starship init fish | source
@@ -109,10 +107,10 @@ alias gp='sudo pacman -S'
 alias rp='sudo pacman -R'
 alias gy='yay -S'
 alias ry='yay -R'
-alias pacup='sudo pacman -Syu'                  # update only standard pkgs
-alias yayup='yay -Syu'                          # update standard pkgs and AUR pkgs (yay)
-alias cleanup='sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages
-alias pkglist='sudo pacman -Qqe > ~/Dokumenty/kodowanie/packages.txt'
+alias pacup='sudo pacman -Syu'
+alias yayup='yay -Syu'
+alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
+alias pkglist='sudo pacman -Qqe > ~/Dokumenty/packages.txt'
 alias pkgcount='pacman -Q | wc -l'
 
 # Bpytop
@@ -122,10 +120,6 @@ alias bt='bpytop'
 alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
-
-# Curl
-alias cwpl='curl wttr.in/pleszew'
-alias cwpo='curl wttr.in/poznan'
 
 # Emacs
 alias em='/usr/bin/emacs -nw'
@@ -139,7 +133,7 @@ alias doomdoc='~/.emacs.d/bin/doom doctor'
 alias doomrec='~/.emacs.d/bin/doom build'
 
 # MU4E
-alias mu4emu='time mu init --maildir=~/Dokumenty/org/Maildir/'
+alias mu4emu='time mu init --maildir=~/Dokumenty/Maildir/'
 alias mu4emb='time mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a'
 
 # grub

@@ -41,31 +41,37 @@
 ## catppuccin
 
 #[urgency_low]
-#   background = "#1a1823"
-#   foreground = "#6e6c7e"
+#   background = "#1E1E2E"
+#   foreground = "#D9E0EE"
+#   frame_color = "#F5C2E7"
 #
 #[urgency_normal]
-#   background = "#1a1823"
-#   foreground = "#6e6c7e"
+#   background = "#1E1E2E"
+#   foreground = "#D9E0EE"
+#   frame_color = "#F5C2E7"
 #
 #[urgency_critical]
-#   background = "#1a1823"
-#   foreground = "#6e6c7e"
+#   background = "#1E1E2E"
+#   foreground = "#D9E0EE"
+#   frame_color = "#F28FAD"
 
 
 ## dracula
 
 #[urgency_low]
-#   background = "#282a36"
-#   foreground = "#6272a4"
+#   background = "#282A36"
+#   foreground = "#F8F8F2"
+#   frame_color = "#bd93f9"
 #
 #[urgency_normal]
-#   background = "#282a36"
-#   foreground = "#bd93f9"
+#   background = "#282A36"
+#   foreground = "#F8F8F2"
+#   frame_color = "#bd93f9"
 #
 #[urgency_critical]
-#   background = "#ff5555"
-#   foreground = "#f8f8f2"
+#   background = "#282A36"
+#   foreground = "#F8F8F2"
+#   frame_color = "#FF5555"
 
 
 ## gruvbox
@@ -73,14 +79,17 @@
 #[urgency_low]
 #   background = "#282828"
 #   foreground = "#ebdbb2"
+#   frame_color = "#98971a"
 #
 #[urgency_normal]
 #   background = "#282828"
 #   foreground = "#ebdbb2"
+#   frame_color = "#98971a"
 #
 #[urgency_critical]
 #   background = "#282828"
 #   foreground = "#ebdbb2"
+#   frame_color = "#cc241d"
 
 
 ## nord
@@ -88,14 +97,17 @@
 #[urgency_low]
 #   background = "#242831"
 #   foreground = "#f8f8f2"
+#   frame_color = "#81A1C1"
 #
 #[urgency_normal]
 #   background = "#242831"
 #   foreground = "#f8f8f2"
+#   frame_color = "#81A1C1"
 #
 #[urgency_critical]
 #   background = "#242831"
 #   foreground = "#f8f8f2"
+#   frame_color = "#BF616A"
 
 
 ## one dark
@@ -103,11 +115,14 @@
 [urgency_low]
    background = "#282c34"
    foreground = "#bbc2cf"
+   frame_color = "#51afef"
 
 [urgency_normal]
    background = "#282c34"
    foreground = "#bbc2cf"
+   frame_color = "#51afef"
 
 [urgency_critical]
    background = "#282c34"
    foreground = "#bbc2cf"
+   frame_color = "#ff6c6b"
