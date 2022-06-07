@@ -1,13 +1,13 @@
 #+TITLE: README
 #+AUTHOR: ch1ebak
 
-| window manager | qtile                            |
-| shell          | fish/bash                        |
-| terminal       | kitty/alacritty                  |
-| text editor    | doom emacs/neovim                |
-| launcher       | rofi                             |
-| notifications  | dunst                            |
-| theme          | catppuccin/dracula/graphite/nord |
+| window manager | qtile                                    |
+| shell          | fish/bash                                |
+| terminal       | kitty                                    |
+| text editor    | doom emacs                               |
+| launcher       | rofi                                     |
+| notifications  | dunst                                    |
+| theme          | catppuccin/dracula/gruvbox/nord/one dark |
 
 
 * Catppuccin
@@ -21,14 +21,20 @@
 #+ATTR_HTML: :alt Dracula :title Dracula :align left
 [[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/dracula0.jpg]]
 
-* One Dark
+* Gruvbox
 
-#+CAPTION: One Dark
-#+ATTR_HTML: :alt One Dark :title One Dark :align left
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/onedark0.png]]
+#+CAPTION: Gruvbox
+#+ATTR_HTML: :alt Gruvbox :title Gruvbox :align left
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/gruvbox0.png]]
 
 * Nord
 
 #+CAPTION: Nord
 #+ATTR_HTML: :alt Nord :title Nord :align left
 [[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/nord0.jpg]]
+
+* One Dark
+
+#+CAPTION: One Dark
+#+ATTR_HTML: :alt One Dark :title One Dark :align left
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/onedark0.png]]
