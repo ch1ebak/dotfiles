@@ -1,3 +1,5 @@
+now at [[https://codeberg.org/ch1ebak/dotfiles/][codeberg]]
+
 | window manager | qtile                   |
 | shell          | fish (bash as a backup) |
 | terminal       | kitty                   |
@@ -11,5 +13,3 @@
 |                | - nord                  |
 |                | - one dark              |
 |                | - solarized dark        |
-
-now at [[https://codeberg.org/ch1ebak/dotfiles/][codeberg]]
