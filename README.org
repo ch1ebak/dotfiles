@@ -1,1 +1,1 @@
-now at [[https://codeberg.org/ch1ebak/dotfiles/][codeberg]]
+now at [[https://codeberg.org/chlebak/dotfiles/][codeberg]]
