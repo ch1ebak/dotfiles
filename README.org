@@ -1,15 +1,1 @@
 now at [[https://codeberg.org/ch1ebak/dotfiles/][codeberg]]
-
-| window manager | qtile                   |
-| shell          | fish (bash as a backup) |
-| terminal       | kitty                   |
-| text editor    | doom emacs              |
-| launcher       | rofi                    |
-| notifications  | dunst                   |
-| color scheme   | - catppuccin            |
-|                | - [[https://codeberg.org/ch1ebak/dotfiles/raw/branch/main/.screenshots/dracula.png][dracula]]               |
-|                | - everforest            |
-|                | - gruvbox               |
-|                | - nord                  |
-|                | - one dark              |
-|                | - solarized dark        |
