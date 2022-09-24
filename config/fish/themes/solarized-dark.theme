@@ -1,0 +1,7 @@
+# name: solarized-dark
+
+fish_color_normal '#839496'
+fish_color_autosuggestion '#586e75'
+fish_color_command '#268bd2'
+fish_color_error '#dc322f'
+fish_color_param '#b58900'

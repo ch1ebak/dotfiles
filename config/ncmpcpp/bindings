@@ -1,0 +1,190 @@
+#####################################
+### https://codeberg.org/chlebak/ ###
+#####################################
+
+
+
+## Playback
+
+def_key "enter"
+  run_action
+
+def_key "enter"
+  play_item
+
+def_key "p"
+  pause
+
+def_key "P"
+  stop
+
+def_key "r"
+  toggle_repeat
+
+def_key "z"
+  toggle_random
+
+def_key "y"
+  toggle_single
+
+def_key "Z"
+  shuffle
+
+def_key "u"
+  update_database
+
+
+## Movement
+
+def_key "k"
+  scroll_up
+
+def_key "K"
+  scroll_up_artist
+
+def_key "ctrl-k"
+  scroll_up_album
+
+def_key "j"
+  scroll_down
+
+def_key "J"
+  scroll_down_artist
+
+def_key "ctrl-j"
+  scroll_down_album
+
+def_key "h"
+  previous_column
+
+def_key "H"
+  previous
+
+def_key "ctrl-h"
+  master_screen
+
+def_key "l"
+  next_column
+
+def_key "L"
+  next
+
+def_key "ctrl-l"
+  slave_screen
+
+def_key "home"
+  move_home
+
+def_key "end"
+  move_end
+
+def_key "page_up"
+  page_up
+
+def_key "page_down"
+  page_down
+
+
+## Screens
+
+def_key "tab"
+  next_screen
+
+def_key "shift-tab"
+  previous_screen
+
+def_key "1"
+  show_media_library
+
+def_key "1"
+  toggle_media_library_columns_mode
+
+def_key "2"
+  show_playlist
+
+def_key "3"
+  show_search_engine
+
+def_key "3"
+  reset_search_engine
+
+def_key "4"
+  show_browser
+
+def_key "4"
+  change_browse_mode
+
+def_key "5"
+  show_playlist_editor
+
+def_key "6"
+  show_tag_editor
+
+def_key "7"
+  show_outputs
+
+def_key "8"
+  show_visualizer
+
+def_key "v"
+  toggle_visualization_type
+
+
+## Playlists
+
+def_key "a"
+  add_item_to_playlist
+
+def_key "d"
+  delete_playlist_items
+
+def_key "d"
+  delete_browser_items
+
+def_key "d"
+  delete_stored_playlist
+
+def_key "c"
+  clear_playlist
+
+def_key "c"
+  clear_main_playlist
+
+def_key "A"
+  add
+
+def_key "s"
+  sort_playlist
+
+def_key "S"
+  save_playlist
+
+
+## Other settings
+
+def_key ":"
+  execute_command
+
+def_key "?"
+  find
+
+def_key "n"
+  next_found_item
+
+def_key "N"
+  previous_found_item
+
+def_key "e"
+  edit_song
+
+def_key "i"
+  show_song_info
+
+def_key "I"
+  show_artist_info
+
+def_key "f"
+  show_lyrics
+
+def_key "q"
+  quit
