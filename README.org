@@ -1,1 +1,14 @@
-now at [[https://codeberg.org/chlebak/dotfiles/][codeberg]]
+| window manager | qtile                        |
+| shell          | fish (bash as a backup)      |
+| terminal       | kitty                        |
+| text editor    | doom emacs (vim as a backup) |
+| launcher       | rofi                         |
+| notifications  | dunst                        |
+| theme          | - [[https://codeberg.org/chlebak/dotfiles/raw/branch/main/.screenshots/catppuccin.png][catppuccin]]                 |
+|                | - [[https://codeberg.org/chlebak/dotfiles/raw/branch/main/.screenshots/dracula1.png][dracula]]                    |
+|                | - [[https://codeberg.org/chlebak/dotfiles/raw/branch/main/.screenshots/everforest.png][everforest]]                 |
+|                | - [[https://codeberg.org/chlebak/dotfiles/raw/branch/main/.screenshots/gruvbox.png][gruvbox]]                    |
+|                | - [[https://codeberg.org/chlebak/dotfiles/raw/branch/main/.screenshots/nord.png][nord]]                       |
+|                | - [[https://codeberg.org/chlebak/dotfiles/raw/branch/main/.screenshots/onedark.png][one dark]]                   |
+|                | - [[https://codeberg.org/chlebak/dotfiles/raw/branch/main/.screenshots/solarized.png][solarized dark]]             |
+|                | - tokyo night                |
