@@ -3,7 +3,6 @@
 """""""""""""""""""""""""""""""""""
 
 
-
 """""""""""""""
 """ PLUGINS """
 
@@ -16,6 +15,7 @@ Plug 'sainnhe/everforest', { 'as': 'everforest' }
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
 Plug 'arcticicestudio/nord-vim', { 'as': 'nord' }
 Plug 'joshdick/onedark.vim', { 'as': 'onedark' }
+Plug 'tek256/simple-dark', { 'as': 'simple-dark' }
 Plug 'altercation/vim-colors-solarized', { 'as': 'solarized' }
 Plug 'ghifarit53/tokyonight-vim', { 'as': 'tokyonight' }
 
@@ -35,7 +35,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'terryma/vim-expand-region'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'sjl/gundo.vim'
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 Plug 'farmergreg/vim-lastplace'
 Plug 'terryma/vim-multiple-cursors'
@@ -43,7 +42,9 @@ Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'jceb/vim-orgmode'
 Plug 'vim-python/python-syntax'
+Plug 'tpope/vim-speeddating'
 Plug 'godlygeek/tabular'
+Plug 'mbbill/undotree'
 Plug 'frazrepo/vim-rainbow'
 Plug 'tpope/vim-surround'
 Plug 'maxbrunsfeld/vim-yankstack'
@@ -96,7 +97,10 @@ let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
 "" NerdTree
-map <C-n> :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 let g:NERDTreeDirArrowExpandable = '►'
 let g:NERDTreeDirArrowCollapsible = '▼'
 let NERDTreeShowLineNumbers=1
@@ -110,14 +114,17 @@ let g:python_highlight_all = 1
 "" Rainbow
 let g:rainbow_active = 1
 
-" Startify
+"" Startify
 Plug 'mhinz/vim-startify'
 
-" VimWiki
+"" Undotree
+nnoremap <F5> :UndotreeToggle<CR>
+
+"" VimWiki
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
-" Yankstack
+"" Yankstack
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
@@ -132,7 +139,7 @@ set hidden
 set nobackup
 set noswapfile
 set t_Co=256
-set number relativenumber
+set number
 set clipboard=unnamedplus
 syntax enable
 let g:rehash256 = 1
@@ -159,23 +166,23 @@ set guioptions-=L  "remove left-hand scroll bar
 """ COLOR SCHEMES """ 
 
 "" available color schemes
-" catppuccin_mocha
+" catppuccin
 " dracula
 " gruvbox
 " nord
-" one
+" onedark
+" simpled-ark (simpleblack)
 " solarized
+" tokyonight
+     " let g:tokyonight_style = 'night'
+     " let g:tokyonight_enable_italic = 1
 
-colorscheme gruvbox 
+colorscheme simple-dark
 set background=dark
-
-" Tokyo night
-" let g:tokyonight_style = 'night'
-" let g:tokyonight_enable_italic = 1
 
 "" Lightline
 let g:lightline = {
-     \ 'colorscheme': 'gruvbox',
+     \ 'colorscheme': 'simpleblack',
 \ }
 set laststatus=2
 set noshowmode
