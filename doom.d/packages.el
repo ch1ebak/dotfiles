@@ -16,17 +16,12 @@
 (package! dired-open)
 
 ;; E
+;; (package! elfeed)
 (package! elfeed-goodies)
 (package! emmet-mode)
 (package! emacsql)
 (package! emacsql-sqlite)
 (package! evil-ledger)
-
-;; H
-(package! habitica)
-
-;; I
-(package! ivy-posframe)
 
 ;; L
 (package! ledger-mode)

@@ -1,3 +1,40 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; https://github.com/ch1ebak/ ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq frame-resize-pixelwise t)
+(setq display-line-numbers-type t)
+(setq org-hide-emphasis-markers t)
+(setq org-startup-with-inline-images t)
+(global-set-key (kbd "C-x w") 'delete-frame)
+
+;; Auth gpg
+(setq auth-sources '("~/Dokumenty/tajne/.authinfo.gpg"))
+
+;; Beacon mode
+(beacon-mode 1)
+
+;; Browser
+;; (setq browse-url-browser-function 'eww-browse-url)
+
+;; Conf unix mode
+(setq conf-unix-mode t)
+
+;; Modeline
+(setq doom-modeline-buffer-name t)
+
+;; Nov mode
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
+;; Org tempo
+(require 'org-tempo)
+
+;; Pocket
+;; (require 'pocket-reader)
+
+;; Shell
+(setq shell-file-name "/usr/bin/fish")
+
 (use-package all-the-icons
   :if (display-graphic-p))
 
@@ -78,148 +115,19 @@
 (elfeed-goodies/setup)
 (setq elfeed-goodies/entry-pane-size 0.5)
 ;; (add-hook 'elfeed-show-mode-hook 'visual-line-mode)
+(add-hook 'elfeed-search-mode-hook #'elfeed-update)
 (defun elfeed-mark-all-as-read ()
       (interactive)
       (mark-whole-buffer)
       (elfeed-search-untag-all-unread))
-(setq elfeed-feeds (quote
-                    (
-                     ;; Android
-                     ("https://www.androidpolice.com/feed/" android)
-                     ("https://www.androidauthority.com/feed" android)
-                     ;; Bezpieczeństwo
-                     ("http://feeds.feedburner.com/niebezpiecznik/" bezpieczeństwo)
-                     ("https://torrentfreak.com/feed/" bezpieczeństwo)
-                     ("https://zaufanatrzeciastrona.pl/feed/" bezpieczeństwo)
-                     ;; Drzewa
-                     ("https://hyperreal.info/rss.xml" drzewa)
-                     ;; Ekologia
-                     ("https://climateandeconomy.com/feed/" ekologia)
-                     ("https://insideclimatenews.org/feed/" ekologia)
-                     ("https://jembendell.com/feed" ekologia)
-                     ("https://smoglab.pl/feed/" ekologia)
-                     ;; Emacs
-                     ("https://planet.emacslife.com/atom.xml" emacs)
-                     ("http://pragmaticemacs.com/feed/" emacs)
-                     ("https://sachachua.com/blog/category/emacs-news/feed" emacs)
-                     ("https://protesilaos.com/codelog.xml" emacs)
-                     ("https://blog.tecosaur.com/tmio/rss.xml" emacs)
-                     ;; Ereader
-                     ("http://feeds.the-ebook-reader.com/feedburner/cmWU" ereader)
-                     ("http://goodereader.com/blog/feed/" ereader)
-                     ("http://rss.swiatczytnikow.pl/SwiatCzytnikow" ereader)
-                     ("https://lithub.com/feed/" ereader)
-                     ("https://ebookfriendly.com/feed/" ereader)
-                     ;; Gaming
-                     ("blog.bioware.com/feed/" gaming)
-                     ("https://www.gamingonlinux.com/article_rss.php" gaming)
-                     ("http://www.pcgamer.com/feed" gaming)
-                     ("http://www.eurogamer.net/?format=rss" gaming)
-                     ;; Komiksy
-                     ("https://existentialcomics.com/rss.xml" komiksy)
-                     ("https://xkcd.com/atom.xml" komiksy)
-                     ;; LGBT
-                     ("https://www.autostraddle.com/feed" lgbt)
-                     ("https://www.afterellen.com/feed" lgbt)
-                     ("https://lesbrary.com/feed" lgbt)
-                     ("http://queer.pl/rss/" lgbt)
-                     ("https://replika-online.pl/feed/" lgbt)
-                     ;; Linux
-                     ("https://9to5linux.com/feed/atom" linux)
-                     ("https://www.cyberciti.biz/feed/" linux)
-                     ("http://www.linuxjournal.com/node/feed" linux)
-                     ("https://artixlinux.org/feed.php" linux)
-                     ("https://distrowatch.com/news/dw.xml" linux)
-                     ("http://feeds.feedburner.com/linuxpl-news" linux)
-                     ("https://www.linuxjournal.com/node/feed" linux)
-                     ("https://linuxman.co/feed/" linux)
-                     ("https://lwn.net/headlines/newrss" linux)
-                     ("https://omgubuntu.co.uk/feed" linux)
-                     ("https://sysdfree.wordpress.com/feed" linux)
-                     ("https://unixsheikh.com/feed.rss" linux)
-                     ("https://www.phoronix.com/rss.php" linux)
-                     ;; Newsy
-                     ("https://allthatsinteresting.com/tag/news/feed" newsy)
-                     ("https://thegrayzone.com/feed/" newsy)
-                     ("https://multipolarista.com/feed/" newsy)
-                     ;; Nauka
-                     ("https://wielkahistoria.pl/feed/" nauka)
-                     ("https://mitologiawspolczesna.pl/feed/" nauka)
-                     ("https://www.crazynauka.pl/feed/" nauka)
-                     ;; Open source
-                     ("https://fossforce.com/feed/" opensource)
-                     ("https://static.fsf.org/fsforg/rss/news.xml" opensource)
-                     ("https://www.eff.org/rss/updates.xml" opensource)
-                     ("https://feeds.feedburner.com/ItsFoss" opensource)
-                     ("https://opensource.com/rss.xml" opensource)
-                     ;; Płeć
-                     ("http://codziennikfeministyczny.pl/feed/" płeć)
-                     ("https://www.feministcurrent.com/feed/" płeć)
-                     ;; Psychatria
-                     ("https://antipsychiatry.net/" psychatria)
-                     ("http://www.antipsychiatry.org/" psychatria)
-                     ("https://www.psypost.org/feed" psychatria/psychologia)
-                     ;; Rozrywka
-                     ("https://bloody-disgusting.com/feed/" rozrywka)
-                     ;; Róźne
-                     ("http://chilledmagazine.com/feed" różne)
-                     ("https://www.inkedmag.com/.rss/full/" różne)
-                     ("https://node2.feed43.com/anomalist.xml" różne)
-                     ("https://feeds.feedburner.com/EurotransportMagazine" różne)
-                     ("https://www.thecatniptimes.com/feed/" różne)
-                     ("https://www.premierguitar.com/feeds/feed.rss" różne)
-                     ("https://www.racjonalista.pl/rss.php" różne)
-                     ;; Samochody
-                     ("http://www.autoblog.com/rss.xml" auta)
-                     ;; Socjalizm
-                     ("https://instytut-marksa.org/feed/" socjalizm)
-                     ("https://marxistsociology.org/feed/" socjalizm)
-                     ("https://odrodzenie.fr/feed/" socjalizm)
-                     ("https://postep.org.pl/feed" socjalizm)
-                     ("http://strajk.eu/feed/" socjalizm)
-                     ("https://strajk.eu/temat/wiadomosci/feed/" socjalizm)
-                     ("https://strajk.eu/temat/komentarz-dnia/feed/" socjalizm)
-                     ("https://strajk.eu/temat/publicystyka/feed/" socjalizm)
-                     ("https://krytykapolityczna.pl/feed/" socjalizm)
-                     ("https://www.fightbacknews.org/feed" socjalizm)
-                     ("https://www.redspark.nu/en/feed/" socjalizm)
-                     ("https://www.workers.org/feed/" socjalizm)
-                     ("https://www.socialistworld.net/feed/" socjalizm)
-                     ("https://www.liberationnews.org/feed/" socjalizm)
-                     ("https://tribuneofthepeoplenews.wordpress.com/feed/" socjalizm)
-                     ("https://mronline.org/feed/" socjalizm)
-                     ("https://www.peoplesworld.org/feed/" socjalizm)
-                     ("https://theredphoenixapl.org/feed/" socjalizm)
-                     ("http://www.popularresistance.org/feed/" socjalizm)
-                     ("https://www.project-syndicate.org/RSS" socjalizm)
-                     ;; Socjologia
-                     ("https://feeds.feedburner.com/EverydaySociologyBlog" socjologia)
-                     ("http://www.sociologylens.net/feed" socjologia)
-                     ;; Sport
-                     ("https://pilkarskamafia.blogspot.com/feeds/posts/default" sport)
-                     ("https://rss2.feedspot.com/https://www.fourfourtwo.com/news" sport)
-                     ;; Tech
-                     ("https://antyweb.pl/feed" tech)
-                     ("https://kernal.eu/feed" tech)
-                     ("https://hnrss.org/frontpage" tech)
-                     ("https://sadgrl.online/feed.xml" tech)
-                     ("https://stare.pro/" tech)
-                     ("https://rss2.feedspot.com/https://www.bloomberg.com/technology" tech)
-                     ("https://techcrunch.com/feed/" tech)
-                     ("https://www.wired.com/feed/rss" tech)
-                     ("https://feeds.arstechnica.com/arstechnica/index" tech)
-                     ;; Teorie spiskowe
-                     ("https://consensus911.org/" teorie spiskowe)
-                     ;; Zegarki
-                     ("https://www.g-central.com/feed/" zegarki)
-                     )))
+(setq rmh-elfeed-org-files (list "~/.doom.d/elfeed.org"))
 
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
-(setq doom-font (font-spec :family "MesloLGS Nerd Font " :size 12)
-      doom-variable-pitch-font (font-spec :family "Atkinson Hyperlegible" :size 13)
-      doom-big-font (font-spec :family "MesloLGS Nerd Font " :size 20))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font " :size 12)
+      doom-variable-pitch-font (font-spec :family "Cantarell" :size 13)
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font " :size 20))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -254,11 +162,6 @@
  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
  (setq ivy-rich-path-style 'abbrev)
 
-(require 'ivy-posframe)
-;; display at `ivy-posframe-style'
-(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
-(ivy-posframe-mode 1)
-
 (use-package ledger-mode
   :mode ("\\.dat\\'"
          "\\.ledger\\'")
@@ -280,7 +183,7 @@
   :defer 10
   :config
 
-  (setq mu4e-get-mail-command "mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a")
+  (setq mu4e-get-mail-command "mbsync -c ~/.doom.d/mu4e/.mbsyncrc -a")
   (setq mu4e-root-maildir (expand-file-name "~/Dokumenty/Maildir"))
 
   ;; This is set to 't' to avoid mail syncing issues when using mbsync
@@ -329,8 +232,8 @@
           (lambda (msg)
             (when msg
               (string-prefix-p "/gmail" (mu4e-message-field msg :maildir))))
-        :vars '((user-mail-address . "*****.***@gmail.com")
-                (user-full-name    . "***** ***")
+        :vars '((user-mail-address . "k.derwich96@gmail.com")
+                (user-full-name    . "Karolina Derwich")
                 (smtpmail-smtp-server  . "smtp.gmail.com")
                 (smtpmail-smtp-service . 465)
                 (smtpmail-stream-type  . ssl)
@@ -346,8 +249,8 @@
           (lambda (msg)
             (when msg
               (string-prefix-p "/outlook" (mu4e-message-field msg :maildir))))
-        :vars '((user-mail-address . "*****.***@outlook.com")
-                (user-full-name    . "***** ***")
+        :vars '((user-mail-address . "k.derwich@outlook.com")
+                (user-full-name    . "Karolina Derwich")
                 (smtpmail-smtp-server  . "smtp-mail.outlook.com")
                 (smtpmail-smtp-service . 587)
                 (smtpmail-stream-type  . ssl)
@@ -358,36 +261,6 @@
 
 (mu4e-alert-set-default-style 'libnotify)
 (add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
-
-(defun move-mpc-down ()
-  (interactive)
-  (evil-next-visual-line)
-  (mpc-select)
- )
-(defun move-mpc-up ()
-  (interactive)
-  (evil-previous-visual-line)
-  (mpc-select)
- )
-
-(general-define-key
- :keymaps 'mpc-mode-map
- :states 'normal
- "j" 'move-mpc-down
- "k" 'move-mpc-up
- "t" 'mpc-toggle-play
- "r" 'mpc-toggle-repeat
- "s" 'mpc-toggle-shuffle
- "S" 'mpc-toggle-shuffle
- "c" 'mpc-toggle-consume
- "a" 'mpc-playlist-add
- "p" 'mpc-playlist
- ">" 'mpc-next
- "<" 'mpc-prev
- "R" 'mpc-playlist-delete
- "RET" 'mpc-select
- "x" 'mpc-play-at-point
- )
 
 (after! org
   (setq org-directory "~/Dokumenty/org/"
@@ -433,37 +306,34 @@
 
 (org-notifications-start)
 
-;; (use-package org-roam
-  ;; :ensure t
-  ;; :init
-  ;; (setq org-roam-v2-ack t)
-  ;; :custom
-  ;; (org-roam-directory "~/Dokumenty/org/org-roam")
-  ;; (setq org-roam-dailies-directory "~/Dokumenty/org/org-roam/daily")
-  ;; (custom-set-faces
-    ;; '((org-roam-link org-roam-link-current)
-     ;; :foreground "#e24888" :underline t))
-  ;; (org-roam-completion-everywhere t)
-  ;; :bind
-  ;; (("C-c n l" . org-roam-buffer-toggle)
-   ;; ("C-c n f" . org-roam-node-find)
-   ;; ("C-c n i" . org-roam-node-insert)
-   ;; :map org-mode-map
-   ;; ("C-M-i" . completion-at-point)
-   ;; :map org-roam-dailies-map
-   ;; ("Y" . org-roam-dailies-capture-yesterday)
-   ;; ("T" . org-roam-dailies-capture-tomorrow))
-  ;; :bind-keymap
-  ;; ("C-c n d" . org-roam-dailies-map)
-  ;; :config
-  ;; (require 'org-roam-dailies) ;; Ensure the keymap is available
-  ;; (org-roam-db-autosync-mode)
-  ;; (org-roam-setup))
+(use-package org-roam
+  :ensure t
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/Dokumenty/org/org-roam")
+  (setq org-roam-dailies-directory "~/Dokumenty/org/org-roam/daily")
+  (custom-set-faces
+    '((org-roam-link org-roam-link-current)
+     :foreground "#e24888" :underline t))
+  (org-roam-completion-everywhere t)
+  :bind
+  (("C-c n l" . org-roam-buffer-toggle)
+   ("C-c n f" . org-roam-node-find)
+   ("C-c n i" . org-roam-node-insert)
+   :map org-mode-map
+   ("C-M-i" . completion-at-point)
+   :map org-roam-dailies-map
+   ("Y" . org-roam-dailies-capture-yesterday)
+   ("T" . org-roam-dailies-capture-tomorrow))
+  :bind-keymap
+  ("C-c n d" . org-roam-dailies-map)
+  :config
+  (require 'org-roam-dailies) ;; Ensure the keymap is available
+  (org-roam-db-autosync-mode)
+  (org-roam-setup))
 
 (require 'org-sticky-header)
-
-(require 'rainbow-mode)
-(setq rainbow-mode t)
 
 (use-package spell-fu)
 (global-spell-fu-mode)
@@ -483,42 +353,34 @@
           (format-time-string "%Y-%m-%d"))))
 
 ;; (setq doom-theme 'doom-catppuccin)
-;; (setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-dracula)
 ;; (setq doom-theme 'everforest-hard-dark)
-(setq doom-theme 'doom-gruvbox)
+;; (setq doom-theme 'doom-gruvbox)
 ;; (setq doom-theme 'doom-nord)
 ;; (setq doom-theme 'doom-one)
 ;; (setq doom-theme 'doom-solarized-dark)
 ;; (setq doom-theme 'doom-tokyo-night)
+
+;; (setq doom-theme 'modus-vivendi)
+
+;; (setq modus-themes-mode-line '(borderless))
+;; (setq modus-themes-region '(bg-only))
+;; (setq modus-themes-completions 'minimal)
+;; (setq modus-themes-bold-constructs t)
+;; (setq modus-themes-italic-constructs t)
+;; (setq modus-themes-paren-match '(bold intense))
+;; (setq modus-themes-syntax '(alt-syntax faint))
+;; (setq modus-themes-headings
+   ;; '((1 . (rainbow 1.1))
+     ;; (2 . (rainbow 1.1))
+     ;; (3 . (rainbow 1.1))
+     ;; (t . (semilight 1.0))))
+;; (setq modus-themes-scale-headings t)
+;; (setq modus-themes-org-blocks 'gray-background)
+;; (load-theme 'modus-vivendi t)
 
 (add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
 (defun td/visual-fill-setup ()
   (setq-local visual-fill-column-width 150
               visual-fill-column-center-text nil)
   (visual-fill-column-mode 1))
-
-(setq frame-resize-pixelwise t)
-(setq display-line-numbers-type t)
-(setq org-hide-emphasis-markers t)
-(setq auth-sources '("~/Dokumenty/tajne/.authinfo.gpg"))
-(setq org-startup-with-inline-images t)
-(setq conf-unix-mode t)
-(global-set-key (kbd "C-x w") 'delete-frame)
-
-;; Beacon mode
-(beacon-mode 1)
-
-;; Browser
-;; (setq browse-url-browser-function 'eww-browse-url)
-
-;; Nov mode
-(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-
-;; Modeline
-(setq doom-modeline-buffer-name t)
-
-;; Pocket
-(require 'pocket-reader)
-
-;; Shell
-(setq shell-file-name "/usr/bin/fish")
