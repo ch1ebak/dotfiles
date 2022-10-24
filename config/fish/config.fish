@@ -3,11 +3,36 @@
 ###################################
 
 
+### EYE CANDY
+# fish_config theme choose catppuccin
+fish_config theme choose dracula
+# fish_config theme choose everforest
+# fish_config theme choose grayscale
+# fish_config theme choose gruvbox
+# fish_config theme choose nord
+# fish_config theme choose one-dark
+# fish_config theme choose solarized-dark
+# fish_config theme choose tokyo-night
+
+## Fetch
+# colorscript random
+# starfetch
+# treefetch
+neofetch
+# fetchit
+
+## Starship
+# starship init fish | source
+
+## FZF
+set -Ux FZF_DEFAULT_OPTS "--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
+
+
+### OPTIONS
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
-
-### OPTIONS
 
 ## Path
 export PATH="$PATH:$HOME/.config/fish/config.fish"
@@ -57,41 +82,20 @@ else
 end
 
 
-### EYE CANDY
-# fish_config theme choose catppuccin
-# fish_config theme choose dracula
-# fish_config theme choose everforest
-fish_config theme choose gruvbox
-# fish_config theme choose nord
-# fish_config theme choose one-dark
-# fish_config theme choose solarized-dark
-# fish_config theme choose tokyo-night
-
-
-## Fetch
-# colorscript random
-# starfetch
-# treefetch
-neofetch
-# fetchit
-
-## Starship
-# starship init fish | source
-
-
 ### ALIASES
 
 # arch - pacman and yay
 alias gp='sudo pacman -S'
-alias rp='sudo pacman -R'
+alias rp='sudo pacman -Rns'
 alias pacup='sudo pacman -Syu'
 alias pacs='pacman -F'
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
 alias pkglist='sudo pacman -Qqe > ~/Dokumenty/packages.txt'
 alias pkgcount='pacman -Q | wc -l'
-alias gy='yay'
-alias ry='yay -R'
-alias yayup='yay -Syu'
+alias gy='yay -S'
+alias ry='yay -Rns'
+alias yayup='yay -Sua'
+alias allup='yay -Syu'
 
 # Bpytop
 alias bt='bpytop'
@@ -105,6 +109,9 @@ alias rm='rm -i'
 alias wpl='curl wttr.in/pleszew'
 alias wpo='curl wttr.in/poznan'
 alias wca='curl wttr.in/irvine'
+
+# Df
+alias df='duf'
 
 # Dunst
 alias dunstres='killall dunst && dunst & && dunstify "hewwo"'
@@ -127,13 +134,14 @@ alias mu4emb='time mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a'
 
 # Git
 alias gtc='git clone'
+alias dots='git clone https://github.com/ch1ebak/dotfiles'
+alias stpage='git clone https://github.com/ch1ebak/ch1ebak.github.io'
 
 # grub
 alias grubreload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 # ledger
 alias bal='ledger --empty -S -T -f ~/Dokumenty/ledger/ledger.dat bal ^assets:Santander assets:gotówka assets:drobne assets:SteamWallet assets:PayPal'
-alias debt='ledger --empty -S -T -f ~/Dokumenty/ledger/debt.dat bal ^assets:Wiki'
 
 # ls
 alias ls='ls -la --color=always --group-directories-first'
@@ -143,7 +151,8 @@ alias merge='xrdb -merge ~/.Xresources'
 
 # Music
 alias mixer='ncpamixer'
-alias music='mpd ~/.config/mpd/mpd.conf && yams -p 6601 -r && ncmpcpp'
+alias music='mpd ~/.config/mpd/mpd.conf && yams -p 6600 -r && ncmpcpp'
+alias musicel='mpd ~/.config/mpd/mpd.conf && yams -p 6600 -r'
 alias ncpc='ncmpcpp'
 
 # Mount
@@ -166,8 +175,23 @@ alias tsl='sudo timeshift --list'
 alias tgui='sudo timeshift-gtk'
 
 # Vim
-alias vconf='vim ~/.vimrc'
 alias vfzf='vim $(fzf)'
+alias vconf='vim ~/.vimrc'
+alias vbash='vim ~/.bashrc'
+alias vxinit='vim ~/.xinitrc'
+alias vxres='vim ~/.Xresources'
+alias vstarship='vim ~/.config/starship.toml'
+alias vcritty='vim ~/.config/alacritty/alacritty.yml'
+alias vbtop='vim ~/.config/bpytop/bpytop.conf'
+alias vdunst='vim ~/.config/dunst/dunstrc'
+alias vfish='vim ~/.config/fish/config.fish'
+alias vkitty='vim ~/.config/kitty/kitty.conf'
+alias vmpd='vim ~/.config/mpd/mpd.conf'
+alias vncpc='vim ~/.config/ncmpcpp/config'
+alias vnfetch='vim ~/.config/neofetch/config.conf'
+alias vpicom='vim ~/.config/picom/picom.conf'
+alias vqtile='vim ~/.config/qtile/config.py'
+alias vzathura='vim ~/.config/zathura/zathurarc'
 
 # yt-dlp
 alias yt='yt-dlp -x --audio-format flac --audio-quality 0'
