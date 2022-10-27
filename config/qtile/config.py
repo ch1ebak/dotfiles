@@ -26,15 +26,13 @@ from colors.dracula import colors
 # from colors.tokyonight import colors
 
 mod = "mod4"
-# terminal = guess_terminal("kitty")
-terminal = guess_terminal("alacritty")
+terminal = guess_terminal("kitty")
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 keys = [
      # Apps
-    Key([mod], "Return", lazy.spawn("alacritty"), desc="Launch terminal"),
-    Key([mod, "shift"], "Return", lazy.spawn("kitty"), desc="Launch vterm"),
-    # Key([mod, "shift"], "Return", lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"), desc="Launch vterm"),
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod, "shift"], "Return", lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"), desc="Launch vterm"),
 
     Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"), desc="Launch Dired"),
     Key([mod, "shift"], "a", lazy.spawn("pcmanfm"), desc="Launch pcmanfm"),
@@ -258,28 +256,28 @@ screens = [
                      linewidth = 0,
                      padding = 5,
                      ),
-             widget.TextBox(
-                     text = "",
-                     fontsize = 12,
-                     foreground = colors[10],
-                     ),
-             widget.Wttr(
-                     padding = 5,
-                     location={'Pleszew': 'home'},
+             # widget.TextBox(
+                     # text = "",
+                     # fontsize = 12,
+                     # foreground = colors[10],
+                     # ),
+             # widget.Wttr(
+                     # padding = 5,
+                     # location={'Pleszew': 'home'},
                      # location={'~51.8960985,17.7865673': 'home'},
-                     foreground = colors[15],
-                     format = '  %t'
+                     # foreground = colors[15],
+                     # format = '  %t'
                      # format = '%c%t'
-                     ),
-             widget.TextBox(
-                     text = "",
-                     fontsize = 12,
-                     foreground = colors[4],
-                     ),
-             widget.Sep(
-                     linewidth = 0,
-                     padding = 5,
-                     ),
+                     # ),
+             # widget.TextBox(
+                     # text = "",
+                     # fontsize = 12,
+                     # foreground = colors[4],
+                     # ),
+             # widget.Sep(
+                     # linewidth = 0,
+                     # padding = 5,
+                     # ),
              widget.TextBox(
                      text = "",
                      fontsize = 12,
