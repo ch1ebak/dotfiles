@@ -4,15 +4,16 @@
 | text editor    | doom emacs (vim as a backup)     |
 | launcher       | rofi                             |
 | notifications  | dunst                            |
-| themes         | - catppuccin                     |
-|                | - dracula                        |
-|                | - everforest                     |
+| themes         | - dracula                        |
 |                | - gruvbox                        |
 |                | - nord                           |
-|                | - one dark                       |
-|                | - solarized dark                 |
-|                | - tokyo night                    |
 
 
-#+NAME: combined
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/combined.png]]
+#+NAME: dracula
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/dracula.png]]
+
+#+NAME: gruvbox
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/gruvbox.png]]
+
+#+NAME: nord
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/nord.png]]

@@ -3,21 +3,16 @@
 """""""""""""""""""""""""""""""""""
 
 
+
 """""""""""""""
 """ PLUGINS """
 
 call plug#begin()
 
 " color schemes
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'sainnhe/everforest', { 'as': 'everforest' }
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
 Plug 'arcticicestudio/nord-vim', { 'as': 'nord' }
-Plug 'joshdick/onedark.vim', { 'as': 'onedark' }
-Plug 'tek256/simple-dark', { 'as': 'simple-dark' }
-Plug 'altercation/vim-colors-solarized', { 'as': 'solarized' }
-Plug 'ghifarit53/tokyonight-vim', { 'as': 'tokyonight' }
 
 " lightline
 Plug 'itchyny/lightline.vim'
@@ -33,24 +28,48 @@ Plug 'blueyed/vim-diminactive'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-eunuch'
 Plug 'terryma/vim-expand-region'
+Plug 'dag/vim-fish'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 Plug 'farmergreg/vim-lastplace'
+Plug 'tpope/vim-markdown'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'jceb/vim-orgmode'
 Plug 'vim-python/python-syntax'
+Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-speeddating'
 Plug 'godlygeek/tabular'
 Plug 'mbbill/undotree'
 Plug 'frazrepo/vim-rainbow'
 Plug 'tpope/vim-surround'
 Plug 'maxbrunsfeld/vim-yankstack'
-Plug 'vimwiki/vimwiki'
 
 call plug#end()
+
+
+"""""""""""""""""""""
+""" COLOR SCHEMES """
+
+"" available color schemes
+" dracula
+     " let g:dracula_colorterm = 0
+     " let g:dracula_italic = 0 
+" gruvbox
+" nord
+
+syntax on 
+set background=dark
+colorscheme nord 
+
+"" Lightline
+let g:lightline = {
+     \ 'colorscheme': 'nord',
+\ }
+set laststatus=2
+set noshowmode
 
 
 """"""""""""""""""""""""""
@@ -85,6 +104,11 @@ let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
 let g:lastplace_ignore_buftype = "quickfix,nofile,help"
 let g:lastplace_open_folds = 0
 
+"" Markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+let g:markdown_syntax_conceal = 0
+let g:markdown_minlines = 100
+
 "" Multiple cursors
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_start_word_key      = '<C-n>'
@@ -114,15 +138,8 @@ let g:python_highlight_all = 1
 "" Rainbow
 let g:rainbow_active = 1
 
-"" Startify
-Plug 'mhinz/vim-startify'
-
 "" Undotree
 nnoremap <F5> :UndotreeToggle<CR>
-
-"" VimWiki
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 "" Yankstack
 nmap <leader>p <Plug>yankstack_substitute_older_paste
@@ -141,7 +158,6 @@ set noswapfile
 set t_Co=256
 set number
 set clipboard=unnamedplus
-syntax enable
 let g:rehash256 = 1
 syntax on 
 set nocompatible
@@ -160,29 +176,3 @@ set guioptions-=L  "remove left-hand scroll bar
 
 "" Remap keys 
 :imap ii <Esc>
-
-
-"""""""""""""""""""""
-""" COLOR SCHEMES """ 
-
-"" available color schemes
-" catppuccin
-" dracula
-" gruvbox
-" nord
-" onedark
-" simpled-ark (simpleblack)
-" solarized
-" tokyonight
-     " let g:tokyonight_style = 'night'
-     " let g:tokyonight_enable_italic = 1
-
-colorscheme simple-dark
-set background=dark
-
-"" Lightline
-let g:lightline = {
-     \ 'colorscheme': 'simpleblack',
-\ }
-set laststatus=2
-set noshowmode

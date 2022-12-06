@@ -17,28 +17,6 @@ Xft.lcdfilter: lcdfilter
 
 !!! Color schemes
 
-!! Catppuccin
-! Sxiv.background: #1E1E2E
-! Sxiv.foreground: #D9E0EE
-! *background: #1E1E2E
-! *foreground: #D9E0EE
-! *color0: #6E6C7E
-! *color8: #988BA2
-! *color1: #F28FAD
-! *color9: #F28FAD
-! *color2: #ABE9B3
-! *color10: #ABE9B3
-! *color3: #FAE3B0
-! *color11:  #FAE3B0
-! *color4: #96CDFB
-! *color12: #96CDFB
-! *color5: #DDB6F2
-! *color13: #DDB6F2
-! *color6: #F5C2E7
-! *color14: #F5C2E7
-! *color7: #C3BAC6
-! *color15: #D9E0EE
-
 !! Dracula
 ! Sxiv.background: #282A36
 ! Sxiv.foreground: #F8F8F2
@@ -61,134 +39,46 @@ Xft.lcdfilter: lcdfilter
 ! *.color7:     #BFBFBF
 ! *.color15:    #E6E6E6
 
-!! Everforest
-! Sxiv.background: #323d43
-! Sxiv.foreground: #d8caac
-! *.background:   #323d43
-! *.foreground:   #d8caac
-! *.color0:       #868d80
-! *.color8:       #868d80
-! *.color1:       #e68183
-! *.color9:       #e68183
-! *.color2:       #a7c080
-! *.color10:      #a7c080
-! *.color3:       #d9bb80
-! *.color11:      #d9bb80
-! *.color4:       #89beba
-! *.color12:      #89beba
-! *.color5:       #d3a0bc
-! *.color13:      #d3a0bc
-! *.color6:       #87c095
-! *.color14:      #87c095
-! *.color7:       #d8caac
-! *.color15:      #d8caac
-
 !! Gruvbox
-Sxiv.background: #282828
-Sxiv.foreground: #ebdbb2
-*background: #282828
-*foreground: #ebdbb2
-*color0:  #282828
-*color8:  #928374
-*color1:  #cc241d
-*color9:  #fb4934
-*color2:  #98971a
-*color10: #b8bb26
-*color3:  #d79921
-*color11: #fabd2f
-*color4:  #458588
-*color12: #83a598
-*color5:  #b16286
-*color13: #d3869b
-*color6:  #689d6a
-*color14: #8ec07c
-*color7:  #a89984
-*color15: #ebdbb2
+! Sxiv.background: #282828
+! Sxiv.foreground: #ebdbb2
+! *background: #282828
+! *foreground: #ebdbb2
+! *color0:  #282828
+! *color8:  #928374
+! *color1:  #cc241d
+! *color9:  #fb4934
+! *color2:  #98971a
+! *color10: #b8bb26
+! *color3:  #d79921
+! *color11: #fabd2f
+! *color4:  #458588
+! *color12: #83a598
+! *color5:  #b16286
+! *color13: #d3869b
+! *color6:  #689d6a
+! *color14: #8ec07c
+! *color7:  #a89984
+! *color15: #ebdbb2
 
 !! Nord
-! Sxiv.background: #2E3440
-! Sxiv.foreground: #D8DEE9
-! *.background: #2E3440
-! *.foreground: #D8DEE9
-! *.color0: #3B4252
-! *.color8: #4C566A
-! *.color1: #BF616A
-! *.color9: #BF616A
-! *.color2: #A3BE8C
-! *.color10: #A3BE8C
-! *.color3: #EBCB8B
-! *.color11: #EBCB8B
-! *.color4: #81A1C1
-! *.color12: #81A1C1
-! *.color5: #B48EAD
-! *.color13: #B48EAD
-! *.color6: #88C0D0
-! *.color14: #8FBCBB
-! *.color7: #E5E9F0
-! *.color15: #ECEFF4
-
-!! One Dark
-! Sxiv.background: #282c34
-! Sxiv.foreground: #bbc2cf
-! *.background:    #282c34
-! *.foreground:    #bbc2cf
-! *.color0:        #282c34
-! *.color8:        #5C6370
-! *.color1:        #ff6c6b
-! *.color9:        #ff6c6b
-! *.color2:        #98be65
-! *.color10:       #98be65
-! *.color3:        #da8548
-! *.color11:       #da8548
-! *.color4:        #51afef
-! *.color12:       #51afef
-! *.color5:        #c678dd
-! *.color13:       #c678dd
-! *.color6:        #46D9FF
-! *.color14:       #46D9FF
-! *.color7:        #9ca0a4
-! *.color15:       #DFDFDF
-
-!! Solarized Dark
-! Sxiv.background:        #002b36
-! Sxiv.foreground:        #839496
-! *background:            #002b36
-! *foreground:            #839496
-! *color0:                #073642
-! *color8:                #002b36
-! *color1:                #dc322f
-! *color9:                #cb4b16
-! *color2:                #859900
-! *color10:               #586e75
-! *color3:                #b58900
-! *color11:               #657b83
-! *color4:                #268bd2
-! *color12:               #839496
-! *color5:                #d33682
-! *color13:               #6c71c4
-! *color6:                #2aa198
-! *color14:               #93a1a1
-! *color7:                #eee8d5
-! *color15:               #fdf6e3
-
-!! Tokyo Night
-! Sxiv.background:    #1A1B26
-! Sxiv.foreground:    #A9B1D6
-! *.background:    #1A1B26
-! *.foreground:    #A9B1D6
-! *.color0:        #1A1B26
-! *.color8:        #4E5173
-! *.color1:        #F7768E
-! *.color9:        #E06C75
-! *.color2:        #E0AF68
-! *.color10:       #D19A66
-! *.color3:        #9ECE6A
-! *.color11:       #98C379
-! *.color4:        #7AA2F7
-! *.color12:       #61AFEF
-! *.color5:        #9A7ECC
-! *.color13:       #C678DD
-! *.color6:        #4ABAAF
-! *.color14:       #56B6C2
-! *.color7:        #ACB0D0
-! *.color15:       #ABB2BF
+Sxiv.background: #2E3440
+Sxiv.foreground: #D8DEE9
+*.background: #2E3440
+*.foreground: #D8DEE9
+*.color0: #3B4252
+*.color8: #4C566A
+*.color1: #BF616A
+*.color9: #BF616A
+*.color2: #A3BE8C
+*.color10: #A3BE8C
+*.color3: #EBCB8B
+*.color11: #EBCB8B
+*.color4: #81A1C1
+*.color12: #81A1C1
+*.color5: #B48EAD
+*.color13: #B48EAD
+*.color6: #88C0D0
+*.color14: #8FBCBB
+*.color7: #E5E9F0
+*.color15: #ECEFF4
