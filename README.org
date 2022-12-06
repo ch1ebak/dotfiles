@@ -1,12 +1,13 @@
-| window manager | qtile                            |
-| shell          | fish (bash as a backup)          |
-| terminal       | kitty                            |
-| text editor    | doom emacs (vim as a backup)     |
-| launcher       | rofi                             |
-| notifications  | dunst                            |
-| themes         | - dracula                        |
-|                | - gruvbox                        |
-|                | - nord                           |
+| window manager | qtile                        |
+| shell          | fish (bash as a backup)      |
+| terminal       | kitty                        |
+| text editor    | doom emacs (vim as a backup) |
+| launcher       | [[https://github.com/newmanls/rofi-themes-collection][rofi]]                         |
+| notifications  | dunst                        |
+| browser        | [[https://github.com/andreasgrafen/cascade][firefox]] + [[https://github.com/gbprod/vimium-nord-theme][vimium]]             |
+| themes         | - dracula                    |
+|                | - gruvbox                    |
+|                | - nord                       |
 
 
 #+NAME: dracula
