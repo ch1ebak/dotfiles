@@ -1,0 +1,89 @@
+###################################
+### https://github.com/ch1ebak/ ###
+###################################
+
+
+
+[global]
+
+  monitor = 0
+  shrink = no
+  padding = 20
+  horizontal_padding = 20
+
+  width = 275
+  height = 100
+  offset = 10x50
+  origin = bottom-right
+
+  frame_width = 2
+  separator_height = 0
+
+  sort = yes
+  font = JetBrainsMono Nerd Font 10
+  markup = full
+  format = "<b>%s</b>\n%b"
+  alignment = left
+  show_age_threshold = 60
+  word_wrap = yes
+  ignore_newline = no
+  stack_duplicates = true
+  hide_duplicate_count = no
+  show_indicators = yes
+
+  icon_position = left
+  max_icon_size= 60
+  sticky_history = no
+  history_length = 6
+  title = Dunst
+  class = Dunst
+  corner_radius = 0
+
+  mouse_left_click = close_current
+  mouse_middle_click = do_action
+  mouse_right_click = close_all
+
+
+### Color schemes
+
+## dracula
+# [urgency_low]
+   # background = "#282A36"
+   # foreground = "#F8F8F2"
+   # frame_color = "#bd93f9"
+# [urgency_normal]
+   # background = "#282A36"
+   # foreground = "#F8F8F2"
+   # frame_color = "#bd93f9"
+# [urgency_critical]
+   # background = "#282A36"
+   # foreground = "#F8F8F2"
+   # frame_color = "#FF5555"
+
+## gruvbox
+# [urgency_low]
+  # background = "#282828"
+  # foreground = "#ebdbb2"
+  # frame_color = "#98971a"
+# [urgency_normal]
+  # background = "#282828"
+  # foreground = "#ebdbb2"
+  # frame_color = "#98971a"
+# [urgency_critical]
+  # background = "#282828"
+  # foreground = "#ebdbb2"
+  # frame_color = "#cc241d"
+
+## nord
+[urgency_low]
+   background = "#242831"
+   foreground = "#f8f8f2"
+   frame_color = "#81A1C1"
+[urgency_normal]
+   background = "#242831"
+   foreground = "#f8f8f2"
+   frame_color = "#81A1C1"
+[urgency_critical]
+   background = "#242831"
+   foreground = "#f8f8f2"
+   frame_color = "#BF616A"

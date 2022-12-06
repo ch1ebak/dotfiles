@@ -1,0 +1,96 @@
+/*******************************************************************************
+ * ROFI ONELINE THEME USING THE DRACULA COLOR PALETTE
+ * User                 : LR-Tech               
+ *******************************************************************************/
+
+* {
+    font:   "mononoki Nerd Font Bold 10";
+
+    dracula0:     #282a36;
+    dracula1:     #44475a;
+    dracula2:     #f8f8f2;
+    dracula3:     #6272a4;
+    dracula4:     #8be9fd;
+    dracula5:     #50fa7b;
+    dracula6:     #ffb86c;
+    dracula7:     #bd93f9;
+    dracula8:     #ff79c6;
+    dracula9:     #ff5555;
+    dracula10:    #f1fa8c;
+
+    background-color:   transparent;
+    text-color:         @dracula2;
+    accent-color:       @dracula8;
+
+    margin:     0px;
+    padding:    1px;
+    spacing:    0px;
+}
+
+window {
+    location:           north;
+    width:              100%;
+    background-color:   @dracula0;
+    children:           [ mainbox,message ];
+}
+
+mainbox {
+    orientation:    horizontal;
+    children:       [ inputbar,listview ];
+}
+
+inputbar {
+    width:      25%;
+    padding:    1px 8px;
+    spacing:    8px;
+    children:   [ prompt, entry ];
+}
+
+prompt, entry, element-text, element-icon {
+    vertical-align: 0.5;
+}
+
+prompt {
+    text-color: @dracula5;
+}
+
+listview {
+    layout: horizontal;
+}
+
+element {
+    padding:    1px 8px;
+    spacing:    4px;
+}
+
+element normal urgent {
+    text-color: @dracula9;
+}
+
+element normal active {
+    text-color: @accent-color;
+}
+
+element selected {
+    text-color: @dracula0;
+}
+
+element selected normal {
+    background-color:   @accent-color;
+}
+
+element selected urgent {
+    background-color:   @dracula7;
+}
+
+element selected active {
+    background-color:   @dracula3;
+}
+
+element-icon {
+    size:   0.75em;
+}
+
+element-text {
+    text-color: inherit;
+}
