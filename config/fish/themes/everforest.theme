@@ -1,7 +1,0 @@
-# name: everforest
-
-fish_color_normal '#d8caac'
-fish_color_autosuggestion '#5f6d67'
-fish_color_command '#d9bb80'
-fish_color_error '#e68183'
-fish_color_param '#a7c080'

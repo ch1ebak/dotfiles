@@ -1,7 +1,0 @@
-# name: tokyo-night
-
-fish_color_normal '#A9B1D6'
-fish_color_autosuggestion '#4E5173'
-fish_color_command '#9ECE6A'
-fish_color_error '#F7768E'
-fish_color_param '#7AA2F7'

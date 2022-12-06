@@ -1,7 +1,0 @@
-# name: one-dark
-
-fish_color_normal '#bbc2cf'
-fish_color_autosuggestion '#5C6370'
-fish_color_command '#51afef'
-fish_color_error '#ff6c6b'
-fish_color_param '#98be65'

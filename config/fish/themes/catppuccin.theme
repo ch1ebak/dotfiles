@@ -1,7 +1,0 @@
-# name: catppuccin
-
-fish_color_normal '#dadae8'
-fish_color_autosuggestion '#6e6c7e'
-fish_color_command '#a4b9ef'
-fish_color_error '#e38c8f'
-fish_color_param '#f2cecf'
