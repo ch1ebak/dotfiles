@@ -1,5 +1,5 @@
 | window manager | qtile                        |
-| shell          | fish (bash as a backup)      |
+| shell          | bash (fish as a backup)      |
 | terminal       | kitty                        |
 | text editor    | doom emacs (vim as a backup) |
 | launcher       | [[https://github.com/newmanls/rofi-themes-collection][rofi]]                         |
@@ -8,6 +8,7 @@
 | themes         | - dracula                    |
 |                | - gruvbox                    |
 |                | - nord                       |
+|                | - grayscale                  |
 
 
 #+NAME: dracula
@@ -18,3 +19,6 @@
 
 #+NAME: nord
 [[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/nord.png]]
+
+#+NAME: grayscale
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/grayscale.png]]
