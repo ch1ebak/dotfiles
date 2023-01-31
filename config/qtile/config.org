@@ -52,8 +52,9 @@ from libqtile.widget import spacer
 #+begin_src python
 
 # from colors.dracula import colors
+from colors.grayscale import colors
 # from colors.gruvbox import colors
-from colors.nord import colors
+# from colors.nord import colors
 
 #+end_src
 
@@ -73,22 +74,21 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 | Key                | Action                    |
 |--------------------+---------------------------|
 |                    | App launching             |
-| Super+Return       | terminal                  |
-| Super+shift+Return | kitty                     |
-| Super+a            | dired (emacs)             |
-| Super+shift+a      | pcmanfm                   |
+| Super+Return       | kitty                     |
+| Super+w            | firefox                   |
+| Super+shift+w      | firefox - private         |
 | Super+e            | emacsclient               |
-| Super+shift+e      | vim                       |
+| Super+a            | dired                     |
+| Super+shift+a      | pcmanfm                   |
+| Super+s            | rofi                      |
 | Super+g            | steam                     |
 | Super+shift+g      | lutris                    |
 | Super+control+g    | heroic                    |
+| Super+v            | vterm                     |
+| Super+shift+v      | eshell                    |
 | Super+m            | ncmpcpp                   |
 | Super+p            | slock                     |
 | Super+shift+p      | rofi power menu           |
-| Super+r            | keypassxc                 |
-| Super+s            | rofi                      |
-| Super+w            | firefox                   |
-| Super+shift+w      | firefox - private         |
 |                    | App control               |
 | Super+q            | kill window               |
 | Super+ctrl+r       | restart qtile             |
@@ -123,27 +123,29 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 keys = [
      # Apps
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod, "shift"], "Return", lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"), desc="Launch vterm"),
+
+    Key([mod], "w", lazy.spawn("firefox"), desc="Launch Firefox"),
+    Key([mod, "shift"], "w", lazy.spawn("/usr/bin/firefox --private-window"), desc="Launch Firefox Private"),
+
+    Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'"), desc='Launch Emacs'),
 
     Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"), desc="Launch Dired"),
-    Key([mod, "shift"], "a", lazy.spawn("pcmanfm"), desc="Launch pcmanfm"),
+    Key([mod, "shift"], "a", lazy.spawn("pcmanfm"), desc="Launch Pcmanfm"),
 
-    Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'"), desc='Launch Emacsclient'),
-    Key([mod, "shift"], "e", lazy.spawn("kitty -e vim"), desc='Launch vim'),
+    Key([mod], "s", lazy.spawn("rofi -show drun"), desc="Launch Rofi"),
 
     Key([mod], "g", lazy.spawn("steam"), desc='Launch Steam'),
     Key([mod, "shift"], "g", lazy.spawn("lutris"), desc='Launch Lutris'),
     Key([mod, "control"], "g", lazy.spawn("heroic"), desc='Launch Heroic Game Launcher'),
 
+    Key([mod], "v", lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"), desc="Launch Vterm"),
+    Key([mod, "shift"], "v", lazy.spawn("emacsclient -c -a 'emacs' --eval '(eshell)'"), desc='Launch Eshell'),
+
     Key([mod], "m", lazy.spawn("kitty -e ncmpcpp"), desc="Launch ncmpcpp"),
 
+    # Power menu
     Key([mod], "p", lazy.spawn("slock"), desc="Launch lock screen"),
     Key([mod, "shift"], "p", lazy.spawn("rofi -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu"), desc="Launch Rofi Power Menu"),
-
-    Key([mod], "s", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
-
-    Key([mod], "w", lazy.spawn("firefox"), desc="Launch Firefox"),
-    Key([mod, "shift"], "w", lazy.spawn("/usr/bin/firefox --private-window"), desc="Launch Firefox Private"),
 
     # App control
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -199,17 +201,17 @@ keys = [
 
 #+begin_src python
 
-# Icons-dots, for 2 monitors
+# Icons, 2 monitors
 groups = [
-       Group("1", label="", layout='monadtall'),
-       Group("2", label="", layout='monadtall'),
-       Group("3", label="", layout='monadtall'),
-       Group("4", label="", layout='monadtall'),
-       Group("5", label="", layout='monadtall'),
-       Group("6", label="", layout='monadtall'),
-       Group("7", label="", layout='monadtall'),
-       Group("8", label="", layout='max', matches=[Match(wm_class=["vlc", "mpv", "rhythmbox"])]),
-       Group("9", label="", layout='monadtall', matches=[Match(wm_class=["signal", "ferdium"])])
+       Group("1", label="", layout='monadtall', matches=[Match(wm_class=["signal"])]),
+       Group("2", label="", layout='max', matches=[Match(wm_class=["tor"])]),
+       Group("3", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
+       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["kitty"])]),
+       Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm"])]),
+       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["transmission-gtk", "gimp", "calibre", "nitrogen"])]),
+       Group("7", label="", layout='monadtall', matches=[Match(wm_class=["Steam", "lutris"])]),
+       Group("8", label="", layout='monadwide', matches=[Match(wm_class=["deadbeef"])]),
+       Group("9", label="", layout='max', matches=[Match(wm_class=["mpv"])])
        ]
 
 for i in range(len(groups)):
@@ -228,13 +230,13 @@ for i in range(len(groups)):
 layout_theme = {"border_width": 2,
                 "margin": 6,
                 "border_focus": colors[14],
-                "border_normal": colors[0]
+                "border_normal": colors[2]
                 }
 
 layouts = [
     layout.MonadWide(**layout_theme),
     layout.MonadTall(**layout_theme),
-    layout.Columns(**layout_theme),
+    # layout.Columns(**layout_theme),
     layout.Max(**layout_theme),
 ]
 
@@ -269,8 +271,9 @@ screens = [
                      padding = 5,
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "[",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[10],
                      ),
              widget.GroupBox(
@@ -294,8 +297,9 @@ screens = [
                      background = colors[0]
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "]",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[4],
                      ),
              widget.Sep(
@@ -310,20 +314,21 @@ screens = [
                      padding = 5,
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "[",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[10],
                      ),
              widget.Wttr(
                      padding = 5,
-                     location={'***** ***': 'home'},
+                     location={'': 'home'},
                      foreground = colors[6],
-                     # format = ' %C, %t'
-                     format = '  %C, %t'
+                     format = '%C, %t'
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "]",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[4],
                      ),
              widget.Sep(
@@ -331,18 +336,20 @@ screens = [
                      padding = 5,
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "[",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[10],
                      ),
              widget.Clock(
                      # format = "  %a, %d.%m.%y",
-                     format = "  %a, %d.%m.%y",
+                     format = "%a, %d.%m.%y",
                      foreground = colors[6],
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "]",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[4],
                      ),
              widget.Sep(
@@ -350,17 +357,19 @@ screens = [
                      padding = 5,
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "[",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[10],
                      ),
              widget.Clock(
-                     format = "  %H:%M",
+                     format = "%H:%M",
                      foreground = colors[6],
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "]",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[4],
                      ),
              widget.Sep(
@@ -368,14 +377,16 @@ screens = [
                      padding = 5,
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "[",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[10],
                      ),
              widget.Systray(),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "]",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[4],
                      ),
              widget.Sep(
@@ -405,8 +416,9 @@ screens = [
                      padding = 5,
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "[",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[10],
                      ),
              widget.GroupBox(
@@ -430,8 +442,9 @@ screens = [
                      background = colors[0]
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "]",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[4],
                      ),
              widget.Sep(
@@ -446,20 +459,22 @@ screens = [
                      padding = 5,
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "[",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[10],
                      ),
              widget.Wttr(
                      padding = 5,
-                     location={'***** ***': 'home'},
+                     location={'': 'home'},
                      foreground = colors[6],
                      # format = ' %C, %t'
-                     format = '  %C, %t'
+                     format = '%C, %t'
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "]",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[4],
                      ),
              widget.Sep(
@@ -467,18 +482,20 @@ screens = [
                      padding = 5,
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "[",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[10],
                      ),
              widget.Clock(
                      # format = "  %a, %d.%m.%y",
-                     format = "  %a, %d.%m.%y",
+                     format = "%a, %d.%m.%y",
                      foreground = colors[6],
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "]",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[4],
                      ),
              widget.Sep(
@@ -486,18 +503,149 @@ screens = [
                      padding = 5,
                      ),
              widget.TextBox(
-                     text = "",
-                     fontsize = 12,
+                     text = "[",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[10],
                      ),
              widget.Clock(
                      # format = "  %H:%M",
-                     format = "  %H:%M",
+                     format = "%H:%M",
                      foreground = colors[6],
                      ),
              widget.TextBox(
-                     text = "",
+                     text = "]",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
+                     foreground = colors[4],
+                     ),
+             widget.Sep(
+                     linewidth = 0,
+                     padding = 5,
+                     ),
+             widget.CurrentLayoutIcon(
+                     custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
+                     padding = 5,
+                     scale = 0.7
+                     ),
+             widget.Sep(
+                     linewidth = 0,
+                     padding = 5,
+                     ),
+             ], 25,
+             # border_width = 2,
+             # border_color = "#2E3440",
+             margin = [6, 6, 0, 6]
+             ), ),
+ Screen(
+         top=bar.Bar(
+             [
+             widget.Sep(
+                     linewidth = 0,
+                     padding = 5,
+                     ),
+             widget.TextBox(
+                     text = "[",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
+                     foreground = colors[10],
+                     ),
+             widget.GroupBox(
                      fontsize = 12,
+                     font='Font Awesome',
+                     margin_y = 3,
+                     margin_x = 0,
+                     padding_y = 5,
+                     padding_x = 3,
+                     borderwidth = 3,
+                     inactive = colors[2],
+                     active = colors[15],
+                     rounded = False,
+                     highlight_color = colors[9],
+                     highlight_method = "line",
+                     this_current_screen_border = colors[15],
+                     this_screen_border = colors[7],
+                     other_current_screen_border = colors[7],
+                     other_screen_border = colors[15],
+                     foreground = colors[15],
+                     background = colors[0]
+                     ),
+             widget.TextBox(
+                     text = "]",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
+                     foreground = colors[4],
+                     ),
+             widget.Sep(
+                     linewidth = 0,
+                     padding = 5,
+                     ),
+             widget.Spacer(
+                     length = bar.STRETCH
+                     ),
+             widget.Sep(
+                     linewidth = 0,
+                     padding = 5,
+                     ),
+             widget.TextBox(
+                     text = "[",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
+                     foreground = colors[10],
+                     ),
+             widget.Wttr(
+                     padding = 5,
+                     location={'': 'home'},
+                     foreground = colors[6],
+                     # format = ' %C, %t'
+                     format = '%C, %t'
+                     ),
+             widget.TextBox(
+                     text = "]",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
+                     foreground = colors[4],
+                     ),
+             widget.Sep(
+                     linewidth = 0,
+                     padding = 5,
+                     ),
+             widget.TextBox(
+                     text = "[",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
+                     foreground = colors[10],
+                     ),
+             widget.Clock(
+                     # format = "  %a, %d.%m.%y",
+                     format = "%a, %d.%m.%y",
+                     foreground = colors[6],
+                     ),
+             widget.TextBox(
+                     text = "]",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
+                     foreground = colors[4],
+                     ),
+             widget.Sep(
+                     linewidth = 0,
+                     padding = 5,
+                     ),
+             widget.TextBox(
+                     text = "[",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
+                     foreground = colors[10],
+                     ),
+             widget.Clock(
+                     # format = "  %H:%M",
+                     format = "%H:%M",
+                     foreground = colors[6],
+                     ),
+             widget.TextBox(
+                     text = "]",
+                     fontsize = 15,
+                     font='Font Awesome Bold',
                      foreground = colors[4],
                      ),
              widget.Sep(
@@ -598,7 +746,6 @@ def autostart():
     qtile.cmd_spawn("/usr/bin/pipewire-alsa &")
     qtile.cmd_spawn("/usr/bin/pipewire-jack &")
     qtile.cmd_spawn("/usr/bin/wireplumber &")
-    qtile.cmd_spawn("/usr/lib/kdeconnectd &")
     for p in processes:
         subprocess.Popen(p)
 
