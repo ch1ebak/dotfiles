@@ -1,15 +1,18 @@
-| window manager | qtile                        |
-| shell          | bash (fish as a backup)      |
-| terminal       | kitty                        |
-| text editor    | doom emacs (vim as a backup) |
+# 2023-05-16 now with catpuccin, grayscale, spacegray, and spacegray themed ratpoison.
+
+| window manager | qtile / ratpoison            |
+| shell          | fish / bash                  |
+| terminal       | alacritty / kitty            |
+| text editor    | doom emacs / vim             |
 | launcher       | [[https://github.com/newmanls/rofi-themes-collection][rofi]]                         |
 | notifications  | dunst                        |
 | browser        | [[https://github.com/andreasgrafen/cascade][firefox]] + [[https://github.com/gbprod/vimium-nord-theme][vimium]] + [[https://github.com/ch1ebak/ch1ebak.github.io][startpage]] |
 | themes         | - dracula                    |
 |                | - gruvbox                    |
 |                | - nord                       |
+|                | - catpuccin                  |
 |                | - grayscale                  |
-
+|                | - spacegray                  |
 
 #+NAME: dracula
 [[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/dracula.png]]
@@ -22,3 +25,6 @@
 
 #+NAME: grayscale
 [[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/grayscale.png]]
+
+#+NAME: spacegray
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/spacegray.png]]
