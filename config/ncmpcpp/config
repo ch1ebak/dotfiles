@@ -71,5 +71,5 @@ startup_screen = playlist
 # startup_slave_screen = "visualizer"
 # startup_slave_screen_focus = no
 locked_screen_width_part = 60
-execute_on_song_change = notify-send -i "Now Playing" "$(mpc --format '%title% - %artist%' current)"
+# execute_on_song_change = notify-send -i "Now Playing" "$(mpc --format '%title% - %artist%' current)"
 lyrics_fetchers = azlyrics, genius, tekstowo

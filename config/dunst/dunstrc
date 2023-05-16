@@ -47,6 +47,20 @@
 
 ### Color schemes
 
+## catppuccin
+# [urgency_low]
+   # background = "#1E1E2E"
+   # foreground = "#CDD6F4"
+   # frame_color = "#F5C2E7"
+# [urgency_normal]
+   # background = "#1E1E2E"
+   # foreground = "#CDD6F4"
+   # frame_color = "#F5C2E7"
+# [urgency_critical]
+   # background = "#1E1E2E"
+   # foreground = "#CDD6F4"
+   # frame_color = "#F38BA8"
+
 ## dracula
 # [urgency_low]
    # background = "#282A36"
@@ -62,18 +76,18 @@
    # frame_color = "#FF5555"
 
 ## grayscale
-[urgency_low]
-   background = "#000000"
-   foreground = "#e0e6f0"
-   frame_color = "#525252"
-[urgency_normal]
-   background = "#000000"
-   foreground = "#e0e6f0"
-   frame_color = "#525252"
-[urgency_critical]
-   background = "#000000"
-   foreground = "#e0e6f0"
-   frame_color = "#f7f7f7"
+# [urgency_low]
+   # background = "#000000"
+   # foreground = "#e0e6f0"
+   # frame_color = "#525252"
+# [urgency_normal]
+   # background = "#000000"
+   # foreground = "#e0e6f0"
+   # frame_color = "#525252"
+# [urgency_critical]
+   # background = "#000000"
+   # foreground = "#e0e6f0"
+   # frame_color = "#f7f7f7"
 
 ## gruvbox
 # [urgency_low]
@@ -102,3 +116,17 @@
    # background = "#242831"
    # foreground = "#f8f8f2"
    # frame_color = "#BF616A"
+
+## Spacegray
+[urgency_low]
+   background = "#20242d"
+   foreground = "#b3b8c3"
+   frame_color = "#b04b57"
+[urgency_normal]
+   background = "#20242d"
+   foreground = "#b3b8c3"
+   frame_color = "#b04b57"
+[urgency_critical]
+   background = "#20242d"
+   foreground = "#b3b8c3"
+   frame_color = "#b04b57"

@@ -1,0 +1,73 @@
+## Window look
+set winname title
+set wingravity center
+set transgravity center
+set bargravity center
+set border 2
+set barborder 2
+set font "JetBrainsMono Nerd Font:size=10"
+set bgcolor #20242d
+set fgcolor #B3B8C3
+set fwcolor #b04b57
+set bwcolor #4c4f56
+
+## Setting the escape key to the Windows key
+escape Super_L
+
+# Apps
+bind s-Return exec alacritty
+bind s-w exec firefox
+bind s-s exec rofi -show drun
+bind s-e exec emacsclient -c -a 'emacs'
+bind s-a exec emacsclient -c -a 'emacs' --eval '(dired nil)'
+bind s-A exec pcmanfm
+bind s-g exec steam
+bind s-G exec lutris
+
+# Ratpoison
+# bind s-t exec ratpoison -d :0.0 -c "echo `date +'%r - %A %n    %D - %B'`  `cal | tail -n +2 | sed -e 's/^Su/\n\n Su/' -e 's/.*/ & /' -e \"s/\ $(date +%e)\ /\/\"`"
+bind s-t exec ratpoison -d :0.0 -c "echo `date +'%a, %d.%m.%y | %H:%M'`  `cal | tail -n +2 | sed -e 's/^Su/\n\n Su/' -e 's/.*/ & /' -e \"s/\ $(date +%e)\ /\/\"`"
+
+# System management
+bind s-p exec slock
+bind s-P exec rofi -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu
+
+# Apps control
+bind q delete
+
+# Window manipulation
+bind x hsplit
+bind X split
+bind z prevscreen
+bind c nextscreen
+bind h focusleft
+bind l focusright
+bind j next
+bind k prev
+bind H exchangeleft
+bind L exchangeright
+bind n only
+bind J resize
+bind K resize
+
+## Workspaces
+exec /usr/bin/rpws init 9 -k
+
+bind C-1 exec rpws 1
+bind C-2 exec rpws 2
+bind C-3 exec rpws 3
+bind C-4 exec rpws 4
+bind C-5 exec rpws 5
+bind C-6 exec rpws 6
+bind C-7 exec rpws 7
+bind C-8 exec rpws 8
+bind C-9 exec rpws 9
+
+## Startup
+exec nitrogen --restore &
+exec xrandr --output eDP-1 --off --output DP-1 --mode 1280x1024 --pos 0x0 --rotate normal --output HDMI-1 --off --output HDMI-1-0 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off
+exec picom --experimental-backend -b
+exec /usr/bin/emacs --daemon &
+exec keepassxc &
+exec dunst &
+exec xrdb -load ~/.Xresources

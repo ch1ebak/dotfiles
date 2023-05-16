@@ -6,7 +6,7 @@
 ### OPTIONS
 
 ## Exports
-export TERM="kitty"                               # getting proper colors
+export TERM="alacritty"                           # getting proper colors
 export ALTERNATE_EDITOR=""                        # setting for emacsclient
 export EDITOR="emacsclient -t -a ''"              # $EDITOR use Emacs in terminal
 export VISUAL="emacsclient -c -a emacs"           # $VISUAL use Emacs in GUI mode
@@ -105,6 +105,8 @@ alias stpage='git clone https://github.com/ch1ebak/ch1ebak.github.io'
 
 # Music
 alias mixer='ncpamixer'
+# alias music='mpd ~/.config/mpd/mpd.conf && yams -p 6600 -r && ncmpcpp'
+alias music='mpd ~/.config/mpd/mpd.conf && mpdscribble -D --conf ~/.mpdscribble/mpdscribble.conf &'
 alias mpdd='mpd ~/.config/mpd/mpd.conf &'
 alias mpds='mpdscribble -D --conf ~/.mpdscribble/mpdscribble.conf &'
 alias ncpc='ncmpcpp'
@@ -130,4 +132,4 @@ eval "$(starship init bash)"
 
 ## Fetch
 # neofetch
-pfetch
+# pfetch

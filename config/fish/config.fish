@@ -4,9 +4,11 @@
 
 
 ### EYE CANDY
+# fish_config theme choose catppuccin
 # fish_config theme choose dracula
 # fish_config theme choose gruvbox
-fish_config theme choose nord
+# fish_config theme choose nord
+fish_config theme choose spacegray
 
 ## Fetch
 # colorscript random
@@ -87,7 +89,7 @@ alias pkgcount='pacman -Q | wc -l'
 alias gy='yay -S'
 alias ry='yay -Rns'
 alias yayup='yay -Sua'
-alias allup='yay -Syu'
+alias update='yay -Syu'
 
 # void - xbps
 # alias gp='sudo xbps-install'
@@ -98,9 +100,11 @@ alias allup='yay -Syu'
 # alias pacerror='xbps-pkgdb -a'
 
 # Commands
+alias cat="bat"
 alias cp="cp -i"
-alias df='duf'
-alias ls='ls -la --color=always --group-directories-first'
+alias df="duf"
+# alias ls='ls -la --color=always --group-directories-first'
+alias ls='exa -la --color=always --group-directories-first'
 alias mkdir='mkdir -pv'
 alias mv='mv -i'
 # alias rm='rm -i'
@@ -118,7 +122,7 @@ alias emacsd='/usr/bin/emacs --daemon &'
 alias kemacs='killall emacs'
 
 # Doom Emacs
-alias doom='~/.emacs.d/bin/doom sync'
+alias dooms='~/.emacs.d/bin/doom sync'
 alias doomup='~/.emacs.d/bin/doom upgrade'
 alias doomdoc='~/.emacs.d/bin/doom doctor'
 alias doomrec='~/.emacs.d/bin/doom build'
@@ -155,6 +159,9 @@ alias picom='picom --experimental-backend -b'
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown now'
 
+# Sync time
+alias synctime='sudo ntpd -qg && sudo hwclock -w'
+
 # Timeshift
 alias tsc='sudo timeshift --create'
 alias tsl='sudo timeshift --list'
@@ -167,3 +174,7 @@ alias vconf='vim ~/.vimrc'
 # yt-dlp
 alias yt='yt-dlp -x --audio-format flac --audio-quality 0'
 alias ytv='yt-dlp -f mp4'
+
+# xinput
+alias kbin='xinput reattach 20 3'
+alias kbout='xinput float 20'

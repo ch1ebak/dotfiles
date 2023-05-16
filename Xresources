@@ -17,6 +17,28 @@ Xft.lcdfilter: lcdfilter
 
 !!! Color schemes
 
+!! Catppuccin
+! Sxiv.background: #1E1E2E
+! Sxiv.foreground: #CDD6F4
+! *background: #1E1E2E
+! *foreground: #CDD6F4
+! *color0: #45475A
+! *color8: #585B70
+! *color1: #F38BA8
+! *color9: #F38BA8
+! *color2: #A6E3A1
+! *color10: #A6E3A1
+! *color3: #F9E2AF
+! *color11: #F9E2AF
+! *color4: #89B4FA
+! *color12: #89B4FA
+! *color5: #F5C2E7
+! *color13: #F5C2E7
+! *color6: #94E2D5
+! *color14: #94E2D5
+! *color7: #BAC2DE
+! *color15: #A6ADC8
+
 !! Dracula
 ! Sxiv.background: #282A36
 ! Sxiv.foreground: #E6E6E6
@@ -40,26 +62,26 @@ Xft.lcdfilter: lcdfilter
 ! *.color15:    #F8F8F2
 
 !! Grayscale
-Sxiv.background:   #000000
-Sxiv.foreground:   #e0e6f0
-*.background:   #000000
-*.foreground:   #e0e6f0
-*.color0:       #101010
-*.color8:       #525252
-*.color1:       #7c7c7c
-*.color9:       #7c7c7c
-*.color2:       #8e8e8e
-*.color10:      #8e8e8e
-*.color3:       #a0a0a0
-*.color11:      #a0a0a0
-*.color4:       #686868
-*.color12:      #686868
-*.color5:       #747474
-*.color13:      #747474
-*.color6:       #868686
-*.color14:      #868686
-*.color7:       #b9b9b9
-*.color15:      #f7f7f7
+! Sxiv.background:   #000000
+! Sxiv.foreground:   #e0e6f0
+! *.background:   #000000
+! *.foreground:   #e0e6f0
+! *.color0:       #101010
+! *.color8:       #525252
+! *.color1:       #7c7c7c
+! *.color9:       #7c7c7c
+! *.color2:       #8e8e8e
+! *.color10:      #8e8e8e
+! *.color3:       #a0a0a0
+! *.color11:      #a0a0a0
+! *.color4:       #686868
+! *.color12:      #686868
+! *.color5:       #747474
+! *.color13:      #747474
+! *.color6:       #868686
+! *.color14:      #868686
+! *.color7:       #b9b9b9
+! *.color15:      #f7f7f7
 
 !! Gruvbox
 ! Sxiv.background: #282828
@@ -104,3 +126,26 @@ Sxiv.foreground:   #e0e6f0
 ! *.color14: #8FBCBB
 ! *.color7: #E5E9F0
 ! *.color15: #ECEFF4
+
+!! Spacegray
+Sxiv.background: #20242d
+Sxiv.foreground: #b3b8c3
+*.background:  #20242d
+*.foreground:  #b3b8c3
+*.color0:      #000000
+*.color8:      #000000
+*.color1:      #b04b57
+*.color9:      #b04b57
+*.color2:      #87b379
+*.color10:     #87b379
+*.color3:      #e5c179
+*.color11:     #e5c179
+*.color4:      #7d8fa4
+*.color12:     #7d8fa4
+*.color5:      #a47996
+*.color13:     #a47996
+*.color6:      #85a7a5
+*.color14:     #85a7a5
+*.color7:      #b3b8c3
+*.color15:     #ffffff
+*.colorBD:     #b3b8c3

@@ -15,18 +15,22 @@ from libqtile.utils import guess_terminal
 from typing import List  # noqa: F401from typing import List  # noqa: F401
 from libqtile.widget import spacer
 
+# from colors.catppuccin import colors
 # from colors.dracula import colors
-from colors.grayscale import colors
+# from colors.grayscale import colors
 # from colors.gruvbox import colors
 # from colors.nord import colors
+from colors.spacegray import colors
 
 mod = "mod4"
-terminal = guess_terminal("kitty")
+terminal = guess_terminal("alacritty")
+# terminal = guess_terminal("kitty")
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 keys = [
      # Apps
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod, "shift"], "Return", lazy.spawn("kitty -e bash"), desc="Launch Kitty"),
 
     Key([mod], "w", lazy.spawn("firefox"), desc="Launch Firefox"),
     Key([mod, "shift"], "w", lazy.spawn("/usr/bin/firefox --private-window"), desc="Launch Firefox Private"),
@@ -45,7 +49,8 @@ keys = [
     Key([mod], "v", lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"), desc="Launch Vterm"),
     Key([mod, "shift"], "v", lazy.spawn("emacsclient -c -a 'emacs' --eval '(eshell)'"), desc='Launch Eshell'),
 
-    Key([mod], "m", lazy.spawn("kitty -e ncmpcpp"), desc="Launch ncmpcpp"),
+    Key([mod], "m", lazy.spawn("alacritty -e ncmpcpp"), desc="Launch ncmpcpp"),
+    Key([mod, "shift"], "m", lazy.spawn("alacritty -e castero"), desc="Launch castero"),
 
     # Power menu
     Key([mod], "p", lazy.spawn("slock"), desc="Launch lock screen"),
@@ -101,12 +106,13 @@ keys = [
 # Icons, 2 monitors
 groups = [
        Group("1", label="", layout='monadtall', matches=[Match(wm_class=["signal"])]),
-       Group("2", label="", layout='max', matches=[Match(wm_class=["tor"])]),
+       Group("2", label="", layout='max', matches=[Match(wm_class=["tor", "qutebrowser"])]),
        Group("3", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
-       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["kitty"])]),
+       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["Alacritty", "kitty"])]),
        Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm"])]),
-       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["transmission-gtk", "gimp", "calibre", "nitrogen"])]),
-       Group("7", label="", layout='monadtall', matches=[Match(wm_class=["Steam", "lutris"])]),
+       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["gimp", "calibre", "nitrogen", "nicotine+",
+                                                                          "qbittorrent", "motrix", "kcc"])]),
+       Group("7", label="", layout='monadtall', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
        Group("8", label="", layout='monadwide', matches=[Match(wm_class=["deadbeef"])]),
        Group("9", label="", layout='max', matches=[Match(wm_class=["mpv"])])
        ]
@@ -166,9 +172,9 @@ screens = [
                      highlight_color = colors[9],
                      highlight_method = "line",
                      this_current_screen_border = colors[15],
-                     this_screen_border = colors[7],
+                     this_screen_border = colors[15],
                      other_current_screen_border = colors[7],
-                     other_screen_border = colors[15],
+                     other_screen_border = colors[7],
                      foreground = colors[15],
                      background = colors[0]
                      ),
@@ -311,9 +317,9 @@ screens = [
                      highlight_color = colors[9],
                      highlight_method = "line",
                      this_current_screen_border = colors[15],
-                     this_screen_border = colors[7],
+                     this_screen_border = colors[15],
                      other_current_screen_border = colors[7],
-                     other_screen_border = colors[15],
+                     other_screen_border = colors[7],
                      foreground = colors[15],
                      background = colors[0]
                      ),
@@ -440,9 +446,9 @@ screens = [
                      highlight_color = colors[9],
                      highlight_method = "line",
                      this_current_screen_border = colors[15],
-                     this_screen_border = colors[7],
+                     this_screen_border = colors[15],
                      other_current_screen_border = colors[7],
-                     other_screen_border = colors[15],
+                     other_screen_border = colors[7],
                      foreground = colors[15],
                      background = colors[0]
                      ),
@@ -598,17 +604,13 @@ auto_minimize = True
 
 @hook.subscribe.startup_once
 def autostart():
-    qtile.cmd_spawn("xrandr --output eDP1 --off --output DP1 --mode 1280x1024 --pos 0x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off --output HDMI-1-0 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off")
+    qtile.cmd_spawn("xrandr --output eDP-1 --off --output DP-1 --mode 1280x1024 --pos 0x0 --rotate normal --output HDMI-1 --off --output HDMI-1-0 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off")
     qtile.cmd_spawn("nitrogen --restore &")
     qtile.cmd_spawn("picom --experimental-backend -b")
     qtile.cmd_spawn("/usr/bin/emacs --daemon &")
-    qtile.cmd_spawn("connman-gtk &")
     qtile.cmd_spawn("keepassxc &")
-    qtile.cmd_spawn("/usr/bin/pipewire &")
-    qtile.cmd_spawn("/usr/bin/pipewire-pulse &")
-    qtile.cmd_spawn("/usr/bin/pipewire-alsa &")
-    qtile.cmd_spawn("/usr/bin/pipewire-jack &")
-    qtile.cmd_spawn("/usr/bin/wireplumber &")
+    qtile.cmd_spawn("dunst &")
+    qtile.cmd_spawn("nm-applet &")
     for p in processes:
         subprocess.Popen(p)
 

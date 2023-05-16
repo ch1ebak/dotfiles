@@ -1,0 +1,29 @@
+* root :elfeed:
+** android :android:
+*** https://www.androidpolice.com/feed/
+** emacs :emacs:
+*** https://planet.emacslife.com/atom.xml
+*** http://pragmaticemacs.com/feed/
+*** https://sachachua.com/blog/category/emacs-news/feed
+*** https://protesilaos.com/codelog.xml
+*** https://blog.tecosaur.com/tmio/rss.xml
+** linux :linux:
+*** https://9to5linux.com/feed/atom
+*** https://www.cyberciti.biz/feed/
+*** http://www.linuxjournal.com/node/feed
+*** https://artixlinux.org/feed.php
+*** https://distrowatch.com/news/dw.xml
+*** http://feeds.feedburner.com/linuxpl-news
+*** https://www.linuxjournal.com/node/feed
+*** https://linuxman.co/feed/
+*** https://lwn.net/headlines/newrss
+*** https://omgubuntu.co.uk/feed
+*** https://sysdfree.wordpress.com/feed
+*** https://unixsheikh.com/feed.rss
+*** https://www.phoronix.com/rss.php
+** open source :opensource:
+*** https://fossforce.com/feed/
+*** https://static.fsf.org/fsforg/rss/news.xml
+*** https://www.eff.org/rss/updates.xml
+*** https://feeds.feedburner.com/ItsFoss
+*** https://opensource.com/rss.xml

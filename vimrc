@@ -3,7 +3,6 @@
 """""""""""""""""""""""""""""""""""
 
 
-
 """""""""""""""
 """ PLUGINS """
 
@@ -13,6 +12,7 @@ call plug#begin()
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
 Plug 'arcticicestudio/nord-vim', { 'as': 'nord' }
+Plug 'ignu/Spacegray.vim', { 'as': 'spacegray' }
 
 " lightline
 Plug 'itchyny/lightline.vim'
@@ -34,6 +34,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 Plug 'farmergreg/vim-lastplace'
 Plug 'tpope/vim-markdown'
+Plug 'mzlogin/vim-markdown-toc'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -55,14 +56,15 @@ call plug#end()
 
 "" available color schemes
 " dracula
-     " let g:dracula_colorterm = 0
-     " let g:dracula_italic = 0 
+     let g:dracula_colorterm = 0
+     let g:dracula_italic = 0 
 " gruvbox
 " nord
 
 syntax on 
 set background=dark
 colorscheme nord 
+set termguicolors
 
 "" Lightline
 let g:lightline = {
@@ -70,7 +72,6 @@ let g:lightline = {
 \ }
 set laststatus=2
 set noshowmode
-
 
 """"""""""""""""""""""""""
 """ PLUGINS - SETTINGS """
