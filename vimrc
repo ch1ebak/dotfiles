@@ -22,12 +22,15 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'farmergreg/vim-lastplace'
 Plug 'godlygeek/tabular'
+Plug 'itchyny/lightline.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'matze/vim-move'
 Plug 'mbbill/undotree'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'mhinz/vim-startify'
+Plug 'morhetz/gruvbox'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'nordtheme/vim', { 'as': 'nord' }
 Plug 'preservim/nerdtree'
@@ -43,6 +46,7 @@ Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
+
 """""""""""""""""""
 ""PLUGIN SETTINGS""
 """""""""""""""""""
@@ -54,6 +58,23 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
 let g:lastplace_ignore_buftype = "quickfix,nofile,help"    
 let g:lastplace_open_folds = 0                             
+
+"lightline
+let g:lightline = {
+      \ 'colorscheme': 'apprentice',
+      \ }
+let g:lightline.active = {
+    \ 'left': [ [ 'mode', 'paste' ],
+    \           [ 'readonly', 'filename', 'modified' ] ],
+    \ 'right': [ [ 'lineinfo' ],
+    \            [ 'percent' ] ] }
+let g:lightline.inactive = {
+    \ 'left': [ [ 'filename' ] ],
+    \ 'right': [ [ 'lineinfo' ],
+    \            [ 'percent' ] ] }
+let g:lightline.tabline = {
+    \ 'left': [ [ 'tabs' ] ],
+    \ 'right': [ [ 'close' ] ] }
 
 "markdown                                                    
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
@@ -93,52 +114,79 @@ let g:syntastic_check_on_wq = 0
 "table mode
 let g:table_mode_corner='|'
 
+"undotree
+if has("persistent_undo")
+    set undodir=~/.vim/custom/undodir
+    set undofile
+endif
+
 "vimwiki
 let g:vimwiki_list = [{'path': '~/Dokumenty/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
+
 """"""""""""
 ""SETTINGS""
 """"""""""""
-colorscheme dracula 
-let g:dracula_colorterm = 0
-set background=dark
+set nocompatible         
+
+"misc
+set autoread
+set confirm
+set hidden
+set wildmenu             
+
+"code
+set nofoldenable
+
+"GUI
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+
+"indentation
+set autoindent
 set expandtab
 set tabstop=2
-set softtabstop=2
-set ignorecase
+
+"search
+set hlsearch
 set smartcase
-set path+=**             
-set wildmenu             
-set incsearch            
-set hidden               
-set nobackup             
-set noswapfile           
+set ignorecase
+set incsearch
+
+"text
+set encoding=UTF-8
+set linebreak
+syntax enable
+set wrap
+
+"theme
+colorscheme gruvbox 
+" let g:dracula_colorterm = 0
+set background=dark
 set t_Co=256             
-set number               
-set clipboard=unnamedplus
 let g:rehash256 = 1      
-syntax on                
-set nocompatible         
-filetype plugin on       
-set encoding=UTF-8       
-set mouse=nicr           
 set notermguicolors
+
+"ui
+set laststatus=2
+set noshowmode
+set ruler
+set number relativenumber
+set mouse=a
+
 
 """""""""""""""
 ""KEYBINDINGS"" 
 """""""""""""""
 let g:mapleader = "\<Space>"
-nnoremap <leader>u :UndotreeToggle<CR>
+nmap <leader>hr :source .vimrc<Cr>
 
-"closing brackets
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
+"aspell
+nmap <leader>ap :!aspell --lang=pl -c %<Cr>
+nmap <leader>ae :!aspell --lang=en -c %<Cr>
 
 "fzf
 nmap <leader>sf :Files<Cr>
@@ -156,3 +204,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nmap <leader>v :vsplit
 nmap <leader>s :split
+
+"undotree
+nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <leader>uu :UndotreeFocus<CR>
