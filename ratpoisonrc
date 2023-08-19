@@ -6,8 +6,8 @@ set bargravity center
 set border 2
 set barborder 2
 set font "JetBrainsMono Nerd Font:size=10"
-set bgcolor #20242d
-set fgcolor #B3B8C3
+set bgcolor #0c0404
+set fgcolor #e00000
 set fwcolor #b04b57
 set bwcolor #4c4f56
 
@@ -15,7 +15,7 @@ set bwcolor #4c4f56
 escape Super_L
 
 # Apps
-bind s-Return exec alacritty
+bind s-Return exec alacritty 
 bind s-w exec firefox
 bind s-s exec rofi -show drun
 bind s-e exec emacsclient -c -a 'emacs'
@@ -64,10 +64,11 @@ bind C-8 exec rpws 8
 bind C-9 exec rpws 9
 
 ## Startup
+exec xrdb -load ~/.Xresources
 exec nitrogen --restore &
 exec xrandr --output eDP-1 --off --output DP-1 --mode 1280x1024 --pos 0x0 --rotate normal --output HDMI-1 --off --output HDMI-1-0 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off
-exec picom --experimental-backend -b
-exec /usr/bin/emacs --daemon &
+exec picom -b
+# exec /usr/bin/emacs --daemon &
 exec keepassxc &
 exec dunst &
-exec xrdb -load ~/.Xresources
+exec nm-applet &
