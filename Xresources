@@ -1,7 +1,8 @@
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!! https://github.com/ch1ebak/ !!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+!    _  __  ____   ______ _____  ____   __  __ ____   ______ ______ _____  !
+!   | |/ / / __ \ / ____// ___/ / __ \ / / / // __ \ / ____// ____// ___/  !
+!   |   / / /_/ // __/   \__ \ / / / // / / // /_/ // /    / __/   \__ \   !
+!  /   | / _, _// /___  ___/ // /_/ // /_/ // _, _// /___ / /___  ___/ /   !
+! /_/|_|/_/ |_|/_____/ /____/ \____/ \____//_/ |_| \____//_____/ /____/    !
 
 
 !!! Global
@@ -16,28 +17,27 @@ Xft.lcdfilter: lcdfilter
 
 
 !!! Color schemes
-
 !! Catppuccin
-! Sxiv.background: #1E1E2E
-! Sxiv.foreground: #CDD6F4
-! *background: #1E1E2E
-! *foreground: #CDD6F4
-! *color0: #45475A
-! *color8: #585B70
-! *color1: #F38BA8
-! *color9: #F38BA8
-! *color2: #A6E3A1
-! *color10: #A6E3A1
-! *color3: #F9E2AF
-! *color11: #F9E2AF
-! *color4: #89B4FA
-! *color12: #89B4FA
-! *color5: #F5C2E7
-! *color13: #F5C2E7
-! *color6: #94E2D5
-! *color14: #94E2D5
-! *color7: #BAC2DE
-! *color15: #A6ADC8
+! Sxiv.background: #24273A
+! Sxiv.foreground: #CAD3F5
+! *background: #24273A
+! *foreground: #CAD3F5
+! *color0: #494D64
+! *color8: #5B6078
+! *color1: #ED8796
+! *color9: #ED8796
+! *color2: #A6DA95
+! *color10: #A6DA95
+! *color3: #EED49F
+! *color11: #EED49F
+! *color4: #8AADF4
+! *color12: #8AADF4
+! *color5: #F5BDE6
+! *color13: #F5BDE6
+! *color6: #8BD5CA
+! *color14: #8BD5CA
+! *color7: #B8C0E0
+! *color15: #A5ADCB
 
 !! Dracula
 ! Sxiv.background: #282A36
@@ -62,10 +62,10 @@ Xft.lcdfilter: lcdfilter
 ! *.color15:    #F8F8F2
 
 !! Grayscale
-! Sxiv.background:   #000000
-! Sxiv.foreground:   #e0e6f0
-! *.background:   #000000
-! *.foreground:   #e0e6f0
+! Sxiv.background: #101010
+! Sxiv.foreground: #b9b9b9
+! *.background:   #101010
+! *.foreground:   #b9b9b9
 ! *.color0:       #101010
 ! *.color8:       #525252
 ! *.color1:       #7c7c7c
@@ -104,7 +104,7 @@ Xft.lcdfilter: lcdfilter
 ! *color14: #8ec07c
 ! *color7:  #a89984
 ! *color15: #ebdbb2
-
+ 
 !! Nord
 ! Sxiv.background: #2E3440
 ! Sxiv.foreground: #D8DEE9
@@ -148,4 +148,3 @@ Sxiv.foreground: #b3b8c3
 *.color14:     #85a7a5
 *.color7:      #b3b8c3
 *.color15:     #ffffff
-*.colorBD:     #b3b8c3
