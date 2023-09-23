@@ -1,30 +1,26 @@
-# 2023-05-16 now with catpuccin, grayscale, spacegray, and spacegray themed ratpoison.
-
+|----------------+------------------------------|
 | window manager | qtile / ratpoison            |
-| shell          | fish / bash                  |
-| terminal       | alacritty / kitty            |
-| text editor    | doom emacs / vim             |
+|----------------+------------------------------|
+| shell          | bash                         |
+|----------------+------------------------------|
+| terminal       | alacritty                    |
+|----------------+------------------------------|
+| text editor    | doom emacs                   |
+|----------------+------------------------------|
 | launcher       | [[https://github.com/newmanls/rofi-themes-collection][rofi]]                         |
+|----------------+------------------------------|
 | notifications  | dunst                        |
-| browser        | [[https://github.com/andreasgrafen/cascade][firefox]] + [[https://github.com/gbprod/vimium-nord-theme][vimium]] + [[https://github.com/ch1ebak/ch1ebak.github.io][startpage]] |
+|----------------+------------------------------|
+| browser        | [[https://github.com/andreasgrafen/cascade][firefox]] + [[https://github.com/gbprod/vimium-nord-theme][vimium]] + [[https://github.com/ch1ebak/orgmode-startpage][startpage]] |
+|----------------+------------------------------|
 | themes         | - dracula                    |
 |                | - gruvbox                    |
 |                | - nord                       |
 |                | - catpuccin                  |
 |                | - grayscale                  |
 |                | - spacegray                  |
+|----------------+------------------------------|
 
-#+NAME: dracula
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/dracula.png]]
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/spacegray3.png]]
 
-#+NAME: gruvbox
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/gruvbox.png]]
-
-#+NAME: nord
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/nord.png]]
-
-#+NAME: grayscale
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/grayscale.png]]
-
-#+NAME: spacegray
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/spacegray.png]]
+old screenshots [[https://github.com/ch1ebak/dotfiles/tree/main/screenshots][>>>]]
