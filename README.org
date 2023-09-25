@@ -7,7 +7,7 @@
 |----------------+------------------------------|
 | terminal       | alacritty                    |
 |----------------+------------------------------|
-| text editor    | doom emacs                   |
+| text editor    | doom emacs / neovim          |
 |----------------+------------------------------|
 | launcher       | [[https://github.com/newmanls/rofi-themes-collection][rofi]]                         |
 |----------------+------------------------------|
