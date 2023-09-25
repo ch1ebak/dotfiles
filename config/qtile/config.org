@@ -88,6 +88,7 @@ keys = [
 
     # App control
     Key([mod], "q", lazy.window.kill()),
+    Key([mod, "shift"], "q", lazy.spawn("xkill")),
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
 
@@ -404,7 +405,8 @@ bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
     *layout.Floating.default_float_rules,
-    Match(wm_class='notification')],
+    Match(wm_class='notification'),
+    Match(wm_class='copyq')],
     border_width = 2,
     border_focus = colors[14],
     border_normal = colors[2]
