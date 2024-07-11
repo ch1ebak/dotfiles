@@ -1,7 +1,0 @@
-# name: gruvbox
-
-fish_color_normal '#ebdbb2'
-fish_color_autosuggestion '#83a598'
-fish_color_command '#98971a'
-fish_color_error '#cc241d'
-fish_color_param '#d3869b'

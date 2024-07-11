@@ -1,7 +1,0 @@
-# name: nord
-
-fish_color_normal '#eceff4'
-fish_color_autosuggestion '#4c566a'
-fish_color_command '#eceff4'
-fish_color_error '#bf616a'
-fish_color_param '#eceff4'
