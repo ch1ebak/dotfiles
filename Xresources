@@ -1,0 +1,84 @@
+!    _  __  ____   ______ _____  ____   __  __ ____   ______ ______ _____  !
+!   | |/ / / __ \ / ____// ___/ / __ \ / / / // __ \ / ____// ____// ___/  !
+!   |   / / /_/ // __/   \__ \ / / / // / / // /_/ // /    / __/   \__ \   !
+!  /   | / _, _// /___  ___/ // /_/ // /_/ // _, _// /___ / /___  ___/ /   !
+! /_/|_|/_/ |_|/_____/ /____/ \____/ \____//_/ |_| \____//_____/ /____/    !
+
+
+!!! Global
+Xcursor.theme: Future-dark
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcdfilter
+
+
+!!! Color schemes
+!! Dracula
+! Sxiv.background: #282A36
+! Sxiv.foreground: #E6E6E6
+! *.background: #282A36
+! *.foreground: #E6E6E6
+! *.color0:     #000000
+! *.color8:     #4D4D4D
+! *.color1:     #FF5555
+! *.color9:     #FF6E67
+! *.color2:     #50FA7B
+! *.color10:    #5AF78E
+! *.color3:     #F1FA8C
+! *.color11:    #F4F99D
+! *.color4:     #BD93F9
+! *.color12:    #CAA9FA
+! *.color5:     #FF79C6
+! *.color13:    #FF92D0
+! *.color6:     #8BE9FD
+! *.color14:    #9AEDFE
+! *.color7:     #BFBFBF
+! *.color15:    #F8F8F2
+
+!! Grayscale
+! Sxiv.background: #101010
+! Sxiv.foreground: #b9b9b9
+! *.background:   #101010
+! *.foreground:   #b9b9b9
+! *.color0:       #101010
+! *.color8:       #525252
+! *.color1:       #7c7c7c
+! *.color9:       #7c7c7c
+! *.color2:       #8e8e8e
+! *.color10:      #8e8e8e
+! *.color3:       #a0a0a0
+! *.color11:      #a0a0a0
+! *.color4:       #686868
+! *.color12:      #686868
+! *.color5:       #747474
+! *.color13:      #747474
+! *.color6:       #868686
+! *.color14:      #868686
+! *.color7:       #b9b9b9
+! *.color15:      #f7f7f7
+
+!! Spacegray
+Sxiv.background: #20242d
+Sxiv.foreground: #b3b8c3
+*.background:  #20242d
+*.foreground:  #b3b8c3
+*.color0:      #000000
+*.color8:      #000000
+*.color1:      #b04b57
+*.color9:      #b04b57
+*.color2:      #87b379
+*.color10:     #87b379
+*.color3:      #e5c179
+*.color11:     #e5c179
+*.color4:      #7d8fa4
+*.color12:     #7d8fa4
+*.color5:      #a47996
+*.color13:     #a47996
+*.color6:      #85a7a5
+*.color14:     #85a7a5
+*.color7:      #b3b8c3
+*.color15:     #ffffff
