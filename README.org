@@ -1,5 +1,4 @@
-|----------------+------------------------------|
-| stuff i use    |                              |
+* STUFF I USE
 |----------------+------------------------------|
 | window manager | qtile / ratpoison            |
 |----------------+------------------------------|
@@ -7,7 +6,7 @@
 |----------------+------------------------------|
 | terminal       | alacritty                    |
 |----------------+------------------------------|
-| text editor    | doom emacs / neovim          |
+| text editor    | emacs                        |
 |----------------+------------------------------|
 | launcher       | [[https://github.com/newmanls/rofi-themes-collection][rofi]]                         |
 |----------------+------------------------------|
@@ -15,14 +14,13 @@
 |----------------+------------------------------|
 | browser        | [[https://github.com/andreasgrafen/cascade][firefox]] + [[https://github.com/gbprod/vimium-nord-theme][vimium]] + [[https://github.com/ch1ebak/orgmode-startpage][startpage]] |
 |----------------+------------------------------|
-| themes         | - dracula                    |
-|                | - gruvbox                    |
-|                | - nord                       |
-|                | - catpuccin                  |
-|                | - grayscale                  |
-|                | - spacegray                  |
+| theme          | spacegray                    |
 |----------------+------------------------------|
 
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/spacegray3.png]]
+* SCREENSHOTS
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/spacegray4.png]]
 
 old screenshots [[https://github.com/ch1ebak/dotfiles/tree/main/screenshots][>>>]]
+
+* 2024-07-15 
+deleted the doom emacs config because i switched to vanilla emacs.
