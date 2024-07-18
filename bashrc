@@ -37,9 +37,10 @@ HISTTIMEFORMAT="%F %T "
 
 ## Prompt
 PS1="\[\033[31m\]\w >\e[0m "
+# eval "$(starship init bash)"
 
 ## Fetch
-neofetch
+# neofetch
 
 
 # ALIASES
@@ -54,7 +55,6 @@ alias pkgcount="pacman -Q | wc -l"
 alias yi="paru -S"
 alias yr="paru -Rns"
 alias yup="paru -Sua"
-alias update="paru -Syu"
 
 ## Commands
 alias ..="cd .."
@@ -66,41 +66,22 @@ alias ls="ls -lA --color=always --group-directories-first"
 alias mkdir="mkdir -pv"
 alias mv="mv -i"
 alias rm="trash -vi"
-
-## Bpytop
+                                                               
+# Backlight
 alias bt="bpytop"
-
+alias gc="git clone"
+alias merge="xrdb -merge ~/.Xresources"
+alias nfnc="neofetch --config none"
+alias nvt="nvtop"
+alias picom="picom -b"
+alias synctime="sudo ntpd -qg && sudo hwclock -w"
+alias xbl="xbacklight -set "
+                                                               
 ## Emacs
 alias em="/usr/bin/emacs -nw"
 alias emacsd="/usr/bin/emacs --daemon &"
 alias kemacs="killall emacs"
-alias dooms="~/.config/emacs/bin/doom sync"
-
-## Git
-alias gc="git clone"
-alias dots="git clone https://github.com/ch1ebak/dotfiles"
-
-## grub
-alias grubreload="sudo grub-mkconfig -o /boot/grub/grub.cfg"
-
-## Merge Xresources
-alias merge="xrdb -merge ~/.Xresources"
-
-## Neofetch
-alias nf="neofetch"
-alias nfnc="neofetch --config none"
-
-## Picom
-# alias picom="picom --experimental-backend -b"
-alias picom="picom -b"
-
+                                                               
 ## Reboot
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
-
-## Sync time
-alias synctime="sudo ntpd -qg && sudo hwclock -w"
-
-## xinput
-alias kbin="xinput reattach 20 3"
-alias kbout="xinput float 20"

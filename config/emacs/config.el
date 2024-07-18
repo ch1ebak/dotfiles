@@ -152,6 +152,7 @@
 
   (me/leader-keys
     "A" '(org-agenda :wk "Org Agenda")
+    "a a" '((lambda () (interactive) (find-file "~/Dokumenty/notatki/agenda/agenda-agenda.org")) :wk "Notes index")
     "X" '(org-capture :wk "Org Capture"))
 
   (me/leader-keys
@@ -164,15 +165,16 @@
   (general-nmap
     :keymaps 'org-mode-map
     "m a" 'org-insert-link
-    "m A" 'link-hint-copy-link
+    "m A" 'link-hint-copy-link-at-point
     "m t" 'org-todo
     "m d" 'org-deadline
     "m s" 'org-schedule
     "m r" 'org-refile
+    "m p" 'org-priority
     "m H" 'org-metaleft
     "m L" 'org-metaright
-    "m J" 'org-down
-    "m K" 'org-up
+    "m J" 'org-metadown
+    "m K" 'org-metaup
     "M" 'org-sidebar-tree-toggle)
   
   (general-nmap
@@ -181,9 +183,10 @@
     "l" 'dired-open-file)
   
   (general-nmap
-    :keymaps 'elfeed-mode-map
+    :keymaps 'elfeed-search-mode-map
     "W" 'elfeed-search-browse-url
     "M" 'elfeed-mark-all-as-read
+    "P" 'pocket-reader-elfeed-search-add-link
     "O" 'elfeed-update)
 )
 
@@ -202,6 +205,8 @@
 
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
+
+(add-hook 'dired-mode-hook 'auto-revert-mode)
 
 (use-package all-the-icons-dired
   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
@@ -227,7 +232,7 @@
 
 (use-package elfeed
   :config
-  (setq elfeed-search-feed-face ":foreground #ffffff :weight bold")
+  (setq elfeed-search-feed-face ":foreground #b3b8c3 :weight bold")
   (setq elfeed-db-directory "~/.config/emacs/files/elfeed/database"))
 
 (defun elfeed-mark-all-as-read ()
@@ -271,8 +276,10 @@
  browse-url-browser-function 'eww-browse-url
  shr-use-fonts  nil
  ;; shr-use-colors nil
- shr-indentation 2
- shr-width 70
+ ;; shr-indentation 2
+ ;; shr-width 70
+ shr-indentation 70 
+ shr-width 170
  eww-auto-rename-buffer 1
  eww-download-directory "~/Pobrane"
  eww-search-prefix "https://frogfind.com/?q="
@@ -299,12 +306,23 @@
   :config
   (setq hl-todo-highlight-punctuation ":"
         hl-todo-keyword-faces
-        `(("TODO"       warning bold)
-          ("FIXME"      error bold)
-          ("HACK"       font-lock-constant-face bold)
-          ("REVIEW"     font-lock-keyword-face bold)
-          ("NOTE"       success bold)
-          ("DEPRECATED" font-lock-doc-face bold))))
+        `(("TODO"      error bold)
+	      ("WAIT"      warning bold)
+          ("FIXME"     font-lock-constant-face bold)
+          ("CANCELED"  font-lock-keyword-face bold)
+          ("DONE"      success bold))))
+
+(defun insert-todays-date (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%d-%m-%Y")
+          (format-time-string "%Y-%m-%d"))))
+
+(defun insert-current-time (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%R")
+          (format-time-string "%H:%M"))))
 
 (use-package counsel
   :after ivy
@@ -360,10 +378,15 @@
                                'ivy-rich-switch-buffer-transformer))
 
 (setq org-ellipsis " ▾")
-
-(setq org-agenda-start-with-log-mode t)
+(setq org-src-preserve-indentation t)
+(setq calendar-week-start-day 1)
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
+
+(setq org-todo-keywords
+  '((sequence "TODO(t)" "WAIT(w)" "FIXME(f)" "|" "CANCELED(c)" "DONE(d)")))
+
+(setq org-agenda-start-with-log-mode t)
 
 ;; (setq org-agenda-files '("~/Dokumenty/notatki/agenda/"))
 (setq org-agenda-files
@@ -371,28 +394,49 @@
     "~/Dokumenty/notatki/agenda/agenda-habits.org"
     "~/Dokumenty/notatki/agenda/agenda-important.org"))
 
+(setq org-agenda-span 10
+      org-agenda-start-on-weekday nil
+      org-agenda-start-day "-2d")
 
-(setq org-todo-keywords
-  '((sequence "TODO(t)" "WAIT(w)" "|" "CANCELED(c)" "DONE(d)")))
-
-(setq org-src-preserve-indentation t)
-
-(setq calendar-week-start-day 1)
+(setq org-agenda-prefix-format
+      (quote
+       ((agenda . "%-20c%?-12t% s")
+        (timeline . "% s")
+        (todo . "%-12c")
+        (tags . "%-12c")
+        (search . "%-12c"))))
+(setq org-agenda-deadline-leaders (quote (":" "D%2d: " "")))
+(setq org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
 
 (add-hook 'org-mode-hook 'org-indent-mode)
-(use-package org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/Dokumenty/notatki/agenda/agenda-agenda.org" "TODOs")
+      '(("t" "Todo" entry (file+headline "~/Dokumenty/notatki/agenda/agenda-agenda.org" "ZADANIA")
          "* TODO %?\n  %i\n  %a")))
 
 (require 'org-habit)
 (add-to-list 'org-modules 'org-habit)
 (setq org-habit-graph-column 60)
 
+(use-package org-fancy-priorities
+  :ensure t
+  :hook
+  (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq
+     org-fancy-priorities-list '(" " " " "!")
+     org-priority-faces
+     '((?A :foreground "#b04b57")
+       (?B :foreground "#e5c179")
+       (?C :foreground "#87b379"))))
+
 (setq org-refile-targets
-  '(("archive.org" :maxlevel . 1)))
+  '(("archive.org" :maxlevel . 1)
+    ("agenda-agenda.org" :maxlevel . 1)))
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
 (use-package org-sidebar)
@@ -402,9 +446,9 @@
 (use-package ox-epub)
 
 (use-package pocket-reader)
-;; (setq pocket-reader-open-url-default-function #'eww)
-;; (setq pocket-reader-pop-to-url-default-function #'eww)
-;; (add-hook 'pocket-reader-mode (lambda () (display-line-numbers-mode 0)))
+(setq pocket-reader-open-url-default-function #'eww)
+(setq pocket-reader-pop-to-url-default-function #'eww)
+(add-hook 'pocket-reader-mode (lambda () (display-line-numbers-mode 0)))
 
 (use-package rainbow-delimiters
   :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
@@ -444,28 +488,29 @@
 	  which-key-allow-imprecise-window-fit nil
 	  which-key-separator " → " ))
 
-(delete-selection-mode 1)    ;; You can select text and delete it by typing.
-(electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
-(electric-pair-mode 1)       ;; Turns on automatic parens pairing
-;; The following prevents <> from auto-pairing when electric-pair-mode is on.
-;; Otherwise, org-tempo is broken when you try to <s TAB...
+(delete-selection-mode 1)
+(electric-indent-mode -1)
+(electric-pair-mode 1)
 (add-hook 'org-mode-hook (lambda ()
            (setq-local electric-pair-inhibit-predicate
                    `(lambda (c)
                   (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
-(global-auto-revert-mode t)  ;; Automatically show changes if the file has changed
-(global-display-line-numbers-mode 1) ;; Display line numbers
-(global-visual-line-mode t)  ;; Enable truncated lines
-(menu-bar-mode -1)           ;; Disable the menu bar 
-(scroll-bar-mode -1)         ;; Disable the scroll bar
-(tool-bar-mode -1)           ;; Disable the tool bar
-(setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
-(setq use-file-dialog nil)   ;; No file dialog
-(setq use-dialog-box nil)    ;; No dialog box
-(setq pop-up-windows nil)    ;; No popup windows
+(global-auto-revert-mode t)
+(global-visual-line-mode t)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(setq org-edit-src-content-indentation 0)
+(setq use-file-dialog nil)
+(setq use-dialog-box nil)
+(setq pop-up-windows nil)
 (setq inhibit-startup-screen nil)
 
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers 'relative)
+
 (setq conf-unix-mode t)
+(add-to-list 'auto-mode-alist '("\\.*rc$" . conf-unix-mode))
 (setq shell-file-name "/usr/bin/bash")
 
 (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
@@ -485,21 +530,21 @@
 
 (set-face-attribute 'default nil
   :font "JetBrainsMono NF"
-  :height 100
+  :height 90
   :weight 'medium)
 (set-face-attribute 'variable-pitch nil
-  :font "Atkinson Hyperlegible"
-  :height 100
+  :font "Cantarell"
+  :height 90
   :weight 'medium)
 (set-face-attribute 'fixed-pitch nil
   :font "JetBrainsMono NF"
-  :height 100
+  :height 90
   :weight 'medium)
 (set-face-attribute 'font-lock-comment-face nil
   :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil
   :slant 'italic)
-(add-to-list 'default-frame-alist '(font . "JetBrainsMono NF-10"))
+(add-to-list 'default-frame-alist '(font . "JetBrainsMono NF-9"))
 
 (use-package doom-modeline
   :ensure t

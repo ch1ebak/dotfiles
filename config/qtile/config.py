@@ -1,9 +1,10 @@
-#    ____  ______ ____ __     ______   ______ ____   _   __ ______ ____ ______ #
-#   / __ \/_  __//  _// /    / ____/  / ____// __ \ / | / // ____//  _// ____/ #
-#  / / / / / /   / / / /    / __/    / /    / / / //  |/ // /_    / / / / __   #
-# / /_/ / / /  _/ / / /___ / /___   / /___ / /_/ // /|  // __/  _/ / / /_/ /   #
-# \___\_\/_/  /___//_____//_____/   \____/ \____//_/ |_//_/    /___/ \____/    #
+#    ____  ______ ____ __     ______ #
+#   / __ \/_  __//  _// /    / ____/ #
+#  / / / / / /   / / / /    / __/    #
+# / /_/ / / /  _/ / / /___ / /___    #
+# \___\_\/_/  /___//_____//_____/    #
 
+# IMPORTS
 import os
 import subprocess
 import re
@@ -14,8 +15,10 @@ from libqtile.lazy import lazy
 from libqtile.widget import spacer
 from typing import List
 
+## Color scheme
 from colors.spacegray import colors
 
+# KEYBINDINGS
 mod = "mod4"
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
@@ -81,18 +84,20 @@ keys = [
     Key([mod], "Space", lazy.window.toggle_fullscreen())
 ]
 
+# GROUPS
 groups = [
        Group("1", label="", layout='monadtall'),
        Group("2", label="", layout='monadtall'),
        Group("3", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
        Group("4", label="", layout='monadtall', matches=[Match(wm_class=["alacritty", "Alacritty"])]),
        Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm"])]),
-       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "nitrogen", "qbittorrent", "openrgb", "kcc", "lxappearance-gtk3"])]),
+       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "kcc", "qbittorrent", "nitrogen", "openrgb", "lxappearance"])]),
        Group("7", label="", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
        Group("8", label="", layout='max', matches=[Match(wm_class=["spotify"])]),
        Group("9", label="", layout='max', matches=[Match(wm_class=["mpv"])])
        ]
 
+## Move windows between groups
 for i in groups:
     keys.extend(
         [
@@ -111,6 +116,7 @@ for i in groups:
         ]
     )
 
+# LAYOUTS
 layout_theme = {"border_width": 2,
                 "margin": 6,
                 "border_focus": colors[5],
@@ -123,6 +129,7 @@ layouts = [
     layout.MonadTall(**layout_theme),
 ]
 
+# WIDGETS
 widget_defaults = dict(
     font='JetBrainsMono NF Bold Italic',
     fontsize=10,
@@ -131,6 +138,7 @@ widget_defaults = dict(
     background = colors[0]
     )
 
+# SCREENS
 screens = [
  Screen(
          top=bar.Bar(
@@ -226,7 +234,8 @@ screens = [
                      not_charging_char = "",
                      unknown_char_char = "?",
                      low_percentage = 0.2,
-                     low_foreground = colors[6]
+                     low_foreground = colors[6],
+                     notify_below = 0.2
                      ),
              widget.TextBox(
                      text = "",
@@ -401,6 +410,7 @@ screens = [
              ), ),
 ]
 
+# SETTINGS
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
 follow_mouse_focus = False
@@ -419,15 +429,16 @@ focus_on_window_activation = "smart"
 reconfigure_screens = True
 auto_minimize = True
 
+# AUTOSTART
 @hook.subscribe.startup_once
 def start_once():
     qtile.cmd_spawn("xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --rate 144 --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --rate 144")
-    qtile.cmd_spawn("picom -b")
-    # qtile.cmd_spawn("keepassxc &")
-    qtile.cmd_spawn("dunst &")
+    qtile.cmd_spawn("/usr/bin/emacs --daemon &")
     qtile.cmd_spawn("nm-applet &")
     qtile.cmd_spawn("nitrogen --restore &")
-    qtile.cmd_spawn("/usr/bin/emacs --daemon &")
+    qtile.cmd_spawn("picom -b")
+    qtile.cmd_spawn("dunst &")
+    qtile.cmd_spawn("batsignal -w 20 -c 15 -d 5 -p -f 90 -b")
     for p in processes:
         subprocess.Popen(p)
 

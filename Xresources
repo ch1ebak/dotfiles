@@ -6,7 +6,7 @@
 
 
 !!! Global
-Xcursor.theme: Future-dark
+Xcursor.theme: Future
 Xft.dpi: 96
 Xft.antialias: true
 Xft.hinting: true

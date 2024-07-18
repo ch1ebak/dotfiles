@@ -1,22 +1,29 @@
-" filetype detection and syntax highlighting
+" _    __ ____ __  ___  "
+" | |  / //  _//  |/  / "
+" | | / / / / / /|_/ /  "
+" | |/ /_/ / / /  / /   "
+" |___//___//_/  /_/    "
+
+set nocompatible
+filetype off
 filetype plugin indent on
 syntax on
-
-" it's there so let's activate it
-runtime macros/matchit.vim
-
-" various settings
-set autoindent
-set backspace=indent,eol,start
-set hidden
-set incsearch
-set path=.,**
+set shiftwidth=4
+set number
 set ruler
-set shiftround
-set smarttab
+set visualbell
+set encoding=utf-8
+set modelines=0
+set wrap
+set autoindent
+set smartindent
+set tabstop=2 shiftwidth=2 expandtab
 set wildmenu
-
-" various adjustments of the default colorscheme
-hi ModeMsg      ctermbg=green     ctermfg=black cterm=NONE
-hi StatusLineNC ctermbg=darkgrey                cterm=bold
-hi Visual       ctermbg=lightcyan ctermfg=black cterm=bold
+set wildmode=list:longest
+set hidden
+set ttyfast
+set laststatus=2
+set showmode
+set showcmd
+set number relativenumber
+set nu rnu

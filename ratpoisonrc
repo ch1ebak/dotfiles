@@ -44,10 +44,10 @@ bind s-P exec rofi -m 1 -show power-menu -modi power-menu:~/.config/rofi/modules
 bind q delete
 
 ## Window manipulation
-bind x hsplit
-bind X split
+bind c hsplit
+bind C split
 bind z prevscreen
-bind c nextscreen
+bind x nextscreen
 bind h focusleft
 bind l focusright
 bind j next
@@ -72,10 +72,9 @@ bind C-9 exec rpws 9
 
 # AUTOSTART
 exec xrdb -load ~/.Xresources
-exec nitrogen --restore &
 exec xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --rate 144 --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --rate 144
-exec picom -b
 exec /usr/bin/emacs --daemon &
-exec keepassxc &
+exec nitrogen --restore &
+exec picom -b
 exec dunst &
-exec nm-applet &
+exec batsignal -w 20 -c 15 -d 5 -p -f 90 -b

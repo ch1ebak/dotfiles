@@ -84,55 +84,35 @@ alias pkgcount="pacman -Q | wc -l"
 alias yi="paru -S"
 alias yr="paru -Rns"
 alias yup="paru -Sua"
-alias update="paru -Syu"
 
 ## Commands
 alias ..="cd .."
 alias cp="cp -i"
-alias df="df -hl --exclude-type=tmpfs --exclude-type=devtmpfs"
+#alias df="df -hl --exclude-type=tmpfs --exclude-type=devtmpfs"
+alias df="duf --only local"
 alias fd="fd --hidden --ignore-case"
 alias grep="rg"
-alias ls="ls -lA --color=always --group-directories-first"
+#alias ls="ls -lA --color=always --group-directories-first"
+alias ls="eza -lA --color=always --group-directories-first"
 alias mkdir="mkdir -pv"
 alias mv="mv -i"
 alias rm="trash -vi"
 
 # Backlight
-alias xbl="xbacklight -set "
-
-## Bpytop
 alias bt="bpytop"
+alias gc="git clone"
+alias merge="xrdb -merge ~/.Xresources"
+alias nfnc="neofetch --config none"
+alias nvt="nvtop"
+alias picom="picom -b"
+alias synctime="sudo ntpd -qg && sudo hwclock -w"
+alias xbl="xbacklight -set "
 
 ## Emacs
 alias em="/usr/bin/emacs -nw"
 alias emacsd="/usr/bin/emacs --daemon &"
 alias kemacs="killall emacs"
 
-## Git
-alias gc="git clone"
-alias dots="git clone https://github.com/ch1ebak/dotfiles"
-
-## grub
-alias grubreload="sudo grub-mkconfig -o /boot/grub/grub.cfg"
-
-## Merge Xresources
-alias merge="xrdb -merge ~/.Xresources"
-
-## Neofetch
-alias nf="neofetch"
-alias nfnc="neofetch --config none"
-
-## Picom
-# alias picom="picom --experimental-backend -b"
-alias picom="picom -b"
-
 ## Reboot
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
-
-## Sync time
-alias synctime="sudo ntpd -qg && sudo hwclock -w"
-
-## xinput
-alias kbin="xinput reattach 20 3"
-alias kbout="xinput float 20"
