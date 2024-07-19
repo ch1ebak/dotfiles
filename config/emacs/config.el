@@ -132,8 +132,13 @@
     "f U" '(sudo-edit :wk "Sudo edit file"))
 
   (me/leader-keys
-    "h t" '(counsel-load-theme :wk "Change theme")
-    "h U" '(elpaca-update-all :wk "Update packages")
+    "h c t" '(counsel-load-theme :wk "Change theme")
+    "h c g" '(customize-group :wk "Customize group")
+    "h d f" '(describe-function :wk "Describe function")
+    "h d v" '(describe-variable :wk "Describe variable")
+    "h e m" '(elpaca-manager :wk "Elpaca manager")
+    "h e u" '(elpaca-update-all :wk "Elpaca: update packages")
+    "h e d" '(elpaca-delete :wk "Elpaca: delete package")
     "h r r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el") (ignore (elpaca-process-queues))) :wk "Reload emacs config"))
 
   (me/leader-keys
@@ -160,7 +165,8 @@
     "n n" '((lambda () (interactive) (counsel-find-file "~/Dokumenty/notatki/")) :wk "Notes folder")
     "E" '(elfeed :wk "Elfeed")
     "P" '(pocket-reader :wk "Pocket")
-    "W" '(eww :wk "EWW"))
+    "W" '(eww :wk "EWW")
+    "w w" '(eww-list-bookmarks :wk "EWW Bookmarks"))
 
   (general-nmap
     :keymaps 'org-mode-map
@@ -219,17 +225,6 @@
                                 ("mkv" . "mpv")
                                 ("mp4" . "mpv"))))
 
-(use-package dired-preview
-  :config
-  (setq dired-preview-delay 0.7)
-  (setq dired-preview-max-size (expt 2 20))
-  (setq dired-preview-ignored-extensions-regexp
-        (concat "\\."
-                "\\(mkv\\|webm\\|mp4\\|mp3\\|ogg\\|m4a"
-                "\\|gz\\|zst\\|tar\\|xz\\|rar\\|zip"
-                "\\|iso\\|epub\\|pdf\\)"))
-  (dired-preview-global-mode 1))
-
 (use-package elfeed
   :config
   (setq elfeed-search-feed-face ":foreground #b3b8c3 :weight bold")
@@ -282,6 +277,7 @@
  shr-width 170
  eww-auto-rename-buffer 1
  eww-download-directory "~/Pobrane"
+ eww-bookmarks-directory "~/.config/emacs/files/"
  eww-search-prefix "https://frogfind.com/?q="
  browse-url-secondary-browser-function 'browse-url-firefox)
 
@@ -293,12 +289,6 @@
     (switch-to-buffer (generate-new-buffer "eww"))
     (eww-mode)
     (eww url)))
-
-(use-package flycheck
-  :ensure t
-  :defer t
-  :diminish
-  :init (global-flycheck-mode))
 
 (use-package hl-todo
   :hook ((org-mode . hl-todo-mode)
@@ -435,8 +425,8 @@
        (?C :foreground "#87b379"))))
 
 (setq org-refile-targets
-  '(("archive.org" :maxlevel . 1)
-    ("agenda-agenda.org" :maxlevel . 1)))
+  '(("archive.org" :maxlevel . 1)))
+    ;; ("agenda-agenda.org" :maxlevel . 1)
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
 (use-package org-sidebar)
@@ -521,7 +511,8 @@
 
 (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
 (setq user-emacs-directory "~/.config/emacs")
-;; (setq bookmark-default-file "~/.config/emacs/files/bookmarks")
+(setq bookmark-default-file "~/.config/emacs/files/bookmarks")
+(setq recentf-save-file "~/.config/emacs/files/recentf")
 (setq auth-sources '("~/Dokumenty/tajne/.authinfo.gpg"))
 
 (recentf-mode 1)
@@ -552,8 +543,7 @@
   :config
   (setq doom-modeline-height 30
         doom-modeline-bar-width 5
-        doom-modeline-persp-name t
-        doom-modeline-persp-icon t))
+        doom-modeline-buffer-file-name-style 'truncate-all))
 
 (use-package doom-themes
   :config
