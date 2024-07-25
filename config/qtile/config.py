@@ -86,12 +86,12 @@ keys = [
 
 # GROUPS
 groups = [
-       Group("1", label="", layout='monadtall'),
+       Group("1", label="", layout='monadtall', matches=[Match(wm_class=["ferdium"])]),
        Group("2", label="", layout='monadtall'),
        Group("3", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
        Group("4", label="", layout='monadtall', matches=[Match(wm_class=["alacritty", "Alacritty"])]),
        Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm"])]),
-       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "kcc", "qbittorrent", "nitrogen", "openrgb", "lxappearance"])]),
+       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "kcc", "qbittorrent", "nitrogen", "openrgb", "lxappearance", "VirtualBox Manager"])]),
        Group("7", label="", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
        Group("8", label="", layout='max', matches=[Match(wm_class=["spotify"])]),
        Group("9", label="", layout='max', matches=[Match(wm_class=["mpv"])])
@@ -439,6 +439,7 @@ def start_once():
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
     qtile.cmd_spawn("batsignal -w 20 -c 15 -d 5 -p -f 90 -b")
+    qtile.cmd_spawn("xbacklight -set 60")
     for p in processes:
         subprocess.Popen(p)
 
