@@ -93,12 +93,11 @@
   :config
   (general-evil-setup)
 
-  ;; set up 'SPC' as the global leader key
   (general-create-definer me/leader-keys
     :states '(normal insert visual emacs)
     :keymaps 'override
-    :prefix "SPC" ;; set leader
-    :global-prefix "M-SPC") ;; access leader in insert mode
+    :prefix "SPC"
+    :global-prefix "M-SPC")
 
   (me/leader-keys
     "SPC" '(counsel-M-x :wk "M-x")
@@ -143,6 +142,7 @@
 
   (me/leader-keys
     "TAB q" '(evil-window-delete :wk "Close window")
+    "TAB x" '(kill-other-buffers :wk "Kill other buffers")
     "TAB RET" '(evil-window-vnew :wk "New window")
     "TAB h" '(evil-window-left :wk "Window left")
     "TAB j" '(evil-window-down :wk "Window down")
@@ -156,13 +156,9 @@
     "TAB L" '(next-buffer :wk "Buffer next"))
 
   (me/leader-keys
+    "X" '(org-capture :wk "Org Capture")
     "A" '(org-agenda :wk "Org Agenda")
-    "a a" '((lambda () (interactive) (find-file "~/Dokumenty/notatki/agenda/agenda-agenda.org")) :wk "Notes index")
-    "X" '(org-capture :wk "Org Capture"))
-
-  (me/leader-keys
     "N" '((lambda () (interactive) (find-file "~/Dokumenty/notatki/index-index.org")) :wk "Notes index")
-    "n n" '((lambda () (interactive) (counsel-find-file "~/Dokumenty/notatki/")) :wk "Notes folder")
     "E" '(elfeed :wk "Elfeed")
     "P" '(pocket-reader :wk "Pocket")
     "W" '(eww :wk "EWW")
@@ -367,6 +363,11 @@
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer))
 
+(defun kill-other-buffers ()
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+
 (setq org-ellipsis " ▾")
 (setq org-src-preserve-indentation t)
 (setq calendar-week-start-day 1)
@@ -382,6 +383,7 @@
 (setq org-agenda-files
   '("~/Dokumenty/notatki/agenda/agenda-agenda.org"
     "~/Dokumenty/notatki/agenda/agenda-habits.org"
+    "~/Dokumenty/notatki/agenda/agenda-powtarzalne.org"
     "~/Dokumenty/notatki/agenda/agenda-important.org"))
 
 (setq org-agenda-span 10
