@@ -35,12 +35,9 @@ keys = [
     Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'")),
     Key([mod, "shift"], "a", lazy.spawn("pcmanfm")),
 
+    Key([mod], "c", lazy.spawn("rofi -m 1 -show window")),
+
     Key([mod], "s", lazy.spawn("rofi -m 1 -show drun")),
-
-    Key([mod], "d", lazy.spawn("spotify")),
-
-    Key([mod], "g", lazy.spawn("steam")),
-    Key([mod, "shift"], "g", lazy.spawn("lutris")),
 
     # Power menu
     Key([mod], "p", lazy.spawn("slock")),
@@ -91,7 +88,7 @@ groups = [
        Group("3", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
        Group("4", label="", layout='monadtall', matches=[Match(wm_class=["alacritty", "Alacritty"])]),
        Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm"])]),
-       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "kcc", "qbittorrent", "nitrogen", "openrgb", "lxappearance", "VirtualBox Manager"])]),
+       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "kcc", "qbittorrent", "nitrogen", "openrgb", "lxappearance", "virt-manager", "gimp"])]),
        Group("7", label="", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
        Group("8", label="", layout='max', matches=[Match(wm_class=["spotify"])]),
        Group("9", label="", layout='max', matches=[Match(wm_class=["mpv"])])
