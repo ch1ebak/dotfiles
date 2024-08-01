@@ -107,40 +107,48 @@
     "<" '(kill-buffer :wk "Kill buffer"))
   
   (me/leader-keys
+    "b" '(:ignore t :wk "Bookmarks")
     "b m" '(bookmark-set :wk "Add to bookmarks")
     "b s" '(bookmark-save :wk "Save bookmarks")
     "RET" '(counsel-bookmark :wk "List bookmarks"))
 
   (me/leader-keys
-    "s b" '(swiper-isearch :wk "Swiper")
+    "s" '(:ignore t :wk "Search")
+    "s b" '(swiper :wk "Swiper")
     "s l" '(counsel-imenu :wk "Imenu")
     "s r" '(counsel-rg :wk "Grep")
     "s f" '(counsel-fzf :wk "Fuzzy finding"))
 
   (me/leader-keys
+    "c" '(:ignore t :wk "Comments")
     "c c" '(comment-line :wk "Comment Line")
     "c r" '(comment-or-uncomment-region :wk "Comment Region"))
 
   (me/leader-keys
+    "f" '(:ignore t :wk "Files")
     "f p" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Emacs config.org")
     "f P" '((lambda () (interactive) (dired "~/.config/emacs/")) :wk "Emacs directory")
-    "f r" '(counsel-recentf :wk "Recent files"))
-
-  (me/leader-keys
+    "f r" '(counsel-recentf :wk "Recent files")
     "f u" '(sudo-edit-find-file :wk "Sudo find file")
     "f U" '(sudo-edit :wk "Sudo edit file"))
 
   (me/leader-keys
+    "h" '(:ignore t :wk "Help")
+    "h c" '(:ignore t :wk "Customize")
     "h c t" '(counsel-load-theme :wk "Change theme")
     "h c g" '(customize-group :wk "Customize group")
+    "h d" '(:ignore t :wk "Describe")
     "h d f" '(describe-function :wk "Describe function")
     "h d v" '(describe-variable :wk "Describe variable")
+    "h e" '(:ignore t :wk "Elpaca")
     "h e m" '(elpaca-manager :wk "Elpaca manager")
     "h e u" '(elpaca-update-all :wk "Elpaca: update packages")
     "h e d" '(elpaca-delete :wk "Elpaca: delete package")
+    "h r" '(:ignore t :wk "Reload")
     "h r r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el") (ignore (elpaca-process-queues))) :wk "Reload emacs config"))
 
   (me/leader-keys
+    "TAB" '(:ignore t :wk "Windows/Buffers/Tabs")
     "TAB q" '(evil-window-delete :wk "Close window")
     "TAB x" '(kill-other-buffers :wk "Kill other buffers")
     "TAB RET" '(evil-window-vnew :wk "New window")
@@ -219,7 +227,8 @@
                                 ("jpg" . "nsxiv")
                                 ("png" . "nsxiv")
                                 ("mkv" . "mpv")
-                                ("mp4" . "mpv"))))
+                                ("mp4" . "mpv")
+                                ("pdf" . "firefox"))))
 
 (use-package elfeed
   :config
@@ -285,18 +294,6 @@
     (switch-to-buffer (generate-new-buffer "eww"))
     (eww-mode)
     (eww url)))
-
-(use-package hl-todo
-  :hook ((org-mode . hl-todo-mode)
-         (prog-mode . hl-todo-mode))
-  :config
-  (setq hl-todo-highlight-punctuation ":"
-        hl-todo-keyword-faces
-        `(("TODO"      error bold)
-	      ("WAIT"      warning bold)
-          ("FIXME"     font-lock-constant-face bold)
-          ("CANCELED"  font-lock-keyword-face bold)
-          ("DONE"      success bold))))
 
 (defun insert-todays-date (arg)
   (interactive "U")
@@ -381,10 +378,10 @@
 
 ;; (setq org-agenda-files '("~/Dokumenty/notatki/agenda/"))
 (setq org-agenda-files
-  '("~/Dokumenty/notatki/agenda/agenda-agenda.org"
-    "~/Dokumenty/notatki/agenda/agenda-habits.org"
+  '("~/Dokumenty/notatki/agenda/agenda-taski.org"
+    "~/Dokumenty/notatki/agenda/agenda-nawyki.org"
     "~/Dokumenty/notatki/agenda/agenda-powtarzalne.org"
-    "~/Dokumenty/notatki/agenda/agenda-important.org"))
+    "~/Dokumenty/notatki/agenda/agenda-ważne.org"))
 
 (setq org-agenda-span 10
       org-agenda-start-on-weekday nil
@@ -407,7 +404,7 @@
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/Dokumenty/notatki/agenda/agenda-agenda.org" "ZADANIA")
+      '(("t" "Todo" entry (file+headline "~/Dokumenty/notatki/agenda/agenda-taski.org" "ZADANIA")
          "* TODO %?\n  %i\n  %a")))
 
 (require 'org-habit)
@@ -427,7 +424,7 @@
        (?C :foreground "#87b379"))))
 
 (setq org-refile-targets
-  '(("archive.org" :maxlevel . 1)))
+  '(("archiwum.org" :maxlevel . 1)))
     ;; ("agenda-agenda.org" :maxlevel . 1)
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
@@ -436,6 +433,18 @@
 (require 'org-tempo)
 
 (use-package ox-epub)
+
+(use-package hl-todo
+  :hook ((org-mode . hl-todo-mode)
+         (prog-mode . hl-todo-mode))
+  :config
+  (setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        `(("TODO"      error bold)
+	      ("WAIT"      warning bold)
+          ("FIXME"     font-lock-constant-face bold)
+          ("CANCELED"  font-lock-keyword-face bold)
+          ("DONE"      success bold))))
 
 (use-package pocket-reader)
 (setq pocket-reader-open-url-default-function #'eww)
@@ -492,14 +501,15 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
+(set-fringe-mode 5)
 (setq org-edit-src-content-indentation 0)
 (setq use-file-dialog nil)
 (setq use-dialog-box nil)
 (setq pop-up-windows nil)
 (setq inhibit-startup-screen nil)
 
-(global-display-line-numbers-mode 1)
-(setq display-line-numbers 'relative)
+(setq display-line-numbers-type 'relative) 
+(global-display-line-numbers-mode)
 
 (setq conf-unix-mode t)
 (add-to-list 'auto-mode-alist '("\\.*rc$" . conf-unix-mode))
