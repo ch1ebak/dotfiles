@@ -1,17 +1,9 @@
 @theme "/home/kd/.config/rofi/themes/spacegray-simple.rasi"
 
 configuration {
+  modi: "drun,window";
   kb-remove-to-eol: "";
-}
-
-configuration {
   kb-accept-entry: "Return";
-}
-
-configuration {
   kb-row-up: "Control+k";
-}
-                  
-configuration {
   kb-row-down: "Control+j";
 }
