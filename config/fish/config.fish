@@ -66,7 +66,7 @@ end
 fish_config theme choose spacegray
 
 ## Fetch
-neofetch
+fastfetch
 
 ## Prompt
 starship init fish | source
@@ -80,7 +80,6 @@ alias pup="sudo pacman -Syu"
 alias ps="pacman -F"
 alias pc="sudo pacman -Rns $(pacman -Qtdq)"
 alias pkglist="sudo pacman -Qqe > ~/Dokumenty/packages.txt"
-alias pkgcount="pacman -Q | wc -l"
 alias yi="paru -S"
 alias yr="paru -Rns"
 alias yup="paru -Sua"
@@ -102,11 +101,10 @@ alias rm="trash -vi"
 alias bt="bpytop"
 alias gc="git clone"
 alias merge="xrdb -merge ~/.Xresources"
-alias nfnc="neofetch --config none"
+alias ff="fastfetch"
+alias ffnc="fastfetch --config examples/6.jsonc"
 alias nvt="nvtop"
-alias picom="picom -b"
 alias synctime="sudo ntpd -qg && sudo hwclock -w"
-alias xbl="xbacklight -set "
 
 ## Emacs
 alias em="/usr/bin/emacs -nw"
