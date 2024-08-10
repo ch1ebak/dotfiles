@@ -25,7 +25,6 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 keys = [
      # Apps
     Key([mod], "Return", lazy.spawn("alacritty")),
-    Key([mod, "shift"], "Return", lazy.spawn("alacritty -e bash")),
 
     Key([mod], "w", lazy.spawn("firefox")),
     Key([mod, "shift"], "w", lazy.spawn("/usr/bin/firefox --private-window")),

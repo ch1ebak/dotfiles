@@ -153,12 +153,12 @@
     "TAB x" '(kill-other-buffers :wk "Kill other buffers")
     "TAB RET" '(evil-window-vnew :wk "New window")
     "TAB h" '(evil-window-left :wk "Window left")
-    "TAB j" '(evil-window-down :wk "Window down")
-    "TAB k" '(evil-window-up :wk "Window up")
-    "TAB l" '(evil-window-right :wk "Window right")
+    "TAB l" '(evil-window-right :wk "Window down")
+    "TAB J" '(evil-window-move-far-left :wk "Move window left")
+    "TAB K" '(evil-window-move-far-right :wk "Move window right")
     "TAB n" '(tab-new :wk "New tab")
-    "TAB J" '(tab-next :wk "Next tab")
-    "TAB K" '(tab-previous :wk "Previous tab")
+    "TAB j" '(tab-next :wk "Next tab")
+    "TAB k" '(tab-previous :wk "Previous tab")
     "TAB r" '(tab-rename :wk "Rename tab")
     "TAB H" '(previous-buffer :wk "Buffer previous")
     "TAB L" '(next-buffer :wk "Buffer next"))
@@ -405,7 +405,7 @@
 
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "~/Dokumenty/notatki/agenda/agenda-taski.org" "ZADANIA")
-         "* TODO %?\n  %i\n  %a")))
+         "* TODO %?\n  %i\n ")))
 
 (require 'org-habit)
 (add-to-list 'org-modules 'org-habit)
