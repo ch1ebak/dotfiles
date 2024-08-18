@@ -10,30 +10,34 @@
 export TERM="alacritty"
 export VISUAL="emacsclient -c -a emacs"
 export EDITOR="emacsclient -t -a """
-export ALTERNATE_EDITOR=""
-
-## Paths
-export PATH="$HOME/.config/emacs/bin:$PATH"
-export TERM=xterm-256color
+export ALTERNATE_EDITOR="vim"
 
 ## Options
-set -o vi
-set colored-stats on
-complete -cf sudo
-bind Space:magic-space
-CDPATH="."
+bind "set colored-stats on"
+bind "set colored-completion-prefix on"
 bind "set completion-ignore-case on"
 bind "set completion-map-case on"
 bind "set show-all-if-ambiguous on"
 bind "set mark-symlinked-directories on"
+complete -cf sudo
+
+## Keybindings
+set -o vi
+bind Space:magic-space
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
+## Shopt
+shopt -s autocd
 shopt -s cdspell
 shopt -s histappend
 shopt -s cmdhist
-PROMPT_COMMAND="history -a"
-HISTSIZE=500000
-HISTFILESIZE=100000
-HISTCONTROL="erasedups:ignoreboth"
-HISTTIMEFORMAT="%F %T "
+
+## History
+export PROMPT_COMMAND="history -a"
+export HISTSIZE=2000
+export HISTFILESIZE=2000
+export HISTCONTROL=erasedups:ignoredups:ignorespace
 
 ## Prompt
 PS1="\[\033[31m\]\w >\[\e[m\] "
@@ -43,7 +47,7 @@ fastfetch
 
 
 # ALIASES
-# arch - pacman and paru
+## arch - pacman and paru
 alias pi="sudo pacman -S"
 alias pr="sudo pacman -Rns"
 alias pup="sudo pacman -Syu"
@@ -58,11 +62,9 @@ alias yup="paru -Sua"
 alias ..="cd .."
 alias cp="cp -i"
 alias df="df -hl --exclude-type=tmpfs --exclude-type=devtmpfs"
-# alias df="duf --only local"
 alias fd="fd --hidden --ignore-case"
 alias grep="rg"
 alias ls="ls -lA --color=always --group-directories-first"
-# alias ls="eza -lA --color=always --group-directories-first"
 alias mkdir="mkdir -pv"
 alias mv="mv -i"
 alias rm="trash -vi"
