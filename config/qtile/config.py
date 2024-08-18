@@ -82,15 +82,15 @@ keys = [
 
 # GROUPS
 groups = [
-       Group("1", label="", layout='monadtall', matches=[Match(wm_class=["ferdium"])]),
-       Group("2", label="", layout='monadtall'),
-       Group("3", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
-       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["alacritty", "Alacritty"])]),
-       Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm"])]),
-       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "kcc", "qbittorrent", "nitrogen", "openrgb", "lxappearance", "virt-manager", "gimp"])]),
-       Group("7", label="", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
-       Group("8", label="", layout='max', matches=[Match(wm_class=["spotify"])]),
-       Group("9", label="", layout='max', matches=[Match(wm_class=["mpv"])])
+       Group("1", label="", layout='monadtall', matches=[Match(wm_class=["ferdium"])]),
+       Group("2", label="", layout='monadtall'),
+       Group("3", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
+       Group("4", label="", layout='monadtall', matches=[Match(wm_class=["alacritty", "Alacritty"])]),
+       Group("5", label="", layout='monadtall', matches=[Match(wm_class=["pcmanfm"])]),
+       Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "kcc", "qbittorrent", "nitrogen", "openrgb", "lxappearance", "virt-manager", "gimp"])]),
+       Group("7", label="", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
+       Group("8", label="", layout='max', matches=[Match(wm_class=["spotify"])]),
+       Group("9", label="", layout='max', matches=[Match(wm_class=["mpv"])])
        ]
 
 ## Move windows between groups
@@ -127,7 +127,7 @@ layouts = [
 
 # WIDGETS
 widget_defaults = dict(
-    font='JetBrainsMono NF Bold Italic',
+    font='JetBrainsMono NF Bold',
     fontsize=10,
     padding=5,
     foreground = colors[7],
@@ -143,57 +143,11 @@ screens = [
                      linewidth = 0,
                      padding = 5,
                      ),
-             widget.CurrentLayoutIcon(
-                     custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
-                     padding = 5,
-                     scale = 0.7
-                     ),
-             widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
-                     fontsize = 15,
-                     foreground = colors[4],
-                     ),
-             widget.OpenWeather(
-                     app_key = "1fcfd7f17c1c297646e7efb5bcfb2c8a",
-                     cityid = "3088848",
-                     format = '{main_temp}°',
-                     metric = True
-                     ),
-             widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
-                     fontsize = 15,
-                     foreground = colors[4],
-                     ),
-             widget.Clock(
-                     format = "%a, %d.%m.%y",
-                     foreground = colors[7],
-                     ),
-             widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
-                     fontsize = 15,
-                     foreground = colors[4],
-                     ),
-             widget.Clock(
-                     format = "%H:%M",
-                     foreground = colors[7],
-                     ),
-             widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
-                     fontsize = 15,
-                     foreground = colors[4],
-                     ),
-             widget.Spacer(
-                     length = bar.STRETCH
-                     ),
              widget.GroupBox(
                      disable_drag = True,
                      center_aligned = True,
                      font='Font Awesome',
-                     fontsize = 13,
+                     fontsize = 12,
                      margin_y = 3,
                      margin_x = 0,
                      padding_y = 5,
@@ -211,14 +165,29 @@ screens = [
                      foreground = colors[7],
                      background = colors[0]
                      ),
-             widget.Spacer(
-                     length = bar.STRETCH
-                     ),
              widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
+                     text = "|",
                      fontsize = 15,
                      foreground = colors[4],
+                     ),
+             widget.CurrentLayoutIcon(
+                     padding = 5,
+                     scale = 0.6
+                     ),
+             widget.Sep(                           
+                     linewidth = 0,
+                     padding = 5,
+                     ),
+             widget.WindowName(
+                     background = colors[1]
+                     ), 
+             widget.Spacer(
+                     length = bar.STRETCH,
+                     background = colors[1]
+                     ),
+             widget.Sep(                                           
+                     linewidth = 0,
+                     padding = 5,
                      ),
              widget.Battery(
                      padding = 5,
@@ -234,38 +203,49 @@ screens = [
                      notify_below = 0.2
                      ),
              widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
+                     text = "|",
                      fontsize = 15,
                      foreground = colors[4],
                      ),
              widget.CPU(                                         
                      padding = 5,
-                     format = '{load_percent}%',
+                     format = '  {load_percent}%',
                      ),
              widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
+                     text = "|",
                      fontsize = 15,
                      foreground = colors[4],
                      ),
              widget.Memory(
-                     format = '{MemUsed: .0f}{mm}',
+                     format = ' {MemUsed: .0f}{mm}',
                      ),
              widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
+                     text = "|",
+                     fontsize = 15,
+                     foreground = colors[4],
+                     ),
+             widget.OpenWeather(                                                   
+                     app_key = "1fcfd7f17c1c297646e7efb5bcfb2c8a",
+                     cityid = "3088848",
+                     format = '  {main_temp}°',
+                     metric = True
+                     ),
+             widget.TextBox(
+                     text = "|",
+                     fontsize = 15,
+                     foreground = colors[4],
+                     ),
+             widget.Clock(
+                     format = " %a, %d.%m.%y - %H:%M",
+                     foreground = colors[7],
+                     ),
+             widget.TextBox(
+                     text = "|",
                      fontsize = 15,
                      foreground = colors[4],
                      ),
              widget.Systray(
                      icon_size = 19
-                     ),
-             widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
-                     fontsize = 15,
-                     foreground = colors[4],
                      ),
              widget.Sep(
                      linewidth = 0,
@@ -273,66 +253,20 @@ screens = [
                      ),
              ],
              25,
-             margin = [6, 6, 0, 6]
+             # margin = [6, 6, 0, 6]
              ), ),
  Screen(
          top=bar.Bar(
              [
-             widget.Sep(                                                                            
+             widget.Sep(
                      linewidth = 0,
                      padding = 5,
-                     ),
-             widget.CurrentLayoutIcon(
-                     custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
-                     padding = 5,
-                     scale = 0.7
-                     ),
-             widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
-                     fontsize = 15,
-                     foreground = colors[4],
-                     ),
-             widget.OpenWeather(
-                     app_key = "1fcfd7f17c1c297646e7efb5bcfb2c8a",
-                     cityid = "3088848",
-                     format = '{main_temp}°',
-                     metric = True
-                     ),
-             widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
-                     fontsize = 15,
-                     foreground = colors[4],
-                     ),
-             widget.Clock(
-                     format = "%a, %d.%m.%y",
-                     foreground = colors[7],                                                        
-                     ),
-             widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
-                     fontsize = 15,
-                     foreground = colors[4],
-                     ),
-             widget.Clock(
-                     format = "%H:%M",
-                     foreground = colors[7],
-                     ),
-             widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
-                     fontsize = 15,
-                     foreground = colors[4],
-                     ),
-             widget.Spacer(
-                     length = bar.STRETCH
                      ),
              widget.GroupBox(
                      disable_drag = True,
                      center_aligned = True,
                      font='Font Awesome',
-                     fontsize = 13,
+                     fontsize = 12,
                      margin_y = 3,
                      margin_x = 0,
                      padding_y = 5,
@@ -350,14 +284,29 @@ screens = [
                      foreground = colors[7],
                      background = colors[0]
                      ),
-             widget.Spacer(
-                     length = bar.STRETCH
-                     ),
              widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
+                     text = "|",
                      fontsize = 15,
                      foreground = colors[4],
+                     ),
+             widget.CurrentLayoutIcon(
+                     padding = 5,
+                     scale = 0.6
+                     ),
+             widget.Sep(
+                     linewidth = 0,
+                     padding = 5,
+                     ),
+             widget.WindowName(
+                     background = colors[1]
+                     ),
+             widget.Spacer(
+                     length = bar.STRETCH,
+                     background = colors[1]
+                     ),
+             widget.Sep(
+                     linewidth = 0,
+                     padding = 5,
                      ),
              widget.Battery(
                      padding = 5,
@@ -369,32 +318,45 @@ screens = [
                      not_charging_char = "",
                      unknown_char_char = "?",
                      low_percentage = 0.2,
-                     low_foreground = colors[6]
+                     low_foreground = colors[6],
+                     notify_below = 0.2
                      ),
              widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
+                     text = "|",
                      fontsize = 15,
                      foreground = colors[4],
                      ),
              widget.CPU(
                      padding = 5,
-                     format = '{load_percent}%',
+                     format = '  {load_percent}%',
                      ),
              widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
+                     text = "|",
                      fontsize = 15,
                      foreground = colors[4],
                      ),
              widget.Memory(
-                     format = '{MemUsed: .0f}{mm}',
+                     format = ' {MemUsed: .0f}{mm}',
                      ),
              widget.TextBox(
-                     text = "",
-                     font='Font Awesome',
+                     text = "|",
                      fontsize = 15,
                      foreground = colors[4],
+                     ),
+             widget.OpenWeather(
+                     app_key = "1fcfd7f17c1c297646e7efb5bcfb2c8a",
+                     cityid = "3088848",
+                     format = '  {main_temp}°',
+                     metric = True
+                     ),
+             widget.TextBox(
+                     text = "|",
+                     fontsize = 15,
+                     foreground = colors[4],
+                     ),
+             widget.Clock(
+                     format = " %a, %d.%m.%y - %H:%M",
+                     foreground = colors[7],
                      ),
              widget.Sep(
                      linewidth = 0,
@@ -402,7 +364,7 @@ screens = [
                      ),
              ],
              25,
-             margin = [6, 6, 0, 6]
+             # margin = [6, 6, 0, 6]
              ), ),
 ]
 
@@ -415,7 +377,7 @@ cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
     *layout.Floating.default_float_rules,
     Match(wm_class='notification'),
-    Match(wm_class='copyq')],
+    Match(wm_class='galculator')],
     border_width = 2,
     border_focus = colors[5],
     border_normal = colors[2]
