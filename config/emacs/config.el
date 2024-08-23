@@ -185,7 +185,14 @@
     "m L" 'org-metaright
     "m J" 'org-metadown
     "m K" 'org-metaup
-    "M" 'org-sidebar-tree-toggle)
+    "M" 'org-sidebar-tree-toggle
+    "t s" 'org-table-sort-lines
+    "t a" 'org-table-sum
+    "t n" 'org-table-insert-column
+    "t h" 'org-table-move-column-left
+    "t l" 'org-table-move-column-right
+    "t j" 'org-table-move-row-down
+    "t k" 'org-table-move-row-up)
   
   (general-nmap
     :keymaps 'dired-mode-map
@@ -295,18 +302,6 @@
     (eww-mode)
     (eww url)))
 
-(defun insert-todays-date (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%d-%m-%Y")
-          (format-time-string "%Y-%m-%d"))))
-
-(defun insert-current-time (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%R")
-          (format-time-string "%H:%M"))))
-
 (use-package counsel
   :after ivy
   :diminish
@@ -360,11 +355,6 @@
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer))
 
-(defun kill-other-buffers ()
-  "Kill all other buffers."
-  (interactive)
-  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
-
 (setq org-ellipsis " ▾")
 (setq org-src-preserve-indentation t)
 (setq calendar-week-start-day 1)
@@ -396,6 +386,10 @@
         (search . "%-12c"))))
 (setq org-agenda-deadline-leaders (quote (":" "D%2d: " "")))
 (setq org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
+
+(setq org-agenda-current-time-string "← now")
+(setq org-agenda-time-grid '((daily today require-timed) (800 1000 1200 1400 1600 1800 2000)
+                             " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
 
 (add-hook 'org-mode-hook 'org-indent-mode)
 (use-package org-bullets
@@ -488,6 +482,23 @@
 	  which-key-max-description-length 25
 	  which-key-allow-imprecise-window-fit nil
 	  which-key-separator " → " ))
+
+(defun insert-todays-date (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%d-%m-%Y")
+          (format-time-string "%Y-%m-%d"))))
+
+(defun insert-current-time (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%R")
+          (format-time-string "%H:%M"))))
+
+(defun kill-other-buffers ()
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
 (delete-selection-mode 1)
 (electric-indent-mode -1)

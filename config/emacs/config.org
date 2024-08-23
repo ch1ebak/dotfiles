@@ -202,7 +202,14 @@
     "m L" 'org-metaright
     "m J" 'org-metadown
     "m K" 'org-metaup
-    "M" 'org-sidebar-tree-toggle)
+    "M" 'org-sidebar-tree-toggle
+    "t s" 'org-table-sort-lines
+    "t a" 'org-table-sum
+    "t n" 'org-table-insert-column
+    "t h" 'org-table-move-column-left
+    "t l" 'org-table-move-column-right
+    "t j" 'org-table-move-row-down
+    "t k" 'org-table-move-row-up)
   
   (general-nmap
     :keymaps 'dired-mode-map
@@ -350,21 +357,6 @@
     (eww url)))
 #+end_src
 
-** Insert date / time 
-#+begin_src emacs-lisp
-(defun insert-todays-date (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%d-%m-%Y")
-          (format-time-string "%Y-%m-%d"))))
-
-(defun insert-current-time (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%R")
-          (format-time-string "%H:%M"))))
-#+end_src
-
 ** [[https://github.com/abo-abo/swiper][Ivy]]
 #+begin_src emacs-lisp
 (use-package counsel
@@ -430,14 +422,6 @@
                                'ivy-rich-switch-buffer-transformer))
 #+end_src
 
-** [[https://www.emacswiki.org/emacs/KillingBuffers#h5o-2][Kill Other Buffers]]
-#+begin_src emacs-lisp
-(defun kill-other-buffers ()
-  "Kill all other buffers."
-  (interactive)
-  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
-#+end_src
-
 ** Org-mode
 #+begin_src emacs-lisp
 (setq org-ellipsis " ▾")
@@ -474,6 +458,10 @@
         (search . "%-12c"))))
 (setq org-agenda-deadline-leaders (quote (":" "D%2d: " "")))
 (setq org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
+
+(setq org-agenda-current-time-string "← now")
+(setq org-agenda-time-grid '((daily today require-timed) (800 1000 1200 1400 1600 1800 2000)
+                             " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
 #+end_src
 
 *** [[https://github.com/sabof/org-bullets][Org Bullets]]
@@ -614,6 +602,30 @@
 	  which-key-max-description-length 25
 	  which-key-allow-imprecise-window-fit nil
 	  which-key-separator " → " ))
+#+end_src
+
+* FUNCTIONS
+** Insert date / time 
+#+begin_src emacs-lisp
+(defun insert-todays-date (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%d-%m-%Y")
+          (format-time-string "%Y-%m-%d"))))
+
+(defun insert-current-time (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%R")
+          (format-time-string "%H:%M"))))
+#+end_src
+
+** [[https://www.emacswiki.org/emacs/KillingBuffers#h5o-2][Kill Other Buffers]]
+#+begin_src emacs-lisp
+(defun kill-other-buffers ()
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 #+end_src
 
 * SETTINGS
