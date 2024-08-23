@@ -11,6 +11,7 @@ export TERM="alacritty"
 export VISUAL="emacsclient -c -a emacs"
 export EDITOR="emacsclient -t -a """
 export ALTERNATE_EDITOR="vim"
+export MANPAGER="less"
 
 ## Options
 bind "set colored-stats on"
@@ -51,12 +52,10 @@ fastfetch
 alias pi="sudo pacman -S"
 alias pr="sudo pacman -Rns"
 alias pup="sudo pacman -Syu"
-alias ps="pacman -F"
 alias pc="sudo pacman -Rns $(pacman -Qtdq)"
 alias pkglist="sudo pacman -Qqe > ~/Dokumenty/packages.txt"
 alias yi="paru -S"
-alias yr="paru -Rns"
-alias yup="paru -Sua"
+alias yup="paru"
                                                                
 ## Commands
 alias ..="cd .."
@@ -65,7 +64,7 @@ alias df="df -hl --exclude-type=tmpfs --exclude-type=devtmpfs"
 alias fd="fd --hidden --ignore-case"
 alias grep="rg"
 alias ls="ls -lA --color=always --group-directories-first"
-alias mkdir="mkdir -pv"
+alias mkd="mkdir -pv"
 alias mv="mv -i"
 alias rm="trash -vi"
                                                                
@@ -76,7 +75,6 @@ alias merge="xrdb -merge ~/.Xresources"
 alias ff="fastfetch"
 alias ffnc="fastfetch --config examples/6.jsonc"
 alias nvt="nvtop"
-alias synctime="sudo ntpd -qg && sudo hwclock -w"
                                                                
 ## Emacs
 alias em="/usr/bin/emacs -nw"
