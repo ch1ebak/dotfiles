@@ -15,9 +15,6 @@ from libqtile.lazy import lazy
 from libqtile.widget import spacer
 from typing import List
 
-## Color scheme
-from colors.spacegray import colors
-
 # KEYBINDINGS
 mod = "mod4"
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
@@ -111,6 +108,18 @@ for i in groups:
             ),
         ]
     )
+    
+# COLOR SCHEME
+colors = [                       
+ ["#20242d", "#20242d"],  # 0
+ ["#363942", "#363942"],  # 1
+ ["#4c4f56", "#4c4f56"],  # 2
+ ["#62656c", "#62656c"],  # 3
+ ["#b04b57", "#b04b57"],  # 4
+ ["#b04b57", "#b04b57"],  # 5
+ ["#b04b57", "#b04b57"],  # 6
+ ["#B3B8C3", "#B3B8C3"]   # 7
+]
 
 # LAYOUTS
 layout_theme = {"border_width": 2,
@@ -366,18 +375,18 @@ dgroups_app_rules = []  # type: List
 follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating(float_rules=[
-    *layout.Floating.default_float_rules,
-    Match(wm_class='notification'),
-    Match(wm_class='galculator')],
-    border_width = 2,
-    border_focus = colors[5],
-    border_normal = colors[2]
-    )
 auto_fullscreen = True
+auto_minimize = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
-auto_minimize = True
+floating_layout = layout.Floating(
+    border_width = 2,            
+    border_focus = colors[5],
+    border_normal = colors[2],
+    float_rules=[
+        *layout.Floating.default_float_rules,
+        Match(wm_class="notification"),
+        Match(title='Qalculate!')])
 
 # AUTOSTART
 @hook.subscribe.startup_once
@@ -388,7 +397,7 @@ def start_once():
     qtile.cmd_spawn("nitrogen --restore &")
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
-    qtile.cmd_spawn("batsignal -w 20 -c 15 -d 5 -p -f 90 -b")
+    # qtile.cmd_spawn("batsignal -w 20 -c 15 -d 5 -p -f 90 -b")
     qtile.cmd_spawn("xbacklight -set 60")
     for p in processes:
         subprocess.Popen(p)
