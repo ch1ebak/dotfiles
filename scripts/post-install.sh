@@ -1,18 +1,25 @@
 #!/bin/sh
 
-echo -ne "
+echo -e "
     ____   ____  _____ ______      ____ _   __ _____ ______ ___     __     __       _____  ______ ____   ____ ____  ______
    / __ \ / __ \/ ___//_  __/     /  _// | / // ___//_  __//   |   / /    / /      / ___/ / ____// __ \ /  _// __ \/_  __/
   / /_/ // / / /\__ \  / /______  / / /  |/ / \__ \  / /  / /| |  / /    / /       \__ \ / /    / /_/ / / / / /_/ / / /
  / ____// /_/ /___/ / / //_____/_/ / / /|  / ___/ / / /  / ___ | / /___ / /___    ___/ // /___ / _, _/_/ / / ____/ / /
 /_/     \____//____/ /_/       /___//_/ |_/ /____/ /_/  /_/  |_|/_____//_____/   /____/ \____//_/ |_|/___//_/     /_/
 I sure hope it works!
+
 "
 
 
 # INSTALL APPS
 ## Pacman
-echo -ne "->> Pacman Apps"
+echo -e "
+   ___   ___   _____ __  ___ ___    _  __  ___    ___   ___   ____
+  / _ \ / _ | / ___//  |/  // _ |  / |/ / / _ |  / _ \ / _ \ / __/
+ / ___// __ |/ /__ / /|_/ // __ | /    / / __ | / ___// ___/_\ \  
+/_/   /_/ |_|\___//_/  /_//_/ |_|/_/|_/ /_/ |_|/_/   /_/   /___/  
+
+"
 
 LIST_OF_APPS_PACMAN="
 alacritty
@@ -33,6 +40,7 @@ gvfs
 gvfs-mtp
 keepassxc
 less
+linux-headers
 lxappearance-gtk3
 mpv
 network-manager-applet
@@ -54,7 +62,6 @@ spotify-launcher
 steam
 thunar
 trash-cli
-tlp
 ttf-font-awesome
 ttf-jetbrains-mono-nerd
 wget
@@ -69,14 +76,19 @@ sudo pacman -Syu
 sudo pacman -S $LIST_OF_APPS_PACMAN
 
 ## Paru
-echo -ne "->> Paru Apps"
+echo -e "
+   ___   ___    ___   __  __  ___    ___   ___   ____
+  / _ \ / _ |  / _ \ / / / / / _ |  / _ \ / _ \ / __/
+ / ___// __ | / , _// /_/ / / __ | / ___// ___/_\ \  
+/_/   /_/ |_|/_/|_| \____/ /_/ |_|/_/   /_/   /___/  
+                                                     
+"
 
 LIST_OF_APPS_PARU="
 ferdium-bin
 pandoc-bin
 picom-git
 protontricks
-slimbookbattery
 spicetify-cli"
 
 sudo pacman -S --needed base-devel
@@ -89,7 +101,13 @@ cd ..
 trash -v /home/$USER/paru
 
 # DOTFILES
-echo -ne "->> Dotfiles"
+echo -e "
+   ___   ____  ______ ____ ____ __    ____ ____
+  / _ \ / __ \/_  __// __//  _// /   / __// __/
+ / // // /_/ / / /  / _/ _/ / / /__ / _/ _\ \  
+/____/ \____/ /_/  /_/  /___//____//___//___/  
+                                               
+"
 
 git clone https://github.com/ch1ebak/dotfiles
 cd dotfiles
@@ -103,12 +121,12 @@ trash -v dotfiles
 
 # FINISHING TOUCHES
 trash -v /home/$USER/.bash_profile
-echo -ne "xrdb ~/.Xresources" > .xinitrc
-echo -ne "exec qtile start" >> .xinitrc
+echo -e "xrdb ~/.Xresources" > .xinitrc
+echo -e "exec qtile start" >> .xinitrc
                                     
 # cp assets/* /home/$USER/.local/share/
 
-echo -ne "
+echo -e "
     ___     __     __       ____   ____   _   __ ______
    /   |   / /    / /      / __ \ / __ \ / | / // ____/
   / /| |  / /    / /      / / / // / / //  |/ // __/
