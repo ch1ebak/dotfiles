@@ -60,8 +60,8 @@ xorg-xbacklight
 xorg-xinit
 xorg-xkill"
 
-sudo pacman -Syu
-sudo pacman -S $LIST_OF_APPS_PACMAN
+pacman -Syu
+pacman -S $LIST_OF_APPS_PACMAN
 
 echo -ne "Pacman done"
 
@@ -74,7 +74,7 @@ echo -ne "Pacman done"
 # slimbookbattery
 # spicetify-cli"
 
-# sudo pacman -S --needed base-devel
+# pacman -S --needed base-devel
 # git clone https://aur.archlinux.org/paru.git
 # cd paru
 # makepkg -si
