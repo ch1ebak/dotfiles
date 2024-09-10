@@ -49,13 +49,11 @@ fastfetch
 
 # ALIASES
 ## arch - pacman and paru
-alias pi="sudo pacman -S"
-alias pr="sudo pacman -Rns"
-alias pup="sudo pacman -Syu"
-alias pc="sudo pacman -Rns $(pacman -Qtdq)"
+alias pi="paru -S"
+alias pr="paru -Rns"
+alias pup="paru -Syu"
 alias pkglist="sudo pacman -Qqe > ~/Dokumenty/packages.txt"
-alias yi="paru -S"
-alias yup="paru"
+alias pc="sudo pacman -Rns $(pacman -Qtdq)"
                                                                
 ## Commands
 alias ..="cd .."
@@ -68,8 +66,13 @@ alias mkd="mkdir -pv"
 alias mv="mv -i"
 alias rm="trash -vi"
                                                                
-# Backlight
+## Reboot
+alias reboot="sudo reboot"
+alias shutdown="sudo shutdown now"
+                                                               
+# Apps
 alias bt="bpytop"
+alias batsig="batsignal -w 20 -c 15 -d 5 -p -f 90 -b"
 alias gc="git clone"
 alias merge="xrdb -merge ~/.Xresources"
 alias ff="fastfetch"
@@ -80,7 +83,3 @@ alias nvt="nvtop"
 alias em="/usr/bin/emacs -nw"
 alias emacsd="/usr/bin/emacs --daemon &"
 alias kemacs="killall emacs"
-                                                               
-## Reboot
-alias reboot="sudo reboot"
-alias shutdown="sudo shutdown now"
