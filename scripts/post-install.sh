@@ -76,7 +76,7 @@ xorg-xbacklight
 xorg-xinit
 xorg-xkill"
 
-sudo sed -Ei 's/^#(Color)$/\1\nILoveCandy/;s/^#(ParallelDownloads).*/\1 = 10/' /etc/pacman.conf
+sudo sed -Ei 's/^#(Color)$/\1\nILoveCandy/;s/^#(ParallelDownloads).*/\1 = 5/' /etc/pacman.conf
 sudo pacman -Syu
 sudo pacman -S $LIST_OF_APPS_PACMAN
 
