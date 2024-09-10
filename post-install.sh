@@ -60,9 +60,8 @@ xorg-xbacklight
 xorg-xinit
 xorg-xkill"
 
-sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
-pacman -Syu
-pacman -S $LIST_OF_APPS_PACMAN
+sudo pacman -Syu
+sudo pacman -S $LIST_OF_APPS_PACMAN
 
 echo -ne "Pacman done"
 
@@ -75,7 +74,7 @@ protontricks
 slimbookbattery
 spicetify-cli"
 
-pacman -S --needed base-devel
+sudo pacman -S --needed base-devel
 git clone https://aur.archlinux.org/paru.git
 cd paru
 makepkg -si
@@ -89,21 +88,21 @@ echo -ne "Paru done"
 # DOTFILES
 git clone https://github.com/ch1ebak/dotfiles
 cd dotfiles
-mv -i bashrc ~/.bashrc
-mv -i Xresources ~/.Xresources
-mv -i config/* ~/.config/
-mv -i mozilla/backups ~/.mozilla/backups
+mv -i bashrc /home/$USER/.bashrc
+mv -i Xresources /home/$USER/.Xresources
+mv -i config/* /home/$USER/.config/
+mv -i mozilla/backups /home/$USER/.mozilla/backups
 cd ..
 trash -vi dotfiles
 
 echo -ne "Dotfiles done"
 
 # FINISHING TOUCHES
-trash ~/.bash_profile
+trash /home/$USER/.bash_profile
 echo -ne "xrdb ~/.Xresources" > .xinitrc
 echo -ne "exec qtile start" >> .xinitrc
                                     
-# cp assets/* ~/.local/share/
+# cp assets/* /home/$USER/.local/share/
 
 echo -ne "
     ___     __     __       ____   ____   _   __ ______
@@ -111,4 +110,5 @@ echo -ne "
   / /| |  / /    / /      / / / // / / //  |/ // __/
  / ___ | / /___ / /___   / /_/ // /_/ // /|  // /___
 /_/  |_|/_____//_____/  /_____/ \____//_/ |_//_____/
+Remember to reboot!
 "
