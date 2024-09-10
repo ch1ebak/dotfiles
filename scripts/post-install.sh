@@ -99,10 +99,10 @@ echo -ne "
 # DOTFILES
 git clone https://github.com/ch1ebak/dotfiles
 cd dotfiles
-mv -i bashrc /home/$USER/.bashrc
-mv -i Xresources /home/$USER/.Xresources
-mv -i config/* /home/$USER/.config/
-mv -i mozilla/backups /home/$USER/.mozilla/backups
+mv -f bashrc /home/$USER/.bashrc
+mv -f Xresources /home/$USER/.Xresources
+mv -f config/* /home/$USER/.config/
+mv -f mozilla/backups /home/$USER/.mozilla/backups
 cd ..
 trash -vi dotfiles
 
