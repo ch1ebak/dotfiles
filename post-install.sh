@@ -66,24 +66,24 @@ sudo pacman -S $LIST_OF_APPS_PACMAN
 echo -ne "Pacman done"
 
 ## Paru
-LIST_OF_APPS_PARU="
-ferdium-bin
-pandoc-bin
-picom-git
-protontricks
-slimbookbattery
-spicetify-cli"
+# LIST_OF_APPS_PARU="
+# ferdium-bin
+# pandoc-bin
+# picom-git
+# protontricks
+# slimbookbattery
+# spicetify-cli"
 
-sudo pacman -S --needed base-devel
-git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
+# sudo pacman -S --needed base-devel
+# git clone https://aur.archlinux.org/paru.git
+# cd paru
+# makepkg -si
 
-echo -ne "Paru installed"
+# echo -ne "Paru installed"
 
-paru -S $LIST_OF_APPS_PARU
+# paru -S $LIST_OF_APPS_PARU
 
-echo -ne "Paru done"
+# echo -ne "Paru done"
 
 # DOTFILES
 git clone https://github.com/ch1ebak/dotfiles
