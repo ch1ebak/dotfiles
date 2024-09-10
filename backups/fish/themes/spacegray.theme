@@ -1,0 +1,7 @@
+# name: spacegray
+
+fish_color_normal '#b3b8c3'
+fish_color_autosuggestion '#7d8fa4'
+fish_color_command '#b3b8c3'
+fish_color_error '#b04b57'
+fish_color_param '#b3b8c3'
