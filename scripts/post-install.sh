@@ -11,6 +11,8 @@ I sure hope it works!
 
 # INSTALL APPS
 ## Pacman
+echo -ne "->> Pacman Apps"
+
 LIST_OF_APPS_PACMAN="
 alacritty
 alsa-utils
@@ -64,15 +66,9 @@ xorg-xkill"
 sudo pacman -Syu
 sudo pacman -S $LIST_OF_APPS_PACMAN
 
-echo -ne "
-    ____   ___    ______ __  ___ ___     _   __   ____   ____   _   __ ______
-   / __ \ /   |  / ____//  |/  //   |   / | / /  / __ \ / __ \ / | / // ____/
-  / /_/ // /| | / /    / /|_/ // /| |  /  |/ /  / / / // / / //  |/ // __/
- / ____// ___ |/ /___ / /  / // ___ | / /|  /  / /_/ // /_/ // /|  // /___
-/_/    /_/  |_|\____//_/  /_//_/  |_|/_/ |_/  /_____/ \____//_/ |_//_____/
-"
-
 ## Paru
+echo -ne "->> Paru Apps"
+
 LIST_OF_APPS_PARU="
 ferdium-bin
 pandoc-bin
@@ -88,31 +84,19 @@ makepkg -si
 
 paru -S $LIST_OF_APPS_PARU
 
-echo -ne "
-    ____   ___     ____   __  __   ____   ____   _   __ ______
-   / __ \ /   |   / __ \ / / / /  / __ \ / __ \ / | / // ____/
-  / /_/ // /| |  / /_/ // / / /  / / / // / / //  |/ // __/
- / ____// ___ | / _, _// /_/ /  / /_/ // /_/ // /|  // /___
-/_/    /_/  |_|/_/ |_| \____/  /_____/ \____//_/ |_//_____/
-"
-
 # DOTFILES
+echo -ne "->> Dotfiles"
+
+cd ..
 git clone https://github.com/ch1ebak/dotfiles
 cd dotfiles
 mv -f bashrc /home/$USER/.bashrc
 mv -f Xresources /home/$USER/.Xresources
+rm -rf /home/$USER/.config/qtile
 mv -f config/* /home/$USER/.config/
 mv -f mozilla/backups /home/$USER/.mozilla/backups
 cd ..
 trash -vi dotfiles
-
-echo -ne "
-    ____   ____  ______ ______ ____ __     ______ _____    ____   ____   _   __ ______
-   / __ \ / __ \/_  __// ____//  _// /    / ____// ___/   / __ \ / __ \ / | / // ____/
-  / / / // / / / / /  / /_    / / / /    / __/   \__ \   / / / // / / //  |/ // __/
- / /_/ // /_/ / / /  / __/  _/ / / /___ / /___  ___/ /  / /_/ // /_/ // /|  // /___
-/_____/ \____/ /_/  /_/    /___//_____//_____/ /____/  /_____/ \____//_/ |_//_____/
-"
 
 # FINISHING TOUCHES
 trash /home/$USER/.bash_profile
