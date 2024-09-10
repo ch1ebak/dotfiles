@@ -9,6 +9,7 @@ echo -ne "
 I sure hope it works!
 "
 
+
 # INSTALL APPS
 ## Pacman
 echo -ne "->> Pacman Apps"
@@ -63,6 +64,7 @@ xorg-xbacklight
 xorg-xinit
 xorg-xkill"
 
+sed -Ei 's/^#(Color)$/\1\nILoveCandy/;s/^#(ParallelDownloads).*/\1 = 10/' /etc/pacman.conf
 sudo pacman -Syu
 sudo pacman -S $LIST_OF_APPS_PACMAN
 
@@ -83,23 +85,24 @@ cd paru
 makepkg -si
 
 paru -S $LIST_OF_APPS_PARU
+cd ..
+trash -v /home/$USER/paru
 
 # DOTFILES
 echo -ne "->> Dotfiles"
 
-cd ..
 git clone https://github.com/ch1ebak/dotfiles
 cd dotfiles
 mv -f bashrc /home/$USER/.bashrc
 mv -f Xresources /home/$USER/.Xresources
-rm -rf /home/$USER/.config/qtile
+trash -v /home/$USER/.config/qtile
 mv -f config/* /home/$USER/.config/
 mv -f mozilla/backups /home/$USER/.mozilla/backups
 cd ..
-trash -vi dotfiles
+trash -v dotfiles
 
 # FINISHING TOUCHES
-trash /home/$USER/.bash_profile
+trash -v /home/$USER/.bash_profile
 echo -ne "xrdb ~/.Xresources" > .xinitrc
 echo -ne "exec qtile start" >> .xinitrc
                                     
