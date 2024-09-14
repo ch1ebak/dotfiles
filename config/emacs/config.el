@@ -86,7 +86,13 @@
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "SPC") nil)
   (define-key evil-motion-state-map (kbd "RET") nil)
-  (define-key evil-motion-state-map (kbd "TAB") nil))
+  (define-key evil-motion-state-map (kbd "TAB") nil)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line))
+
+(setq-default evil-cross-lines t)
 (setq org-return-follows-link  t)
 
 (use-package general
@@ -162,7 +168,7 @@
     "TAB r" '(tab-rename :wk "Rename tab")
     "TAB H" '(previous-buffer :wk "Buffer previous")
     "TAB L" '(next-buffer :wk "Buffer next"))
-
+  
   (me/leader-keys
     "X" '(org-capture :wk "Org Capture")
     "A" '(org-agenda :wk "Org Agenda")
@@ -171,9 +177,10 @@
     "P" '(pocket-reader :wk "Pocket")
     "W" '(eww :wk "EWW")
     "w w" '(eww-list-bookmarks :wk "EWW Bookmarks"))
-
+  
   (general-nmap
     :keymaps 'org-mode-map
+    "m" '(:ignore t :wk "Org")
     "m a" 'org-insert-link
     "m A" 'link-hint-copy-link-at-point
     "m t" 'org-todo
@@ -186,13 +193,18 @@
     "m J" 'org-metadown
     "m K" 'org-metaup
     "M" 'org-sidebar-tree-toggle
+    "t" '(:ignore t :wk "Tabela")
     "t s" 'org-table-sort-lines
     "t a" 'org-table-sum
     "t n" 'org-table-insert-column
     "t h" 'org-table-move-column-left
     "t l" 'org-table-move-column-right
     "t j" 'org-table-move-row-down
-    "t k" 'org-table-move-row-up)
+    "n" '(:ignore t :wk "Pisownia")
+    "n f" 'flyspell-mode
+    "n c" 'flyspell-auto-correct-word
+    "n a" 'flyspell-correct-word-before-point
+    "n i" 'ispell)
   
   (general-nmap
     :keymaps 'dired-mode-map
@@ -210,6 +222,12 @@
 (use-package all-the-icons
   :ensure t
   :if (display-graphic-p))
+
+(use-package all-the-icons-nerd-fonts
+  :after all-the-icons
+  :demand t
+  :config
+  (all-the-icons-nerd-fonts-prefer))
 
 (use-package beacon
   :init
@@ -230,9 +248,9 @@
 
 (use-package dired-open
   :config
-  (setq dired-open-extensions '(("gif" . "nsxiv")
-                                ("jpg" . "nsxiv")
-                                ("png" . "nsxiv")
+  (setq dired-open-extensions '(("gif" . "feh")
+                                ("jpg" . "feh")
+                                ("png" . "feh")
                                 ("mkv" . "mpv")
                                 ("mp4" . "mpv")
                                 ("pdf" . "firefox"))))
@@ -302,6 +320,28 @@
     (eww-mode)
     (eww url)))
 
+(with-eval-after-load "ispell"
+  (setenv "LANG" "pl_PL.UTF-8")
+  (setq ispell-program-name "hunspell")
+  (setq ispell-dictionary "pl_PL,en_US")
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "pl_PL,en_US")
+  (setq ispell-personal-dictionary "~/.config/hunspell/hunspell_personal"))
+
+(setq flyspell-issue-message-flag nil)
+
+(defun insert-todays-date (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%d-%m-%Y")
+          (format-time-string "%Y-%m-%d"))))
+
+(defun insert-current-time (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%R")
+          (format-time-string "%H:%M"))))
+
 (use-package counsel
   :after ivy
   :diminish
@@ -354,6 +394,11 @@
   :config
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer))
+
+(defun kill-other-buffers ()
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
 (setq org-ellipsis " ▾")
 (setq org-src-preserve-indentation t)
@@ -445,6 +490,8 @@
 (setq pocket-reader-pop-to-url-default-function #'eww)
 (add-hook 'pocket-reader-mode (lambda () (display-line-numbers-mode 0)))
 
+(use-package powerthesaurus)
+
 (use-package rainbow-delimiters
   :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
          (clojure-mode . rainbow-delimiters-mode)))
@@ -482,23 +529,6 @@
 	  which-key-max-description-length 25
 	  which-key-allow-imprecise-window-fit nil
 	  which-key-separator " → " ))
-
-(defun insert-todays-date (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%d-%m-%Y")
-          (format-time-string "%Y-%m-%d"))))
-
-(defun insert-current-time (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%R")
-          (format-time-string "%H:%M"))))
-
-(defun kill-other-buffers ()
-  "Kill all other buffers."
-  (interactive)
-  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
 (delete-selection-mode 1)
 (electric-indent-mode -1)
@@ -560,13 +590,15 @@
   :slant 'italic)
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono NF-9"))
 
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-  :config
-  (setq doom-modeline-height 30
-        doom-modeline-bar-width 5
-        doom-modeline-buffer-file-name-style 'truncate-all))
+  (use-package doom-modeline
+    :ensure t
+    :init (doom-modeline-mode 1)
+    :config
+    (setq doom-modeline-height 30
+	  doom-modeline-bar-width 5
+	  doom-modeline-enable-word-count t
+	  doom-modeline-continuous-word-count-modes '(org-mode)
+	  doom-modeline-buffer-file-name-style 'truncate-all))
 
 (use-package doom-themes
   :config
