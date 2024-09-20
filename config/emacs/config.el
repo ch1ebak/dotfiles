@@ -10,7 +10,7 @@
 
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
-    (defvar elpaca-installer-version 0.7)
+(defvar elpaca-installer-version 0.7)
     (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
     (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
     (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
@@ -109,6 +109,8 @@
     "SPC" '(counsel-M-x :wk "M-x")
     "." '(counsel-find-file :wk "Find file")
     ">" '(dired-jump :wk "Dired")
+    "/" '((lambda () (interactive) (counsel-find-file "~/.config/")) :wk "Config directory")
+    "?" '((lambda () (interactive) (counsel-find-file "/ssd/Projekty/")) :wk "Projects directory")
     "," '(counsel-ibuffer :wk "Ibuffer")
     "<" '(kill-buffer :wk "Kill buffer"))
   
@@ -135,8 +137,8 @@
     "f p" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Emacs config.org")
     "f P" '((lambda () (interactive) (dired "~/.config/emacs/")) :wk "Emacs directory")
     "f r" '(counsel-recentf :wk "Recent files")
-    "f u" '(sudo-edit-find-file :wk "Sudo find file")
-    "f U" '(sudo-edit :wk "Sudo edit file"))
+    "f U" '(sudo-edit-find-file :wk "Sudo find file")
+    "f u" '(sudo-edit :wk "Sudo edit file"))
 
   (me/leader-keys
     "h" '(:ignore t :wk "Help")
@@ -175,6 +177,8 @@
     "N" '((lambda () (interactive) (find-file "~/Dokumenty/notatki/index-index.org")) :wk "Notes index")
     "E" '(elfeed :wk "Elfeed")
     "P" '(pocket-reader :wk "Pocket")
+    "T" '(term :wk "Terminal")
+    "M" '(magit :wk "Magit")
     "W" '(eww :wk "EWW")
     "w w" '(eww-list-bookmarks :wk "EWW Bookmarks"))
   
@@ -192,6 +196,7 @@
     "m L" 'org-metaright
     "m J" 'org-metadown
     "m K" 'org-metaup
+    "m l" 'org-cycle-list-bullet
     "M" 'org-sidebar-tree-toggle
     "t" '(:ignore t :wk "Tabela")
     "t s" 'org-table-sort-lines
@@ -222,12 +227,6 @@
 (use-package all-the-icons
   :ensure t
   :if (display-graphic-p))
-
-(use-package all-the-icons-nerd-fonts
-  :after all-the-icons
-  :demand t
-  :config
-  (all-the-icons-nerd-fonts-prefer))
 
 (use-package beacon
   :init
@@ -280,17 +279,6 @@
 (use-package emojify
   :hook (after-init . global-emojify-mode))
 
-(setq erc-prompt (lambda () (concat "[" (buffer-name) "]"))
-      erc-server "irc.libera.chat"
-      erc-nick "papaemeritusIV"
-      erc-track-shorten-start 24
-      erc-autojoin-channels-alist '(("irc.libera.chat" "#archlinux" "#linux" "#emacs"))
-      erc-kill-buffer-on-part t
-      erc-fill-column 100
-      erc-fill-function 'erc-fill-static
-      erc-fill-static-center 20
-      )
-
 (use-package evil-goggles
   :ensure t
   :config
@@ -319,16 +307,6 @@
     (switch-to-buffer (generate-new-buffer "eww"))
     (eww-mode)
     (eww url)))
-
-(with-eval-after-load "ispell"
-  (setenv "LANG" "pl_PL.UTF-8")
-  (setq ispell-program-name "hunspell")
-  (setq ispell-dictionary "pl_PL,en_US")
-  (ispell-set-spellchecker-params)
-  (ispell-hunspell-add-multi-dic "pl_PL,en_US")
-  (setq ispell-personal-dictionary "~/.config/hunspell/hunspell_personal"))
-
-(setq flyspell-issue-message-flag nil)
 
 (defun insert-todays-date (arg)
   (interactive "U")
@@ -405,9 +383,11 @@
 (setq calendar-week-start-day 1)
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
+(setq org-hide-emphasis-markers t)
 
-(setq org-todo-keywords
-  '((sequence "TODO(t)" "WAIT(w)" "FIXME(f)" "|" "CANCELED(c)" "DONE(d)")))
+(customize-set-variable 'org-blank-before-new-entry
+                        '((heading . nil)
+                          (plain-list-item . nil)))
 
 (setq org-agenda-start-with-log-mode t)
 
@@ -473,6 +453,9 @@
 
 (use-package ox-epub)
 
+(setq org-todo-keywords
+  '((sequence "TODO(t)" "WAIT(w)" "FIXME(f)" "|" "CANCELED(c)" "DONE(d)")))
+
 (use-package hl-todo
   :hook ((org-mode . hl-todo-mode)
          (prog-mode . hl-todo-mode))
@@ -490,8 +473,6 @@
 (setq pocket-reader-pop-to-url-default-function #'eww)
 (add-hook 'pocket-reader-mode (lambda () (display-line-numbers-mode 0)))
 
-(use-package powerthesaurus)
-
 (use-package rainbow-delimiters
   :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
          (clojure-mode . rainbow-delimiters-mode)))
@@ -504,11 +485,28 @@
   :init
   (solaire-global-mode +1))
 
+(with-eval-after-load "ispell"
+  (setenv "LANG" "pl_PL.UTF-8")
+  (setq ispell-program-name "hunspell")
+  (setq ispell-dictionary "pl_PL,en_US")
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "pl_PL,en_US")
+  (setq ispell-personal-dictionary "~/.config/hunspell/hunspell_personal"))
+
+(setq ispell-silently-savep t)
+(setq flyspell-issue-message-flag nil)
+;; (add-hook 'text-mode-hook 'flyspell-mode)
+
 (use-package sudo-edit)
 
 (setq tab-bar-new-tab-choice "*scratch*"
       tab-bar-close-button-show nil
       tab-bar-new-button-show nil
+      tab-bar-close-last-tab-choice 'tab-bar-mode-disable
+      tab-bar-close-tab-select 'recent
+      tab-bar-new-tab-to 'right
+      tab-bar-tab-hints nil
+      tab-bar-separator ""
       tab-bar-show 1)
 
 (use-package which-key
@@ -543,18 +541,26 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (set-fringe-mode 5)
+(blink-cursor-mode 0)
+
 (setq org-edit-src-content-indentation 0)
 (setq use-file-dialog nil)
 (setq use-dialog-box nil)
 (setq pop-up-windows nil)
 (setq inhibit-startup-screen nil)
+(setq shell-file-name "/usr/bin/bash")
+(setq-default indent-tabs-mode nil)
+(setq use-short-answers t)
 
 (setq display-line-numbers-type 'relative) 
 (global-display-line-numbers-mode)
 
 (setq conf-unix-mode t)
 (add-to-list 'auto-mode-alist '("\\.*rc$" . conf-unix-mode))
-(setq shell-file-name "/usr/bin/bash")
+
+;; Transparency
+;; (set-frame-parameter nil 'alpha-background 90)
+;; (add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
 
@@ -590,15 +596,15 @@
   :slant 'italic)
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono NF-9"))
 
-  (use-package doom-modeline
-    :ensure t
-    :init (doom-modeline-mode 1)
-    :config
-    (setq doom-modeline-height 30
-	  doom-modeline-bar-width 5
-	  doom-modeline-enable-word-count t
-	  doom-modeline-continuous-word-count-modes '(org-mode)
-	  doom-modeline-buffer-file-name-style 'truncate-all))
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :config
+ (setq doom-modeline-height 30
+	doom-modeline-bar-width 5
+	doom-modeline-enable-word-count t
+	doom-modeline-continuous-word-count-modes '(org-mode)
+	doom-modeline-buffer-file-name-style 'truncate-all))
 
 (use-package doom-themes
   :config
@@ -606,6 +612,20 @@
         doom-themes-enable-italic t)
   (load-theme 'doom-spacegrey t)
   (doom-themes-org-config))
+
+;; Configure the Modus Themes' appearance
+;; (setq modus-themes-mode-line '(borderless)
+;;       modus-themes-region '(bg-only no-extend)
+;;       modus-themes-bold-constructs t
+;;       modus-themes-italic-constructs t
+;;       modus-themes-paren-match '(bold)
+;;       modus-themes-syntax '(alt-syntax)
+;;       modus-themes-org-blocks 'gray-background
+;;       modus-themes-fringes 'subtle
+;;       modus-themes-prompts '(bold))
+
+;; Load the dark theme by default
+;; (load-theme 'modus-vivendi t)
 
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
