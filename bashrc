@@ -52,7 +52,9 @@ fastfetch
 alias pi="paru -S"
 alias pr="paru -Rns"
 alias pup="paru -Syu"
-alias pkglist="sudo pacman -Qqe > ~/Dokumenty/packages.txt"
+alias pkglist="paru -Qqe > ~/Dokumenty/packages.txt"
+alias prs="paru -Ss"
+alias pri="paru -Q | rg"
 alias pc="sudo pacman -Rns $(pacman -Qtdq)"
                                                                
 ## Commands
@@ -73,13 +75,24 @@ alias shutdown="sudo shutdown now"
 # Apps
 alias bt="bpytop"
 alias batsig="batsignal -w 20 -c 15 -d 5 -p -f 90 -b"
-alias gc="git clone"
-alias merge="xrdb -merge ~/.Xresources"
 alias ff="fastfetch"
-alias ffnc="fastfetch --config examples/6.jsonc"
 alias nvt="nvtop"
+alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o /ssd/Wideo/YouTube/"
+
+## Git
+alias dots="git clone https://github.com/ch1ebak/dotfiles"
+alias gc="git clone"
                                                                
 ## Emacs
 alias em="/usr/bin/emacs -nw"
 alias emacsd="/usr/bin/emacs --daemon &"
 alias kemacs="killall emacs"
+
+## System
+alias ctnc="setxkbmap -option ctrl:nocaps"
+alias merge="xrdb -merge ~/.Xresources"
+alias xbl="xbacklight -set"
+
+## Wallpapers
+alias fehs="feh --bg-fill"
+alias wlp="shuf -e -n1 $HOME/Obrazy/tapety/* | xargs feh --bg-fill"
