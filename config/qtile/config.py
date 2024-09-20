@@ -31,9 +31,10 @@ keys = [
     Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
 
-    Key([mod], "c", lazy.spawn("rofi -m 1 -show window")),
-
     Key([mod], "s", lazy.spawn("rofi -m 1 -show drun")),
+    
+    # Cycle wallpaper - Feh required
+    Key([mod], "v", lazy.spawn("/home/kd/.config/qtile/wallpaper.sh")),
 
     # Power menu
     Key([mod], "p", lazy.spawn("slock")),
@@ -46,6 +47,7 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown()),
 
     # Switch between screens (2 monitors)
+    Key([mod], "c", lazy.spawn("rofi -m 1 -show window")),
     Key([mod], "z", lazy.to_screen(1)),
     Key([mod], "x", lazy.to_screen(0)),
 
@@ -83,7 +85,7 @@ groups = [
     Group("2", label="", layout='monadtall'),
     Group("3", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
     Group("4", label="", layout='monadtall', matches=[Match(wm_class=["alacritty", "Alacritty"])]),
-    Group("5", label="", layout='monadtall', matches=[Match(wm_class=["thunar"])]),
+    Group("5", label="", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
     Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "kcc", "qbittorrent", "nitrogen", "openrgb", "lxappearance", "virt-manager", "gimp-2.10"])]),
     Group("7", label="", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
     Group("8", label="", layout='max', matches=[Match(wm_class=["spotify"])]),
@@ -394,11 +396,9 @@ def start_once():
     qtile.cmd_spawn("xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --rate 144 --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --rate 144")
     qtile.cmd_spawn("/usr/bin/emacs --daemon &")
     qtile.cmd_spawn("nm-applet &")
-    qtile.cmd_spawn("nitrogen --restore &")
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
-    # qtile.cmd_spawn("batsignal -w 20 -c 15 -d 5 -p -f 90 -b")
-    qtile.cmd_spawn("xbacklight -set 60")
+    qtile.cmd_spawn("xbacklight -set 50")
     for p in processes:
         subprocess.Popen(p)
 
