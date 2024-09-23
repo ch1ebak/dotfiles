@@ -124,25 +124,26 @@
 
   (me/leader-keys
     "SPC" '(counsel-M-x :wk "M-x")
+    "RET" '(dired-jump :wk "Dired")
+    "/" '(counsel-ibuffer :wk "Ibuffer")
+    "?" '(kill-buffer :wk "Kill buffer")
     "." '(counsel-find-file :wk "Find file")
-    ">" '(dired-jump :wk "Dired")
-    "/" '((lambda () (interactive) (counsel-find-file "~/.dotfiles/")) :wk "Dotfiles directory")
-    "?" '((lambda () (interactive) (counsel-find-file "/ssd/Projekty/")) :wk "Projects directory")
-    "," '(counsel-ibuffer :wk "Ibuffer")
-    "<" '(kill-buffer :wk "Kill buffer"))
-  
+    ">" '((lambda () (interactive) (dired "~/.dotfiles/")) :wk "Dotfiles directory")
+    "," '(counsel-fzf :wk "Fuzzy finding")
+    "<" '(counsel-rg :wk "Grep"))
+                                                                                    
+  (me/leader-keys
+    "s" '(:ignore t :wk "Search")
+    "s i" '(swiper :wk "Swiper")
+    "s p" '(swiper-thing-at-point :wk "Search thing at point")
+    "s b" '(swiper-isearch :wk "Isearch")
+    "s l" '(counsel-imenu :wk "Imenu"))
+
   (me/leader-keys
     "b" '(:ignore t :wk "Bookmarks")
     "b m" '(bookmark-set :wk "Add to bookmarks")
     "b s" '(bookmark-save :wk "Save bookmarks")
-    "RET" '(counsel-bookmark :wk "List bookmarks"))
-
-  (me/leader-keys
-    "s" '(:ignore t :wk "Search")
-    "s b" '(swiper :wk "Swiper")
-    "s l" '(counsel-imenu :wk "Imenu")
-    "s r" '(counsel-rg :wk "Grep")
-    "s f" '(counsel-fzf :wk "Fuzzy finding"))
+    "b a" '(counsel-bookmark :wk "List bookmarks"))
 
   (me/leader-keys
     "c" '(:ignore t :wk "Comments")
@@ -151,26 +152,23 @@
 
   (me/leader-keys
     "f" '(:ignore t :wk "Files")
-    "f p" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Emacs config.org")
-    "f P" '((lambda () (interactive) (dired "~/.config/emacs/")) :wk "Emacs directory")
     "f r" '(counsel-recentf :wk "Recent files")
+    "f u" '(sudo-edit :wk "Sudo edit file")
     "f U" '(sudo-edit-find-file :wk "Sudo find file")
-    "f u" '(sudo-edit :wk "Sudo edit file"))
-
+    "f p" '((lambda () (interactive) (find-file "~/.dotfiles/.config/emacs/config.org")) :wk "Emacs Config")
+    "f n" '((lambda () (interactive) (find-file "~/Dokumenty/notatki/index-index.org")) :wk "Notes index"))
+  
   (me/leader-keys
-    "h" '(:ignore t :wk "Help")
-    "h c" '(:ignore t :wk "Customize")
-    "h c t" '(counsel-load-theme :wk "Change theme")
-    "h c g" '(customize-group :wk "Customize group")
-    "h d" '(:ignore t :wk "Describe")
-    "h d f" '(describe-function :wk "Describe function")
-    "h d v" '(describe-variable :wk "Describe variable")
+    "h" '(:ignore t :wk "Emacs")
+    "h /" '(help :wk "Help")
+    "h ?" '(helpful-at-point :wk "Describe at point")
+    "h t" '(counsel-load-theme :wk "Change theme")
     "h e" '(:ignore t :wk "Elpaca")
     "h e m" '(elpaca-manager :wk "Elpaca manager")
     "h e u" '(elpaca-update-all :wk "Elpaca: update packages")
     "h e d" '(elpaca-delete :wk "Elpaca: delete package")
     "h r" '(:ignore t :wk "Reload")
-    "h r r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el") (ignore (elpaca-process-queues))) :wk "Reload emacs config"))
+    "h r r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el") (ignore (elpaca-process-queues))) :wk "Reload emacs config"))
 
   (me/leader-keys
     "TAB" '(:ignore t :wk "Windows/Buffers/Tabs")
@@ -189,15 +187,14 @@
     "TAB L" '(next-buffer :wk "Buffer next"))
   
   (me/leader-keys
-    "X" '(org-capture :wk "Org Capture")
-    "A" '(org-agenda :wk "Org Agenda")
-    "N" '((lambda () (interactive) (find-file "~/Dokumenty/notatki/index-index.org")) :wk "Notes index")
-    "E" '(elfeed :wk "Elfeed")
-    "P" '(pocket-reader :wk "Pocket")
-    "T" '(term :wk "Terminal")
-    "M" '(magit :wk "Magit")
-    "W" '(eww :wk "EWW")
-    "w w" '(eww-list-bookmarks :wk "EWW Bookmarks"))
+    "p" '(:ignore t :wk "Packages")
+    "p x" '(org-capture :wk "Org Capture")
+    "p a" '(org-agenda :wk "Org Agenda")
+    "p e" '(elfeed :wk "Elfeed")
+    "p p" '(pocket-reader :wk "Pocket")
+    "p t" '(term :wk "Terminal")
+    "p w" '(eww :wk "EWW")
+    "p W" '(eww-list-bookmarks :wk "EWW Bookmarks"))
   
   (general-nmap
     :keymaps 'org-mode-map
@@ -222,11 +219,11 @@
     "t h" 'org-table-move-column-left
     "t l" 'org-table-move-column-right
     "t j" 'org-table-move-row-down
-    "n" '(:ignore t :wk "Pisownia")
-    "n f" 'flyspell-mode
-    "n c" 'flyspell-auto-correct-word
-    "n a" 'flyspell-correct-word-before-point
-    "n i" 'ispell)
+    "s" '(:ignore t :wk "Pisownia")
+    "s f" 'flyspell-mode
+    "s c" 'flyspell-auto-correct-word
+    "s a" 'flyspell-correct-word-before-point
+    "s i" 'ispell)
   
   (general-nmap
     :keymaps 'dired-mode-map
@@ -293,7 +290,7 @@
 (use-package elfeed
   :config
   (setq elfeed-search-feed-face ":foreground #b3b8c3 :weight bold")
-  (setq elfeed-db-directory "~/.config/emacs/files/elfeed/database"))
+  (setq elfeed-db-directory "~/.dotfiles/.config/emacs/files/elfeed/database"))
 
 (defun elfeed-mark-all-as-read ()
   (interactive)
@@ -315,7 +312,7 @@
 (use-package elfeed-org
   :ensure t
   :config
-  (setq rmh-elfeed-org-files (list "~/.config/emacs/files/elfeed/elfeed.org"))
+  (setq rmh-elfeed-org-files (list "~/.dotfiles/.config/emacs/files/elfeed/elfeed.org"))
   (elfeed-org))
 #+end_src
 
@@ -346,7 +343,7 @@
  shr-width 170
  eww-auto-rename-buffer 1
  eww-download-directory "~/Pobrane"
- eww-bookmarks-directory "~/.config/emacs/files/"
+ eww-bookmarks-directory "~/.dotfiles/.config/emacs/files/"
  eww-search-prefix "https://frogfind.com/?q="
  browse-url-secondary-browser-function 'browse-url-firefox)
 
@@ -358,6 +355,11 @@
     (switch-to-buffer (generate-new-buffer "eww"))
     (eww-mode)
     (eww url)))
+#+end_src
+
+** [[https://github.com/Wilfred/helpful][Helpful]]
+#+begin_src emacs-lisp
+(use-package helpful)
 #+end_src
 
 ** Insert date / time 
@@ -405,6 +407,9 @@
     (setq enable-recursive-minibuffers t)
   :config
     (ivy-mode))
+
+(setq counsel-describe-function-function #'helpful-callable)
+(setq counsel-describe-variable-function #'helpful-variable)
 #+end_src
 
 *** [[https://github.com/seagle0128/all-the-icons-ivy-rich][Ivy Icons]]
@@ -608,7 +613,7 @@
   (setq ispell-dictionary "pl_PL,en_US")
   (ispell-set-spellchecker-params)
   (ispell-hunspell-add-multi-dic "pl_PL,en_US")
-  (setq ispell-personal-dictionary "~/.config/hunspell/hunspell_personal"))
+  (setq ispell-personal-dictionary "~/.dotfiles/.config/emacs/files/hunspell_personal"))
 
 (setq ispell-silently-savep t)
 (setq flyspell-issue-message-flag nil)
@@ -690,6 +695,8 @@
 ;; Transparency
 ;; (set-frame-parameter nil 'alpha-background 90)
 ;; (add-to-list 'default-frame-alist '(alpha-background . 90))
+
+(winner-mode 1)
 #+end_src
 
 *** Clean-up
@@ -704,9 +711,9 @@
 *** Files
 #+begin_src emacs-lisp
 (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
-(setq user-emacs-directory "~/.config/emacs")
-(setq bookmark-default-file "~/.config/emacs/files/bookmarks")
-(setq recentf-save-file "~/.config/emacs/files/recentf")
+(setq user-emacs-directory "~/.dotfiles/.config/emacs")
+(setq bookmark-default-file "~/.dotfiles/.config/emacs/files/bookmarks")
+(setq recentf-save-file "~/.dotfiles/.config/emacs/files/recentf")
 (setq auth-sources '("~/Dokumenty/tajne/.authinfo.gpg"))
 #+end_src
 
