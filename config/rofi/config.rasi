@@ -1,4 +1,4 @@
-@theme "/home/kd/.config/rofi/themes/spacegray-simple.rasi"
+@theme "/home/kd/.config/rofi/themes/spacegray-wl.rasi"
 
 configuration {
   modi: "drun,window";
