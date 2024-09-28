@@ -33,9 +33,6 @@ keys = [
 
     Key([mod], "s", lazy.spawn("rofi -m 1 -show drun")),
     
-    # Cycle wallpaper - Feh required
-    Key([mod], "v", lazy.spawn("/home/kd/.config/qtile/wallpaper.sh")),
-
     # Power menu
     Key([mod], "p", lazy.spawn("slock")),
     Key([mod, "shift"], "p", lazy.spawn("rofi -m 1 -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu")),
@@ -86,7 +83,7 @@ groups = [
     Group("3", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
     Group("4", label="", layout='monadtall', matches=[Match(wm_class=["alacritty", "Alacritty"])]),
     Group("5", label="", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
-    Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "kcc", "qbittorrent", "nitrogen", "openrgb", "lxappearance", "virt-manager", "gimp-2.10"])]),
+    Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "gimp-2.10", "nwg-look"])]),
     Group("7", label="", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
     Group("8", label="", layout='max', matches=[Match(wm_class=["spotify"])]),
     Group("9", label="", layout='max', matches=[Match(wm_class=["mpv"])])
@@ -125,7 +122,7 @@ colors = [
 
 # LAYOUTS
 layout_theme = {"border_width": 2,
-                "margin": 6,
+                "margin": 3,
                 "border_focus": colors[5],
                 "border_normal": colors[2]
                 }
@@ -148,6 +145,8 @@ widget_defaults = dict(
 # SCREENS
 screens = [
  Screen(
+         wallpaper = "/home/kd/Obrazy/tapety/00055.jpg",
+         wallpaper_mode = "fill",
          top=bar.Bar(
              [
              widget.Sep(
@@ -260,9 +259,11 @@ screens = [
                      ),
              ],
              25,
-             # margin = [6, 6, 0, 6]
+             # margin = [3, 3, 0, 3]
              ), ),
  Screen(
+         wallpaper = "/home/kd/Obrazy/tapety/00055.jpg",
+         wallpaper_mode = "fill",
          top=bar.Bar(
              [
              widget.Sep(
@@ -367,7 +368,7 @@ screens = [
                      ),
              ],
              25,
-             # margin = [6, 6, 0, 6]
+             # margin = [3, 3, 0, 3]
              ), ),
 ]
 
@@ -398,7 +399,7 @@ def start_once():
     qtile.cmd_spawn("nm-applet &")
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
-    qtile.cmd_spawn("xbacklight -set 50")
+    qtile.cmd_spawn("brightnessctl set 60%")
     for p in processes:
         subprocess.Popen(p)
 
