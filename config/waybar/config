@@ -2,7 +2,7 @@
     "layer": "top",
     "position": "top",
     "height": 20,
-    "margin-top": 6,
+    "margin-top": 3,
     "modules-left": ["hyprland/window"],
     "modules-center": ["hyprland/workspaces"],
     "modules-right": ["battery", "cpu", "memory", "clock", "tray"],
@@ -37,23 +37,27 @@
     },
 
     "hyprland/workspaces": {
-        "format": "{icon}",
+        "all-outputs": true,
+        "sort-by-number": true,
         "on-click": "activate",
+        "format": "{icon}",
+        "move-to-monitor": true,
         "format-icons": {
             "1": "󰭹",
             "2": "󰈹",
             "3": "󰈔",
             "4": "",
             "5": "󰉋",
-            "6": "󰵆",
+            "6": "󰕊",
             "7": "󰓓",
             "8": "󰝚",
             "9": "󰕧",
-        },
-        "sort-by-number": true
+        }
     },
     
    "hyprland/window": {
-       "separate-outputs": true
+       "separate-outputs": true,
+       "format": "{title}"
    }
+
 }

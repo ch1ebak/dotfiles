@@ -2,7 +2,7 @@
     font-family: 'JetBrainsMono NF', sans-serif;
     font-weight: bold;
     font-size: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 window#waybar {
@@ -20,13 +20,13 @@ window#waybar {
 }
 
 .modules-left {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 .modules-right {
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-right: 3px;
+    padding-left: 3px;
 }
 
 .modules-center {
@@ -47,16 +47,6 @@ window#waybar {
     margin-left: 10px;
     color: #e5c179;
     background-color: #20242d;
-}
-
-#battery.critical:not(.charging) {
-    background-color: #b04b57;
-    color: #b3b8c3;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: steps(12);
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
 }
 
 #cpu {
