@@ -10,8 +10,8 @@
 export TERM="alacritty"
 export VISUAL="emacsclient -c -a emacs"
 export EDITOR="emacsclient -t -a """
-export ALTERNATE_EDITOR="vim"
 export MANPAGER="less"
+export FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! -type d \! -name '\''*.tags'\'' -printf '\''%P\n'\'
 
 ## Options
 bind "set colored-stats on"
@@ -53,16 +53,17 @@ alias pi="paru -S"
 alias pr="paru -Rns"
 alias pup="paru -Syu"
 alias pkglist="paru -Qqe > ~/Dokumenty/packages.txt"
-alias prs="paru -Ss"
 alias pri="paru -Q | rg"
-alias pc="sudo pacman -Rns $(pacman -Qtdq)"
+alias prs="pacman -Ss"
                                                                
 ## Commands
-alias ..="cd .."
+alias ..="z .."
+alias z.="z .."
+alias cd="z"
 alias cp="cp -i"
 alias df="df -hl --exclude-type=tmpfs --exclude-type=devtmpfs"
 alias fd="fd --hidden --ignore-case"
-alias grep="rg"
+alias grep="rg -i --hidden"
 alias ls="ls -lA --color=always --group-directories-first"
 alias mkd="mkdir -pv"
 alias mv="mv -i"
@@ -72,16 +73,17 @@ alias rm="trash -vi"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
                                                                
-# Apps
+## Apps
 alias bt="bpytop"
 alias batsig="batsignal -w 20 -c 15 -d 5 -p -f 90 -b"
+alias dunres="killall -e dunst & sleep 1; dunstify "hello!" &"
 alias ff="fastfetch"
 alias nvt="nvtop"
-alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o /ssd/Wideo/YouTube/"
+alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
 
 ## Git
-alias dots="git clone https://github.com/ch1ebak/dotfiles"
 alias gc="git clone"
+alias gdots="git clone https://github.com/ch1ebak/dotfiles"
                                                                
 ## Emacs
 alias em="/usr/bin/emacs -nw"
@@ -89,10 +91,15 @@ alias emacsd="/usr/bin/emacs --daemon &"
 alias kemacs="killall emacs"
 
 ## System
-alias ctnc="setxkbmap -option ctrl:nocaps"
 alias merge="xrdb -merge ~/.Xresources"
 alias xbl="xbacklight -set"
 
 ## Wallpapers
 alias fehs="feh --bg-fill"
 alias wlp="shuf -e -n1 $HOME/Obrazy/tapety/* | xargs feh --bg-fill"
+
+# FZF
+eval "$(fzf --bash)"
+
+# Zoxide
+eval "$(zoxide init bash)"
