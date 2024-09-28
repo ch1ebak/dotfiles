@@ -88,7 +88,7 @@
     (setq evil-want-keybinding nil)
     (setq evil-vsplit-window-right t)
     (setq evil-split-window-below t)
-    (setq evil-undo-system 'undo-redo)
+    (setq evil-undo-system 'undo-fu)
     (evil-mode))
 
 (use-package evil-collection
@@ -124,20 +124,29 @@
 
   (me/leader-keys
     "SPC" '(counsel-M-x :wk "M-x")
-    "RET" '(dired-jump :wk "Dired")
+    "RET" '(counsel-find-file :wk "Find file")
     "/" '(counsel-ibuffer :wk "Ibuffer")
     "?" '(kill-buffer :wk "Kill buffer")
-    "." '(counsel-find-file :wk "Find file")
-    ">" '((lambda () (interactive) (dired "~/.dotfiles/")) :wk "Dotfiles directory")
+    "." '((lambda () (interactive) (counsel-find-file "~/.dotfiles/")) :wk "Dotfiles directory")
+    ">" '((lambda () (interactive) (counsel-find-file "~/Dokumenty/notatki/")) :wk "Notes directory")
     "," '(counsel-fzf :wk "Fuzzy finding")
     "<" '(counsel-rg :wk "Grep"))
                                                                                     
   (me/leader-keys
-    "s" '(:ignore t :wk "Search")
-    "s i" '(swiper :wk "Swiper")
-    "s p" '(swiper-thing-at-point :wk "Search thing at point")
-    "s b" '(swiper-isearch :wk "Isearch")
-    "s l" '(counsel-imenu :wk "Imenu"))
+    "TAB" '(:ignore t :wk "Buffers/Tabs/Windows")
+    "TAB q" '(evil-window-delete :wk "Close window")
+    "TAB x" '(kill-other-buffers :wk "Kill other buffers")
+    "TAB RET" '(evil-window-vnew :wk "New window")
+    "TAB h" '(evil-window-left :wk "Window left")
+    "TAB l" '(evil-window-right :wk "Window down")
+    "TAB J" '(evil-window-move-far-left :wk "Move window left")
+    "TAB K" '(evil-window-move-far-right :wk "Move window right")
+    "TAB n" '(tab-new :wk "New tab")
+    "TAB j" '(tab-next :wk "Next tab")
+    "TAB k" '(tab-previous :wk "Previous tab")
+    "TAB r" '(tab-rename :wk "Rename tab")
+    "TAB H" '(previous-buffer :wk "Buffer previous")
+    "TAB L" '(next-buffer :wk "Buffer next"))
 
   (me/leader-keys
     "b" '(:ignore t :wk "Bookmarks")
@@ -149,14 +158,6 @@
     "c" '(:ignore t :wk "Comments")
     "c c" '(comment-line :wk "Comment Line")
     "c r" '(comment-or-uncomment-region :wk "Comment Region"))
-
-  (me/leader-keys
-    "f" '(:ignore t :wk "Files")
-    "f r" '(counsel-recentf :wk "Recent files")
-    "f u" '(sudo-edit :wk "Sudo edit file")
-    "f U" '(sudo-edit-find-file :wk "Sudo find file")
-    "f p" '((lambda () (interactive) (find-file "~/.dotfiles/.config/emacs/config.org")) :wk "Emacs Config")
-    "f n" '((lambda () (interactive) (find-file "~/Dokumenty/notatki/index-index.org")) :wk "Notes index"))
   
   (me/leader-keys
     "h" '(:ignore t :wk "Emacs")
@@ -171,21 +172,12 @@
     "h r r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el") (ignore (elpaca-process-queues))) :wk "Reload emacs config"))
 
   (me/leader-keys
-    "TAB" '(:ignore t :wk "Windows/Buffers/Tabs")
-    "TAB q" '(evil-window-delete :wk "Close window")
-    "TAB x" '(kill-other-buffers :wk "Kill other buffers")
-    "TAB RET" '(evil-window-vnew :wk "New window")
-    "TAB h" '(evil-window-left :wk "Window left")
-    "TAB l" '(evil-window-right :wk "Window down")
-    "TAB J" '(evil-window-move-far-left :wk "Move window left")
-    "TAB K" '(evil-window-move-far-right :wk "Move window right")
-    "TAB n" '(tab-new :wk "New tab")
-    "TAB j" '(tab-next :wk "Next tab")
-    "TAB k" '(tab-previous :wk "Previous tab")
-    "TAB r" '(tab-rename :wk "Rename tab")
-    "TAB H" '(previous-buffer :wk "Buffer previous")
-    "TAB L" '(next-buffer :wk "Buffer next"))
-  
+    "f" '(:ignore t :wk "Files")
+    "f r" '(counsel-recentf :wk "Recent files")
+    "f u" '(sudo-edit :wk "Sudo edit file")
+    "f U" '(sudo-edit-find-file :wk "Sudo find file")
+    "f p" '((lambda () (interactive) (find-file "~/.dotfiles/.config/emacs/config.org")) :wk "Emacs Config"))
+
   (me/leader-keys
     "p" '(:ignore t :wk "Packages")
     "p x" '(org-capture :wk "Org Capture")
@@ -195,6 +187,13 @@
     "p t" '(term :wk "Terminal")
     "p w" '(eww :wk "EWW")
     "p W" '(eww-list-bookmarks :wk "EWW Bookmarks"))
+
+  (me/leader-keys
+    "s" '(:ignore t :wk "Search")
+    "s i" '(swiper :wk "Swiper")
+    "s p" '(swiper-thing-at-point :wk "Search thing at point")
+    "s b" '(swiper-isearch :wk "Isearch")
+    "s l" '(counsel-imenu :wk "Imenu"))
   
   (general-nmap
     :keymaps 'org-mode-map
@@ -206,6 +205,7 @@
     "m s" 'org-schedule
     "m r" 'org-refile
     "m p" 'org-priority
+    "m c" 'org-toggle-checkbox
     "m H" 'org-metaleft
     "m L" 'org-metaright
     "m J" 'org-metadown
@@ -277,9 +277,9 @@
 #+begin_src emacs-lisp
 (use-package dired-open
   :config
-  (setq dired-open-extensions '(("gif" . "feh")
-                                ("jpg" . "feh")
-                                ("png" . "feh")
+  (setq dired-open-extensions '(("gif" . "nsxiv")
+                                ("jpg" . "nsxiv")
+                                ("png" . "nsxiv")
                                 ("mkv" . "mpv")
                                 ("mp4" . "mpv")
                                 ("pdf" . "firefox"))))
@@ -377,6 +377,21 @@
           (format-time-string "%H:%M"))))
 #+end_src
 
+** Ispell / Flyspell
+#+begin_src emacs-lisp
+(with-eval-after-load "ispell"
+  (setenv "LANG" "pl_PL.UTF-8")
+  (setq ispell-program-name "hunspell")
+  (setq ispell-dictionary "pl_PL,en_US")
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "pl_PL,en_US")
+  (setq ispell-personal-dictionary "~/.dotfiles/.config/emacs/files/hunspell_personal"))
+
+(setq ispell-silently-savep t)
+(setq flyspell-issue-message-flag nil)
+(add-hook 'text-mode-hook 'flyspell-mode)
+#+end_src
+
 ** [[https://github.com/abo-abo/swiper][Ivy]]
 #+begin_src emacs-lisp
 (use-package counsel
@@ -453,6 +468,20 @@
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 #+end_src
 
+** [[https://github.com/mickeynp/ligature.el][Ligature]]
+#+begin_src emacs-lisp
+(use-package ligature
+  :hook (prog-mode . ligature-mode)
+  :config
+  ;; Some ligatures supported by most fonts. E.g. Fira Code, Victor Mono
+  (ligature-set-ligatures 'prog-mode '("~~>" "##" "|-" "-|" "|->" "|=" ">-" "<-" "<--" "->"
+                                       "-->" "-<" ">->" ">>-" "<<-" "<->" "->>" "-<<" "<-<"
+                                       "==>" "=>" "=/=" "!==" "!=" "<==" ">>=" "=>>" ">=>"
+                                       "<=>" "<=<" "=<=" "=>=" "<<=" "=<<"
+                                       "=:=" "=!=" "==" "===" "::" ":=" ":>" ":<" ">:"
+                                       ";;" "__" "&&" "++")))
+#+end_src
+
 ** Org-mode
 #+begin_src emacs-lisp
 (setq org-ellipsis " ▾")
@@ -471,12 +500,11 @@
 #+begin_src emacs-lisp
 (setq org-agenda-start-with-log-mode t)
 
-;; (setq org-agenda-files '("~/Dokumenty/notatki/agenda/"))
 (setq org-agenda-files
-  '("~/Dokumenty/notatki/agenda/agenda-taski.org"
-    "~/Dokumenty/notatki/agenda/agenda-nawyki.org"
-    "~/Dokumenty/notatki/agenda/agenda-powtarzalne.org"
-    "~/Dokumenty/notatki/agenda/agenda-ważne.org"))
+  '("~/Dokumenty/notatki/agenda-taski.org"
+    "~/Dokumenty/notatki/agenda-nawyki.org"
+    "~/Dokumenty/notatki/agenda-powtarzalne.org"
+    "~/Dokumenty/notatki/agenda-ważne.org"))
 
 (setq org-agenda-span 10
       org-agenda-start-on-weekday nil
@@ -509,7 +537,7 @@
 *** Org Capture
 #+begin_src emacs-lisp
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/Dokumenty/notatki/agenda/agenda-taski.org" "ZADANIA")
+      '(("t" "Todo" entry (file+headline "~/Dokumenty/notatki/agenda-taski.org" "ZADANIA")
          "* TODO %?\n  %i\n ")))
 #+end_src
 
@@ -594,8 +622,9 @@
 ** [[https://github.com/emacsmirror/rainbow-mode][Rainbow Mode]]
 #+begin_src emacs-lisp
 (use-package rainbow-mode
-  :diminish
-  :hook org-mode prog-mode)
+  :defer
+  :ensure t
+  :hook (prog-mode . rainbow-mode))
 #+end_src
 
 ** [[https://github.com/hlissner/emacs-solaire-mode][Solaire Mode]]
@@ -603,21 +632,6 @@
 (use-package solaire-mode
   :init
   (solaire-global-mode +1))
-#+end_src
-
-** Spelling
-#+begin_src emacs-lisp
-(with-eval-after-load "ispell"
-  (setenv "LANG" "pl_PL.UTF-8")
-  (setq ispell-program-name "hunspell")
-  (setq ispell-dictionary "pl_PL,en_US")
-  (ispell-set-spellchecker-params)
-  (ispell-hunspell-add-multi-dic "pl_PL,en_US")
-  (setq ispell-personal-dictionary "~/.dotfiles/.config/emacs/files/hunspell_personal"))
-
-(setq ispell-silently-savep t)
-(setq flyspell-issue-message-flag nil)
-;; (add-hook 'text-mode-hook 'flyspell-mode)
 #+end_src
 
 ** [[https://github.com/nflath/sudo-edit][Sudo Edit]]
@@ -636,6 +650,11 @@
       tab-bar-tab-hints nil
       tab-bar-separator ""
       tab-bar-show 1)
+#+end_src
+
+** [[https://github.com/emacsmirror/undo-fu][Undo-fu]]
+#+begin_src emacs-lisp
+(use-package undo-fu)
 #+end_src
 
 ** [[https://github.com/justbur/emacs-which-key][Which Key]]
@@ -768,23 +787,6 @@
         doom-themes-enable-italic t)
   (load-theme 'doom-spacegrey t)
   (doom-themes-org-config))
-#+end_src
-
-**** [[https://protesilaos.com/emacs/modus-themes][Modus Themes]]
-#+begin_src emacs-lisp
-;; Configure the Modus Themes' appearance
-;; (setq modus-themes-mode-line '(borderless)
-;;       modus-themes-region '(bg-only no-extend)
-;;       modus-themes-bold-constructs t
-;;       modus-themes-italic-constructs t
-;;       modus-themes-paren-match '(bold)
-;;       modus-themes-syntax '(alt-syntax)
-;;       modus-themes-org-blocks 'gray-background
-;;       modus-themes-fringes 'subtle
-;;       modus-themes-prompts '(bold))
-
-;; Load the dark theme by default
-;; (load-theme 'modus-vivendi t)
 #+end_src
 
 * RUNTIME PERFORMANCE
