@@ -1,3 +1,9 @@
+#+title: ch1ebak's cool qtile config
+#+author: ch1ebak
+#+property: header-args :tangle config.py
+
+* IMPORTS
+#+begin_src python
 import os
 import subprocess
 import re
@@ -7,10 +13,17 @@ from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.widget import spacer
 from typing import List
+#+end_src
 
+* KEYS
+** General
+#+begin_src python
 mod = "mod4"
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
+#+end_src
 
+** Keybindings
+#+begin_src python
 keys = [
      # Apps
     Key([mod], "Return", lazy.spawn("alacritty")),
@@ -63,7 +76,10 @@ keys = [
     Key([mod], "Tab", lazy.next_layout()),
     Key([mod], "Space", lazy.window.toggle_fullscreen())
 ]
+#+end_src
 
+* GROUPS
+#+begin_src python
 groups = [
     Group("1", label="", layout='max', matches=[Match(wm_class=["ferdium"])]),
     Group("2", label="", layout='monadtall'),
@@ -75,7 +91,10 @@ groups = [
     Group("8", label="", layout='max', matches=[Match(wm_class=["spotify"])]),
     Group("9", label="", layout='max', matches=[Match(wm_class=["mpv"])])
     ]
+#+end_src
 
+** Move windows between groups
+#+begin_src python
 for i in groups:
     keys.extend(
         [
@@ -93,7 +112,10 @@ for i in groups:
             ),
         ]
     )
+#+end_src
 
+* COLOR SCHEME
+#+begin_src python
 colors = [
     ["#20242d"],  # 0
     ["#363942"],  # 1
@@ -107,7 +129,10 @@ colors = [
     ["#a47996"],  # 9
     ["#85a7a5"]   # 10
 ]
+#+end_src
 
+* LAYOUTS
+#+begin_src python
 layout_theme = {"border_width": 2,
     "margin": 6,
     "border_focus": colors[5],
@@ -119,7 +144,11 @@ layouts = [
     layout.MonadTall(**layout_theme),
     layout.MonadThreeCol(**layout_theme)
 ]
+#+end_src
 
+* BAR
+** Widgets
+#+begin_src python
 widget_defaults = dict(
     font='JetBrainsMono NF Bold',
     fontsize=10,
@@ -127,7 +156,10 @@ widget_defaults = dict(
     foreground = colors[4],
     background = colors[0]
     )
+#+end_src
 
+** Screens
+#+begin_src python
 screens = [
     Screen(
         wallpaper = "~/Obrazy/tapety/sg/00179.png",
@@ -349,7 +381,10 @@ screens = [
         )
     )
 ]
+#+end_src
 
+* SETTINGS
+#+begin_src python
 auto_fullscreen = True
 auto_minimize = True
 bring_front_click = False
@@ -360,7 +395,10 @@ focus_on_window_activation = "focus"
 follow_mouse_focus = False
 reconfigure_screens = True
 wmname = "LG3D"
+#+end_src
 
+** Floating
+#+begin_src python
 floats_kept_above = True,
 floating_layout = layout.Floating(
     border_width = 2,
@@ -375,7 +413,10 @@ floating_layout = layout.Floating(
         Match(title="branchdialog"),
         Match(title="pinentry"),
         Match(wm_class="notification")])
+#+end_src
 
+* AUTOSTART
+#+begin_src python
 @hook.subscribe.startup_once
 def start_once():
     qtile.cmd_spawn("xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --rate 144 --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --rate 165")
@@ -386,3 +427,4 @@ def start_once():
     qtile.cmd_spawn("brightnessctl set 60%")
     for p in processes:
         subprocess.Popen(p)
+#+end_src
