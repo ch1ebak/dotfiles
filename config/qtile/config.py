@@ -22,20 +22,17 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 keys = [
      # Apps
     Key([mod], "Return", lazy.spawn("alacritty")),
-
     Key([mod], "w", lazy.spawn("firefox")),
     Key([mod, "shift"], "w", lazy.spawn("/usr/bin/firefox --private-window")),
-
     Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'")),
-
     Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
-
-    Key([mod], "s", lazy.spawn("rofi -m 1 -show drun")),
     
-    # Power menu
+    # Menu
+    Key([mod], "s", lazy.spawn("rofi -m 1 -show drun")),
     Key([mod], "p", lazy.spawn("slock")),
     Key([mod, "shift"], "p", lazy.spawn("rofi -m 1 -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu")),
+    Key([mod], "v", lazy.spawn("/home/kd/.config/qtile/wallpaper.sh")),
 
     # App control
     Key([mod], "q", lazy.window.kill()),
@@ -44,17 +41,16 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown()),
 
     # Switch between screens (2 monitors)
-    Key([mod], "c", lazy.spawn("rofi -m 1 -show window")),
     Key([mod], "z", lazy.to_screen(1)),
     Key([mod], "x", lazy.to_screen(0)),
 
-    # Switch between windows
-    Key([mod], "h", lazy.layout.down()),
-    Key([mod], "l", lazy.layout.next()),
-
-    # Switch between groups
+    # Scroll through groups
     Key([mod], 'j', lazy.screen.prev_group(skip_managed=True, )),
     Key([mod], 'k', lazy.screen.next_group(skip_managed=True, )),
+    
+    # Move focus
+    Key([mod], "h", lazy.layout.down()),
+    Key([mod], "l", lazy.layout.next()),
 
     # Move windows
     Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
@@ -62,7 +58,7 @@ keys = [
     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
 
-    # Grow windows.
+    # Resize windows
     Key([mod, "control"], "n", lazy.layout.normalize()),
     Key([mod, "control"], "h", lazy.layout.grow_left()),
     Key([mod, "control"], "l", lazy.layout.grow_right()),
@@ -109,20 +105,23 @@ for i in groups:
     )
     
 # COLOR SCHEME
-colors = [                       
- ["#20242d", "#20242d"],  # 0
- ["#363942", "#363942"],  # 1
- ["#4c4f56", "#4c4f56"],  # 2
- ["#62656c", "#62656c"],  # 3
- ["#b04b57", "#b04b57"],  # 4
- ["#b04b57", "#b04b57"],  # 5
- ["#b04b57", "#b04b57"],  # 6
- ["#B3B8C3", "#B3B8C3"]   # 7
+colors = [
+ ["#20242d"],  # 0
+ ["#363942"],  # 1
+ ["#4c4f56"],  # 2
+ ["#62656c"],  # 3
+ ["#B3B8C3"],  # 4
+ ["#b04b57"],  # 5
+ ["#87b379"],  # 6
+ ["#e5c179"],  # 7
+ ["#7d8fa4"],  # 8
+ ["#a47996"],  # 9
+ ["#85a7a5"]   # 10
 ]
 
 # LAYOUTS
 layout_theme = {"border_width": 2,
-                "margin": 3,
+                "margin": 6,
                 "border_focus": colors[5],
                 "border_normal": colors[2]
                 }
@@ -138,239 +137,239 @@ widget_defaults = dict(
     font='JetBrainsMono NF Bold',
     fontsize=10,
     padding=5,
-    foreground = colors[7],
+    foreground = colors[4],
     background = colors[0]
     )
 
 # SCREENS
 screens = [
  Screen(
-         wallpaper = "/home/kd/Obrazy/tapety/00055.jpg",
+         wallpaper = "~/Obrazy/tapety/00179.png",
          wallpaper_mode = "fill",
          top=bar.Bar(
              [
              widget.Sep(
-                     linewidth = 0,
-                     padding = 5,
-                     ),
-             widget.GroupBox(
-                     disable_drag = True,
-                     center_aligned = True,
-                     font='Font Awesome',
-                     fontsize = 12,
-                     margin_y = 3,
-                     margin_x = 0,
-                     padding_y = 5,
-                     padding_x = 3,
-                     borderwidth = 3,
-                     highlight_method = "line",
-                     rounded = True,
-                     inactive = colors[2],
-                     active = colors[7],
-                     highlight_color = colors[0],
-                     this_current_screen_border = colors[6],
-                     this_screen_border = colors[7],
-                     other_current_screen_border = colors[1],
-                     other_screen_border = colors[1],
-                     foreground = colors[7],
-                     background = colors[0]
-                     ),
-             widget.TextBox(
-                     text = "|",
-                     fontsize = 15,
-                     foreground = colors[4],
+                     linewidth = 0
                      ),
              widget.CurrentLayoutIcon(
-                     padding = 5,
                      scale = 0.6
-                     ),
-             widget.Sep(                           
-                     linewidth = 0,
-                     padding = 5,
-                     ),
-             widget.WindowName(
-                     background = colors[1]
-                     ), 
-             widget.Sep(                                           
-                     linewidth = 0,
-                     padding = 5,
-                     ),
-             widget.Battery(
-                     padding = 5,
-                     format = '{char} {percent:2.0%}',
-                     charge_char = "",
-                     discharge_char = "",
-                     full_char = "",
-                     empty_char = "",
-                     not_charging_char = "",
-                     unknown_char_char = "?",
-                     low_percentage = 0.2,
-                     low_foreground = colors[6],
-                     notify_below = 0.2
-                     ),
-             widget.TextBox(
-                     text = "|",
-                     fontsize = 15,
-                     foreground = colors[4],
-                     ),
-             widget.CPU(                                         
-                     padding = 5,
-                     format = '  {load_percent}%',
-                     ),
-             widget.TextBox(
-                     text = "|",
-                     fontsize = 15,
-                     foreground = colors[4],
-                     ),
-             widget.Memory(
-                     format = ' {MemUsed: .0f}{mm}',
-                     ),
-             widget.TextBox(
-                     text = "|",
-                     fontsize = 15,
-                     foreground = colors[4],
-                     ),
-             widget.OpenWeather(                                                   
-                     app_key = "1fcfd7f17c1c297646e7efb5bcfb2c8a",
-                     cityid = "3088848",
-                     format = '  {main_temp}°',
-                     metric = True
-                     ),
-             widget.TextBox(
-                     text = "|",
-                     fontsize = 15,
-                     foreground = colors[4],
-                     ),
-             widget.Clock(
-                     format = " %a, %d.%m.%y - %H:%M",
-                     foreground = colors[7],
-                     ),
-             widget.TextBox(
-                     text = "|",
-                     fontsize = 15,
-                     foreground = colors[4],
                      ),
              widget.Systray(
                      icon_size = 19
                      ),
-             widget.Sep(
-                     linewidth = 0,
-                     padding = 5,
-                     ),
-             ],
-             25,
-             # margin = [3, 3, 0, 3]
-             ), ),
- Screen(
-         wallpaper = "/home/kd/Obrazy/tapety/00055.jpg",
-         wallpaper_mode = "fill",
-         top=bar.Bar(
-             [
-             widget.Sep(
-                     linewidth = 0,
-                     padding = 5,
+             widget.TextBox(
+                     fontsize = 15,                                                      
+                     foreground = colors[2],
+                     text = "|"
                      ),
              widget.GroupBox(
                      disable_drag = True,
                      center_aligned = True,
+                     hide_unused = True,
+                     rounded = True,
+                     highlight_method = "line",
                      font='Font Awesome',
                      fontsize = 12,
                      margin_y = 3,
                      margin_x = 0,
                      padding_y = 5,
-                     padding_x = 3,
+                     padding_x = 5,
                      borderwidth = 3,
-                     highlight_method = "line",
-                     rounded = True,
                      inactive = colors[2],
-                     active = colors[7],
+                     active = colors[4],
                      highlight_color = colors[0],
-                     this_current_screen_border = colors[6],
-                     this_screen_border = colors[7],
+                     this_current_screen_border = colors[5],
+                     this_screen_border = colors[4],
                      other_current_screen_border = colors[1],
                      other_screen_border = colors[1],
-                     foreground = colors[7],
+                     foreground = colors[4],
                      background = colors[0]
                      ),
              widget.TextBox(
-                     text = "|",
                      fontsize = 15,
-                     foreground = colors[4],
+                     foreground = colors[2],
+                     text = "|"
                      ),
-             widget.CurrentLayoutIcon(
-                     padding = 5,
-                     scale = 0.6
-                     ),
-             widget.Sep(
-                     linewidth = 0,
-                     padding = 5,
-                     ),
+             widget.Spacer(),
              widget.WindowName(
-                     background = colors[1]
+                     width=bar.CALCULATED,
+                     empty_group_string="Desktop",
+                     max_chars=130,                 
+                     background = colors[0],
+                     foreground = colors[6]
                      ),
-             widget.Sep(
-                     linewidth = 0,
-                     padding = 5,
+             widget.Spacer(),
+             widget.TextBox(
+                     fontsize = 15,
+                     foreground = colors[2],
+                     text = "|"
                      ),
              widget.Battery(
-                     padding = 5,
+                     foreground = colors[7],
                      format = '{char} {percent:2.0%}',
+                     low_foreground = colors[5],
+                     low_percentage = 0.2,
+                     notify_below = 0.2,
                      charge_char = "",
                      discharge_char = "",
                      full_char = "",
                      empty_char = "",
                      not_charging_char = "",
-                     unknown_char_char = "?",
-                     low_percentage = 0.2,
-                     low_foreground = colors[6],
-                     notify_below = 0.2
+                     unknown_char_char = "?"
                      ),
              widget.TextBox(
-                     text = "|",
                      fontsize = 15,
-                     foreground = colors[4],
+                     foreground = colors[2],
+                     text = "|"
                      ),
              widget.CPU(
-                     padding = 5,
-                     format = '  {load_percent}%',
+                     foreground = colors[8],
+                     format = '  {load_percent}%'
                      ),
              widget.TextBox(
-                     text = "|",
                      fontsize = 15,
-                     foreground = colors[4],
+                     foreground = colors[2],
+                     text = "|"
                      ),
              widget.Memory(
                      format = ' {MemUsed: .0f}{mm}',
+                     foreground = colors[9]
                      ),
              widget.TextBox(
-                     text = "|",
                      fontsize = 15,
-                     foreground = colors[4],
-                     ),
-             widget.OpenWeather(
-                     app_key = "1fcfd7f17c1c297646e7efb5bcfb2c8a",
-                     cityid = "3088848",
-                     format = '  {main_temp}°',
-                     metric = True
-                     ),
-             widget.TextBox(
-                     text = "|",
-                     fontsize = 15,
-                     foreground = colors[4],
+                     foreground = colors[2],
+                     text = "|"
                      ),
              widget.Clock(
-                     format = " %a, %d.%m.%y - %H:%M",
+                     foreground = colors[10],
+                     format = " %a, %d.%m.%y - %H:%M"
+                     ),
+             widget.Sep(
+                     linewidth = 0
+                     )
+             ],
+             25,
+             margin = [6, 6, 0, 6]
+             )),
+ Screen(
+         wallpaper = "~/Obrazy/tapety/00179.png",
+         wallpaper_mode = "fill",
+         top=bar.Bar(
+             [
+             widget.Sep(
+                     linewidth = 0,                                           
+                     padding = 5
+                     ),
+             widget.CurrentLayoutIcon(
+                     padding = 5,                                                                         
+                     scale = 0.6
+                     ),
+             widget.TextBox(
+                     fontsize = 15,
+                     foreground = colors[2],
+                     padding = 5,
+                     text = "|"
+                     ),
+             widget.GroupBox(
+                     disable_drag = True,
+                     center_aligned = True,
+                     hide_unused = True,
+                     rounded = True,
+                     highlight_method = "line",
+                     font='Font Awesome',
+                     fontsize = 12,
+                     margin_y = 3,
+                     margin_x = 0,
+                     padding_y = 5,
+                     padding_x = 5,
+                     borderwidth = 3,
+                     inactive = colors[2],
+                     active = colors[4],
+                     highlight_color = colors[0],
+                     this_current_screen_border = colors[5],
+                     this_screen_border = colors[4],
+                     other_current_screen_border = colors[1],
+                     other_screen_border = colors[1],
+                     foreground = colors[4],
+                     background = colors[0]
+                     ),
+             widget.TextBox(
+                     fontsize = 15,
+                     foreground = colors[2],
+                     padding = 5,
+                     text = "|"
+                     ),
+             widget.Spacer(),
+             widget.WindowName(
+                     padding = 5,
+                     width=bar.CALCULATED,
+                     empty_group_string="Desktop",
+                     max_chars=130,
+                     background = colors[0],
+                     foreground = colors[6]
+                     ),
+             widget.Spacer(),
+             widget.TextBox(
+                     fontsize = 15,
+                     foreground = colors[2],
+                     padding = 5,
+                     text = "|"
+                     ),
+             widget.Battery(
                      foreground = colors[7],
+                     format = '{char} {percent:2.0%}',
+                     low_foreground = colors[5],
+                     low_percentage = 0.2,
+                     notify_below = 0.2,
+                     padding = 5,
+                     charge_char = "",
+                     discharge_char = "",
+                     full_char = "",
+                     empty_char = "",
+                     not_charging_char = "",
+                     unknown_char_char = "?"
+                     ),
+             widget.TextBox(
+                     fontsize = 15,
+                     foreground = colors[2],
+                     padding = 5,
+                     text = "|"
+                     ),
+             widget.CPU(
+                     foreground = colors[8],
+                     format = '  {load_percent}%',
+                     padding = 5
+                     ),
+             widget.TextBox(
+                     fontsize = 15,
+                     foreground = colors[2],
+                     padding = 5,
+                     text = "|"
+                     ),
+             widget.Memory(
+                     format = ' {MemUsed: .0f}{mm}',
+                     foreground = colors[9],
+                     padding = 5
+                     ),
+             widget.TextBox(
+                     fontsize = 15,
+                     foreground = colors[2],
+                     padding = 5,
+                     text = "|"
+                     ),
+             widget.Clock(
+                     foreground = colors[10],
+                     format = " %a, %d.%m.%y - %H:%M",
+                     padding = 5
                      ),
              widget.Sep(
                      linewidth = 0,
-                     padding = 5,
-                     ),
+                     padding = 5
+                     )
              ],
              25,
-             # margin = [3, 3, 0, 3]
-             ), ),
-]
+             margin = [6, 6, 0, 6]
+             ))]
 
 # SETTINGS
 dgroups_key_binder = None
@@ -380,11 +379,11 @@ bring_front_click = False
 cursor_warp = False
 auto_fullscreen = True
 auto_minimize = True
-focus_on_window_activation = "smart"
+focus_on_window_activation = "focus"
 reconfigure_screens = True
 floating_layout = layout.Floating(
     border_width = 2,            
-    border_focus = colors[5],
+    border_focus = colors[4],
     border_normal = colors[2],
     float_rules=[
         *layout.Floating.default_float_rules,
@@ -394,7 +393,7 @@ floating_layout = layout.Floating(
 # AUTOSTART
 @hook.subscribe.startup_once
 def start_once():
-    qtile.cmd_spawn("xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --rate 144 --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --rate 144")
+    qtile.cmd_spawn("xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --rate 144 --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --rate 165")
     qtile.cmd_spawn("/usr/bin/emacs --daemon &")
     qtile.cmd_spawn("nm-applet &")
     qtile.cmd_spawn("picom -b")
