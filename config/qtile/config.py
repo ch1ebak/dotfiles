@@ -1,3 +1,14 @@
+# ============================================================
+# ▗▄▄▄▖▗▄▄▄▖▗▄▄▄▖▗▖   ▗▄▄▄▖     ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄▖▗▄▄▄▖ ▗▄▄▖
+# ▐▌ ▐▌  █    █  ▐▌   ▐▌       ▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌     █  ▐▌
+# ▐▌ ▐▌  █    █  ▐▌   ▐▛▀▀▘    ▐▌   ▐▌ ▐▌▐▌ ▝▜▌▐▛▀▀▘  █  ▐▌▝▜▌
+# ▐▙▄▟▙▖ █  ▗▄█▄▖▐▙▄▄▖▐▙▄▄▖    ▝▚▄▄▖▝▚▄▞▘▐▌  ▐▌▐▌   ▗▄█▄▖▝▚▄▞▘
+#
+# github.com/ch1ebak/dotfiles                                                            
+# ============================================================
+
+
+# IMPORTS
 import os
 import subprocess
 import re
@@ -8,9 +19,12 @@ from libqtile.lazy import lazy
 from libqtile.widget import spacer
 from typing import List
 
+# KEYS
+## General
 mod = "mod4"
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
+## Keybindings
 keys = [
      # Apps
     Key([mod], "Return", lazy.spawn("alacritty")),
@@ -19,12 +33,12 @@ keys = [
     Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'")),
     Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
+    Key([mod], "v", lazy.spawn("/home/kd/.config/qtile/wallpaper.sh")),
 
     # Menu
     Key([mod], "s", lazy.spawn("rofi -m 1 -show drun")),
     Key([mod], "p", lazy.spawn("slock")),
     Key([mod, "shift"], "p", lazy.spawn("rofi -m 1 -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu")),
-    Key([mod], "v", lazy.spawn("/home/kd/.config/qtile/wallpaper.sh")),
 
     # App control
     Key([mod], "q", lazy.window.kill()),
@@ -64,18 +78,20 @@ keys = [
     Key([mod], "Space", lazy.window.toggle_fullscreen())
 ]
 
+# GROUPS
 groups = [
     Group("1", label="", layout='max', matches=[Match(wm_class=["ferdium"])]),
-    Group("2", label="", layout='monadtall'),
-    Group("3", label="", layout='monadthreecol', matches=[Match(wm_class=["emacs"])]),
-    Group("4", label="", layout='monadtall', matches=[Match(wm_class=["alacritty", "Alacritty"])]),
-    Group("5", label="", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
-    Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "gimp-2.10", "nwg-look"])]),
+    Group("2", label="", layout='MonadThreeCol'),
+    Group("3", label="", layout='MonadThreeCol', matches=[Match(wm_class=["emacs"])]),
+    Group("4", label="", layout='MonadThreeCol', matches=[Match(wm_class=["alacritty", "Alacritty"])]),
+    Group("5", label="", layout='MonadThreeCol', matches=[Match(wm_class=["Thunar"])]),
+    Group("6", label="", layout='MonadThreeCol', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "gimp-2.10", "nwg-look", "nitrogen"])]),
     Group("7", label="", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
     Group("8", label="", layout='max', matches=[Match(wm_class=["spotify"])]),
     Group("9", label="", layout='max', matches=[Match(wm_class=["mpv"])])
-    ]
+]
 
+## Move windows between groups
 for i in groups:
     keys.extend(
         [
@@ -94,6 +110,7 @@ for i in groups:
         ]
     )
 
+# COLOR SCHEME
 colors = [
     ["#20242d"],  # 0
     ["#363942"],  # 1
@@ -108,30 +125,32 @@ colors = [
     ["#85a7a5"]   # 10
 ]
 
+# LAYOUTS
 layout_theme = {"border_width": 2,
     "margin": 6,
     "border_focus": colors[5],
     "border_normal": colors[2]
-    }
+}
 
 layouts = [
     layout.Max(**layout_theme),
-    layout.MonadTall(**layout_theme),
+    # layout.MonadTall(**layout_theme),
     layout.MonadThreeCol(**layout_theme)
 ]
 
+# BARS
+## Defaults
 widget_defaults = dict(
     font='JetBrainsMono NF Bold',
     fontsize=10,
     padding=5,
     foreground = colors[4],
     background = colors[0]
-    )
+)
 
+## Screens
 screens = [
     Screen(
-        wallpaper = "~/Obrazy/tapety/sg/00179.png",
-        wallpaper_mode = "fill",
         top=bar.Bar(
             [
             widget.Sep(
@@ -146,7 +165,7 @@ screens = [
                 ),
             widget.TextBox(
                 fontsize = 15,
-                foreground = colors[2],
+                foreground = colors[1],
                 text = "|"
                 ),
             widget.GroupBox(
@@ -163,18 +182,18 @@ screens = [
                 padding_x = 5,
                 borderwidth = 3,
                 inactive = colors[2],
-                active = colors[4],
+                active = colors[3],
                 highlight_color = colors[0],
                 this_current_screen_border = colors[5],
-                this_screen_border = colors[4],
+                this_screen_border = colors[3],
                 other_current_screen_border = colors[1],
                 other_screen_border = colors[1],
-                foreground = colors[4],
+                foreground = colors[3],
                 background = colors[0]
                 ),
             widget.TextBox(
                 fontsize = 15,
-                foreground = colors[2],
+                foreground = colors[1],
                 text = "|"
                 ),
             widget.Spacer(),
@@ -188,7 +207,7 @@ screens = [
             widget.Spacer(),
             widget.TextBox(
                 fontsize = 15,
-                foreground = colors[2],
+                foreground = colors[1],
                 text = "|"
                 ),
             widget.Battery(
@@ -206,7 +225,7 @@ screens = [
                 ),
             widget.TextBox(
                 fontsize = 15,
-                foreground = colors[2],
+                foreground = colors[1],
                 text = "|"
                 ),
             widget.CPU(
@@ -215,7 +234,7 @@ screens = [
                 ),
             widget.TextBox(
                 fontsize = 15,
-                foreground = colors[2],
+                foreground = colors[1],
                 text = "|"
                 ),
             widget.Memory(
@@ -224,7 +243,7 @@ screens = [
                 ),
             widget.TextBox(
                 fontsize = 15,
-                foreground = colors[2],
+                foreground = colors[1],
                 text = "|"
                 ),
             widget.Clock(
@@ -241,8 +260,6 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/Obrazy/tapety/sg/00179.png",
-        wallpaper_mode = "fill",
         top=bar.Bar(
             [
             widget.Sep(
@@ -254,7 +271,7 @@ screens = [
                 ),
             widget.TextBox(
                 fontsize = 15,
-                foreground = colors[2],
+                foreground = colors[1],
                 text = "|"
                 ),
             widget.GroupBox(
@@ -271,18 +288,18 @@ screens = [
                 padding_x = 5,
                 borderwidth = 3,
                 inactive = colors[2],
-                active = colors[4],
+                active = colors[3],
                 highlight_color = colors[0],
                 this_current_screen_border = colors[5],
-                this_screen_border = colors[4],
+                this_screen_border = colors[3],
                 other_current_screen_border = colors[1],
                 other_screen_border = colors[1],
-                foreground = colors[4],
+                foreground = colors[3],
                 background = colors[0]
                 ),
             widget.TextBox(
                 fontsize = 15,
-                foreground = colors[2],
+                foreground = colors[1],
                 text = "|"
                 ),
             widget.Spacer(),
@@ -296,7 +313,7 @@ screens = [
             widget.Spacer(),
             widget.TextBox(
                 fontsize = 15,
-                foreground = colors[2],
+                foreground = colors[1],
                 text = "|"
                 ),
             widget.Battery(
@@ -314,7 +331,7 @@ screens = [
                 ),
             widget.TextBox(
                 fontsize = 15,
-                foreground = colors[2],
+                foreground = colors[1],
                 text = "|"
                 ),
             widget.CPU(
@@ -323,7 +340,7 @@ screens = [
                 ),
             widget.TextBox(
                 fontsize = 15,
-                foreground = colors[2],
+                foreground = colors[1],
                 text = "|"
                 ),
             widget.Memory(
@@ -332,7 +349,7 @@ screens = [
                 ),
             widget.TextBox(
                 fontsize = 15,
-                foreground = colors[2],
+                foreground = colors[1],
                 text = "|"
                 ),
             widget.Clock(
@@ -350,17 +367,19 @@ screens = [
     )
 ]
 
+# SETTINGS
 auto_fullscreen = True
 auto_minimize = True
 bring_front_click = False
 cursor_warp = False
 dgroups_key_binder = None
-dgroups_app_rules = []  # type: List
-focus_on_window_activation = "focus"
+dgroups_app_rules = []
+focus_on_window_activation = "smart"
 follow_mouse_focus = False
 reconfigure_screens = True
 wmname = "LG3D"
 
+## Floating
 floats_kept_above = True,
 floating_layout = layout.Floating(
     border_width = 2,
@@ -373,9 +392,12 @@ floating_layout = layout.Floating(
         Match(wm_class="maketag"),
         Match(wm_class="ssh-askpass"),
         Match(title="branchdialog"),
-        Match(title="pinentry"),
-        Match(wm_class="notification")])
+        Match(wm_class="pinentry-gtk"),
+        Match(wm_class="file-roller")
+    ]
+)
 
+# AUTOSTART
 @hook.subscribe.startup_once
 def start_once():
     qtile.cmd_spawn("xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --rate 144 --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --rate 165")
