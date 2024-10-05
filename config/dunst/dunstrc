@@ -6,7 +6,7 @@
 
 
 [global]
-  monitor = 1
+  monitor = 0
   shrink = no
   padding = 25
   horizontal_padding = 25
@@ -15,7 +15,7 @@
   width = 275
   height = 100
   origin = bottom-right
-  offset = 3x3
+  offset = 6x6
 
   frame_width = 2
   separator_height = 0
