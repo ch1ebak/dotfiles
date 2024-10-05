@@ -31,12 +31,12 @@ window {
   location : northwest;
   width    : 280px;
   x-offset : 6px;
-  y-offset : 31px;
+  y-offset : 38px;
 
-  background-color: @bg1;
+  background-color: @bg0;
   border: 2px;
   border-color: @red;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 inputbar {
