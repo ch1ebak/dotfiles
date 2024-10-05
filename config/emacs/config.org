@@ -124,11 +124,11 @@
 
   (me/leader-keys
     "SPC" '(counsel-M-x :wk "M-x")
-    "RET" '(counsel-find-file :wk "Find file")
+    "RET" '(counsel-bookmark :wk "List bookmarks")
     "/" '(counsel-ibuffer :wk "Ibuffer")
     "?" '(kill-buffer :wk "Kill buffer")
-    "." '((lambda () (interactive) (counsel-find-file "~/.dotfiles/")) :wk "Dotfiles directory")
-    ">" '((lambda () (interactive) (counsel-find-file "~/Dokumenty/notatki/")) :wk "Notes directory")
+    "." '(counsel-find-file :wk "Find file")
+    ">" '(neotree-toggle :wk "Toggle neotree")
     "," '(counsel-fzf :wk "Fuzzy finding")
     "<" '(counsel-rg :wk "Grep"))
                                                                                     
@@ -151,8 +151,7 @@
   (me/leader-keys
     "b" '(:ignore t :wk "Bookmarks")
     "b m" '(bookmark-set :wk "Add to bookmarks")
-    "b s" '(bookmark-save :wk "Save bookmarks")
-    "b a" '(counsel-bookmark :wk "List bookmarks"))
+    "b s" '(bookmark-save :wk "Save bookmarks"))
 
   (me/leader-keys
     "c" '(:ignore t :wk "Comments")
@@ -176,7 +175,7 @@
     "f r" '(counsel-recentf :wk "Recent files")
     "f u" '(sudo-edit :wk "Sudo edit file")
     "f U" '(sudo-edit-find-file :wk "Sudo find file")
-    "f p" '((lambda () (interactive) (find-file "~/.dotfiles/.config/emacs/config.org")) :wk "Emacs Config"))
+    "f T" '(org-babel-tangle :wk "Org Babel Tangle"))
 
   (me/leader-keys
     "p" '(:ignore t :wk "Packages")
@@ -194,6 +193,16 @@
     "s p" '(swiper-thing-at-point :wk "Search thing at point")
     "s b" '(swiper-isearch :wk "Isearch")
     "s l" '(counsel-imenu :wk "Imenu"))
+  
+  (me/leader-keys
+    "t" '(:ignore t :wk "Toggles")
+    "t l" '(org-toggle-link-display :wk "Toggle link display")
+    "t i" '(org-toggle-inlay-images :wk "Toggle inlay images")
+    "t w" '(whitespace-mode :wk "Whitespace mode")
+    "t g" '(writegood-mode :wk "Writegood mode")
+    "t v" '(visual-fill-column-mode :wk "Visual fill column")
+    "t f" '(follow-mode :wk "Follow mode")
+    "t r" '(rainbow-mode :wk "Rainbow mode"))
   
   (general-nmap
     :keymaps 'org-mode-map
@@ -223,6 +232,7 @@
     "s f" 'flyspell-mode
     "s c" 'flyspell-auto-correct-word
     "s a" 'flyspell-correct-word-before-point
+    "s t" 'powerthesaurus-transient
     "s i" 'ispell)
   
   (general-nmap
@@ -239,53 +249,73 @@
 )
 #+end_src
 
+* SETTINGS
+#+begin_src emacs-lisp
+(delete-selection-mode 1)
+(electric-indent-mode -1)
+(electric-pair-mode 1)
+(add-hook 'org-mode-hook (lambda ()
+           (setq-local electric-pair-inhibit-predicate
+                   `(lambda (c)
+                  (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
+(global-auto-revert-mode t)
+(global-visual-line-mode t)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(set-fringe-mode 5)
+(blink-cursor-mode 0)
+
+(setq org-edit-src-content-indentation 0)
+(setq use-file-dialog nil)
+(setq use-dialog-box nil)
+(setq pop-up-windows nil)
+(setq inhibit-startup-screen nil)
+(setq shell-file-name "/usr/bin/bash")
+(setq-default indent-tabs-mode nil)
+(setq use-short-answers t)
+
+(setq display-line-numbers-type 'relative) 
+(global-display-line-numbers-mode)
+
+(setq conf-unix-mode t)
+(add-to-list 'auto-mode-alist '("\\.*rc$" . conf-unix-mode))
+
+(winner-mode 1)
+
+;; Transparency
+;; (set-frame-parameter nil 'alpha-background 90)
+;; (add-to-list 'default-frame-alist '(alpha-background . 90))
+#+end_src
+
+*** Clean-up
+#+begin_src emacs-lisp
+(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
+
+(make-directory (expand-file-name "tmp/auto-saves/" user-emacs-directory) t)
+(setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
+      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
+#+end_src
+
+*** Files
+#+begin_src emacs-lisp
+(setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
+(setq user-emacs-directory "~/.dotfiles/.config/emacs")
+(setq bookmark-default-file "~/.dotfiles/.config/emacs/files/bookmarks")
+(setq recentf-save-file "~/.dotfiles/.config/emacs/files/recentf")
+(setq auth-sources '("~/Dokumenty/tajne/.authinfo.gpg"))
+#+end_src
+
+*** Recent files
+#+begin_src emacs-lisp
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(setq recentf-max-saved-items 25)
+#+end_src
+
 * PACKAGES
-** [[https://github.com/domtronn/all-the-icons.el][All the Icons]]
-#+begin_src emacs-lisp
-(use-package all-the-icons
-  :ensure t
-  :if (display-graphic-p))
-#+end_src
-
-** [[https://github.com/Malabarba/beacon][Beacon]]
-#+begin_src emacs-lisp
-(use-package beacon
-  :init
-  (beacon-mode 1))
-#+end_src
-
-** Dired
-#+begin_src emacs-lisp
-(use-package dired
-  :ensure nil
-  :commands (dired dired-jump)
-  :custom ((dired-listing-switches "-agho --group-directories-first")))
-
-(setq delete-by-moving-to-trash t
-      trash-directory "~/.local/share/Trash/files/")
-
-(add-hook 'dired-mode-hook 'auto-revert-mode)
-#+end_src
-
-*** [[https://github.com/jtbm37/all-the-icons-dired][Dired Icons]]
-#+begin_src emacs-lisp
-(use-package all-the-icons-dired
-  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
-#+end_src
-
-*** Dired Open
-#+begin_src emacs-lisp
-(use-package dired-open
-  :config
-  (setq dired-open-extensions '(("gif" . "nsxiv")
-                                ("jpg" . "nsxiv")
-                                ("png" . "nsxiv")
-                                ("mkv" . "mpv")
-                                ("mp4" . "mpv")
-                                ("pdf" . "firefox"))))
-#+end_src
-
-** [[https://github.com/skeeto/elfeed][Elfeed]]
+** Applications
+*** [[https://github.com/skeeto/elfeed][Elfeed]]
 #+begin_src emacs-lisp
 (use-package elfeed
   :config
@@ -298,7 +328,7 @@
   (elfeed-search-update :force)) ; redraw
 #+end_src
 
-*** [[https://github.com/jeetelongname/elfeed-goodies][Elfeed Goodies]]
+**** [[https://github.com/jeetelongname/elfeed-goodies][Elfeed Goodies]]
 #+begin_src emacs-lisp
 (use-package elfeed-goodies
   :init
@@ -307,7 +337,7 @@
   (setq elfeed-goodies/entry-pane-size 0.5))
 #+end_src
 
-*** [[https://github.com/remyhonig/elfeed-org][Elfeed-org]]
+**** [[https://github.com/remyhonig/elfeed-org][Elfeed-org]]
 #+begin_src emacs-lisp
 (use-package elfeed-org
   :ensure t
@@ -316,22 +346,7 @@
   (elfeed-org))
 #+end_src
 
-** [[https://github.com/iqbalansari/emacs-emojify][Emojify]] 
-#+begin_src emacs-lisp
-(use-package emojify
-  :hook (after-init . global-emojify-mode))
-#+end_src
-
-** [[https://github.com/edkolev/evil-goggles][Evil Goggles]]
-#+begin_src emacs-lisp
-(use-package evil-goggles
-  :ensure t
-  :config
-  (evil-goggles-mode))
-  ;; (evil-goggles-use-diff-faces)
-#+end_src
-
-** EWW
+*** EWW
 #+begin_src emacs-lisp
 (setq
  browse-url-browser-function 'eww-browse-url
@@ -357,42 +372,16 @@
     (eww url)))
 #+end_src
 
-** [[https://github.com/Wilfred/helpful][Helpful]]
+*** [[https://github.com/alphapapa/pocket-reader.el][Pocket Reader]]
 #+begin_src emacs-lisp
-(use-package helpful)
+(use-package pocket-reader)
+(setq pocket-reader-open-url-default-function #'eww)
+(setq pocket-reader-pop-to-url-default-function #'eww)
+(add-hook 'pocket-reader-mode (lambda () (display-line-numbers-mode 0)))
 #+end_src
 
-** Insert date / time 
-#+begin_src emacs-lisp
-(defun insert-todays-date (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%d-%m-%Y")
-          (format-time-string "%Y-%m-%d"))))
-
-(defun insert-current-time (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%R")
-          (format-time-string "%H:%M"))))
-#+end_src
-
-** Ispell / Flyspell
-#+begin_src emacs-lisp
-(with-eval-after-load "ispell"
-  (setenv "LANG" "pl_PL.UTF-8")
-  (setq ispell-program-name "hunspell")
-  (setq ispell-dictionary "pl_PL,en_US")
-  (ispell-set-spellchecker-params)
-  (ispell-hunspell-add-multi-dic "pl_PL,en_US")
-  (setq ispell-personal-dictionary "~/.dotfiles/.config/emacs/files/hunspell_personal"))
-
-(setq ispell-silently-savep t)
-(setq flyspell-issue-message-flag nil)
-(add-hook 'text-mode-hook 'flyspell-mode)
-#+end_src
-
-** [[https://github.com/abo-abo/swiper][Ivy]]
+** Completion
+*** [[https://github.com/abo-abo/swiper][Ivy]]
 #+begin_src emacs-lisp
 (use-package counsel
   :after ivy
@@ -427,14 +416,14 @@
 (setq counsel-describe-variable-function #'helpful-variable)
 #+end_src
 
-*** [[https://github.com/seagle0128/all-the-icons-ivy-rich][Ivy Icons]]
+**** [[https://github.com/seagle0128/all-the-icons-ivy-rich][Ivy Icons]]
 #+begin_src emacs-lisp
 (use-package all-the-icons-ivy-rich
   :ensure t
   :init (all-the-icons-ivy-rich-mode 1))
 #+end_src
 
-*** [[https://github.com/radian-software/prescient.el][Ivy Prescient]]
+**** [[https://github.com/radian-software/prescient.el][Ivy Prescient]]
 #+begin_src emacs-lisp
 (use-package ivy-prescient
   :after counsel
@@ -445,7 +434,7 @@
     (ivy-prescient-mode 1))
 #+end_src
 
-*** [[https://github.com/Yevgnen/ivy-rich][Ivy Rich]]
+**** [[https://github.com/Yevgnen/ivy-rich][Ivy Rich]]
 #+begin_src emacs-lisp
 (use-package ivy-rich
   :after ivy
@@ -460,7 +449,112 @@
                                'ivy-rich-switch-buffer-transformer))
 #+end_src
 
-** [[https://www.emacswiki.org/emacs/KillingBuffers#h5o-2][Kill Other Buffers]]
+** Editor
+*** [[https://github.com/edkolev/evil-goggles][Evil Goggles]]
+#+begin_src emacs-lisp
+(use-package evil-goggles
+  :ensure t
+  :config
+  (evil-goggles-mode))
+  ;; (evil-goggles-use-diff-faces)
+#+end_src
+
+*** [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]]
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
+         (clojure-mode . rainbow-delimiters-mode)))
+#+end_src
+
+*** [[https://github.com/emacsmirror/rainbow-mode][Rainbow Mode]]
+#+begin_src emacs-lisp
+(use-package rainbow-mode
+  :defer
+  :ensure t
+  :hook (prog-mode . rainbow-mode))
+#+end_src
+
+*** [[https://github.com/emacsmirror/undo-fu][Undo-fu]]
+#+begin_src emacs-lisp
+(use-package undo-fu)
+#+end_src
+
+** Files
+*** Dired
+#+begin_src emacs-lisp
+(use-package dired
+  :ensure nil
+  :commands (dired dired-jump)
+  :custom ((dired-listing-switches "-agho --group-directories-first")))
+
+(setq delete-by-moving-to-trash t
+      trash-directory "~/.local/share/Trash/files/")
+
+(add-hook 'dired-mode-hook 'auto-revert-mode)
+#+end_src
+
+**** [[https://github.com/jtbm37/all-the-icons-dired][Dired Icons]]
+#+begin_src emacs-lisp
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+#+end_src
+
+**** Dired Open
+#+begin_src emacs-lisp
+(use-package dired-open
+  :config
+  (setq dired-open-extensions '(("gif" . "nsxiv")
+                                ("jpg" . "nsxiv")
+                                ("png" . "nsxiv")
+                                ("mkv" . "mpv")
+                                ("mp4" . "mpv")
+                                ("pdf" . "firefox"))))
+#+end_src
+
+*** [[https://github.com/jaypei/emacs-neotree][Neotree]]
+#+begin_src emacs-lisp
+(use-package neotree
+  :ensure t
+  :custom
+  (neo-theme 'icons)
+  (neo-smart-open t)
+  (neo-autorefresh t)
+  (neo-window-width 40)
+  (neo-window-fixed-size nil)
+  (inhibit-compacting-font-caches t)
+  (neo-show-hidden-files t)
+  :config
+  (add-hook 'neo-after-create-hook
+     #'(lambda (_)
+         (with-current-buffer (get-buffer neo-buffer-name)
+           (setq truncate-lines t)
+           (setq word-wrap nil)
+           (make-local-variable 'auto-hscroll-mode)
+           (setq auto-hscroll-mode nil)))))
+#+end_src
+
+*** [[https://github.com/nflath/sudo-edit][Sudo Edit]]
+#+begin_src emacs-lisp
+(use-package sudo-edit)
+#+end_src
+
+** Functions
+*** Insert date / time 
+#+begin_src emacs-lisp
+(defun insert-todays-date (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%d-%m-%Y")
+          (format-time-string "%Y-%m-%d"))))
+
+(defun insert-current-time (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%R")
+          (format-time-string "%H:%M"))))
+#+end_src
+
+*** [[https://www.emacswiki.org/emacs/KillingBuffers#h5o-2][Kill Other Buffers]]
 #+begin_src emacs-lisp
 (defun kill-other-buffers ()
   "Kill all other buffers."
@@ -468,18 +562,32 @@
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 #+end_src
 
-** [[https://github.com/mickeynp/ligature.el][Ligature]]
+** Help
+*** [[https://github.com/Wilfred/helpful][Helpful]]
 #+begin_src emacs-lisp
-(use-package ligature
-  :hook (prog-mode . ligature-mode)
+(use-package helpful)
+#+end_src
+
+*** [[https://github.com/justbur/emacs-which-key][Which Key]]
+#+begin_src emacs-lisp
+(use-package which-key
+  :init
+    (which-key-mode 1)
+  :diminish
   :config
-  ;; Some ligatures supported by most fonts. E.g. Fira Code, Victor Mono
-  (ligature-set-ligatures 'prog-mode '("~~>" "##" "|-" "-|" "|->" "|=" ">-" "<-" "<--" "->"
-                                       "-->" "-<" ">->" ">>-" "<<-" "<->" "->>" "-<<" "<-<"
-                                       "==>" "=>" "=/=" "!==" "!=" "<==" ">>=" "=>>" ">=>"
-                                       "<=>" "<=<" "=<=" "=>=" "<<=" "=<<"
-                                       "=:=" "=!=" "==" "===" "::" ":=" ":>" ":<" ">:"
-                                       ";;" "__" "&&" "++")))
+  (setq which-key-side-window-location 'bottom
+	  which-key-sort-order #'which-key-key-order-alpha
+	  which-key-allow-imprecise-window-fit nil
+	  which-key-sort-uppercase-first nil
+	  which-key-add-column-padding 1
+	  which-key-max-display-columns nil
+	  which-key-min-display-lines 6
+	  which-key-side-window-slot -10
+	  which-key-side-window-max-height 0.25
+	  which-key-idle-delay 0.8
+	  which-key-max-description-length 25
+	  which-key-allow-imprecise-window-fit nil
+	  which-key-separator " → " ))
 #+end_src
 
 ** Org-mode
@@ -604,145 +712,6 @@
           ("DONE"      success bold))))
 #+end_src
 
-** [[https://github.com/alphapapa/pocket-reader.el][Pocket Reader]]
-#+begin_src emacs-lisp
-(use-package pocket-reader)
-(setq pocket-reader-open-url-default-function #'eww)
-(setq pocket-reader-pop-to-url-default-function #'eww)
-(add-hook 'pocket-reader-mode (lambda () (display-line-numbers-mode 0)))
-#+end_src
-
-** [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]]
-#+begin_src emacs-lisp
-(use-package rainbow-delimiters
-  :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
-         (clojure-mode . rainbow-delimiters-mode)))
-#+end_src
-
-** [[https://github.com/emacsmirror/rainbow-mode][Rainbow Mode]]
-#+begin_src emacs-lisp
-(use-package rainbow-mode
-  :defer
-  :ensure t
-  :hook (prog-mode . rainbow-mode))
-#+end_src
-
-** [[https://github.com/hlissner/emacs-solaire-mode][Solaire Mode]]
-#+begin_src emacs-lisp
-(use-package solaire-mode
-  :init
-  (solaire-global-mode +1))
-#+end_src
-
-** [[https://github.com/nflath/sudo-edit][Sudo Edit]]
-#+begin_src emacs-lisp
-(use-package sudo-edit)
-#+end_src
-
-** Tab Bar Mode
-#+begin_src emacs-lisp
-(setq tab-bar-new-tab-choice "*scratch*"
-      tab-bar-close-button-show nil
-      tab-bar-new-button-show nil
-      tab-bar-close-last-tab-choice 'tab-bar-mode-disable
-      tab-bar-close-tab-select 'recent
-      tab-bar-new-tab-to 'right
-      tab-bar-tab-hints nil
-      tab-bar-separator ""
-      tab-bar-show 1)
-#+end_src
-
-** [[https://github.com/emacsmirror/undo-fu][Undo-fu]]
-#+begin_src emacs-lisp
-(use-package undo-fu)
-#+end_src
-
-** [[https://github.com/justbur/emacs-which-key][Which Key]]
-#+begin_src emacs-lisp
-(use-package which-key
-  :init
-    (which-key-mode 1)
-  :diminish
-  :config
-  (setq which-key-side-window-location 'bottom
-	  which-key-sort-order #'which-key-key-order-alpha
-	  which-key-allow-imprecise-window-fit nil
-	  which-key-sort-uppercase-first nil
-	  which-key-add-column-padding 1
-	  which-key-max-display-columns nil
-	  which-key-min-display-lines 6
-	  which-key-side-window-slot -10
-	  which-key-side-window-max-height 0.25
-	  which-key-idle-delay 0.8
-	  which-key-max-description-length 25
-	  which-key-allow-imprecise-window-fit nil
-	  which-key-separator " → " ))
-#+end_src
-
-* SETTINGS
-#+begin_src emacs-lisp
-(delete-selection-mode 1)
-(electric-indent-mode -1)
-(electric-pair-mode 1)
-(add-hook 'org-mode-hook (lambda ()
-           (setq-local electric-pair-inhibit-predicate
-                   `(lambda (c)
-                  (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
-(global-auto-revert-mode t)
-(global-visual-line-mode t)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(set-fringe-mode 5)
-(blink-cursor-mode 0)
-
-(setq org-edit-src-content-indentation 0)
-(setq use-file-dialog nil)
-(setq use-dialog-box nil)
-(setq pop-up-windows nil)
-(setq inhibit-startup-screen nil)
-(setq shell-file-name "/usr/bin/bash")
-(setq-default indent-tabs-mode nil)
-(setq use-short-answers t)
-
-(setq display-line-numbers-type 'relative) 
-(global-display-line-numbers-mode)
-
-(setq conf-unix-mode t)
-(add-to-list 'auto-mode-alist '("\\.*rc$" . conf-unix-mode))
-
-;; Transparency
-;; (set-frame-parameter nil 'alpha-background 90)
-;; (add-to-list 'default-frame-alist '(alpha-background . 90))
-
-(winner-mode 1)
-#+end_src
-
-*** Clean-up
-#+begin_src emacs-lisp
-(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
-
-(make-directory (expand-file-name "tmp/auto-saves/" user-emacs-directory) t)
-(setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
-      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
-#+end_src
-
-*** Files
-#+begin_src emacs-lisp
-(setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
-(setq user-emacs-directory "~/.dotfiles/.config/emacs")
-(setq bookmark-default-file "~/.dotfiles/.config/emacs/files/bookmarks")
-(setq recentf-save-file "~/.dotfiles/.config/emacs/files/recentf")
-(setq auth-sources '("~/Dokumenty/tajne/.authinfo.gpg"))
-#+end_src
-
-*** Recent files
-#+begin_src emacs-lisp
-(recentf-mode 1)
-(setq recentf-max-menu-items 25)
-(setq recentf-max-saved-items 25)
-#+end_src
-
 ** UI
 *** Fonts
 #+begin_src emacs-lisp
@@ -765,6 +734,20 @@
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono NF-9"))
 #+end_src
 
+*** [[https://github.com/domtronn/all-the-icons.el][All the Icons]]
+#+begin_src emacs-lisp
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+#+end_src
+
+*** [[https://github.com/Malabarba/beacon][Beacon]]
+#+begin_src emacs-lisp
+(use-package beacon
+  :init
+  (beacon-mode 1))
+#+end_src
+
 *** [[https://github.com/seagle0128/doom-modeline][Modeline]]
 #+begin_src emacs-lisp
   (use-package doom-modeline
@@ -778,6 +761,26 @@
 	  doom-modeline-buffer-file-name-style 'truncate-all))
 #+end_src
 
+*** [[https://github.com/hlissner/emacs-solaire-mode][Solaire Mode]]
+#+begin_src emacs-lisp
+(use-package solaire-mode
+  :init
+  (solaire-global-mode +1))
+#+end_src
+
+*** Tab Bar Mode
+#+begin_src emacs-lisp
+(setq tab-bar-new-tab-choice "*scratch*"
+      tab-bar-close-button-show nil
+      tab-bar-new-button-show nil
+      tab-bar-close-last-tab-choice 'tab-bar-mode-disable
+      tab-bar-close-tab-select 'recent
+      tab-bar-new-tab-to 'right
+      tab-bar-tab-hints nil
+      tab-bar-separator ""
+      tab-bar-show 1)
+#+end_src
+
 *** Themes
 **** [[https://github.com/doomemacs/themes][Doom Themes]]
 #+begin_src emacs-lisp
@@ -788,6 +791,49 @@
   (load-theme 'doom-spacegrey t)
   (doom-themes-org-config))
 #+end_src
+
+*** [[https://codeberg.org/joostkremers/visual-fill-column][Visual Fill Column]]
+#+begin_src emacs-lisp
+(use-package visual-fill-column
+  :ensure t
+  :custom
+  (visual-fill-column-width 120)
+  (visual-fill-column-center-text t))
+  ;; :config
+  ;; (add-hook 'text-mode-hook 'visual-fill-column-mode))
+#+end_src
+
+** Writing
+*** Ispell / Flyspell
+#+begin_src emacs-lisp
+(with-eval-after-load "ispell"
+  (setenv "LANG" "pl_PL.UTF-8")
+  (setq ispell-program-name "hunspell")
+  (setq ispell-dictionary "pl_PL,en_US")
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "pl_PL,en_US")
+  (setq ispell-personal-dictionary "~/.dotfiles/.config/emacs/files/hunspell_personal"))
+
+(setq ispell-silently-savep t)
+(setq flyspell-issue-message-flag nil)
+(add-hook 'text-mode-hook 'flyspell-mode)
+#+end_src
+
+*** [[https://github.com/SavchenkoValeriy/emacs-powerthesaurus][Powerthesaurus]]
+#+begin_src emacs-lisp
+(use-package powerthesaurus)
+#+end_src
+                                                                                       
+*** [[https://github.com/bnbeckwith/writegood-mode][Writegood Mode]]
+#+begin_src emacs-lisp
+(use-package writegood-mode
+  :config
+  (writegood-weasels-turn-on)
+  (writegood-passive-voice-turn-on)
+  (writegood-duplicates-turn-on))
+  ;; (add-hook 'text-mode-hook 'writegood-mode))
+#+end_src
+
 
 * RUNTIME PERFORMANCE
 #+begin_src emacs-lisp
