@@ -79,7 +79,7 @@ wmname = "LG3D"
 floats_kept_above = True,
 floating_layout = layout.Floating(
     border_width = 2,
-    border_focus = colors[4],
+    border_focus = colors[5],
     border_normal = colors[2],
     float_rules=[
         *layout.Floating.default_float_rules,
@@ -97,8 +97,14 @@ floating_layout = layout.Floating(
 # AUTOSTART
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser('~')
-    subprocess.call([home + '/.dotfiles/.config/qtile/autostart.sh'])
+    qtile.cmd_spawn("xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --rate 144 --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --rate 165")
+    qtile.cmd_spawn("/usr/bin/emacs --daemon &")
+    qtile.cmd_spawn("nm-applet &")
+    qtile.cmd_spawn("picom -b")
+    qtile.cmd_spawn("dunst &")
+    qtile.cmd_spawn("brightnessctl set 60%")
+    for p in processes:
+        subprocess.Popen(p)
 
 
 # BARS
@@ -114,6 +120,8 @@ widget_defaults = dict(
 ## Screens
 screens = [
     Screen(
+        wallpaper = "~/Obrazy/tapety/00031.jpg",
+        wallpaper_mode = "fill",
         top=bar.Bar(
             [
             widget.Sep(
@@ -223,6 +231,8 @@ screens = [
         )
     ),
     Screen(
+        wallpaper = "~/Obrazy/tapety/00031.jpg",        
+        wallpaper_mode = "fill",
         top=bar.Bar(
             [
             widget.Sep(
@@ -341,11 +351,10 @@ keys = [
      # Apps
     Key([mod], "Return", lazy.spawn("alacritty")),
     Key([mod], "w", lazy.spawn("zen-browser")),
-    Key([mod, "shift"], "w", lazy.spawn("/usr/bin/firefox --private-window")),
+    Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
     Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'")),
     Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
-    Key([mod], "v", lazy.spawn("/home/kd/.config/qtile/wallpaper.sh")),
 
     # Menu
     Key([mod], "s", lazy.spawn("rofi -m 1 -show drun")),
