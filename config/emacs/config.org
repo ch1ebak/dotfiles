@@ -159,6 +159,19 @@
     "c r" '(comment-or-uncomment-region :wk "Comment Region"))
   
   (me/leader-keys
+    "d" '(:ignore t :wk "Dotfiles")
+    "d b" '((lambda () (interactive) (find-file "~/.dotfiles/.bashrc")) :wk "Bash Config")
+    "d e" '((lambda () (interactive) (find-file "~/.dotfiles/.config/emacs/config.org")) :wk "Emacs Config")
+    "d q" '((lambda () (interactive) (find-file "~/.dotfiles/.config/qtile/config.py")) :wk "Qtile Config"))
+
+  (me/leader-keys
+    "f" '(:ignore t :wk "Files")
+    "f r" '(counsel-recentf :wk "Recent files")
+    "f u" '(sudo-edit :wk "Sudo edit file")
+    "f U" '(sudo-edit-find-file :wk "Sudo find file")
+    "f T" '(org-babel-tangle :wk "Org Babel Tangle"))
+  
+  (me/leader-keys
     "h" '(:ignore t :wk "Emacs")
     "h /" '(help :wk "Help")
     "h ?" '(helpful-at-point :wk "Describe at point")
@@ -169,13 +182,6 @@
     "h e d" '(elpaca-delete :wk "Elpaca: delete package")
     "h r" '(:ignore t :wk "Reload")
     "h r r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el") (ignore (elpaca-process-queues))) :wk "Reload emacs config"))
-
-  (me/leader-keys
-    "f" '(:ignore t :wk "Files")
-    "f r" '(counsel-recentf :wk "Recent files")
-    "f u" '(sudo-edit :wk "Sudo edit file")
-    "f U" '(sudo-edit-find-file :wk "Sudo find file")
-    "f T" '(org-babel-tangle :wk "Org Babel Tangle"))
 
   (me/leader-keys
     "p" '(:ignore t :wk "Packages")
@@ -215,11 +221,12 @@
     "m r" 'org-refile
     "m p" 'org-priority
     "m c" 'org-toggle-checkbox
+    "m n" 'org-add-note
+    "m l" 'org-cycle-list-bullet
     "m H" 'org-metaleft
     "m L" 'org-metaright
     "m J" 'org-metadown
     "m K" 'org-metaup
-    "m l" 'org-cycle-list-bullet
     "M" 'org-sidebar-tree-toggle
     "t" '(:ignore t :wk "Tabela")
     "t s" 'org-table-sort-lines
@@ -246,6 +253,11 @@
     "M" 'elfeed-mark-all-as-read
     "P" 'pocket-reader-elfeed-search-add-link
     "O" 'elfeed-update)
+  
+  (general-nmap
+    :keymaps 'pocket-reader-mode-map
+    "F" 'pocket-reader-show-unread-favorites
+    "&" 'pocket-reader-open-in-external-browser)
 )
 #+end_src
 
@@ -352,10 +364,9 @@
  browse-url-browser-function 'eww-browse-url
  shr-use-fonts  nil
  ;; shr-use-colors nil
- ;; shr-indentation 2
- ;; shr-width 70
- shr-indentation 70 
- shr-width 170
+ shr-indentation 2
+ ;; shr-indentation 70 
+ shr-width 100
  eww-auto-rename-buffer 1
  eww-download-directory "~/Pobrane"
  eww-bookmarks-directory "~/.dotfiles/.config/emacs/files/"
@@ -799,8 +810,6 @@
   :custom
   (visual-fill-column-width 120)
   (visual-fill-column-center-text t))
-  ;; :config
-  ;; (add-hook 'text-mode-hook 'visual-fill-column-mode))
 #+end_src
 
 ** Writing
