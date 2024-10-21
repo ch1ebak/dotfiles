@@ -3,4 +3,4 @@ LICENSE
 ^/.*\.org
 /backups
 /screenshots
-/.mozilla
+/browsers
