@@ -80,7 +80,7 @@ def start_once():
 
 ## Groups
 groups = [
-    Group("1", label="", layout='max', matches=[Match(wm_class=["ferdium"])]),
+    Group("1", label="", layout='max', matches=[Match(wm_class=["ferdium", "firefox"])]),
     Group("2", label="", layout='max'),
     Group("3", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
     Group("4", label="", layout='monadtall', matches=[Match(wm_class=["alacritty", "Alacritty"])]),
@@ -206,7 +206,7 @@ widget_defaults = dict(
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/Obrazy/tapety/00031.jpg",
+        wallpaper = "~/.config/qtile/wallpapers/spacegray.jpg",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -317,7 +317,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/Obrazy/tapety/00031.jpg",
+        wallpaper = "~/.config/qtile/wallpapers/spacegray.jpg",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
