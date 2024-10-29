@@ -9,36 +9,28 @@
 draw_bold_text_with_bright_colors = true
 
 [colors.bright]
-black = "#000000"
-blue = "#7d8fa4"
-cyan = "#85a7a5"
-green = "#87b379"
-magenta = "#a47996"
-red = "#b04b57"
-white = "#ffffff"
-yellow = "#e5c179"
-                      
-[colors.cursor]
-cursor = "#b3b8c3"
-text = "#1d1f21"
-                      
+black = "#444b6a"
+blue = "#7da6ff"
+cyan = "#0db9d7"
+green = "#b9f27c"
+magenta = "#bb9af7"
+red = "#ff7a93"
+white = "#acb0d0"
+yellow = "#ff9e64"
+
 [colors.normal]
-black = "#000000"
-blue = "#7d8fa4"
-cyan = "#85a7a5"
-green = "#87b379"
-magenta = "#a47996"
-red = "#b04b57"
-white = "#b3b8c3"
-yellow = "#e5c179"
-                      
+black = "#32344a"
+blue = "#7aa2f7"
+cyan = "#449dab"
+green = "#9ece6a"
+magenta = "#ad8ee6"
+red = "#f7768e"
+white = "#787c99"
+yellow = "#e0af68"
+
 [colors.primary]
-background = "#20242d"
-foreground = "#b3b8c3"
-                      
-[colors.selection]
-background = "#16181e"
-text = "#b3b8c3"
+background = "#1a1b26"
+foreground = "#a9b1d6"
 
 [env]
 TERM = "xterm-256color"
@@ -155,7 +147,7 @@ history = 5000
 
 [window]
 dynamic_padding = false
-opacity = 1.0
+opacity = 0.9
 title = "Alacritty"
 
 [window.class]
