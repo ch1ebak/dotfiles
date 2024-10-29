@@ -21,17 +21,17 @@ from typing import List
 
 ## Color Scheme
 colors = [
-    ["#20242d"],  # 0
-    ["#363942"],  # 1
-    ["#4c4f56"],  # 2
-    ["#8F939C"],  # 3
-    ["#B3B8C3"],  # 4
-    ["#b04b57"],  # 5
-    ["#87b379"],  # 6
-    ["#e5c179"],  # 7
-    ["#7d8fa4"],  # 8
-    ["#a47996"],  # 9
-    ["#85a7a5"]   # 10
+    ["#1a1b26"],  # 0
+    ["#24283b"],  # 1
+    ["#414868"],  # 2
+    ["#9aa5ce"],  # 3
+    ["#a9b1d6"],  # 4
+    ["#f7768e"],  # 5
+    ["#9ece6a"],  # 6
+    ["#e0af68"],  # 7
+    ["#7aa2f7"],  # 8
+    ["#bb9af7"],  # 9
+    ["#7dcfff"]   # 10
 ]
 
 
@@ -70,7 +70,6 @@ floating_layout = layout.Floating(
 @hook.subscribe.startup_once
 def start_once():
     qtile.cmd_spawn("xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --rate 144 --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --rate 165")
-    qtile.cmd_spawn("/usr/bin/emacs --daemon &")
     qtile.cmd_spawn("nm-applet &")
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
@@ -80,10 +79,10 @@ def start_once():
 
 ## Groups
 groups = [
-    Group("1", label="", layout='max', matches=[Match(wm_class=["ferdium", "firefox"])]),
+    Group("1", label="", layout='max', matches=[Match(wm_class=["ferdium"])]),
     Group("2", label="", layout='max'),
-    Group("3", label="", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
-    Group("4", label="", layout='monadtall', matches=[Match(wm_class=["alacritty", "Alacritty"])]),
+    Group("3", label="", layout='monadtall', matches=[Match(wm_class=["Alacritty"])]),
+    Group("4", label="", layout='monadtall'),
     Group("5", label="", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
     Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "gimp-2.10", "nwg-look", "nitrogen"])]),
     Group("7", label="", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
@@ -126,8 +125,8 @@ keys = [
     Key([mod], "Return", lazy.spawn("alacritty")),
     Key([mod], "w", lazy.spawn("zen-browser")),
     Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
-    Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'")),
-    Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'")),
+    Key([mod], "e", lazy.spawn("alacritty -e nvim")),
+    Key([mod], "a", lazy.spawn("alacritty -e yazi")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
 
     # Menu
@@ -160,7 +159,8 @@ keys = [
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
 
     # Resize windows
-    Key([mod, "control"], "n", lazy.layout.normalize()),
+    Key([mod], "n", lazy.layout.maximize()),
+    Key([mod, "shift"], "n", lazy.layout.normalize()),
     Key([mod, "control"], "h", lazy.layout.grow_left()),
     Key([mod, "control"], "l", lazy.layout.grow_right()),
     Key([mod, "control"], "j", lazy.layout.shrink()),
@@ -206,7 +206,7 @@ widget_defaults = dict(
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/spacegray.jpg",
+        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -317,7 +317,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/spacegray.jpg",
+        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
