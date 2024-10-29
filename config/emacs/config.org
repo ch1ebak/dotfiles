@@ -124,17 +124,18 @@
 
   (me/leader-keys
     "SPC" '(execute-extended-command :wk "M-x")
-    "RET" '(list-bookmarks :wk "List bookmarks")
+    "RET" '(consult-bookmark :wk "List bookmarks")
     "/" '(consult-buffer :wk "Consult Buffer")
     "?" '(kill-buffer :wk "Kill buffer")
     "." '(find-file :wk "Find file")
-    ">" '(dired-jump :wk "Toggle neotree")
+    ">" '(zoxide-travel :wk "Zoxide")
     "," '(consult-find :wk "Fuzzy finding")
     "<" '(consult-ripgrep :wk "Grep"))
                                                                                     
   (me/leader-keys
     "TAB" '(:ignore t :wk "Buffers/Tabs/Windows")
     "TAB q" '(evil-window-delete :wk "Close window")
+    "TAB Q" '(kill-emacs :wk "Close window")
     "TAB x" '(kill-other-buffers :wk "Kill other buffers")
     "TAB RET" '(evil-window-vnew :wk "New window")
     "TAB h" '(evil-window-left :wk "Window left")
@@ -328,21 +329,8 @@
 
 *** [[https://github.com/minad/consult][Consult]]
 #+begin_src emacs-lisp
-(defun dw/minibuffer-backward-kill (arg)
-  "When minibuffer is completing a file name delete up to parent
-folder, otherwise delete a character backward"
-  (interactive "p")
-  (if minibuffer-completing-file-name
-      ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
-      (if (string-match-p "/." (minibuffer-contents))
-          (zap-up-to-char (- arg) ?/)
-        (delete-minibuffer-contents))
-      (delete-backward-char arg)))
-
 (use-package consult
   :hook (completion-list-mode . consult-preview-at-point-mode)
-  :bind (:map minibuffer-local-map
-         ("<backspace>" . dw/minibuffer-backward-kill))
   :init
   (setq register-preview-delay 0.5
         register-preview-function #'consult-register-format)
@@ -395,10 +383,14 @@ folder, otherwise delete a character backward"
                                 ("mp4" . "mpv")
                                 ("pdf" . "zen-browser"))))
 #+end_src
-
 *** [[https://github.com/nflath/sudo-edit][Sudo Edit]]
 #+begin_src emacs-lisp
 (use-package sudo-edit)
+#+end_src
+
+*** [[https://github.com/emacsmirror/zoxide][Zoxide]]
+#+begin_src emacs-lisp
+(use-package zoxide)
 #+end_src
 
 ** Editor
@@ -409,6 +401,12 @@ folder, otherwise delete a character backward"
   :config
   (evil-goggles-mode))
   ;; (evil-goggles-use-diff-faces)
+#+end_src
+
+*** [[https://github.com/DarthFennec/highlight-indent-guides][Highlight indent guides]]
+#+begin_src emacs-lisp
+(use-package highlight-indent-guides)
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 #+end_src
 
 *** [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]]
@@ -575,7 +573,7 @@ folder, otherwise delete a character backward"
 
 (setq ispell-silently-savep t)
 (setq flyspell-issue-message-flag nil)
-(add-hook 'text-mode-hook 'flyspell-mode)
+;; (add-hook 'text-mode-hook 'flyspell-mode)
 #+end_src
 
 ** Applications
@@ -719,21 +717,21 @@ folder, otherwise delete a character backward"
 #+begin_src emacs-lisp
 (set-face-attribute 'default nil
   :font "JetBrainsMono NF"
-  :height 90
+  :height 100
   :weight 'medium)
 (set-face-attribute 'variable-pitch nil
   :font "Cantarell"
-  :height 90
+  :height 100
   :weight 'medium)
 (set-face-attribute 'fixed-pitch nil
   :font "JetBrainsMono NF"
-  :height 90
+  :height 100
   :weight 'medium)
 (set-face-attribute 'font-lock-comment-face nil
   :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil
   :slant 'italic)
-(add-to-list 'default-frame-alist '(font . "JetBrainsMono NF-9"))
+(add-to-list 'default-frame-alist '(font . "JetBrainsMono NF-10"))
 #+end_src
 
 **** [[https://github.com/Malabarba/beacon][Beacon]]
@@ -743,17 +741,7 @@ folder, otherwise delete a character backward"
   (beacon-mode 1))
 #+end_src
 
-**** [[https://github.com/doomemacs/themes][Doom Themes]]
-#+begin_src emacs-lisp
-(use-package doom-themes
-  :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (load-theme 'doom-spacegrey t)
-  (doom-themes-org-config))
-#+end_src
-
-**** [[https://github.com/seagle0128/doom-modeline][Modeline]]
+**** [[https://github.com/seagle0128/doom-modeline][Doom Modeline]]
 #+begin_src emacs-lisp
 (use-package doom-modeline
   :ensure t
@@ -764,6 +752,16 @@ folder, otherwise delete a character backward"
        doom-modeline-enable-word-count t
        doom-modeline-continuous-word-count-modes '(org-mode)
        doom-modeline-buffer-file-name-style 'truncate-all))
+#+end_src
+
+**** [[https://github.com/doomemacs/themes][Doom Themes]]
+#+begin_src emacs-lisp
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-tokyo-night t)
+  (doom-themes-org-config))
 #+end_src
 
 **** [[https://github.com/twlz0ne/nerd-fonts.el][Nerd Fonts]]
