@@ -11,7 +11,8 @@
 | File manager   | Yazi      |
 |----------------+-----------|
 
-* [[https://github.com/ch1ebak/dotfiles/tree/main/backups][Stuff I don't use anymore but I have them saved here just in case]]
+* Stuff I don't use anymore but I have them saved here just in case
+[[https://github.com/ch1ebak/dotfiles/tree/main/backups][>>>]]
 
 * SCREENSHOTS
 [[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/tokyonight.png]]
