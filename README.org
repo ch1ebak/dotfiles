@@ -1,26 +1,19 @@
-* STUFF I USE
-|----------------+------------------------------|
-| window manager | qtile                        |
-|----------------+------------------------------|
-| shell          | bash                         |
-|----------------+------------------------------|
-| terminal       | alacritty                    |
-|----------------+------------------------------|
-| text editor    | emacs                        |
-|----------------+------------------------------|
-| launcher       | [[https://github.com/newmanls/rofi-themes-collection][rofi]]                         |
-|----------------+------------------------------|
-| notifications  | dunst                        |
-|----------------+------------------------------|
-| browser        | [[https://github.com/andreasgrafen/cascade][firefox]] + [[https://github.com/gbprod/vimium-nord-theme][vimium]] + [[https://github.com/ch1ebak/orgmode-startpage][startpage]] |
-|----------------+------------------------------|
-| theme          | spacegray                    |
-|----------------+------------------------------|
+#+TITLE: ch1ebak's cool dotfiles
+
+* Installed packages
+|----------------+-----------|
+| Window Manager | Qtile     |
+| Terminal       | Alacritty |
+| Editor         | Neovim    |
+| Shell          | Bash      |
+| Notifications  | Dunst     |
+| Launcher       | Rofi      |
+| File manager   | Yazi      |
+|----------------+-----------|
+
+* [[https://github.com/ch1ebak/dotfiles/tree/main/backups][Stuff I don't use anymore but I have them saved here just in case]]
 
 * SCREENSHOTS
-[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/spacegray4.png]]
+[[https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/tokyonight.png]]
 
 old screenshots [[https://github.com/ch1ebak/dotfiles/tree/main/screenshots][>>>]]
-
-* 2024-07-15 
-deleted the doom emacs config because i switched to vanilla emacs.
