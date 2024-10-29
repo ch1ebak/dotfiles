@@ -1,0 +1,18 @@
+# Format
+format = '$directory$character'
+add_newline = false
+
+# Colors
+palette = 'foo'
+[palettes.foo]
+red = '#b04b57'
+
+# Modules
+[directory]
+style = "red"
+truncation_length = 8
+truncation_symbol = '…/'
+
+[character]
+success_symbol = "[➜](bold red)"
+error_symbol = "[✗](bold red)"

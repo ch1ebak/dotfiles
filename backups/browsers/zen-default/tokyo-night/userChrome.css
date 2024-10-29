@@ -1,0 +1,21 @@
+:root {
+    --zen-primary-color: #9aa5ce !important;
+}
+                                                   
+@media not (prefers-color-scheme: dark) {
+    :root {
+        --zen-colors-primary: ##a9b1d6 !important;
+        --zen-colors-secondary: ##a9b1d6 !important;
+        --zen-colors-tertiary: #c0caf5 !important;
+        --zen-colors-border: #a9b1d6 !important;
+    }
+}
+                                                   
+@media (prefers-color-scheme: dark) {
+    :root {
+        --zen-colors-primary: #414868 !important;
+        --zen-colors-secondary: #24283b !important;
+        --zen-colors-tertiary: #1a1b26 !important;
+        --zen-colors-border: #414868 !important;
+    }
+}
