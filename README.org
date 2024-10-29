@@ -1,15 +1,17 @@
 #+TITLE: ch1ebak's cool dotfiles
 
 * Installed packages
-|----------------+-----------|
-| Window Manager | Qtile     |
-| Terminal       | Alacritty |
-| Editor         | Neovim    |
-| Shell          | Bash      |
-| Notifications  | Dunst     |
-| Launcher       | Rofi      |
-| File manager   | Yazi      |
-|----------------+-----------|
+|----------------+-----------------------|
+| Theme          | Tokyo Night/Spacegray |
+|----------------+-----------------------|
+| Window Manager | Qtile                 |
+| Terminal       | Alacritty             |
+| Editor         | Neovim                |
+| Shell          | Bash                  |
+| Notifications  | Dunst                 |
+| Launcher       | Rofi                  |
+| File manager   | Yazi                  |
+|----------------+-----------------------|
 
 * Stuff I don't use anymore but I have them saved here just in case
 [[https://github.com/ch1ebak/dotfiles/tree/main/backups][>>>]]
