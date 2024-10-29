@@ -58,7 +58,6 @@ keymap = [
   { on = ".", run = "plugin zoxide", desc = "Jump to a directory using zoxide" },                      
   { on = ",", run = "plugin fzf", desc = "Jump to a directory or reveal a file using fzf" },
   { on = "<", run = "search rg", desc = "Search files by content using ripgrep" },
-  # { on = "/", run = "search fd", desc = "Search files by name using fd" },
 	{ on = "/", run = "find --smart", desc = "Find next file" },
 	{ on = "?", run = "find --previous --smart", desc = "Find previous file" },
 	{ on = "n", run = "find_arrow", desc = "Go to the next found" },
