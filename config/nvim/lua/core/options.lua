@@ -1,8 +1,6 @@
 local g = vim.g
 local o = vim.o
 local opt = vim.opt
-local cmd = vim.cmd
-
 
 vim.api.nvim_command('filetype plugin indent on')
 o.fileencoding = 'utf-8'
@@ -20,7 +18,6 @@ o.sidescrolloff = 8
 
 opt.termguicolors = true
 o.background = 'dark'
-cmd 'colorscheme tokyonight'
 
 opt.breakindent = true
 o.autoindent = true
