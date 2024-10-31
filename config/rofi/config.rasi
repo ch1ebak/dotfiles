@@ -1,5 +1,3 @@
-//@theme "/home/kd/.config/rofi/themes/spacegray.rasi"
-
 configuration {
   modi: "drun,window";
   kb-remove-to-eol: "";
@@ -7,6 +5,8 @@ configuration {
   kb-row-up: "Control+k";
   kb-row-down: "Control+j";
 }
-//@theme "/home/kd/.config/rofi/themes/grayscale.rasi"
-//@theme "/home/kd/.config/rofi/themes/spacegray.rasi"
-@theme "/home/kd/.config/rofi/themes/tokyo-night.rasi"
+
+//@theme "/home/kd/.config/rofi/themes/tokyonight"
+//@theme "/home/kd/.config/rofi/themes/tokyonight"
+//@theme "/home/kd/.config/rofi/themes/tokyonight"
+@theme "/home/kd/.config/rofi/themes/tokyonight"

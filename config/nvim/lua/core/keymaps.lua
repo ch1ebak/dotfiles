@@ -31,4 +31,8 @@ keymap.set("n", "N", "Nzzzv", opts)
 keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", opts)
 
 -- Fun stuff
-keymap.set("n", "<leader>/", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], opts)
+keymap.set("n", "<leader>?", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], opts)
+
+-- Shortcuts
+keymap.set('n', '<leader>fq', ":e ~/.dotfiles/.config/qtile/config.py<CR>", { desc = 'Open Qtile Config' }, opts)
+keymap.set('n', '<leader>fb', ":e ~/.dotfiles/.bashrc<CR>", { desc = 'Open bashrc' }, opts)

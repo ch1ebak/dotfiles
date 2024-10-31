@@ -32,6 +32,5 @@ return {
                 dark_background = true,
             }
         })
-    -- vim.cmd("colorscheme nordic")
     end
 }

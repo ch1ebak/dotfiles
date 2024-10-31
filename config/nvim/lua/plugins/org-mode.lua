@@ -12,9 +12,9 @@ return {
     ensure_installed = {'org'},
   }
   require('orgmode').setup({
-    org_agenda_files = '~/Dokumenty/notatki/*',
-    org_default_notes_file = '~/Dokumenty/notatki/agenda-taski.org',
-    org_archive_location = '~/Dokumenty/notatki/archiwum.org',
+    org_agenda_files = '~/Dokumenty/notatki/agenda/*',
+    org_default_notes_file = '~/Dokumenty/notatki/agenda/agenda-taski.org',
+    org_archive_location = '~/Dokumenty/notatki/agenda/archiwum.org',
     win_split_mode = 'vsplit',
     org_startup_folded = 'content',
     org_hide_leading_stars = true,

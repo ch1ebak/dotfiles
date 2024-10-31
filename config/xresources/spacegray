@@ -1,5 +1,3 @@
-Sxiv.background: #20242d
-Sxiv.foreground: #b3b8c3
 *.background:  #20242d
 *.foreground:  #b3b8c3
 *.color0:      #000000

@@ -21,7 +21,6 @@ from typing import List
 
 ## Color scheme
 from themes.tokyonight import colors
-# from themes.spacegray import colors
 
 # SETTINGS
 ## General
