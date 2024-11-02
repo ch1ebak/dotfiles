@@ -18,7 +18,7 @@ keymap.set('n', '<leader><Tab>q', ":q<CR>", { desc = 'Close' }, opts)
 keymap.set('n', '<leader><Tab>H', "<C-^>", { desc = 'Switch between buffers' }, opts)
 keymap.set('n', '<leader><Tab>L', "<C-^>", { desc = 'Switch between buffers' }, opts)
 keymap.set('n', '<leader><Tab>J', "<C-W>R", { desc = 'Move splits around' }, opts)
-keymap.set('n', '<leader><Tab>L', "<C-W>R", { desc = 'Move splits around' }, opts)
+keymap.set('n', '<leader><Tab>K', "<C-W>R", { desc = 'Move splits around' }, opts)
 
 -- Movement
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", opts)
@@ -32,7 +32,4 @@ keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", opts)
 
 -- Fun stuff
 keymap.set("n", "<leader>?", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], opts)
-
--- Shortcuts
-keymap.set('n', '<leader>fq', ":e ~/.dotfiles/.config/qtile/config.py<CR>", { desc = 'Open Qtile Config' }, opts)
-keymap.set('n', '<leader>fb', ":e ~/.dotfiles/.bashrc<CR>", { desc = 'Open bashrc' }, opts)
+keymap.set("n", "<leader><leader>", ":w<CR>", opts)

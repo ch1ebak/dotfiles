@@ -257,7 +257,7 @@ screens = [
             widget.Battery(
                 foreground = colors[7],
                 format = '{char} {percent:2.0%}',
-                low_foreground = colors[5],
+                low_foreground = "#AA4A44",
                 low_percentage = 0.2,
                 notify_below = 0.2,
                 charge_char = "",
@@ -365,7 +365,7 @@ screens = [
             widget.Battery(
                 foreground = colors[7],
                 format = '{char} {percent:2.0%}',
-                low_foreground = colors[5],
+                low_foreground = "#AA4A44",
                 low_percentage = 0.2,
                 notify_below = 0.2,
                 charge_char = "",
