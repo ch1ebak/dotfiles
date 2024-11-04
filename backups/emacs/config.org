@@ -128,7 +128,7 @@
     "/" '(consult-buffer :wk "Consult Buffer")
     "?" '(kill-buffer :wk "Kill buffer")
     "." '(find-file :wk "Find file")
-    ">" '(zoxide-travel :wk "Zoxide")
+    ">" '(dired-jump :wk "Dired")
     "," '(consult-find :wk "Fuzzy finding")
     "<" '(consult-ripgrep :wk "Grep"))
                                                                                     
@@ -236,6 +236,15 @@
     "s a" 'flyspell-correct-word-before-point
     "s t" 'powerthesaurus-transient
     "s i" 'ispell)
+  
+  (general-nmap
+    :keymaps 'markdown-mode-map
+    "m a" 'markdown-insert-link
+    "m H" 'markdown-promote
+    "m L" 'markdown-demote
+    "m J" 'markdown-move-down
+    "m K" 'markdown-move-up
+    "t t" 'markdown-insert-table)
   
   (general-nmap
     :keymaps 'dired-mode-map
@@ -383,14 +392,10 @@
                                 ("mp4" . "mpv")
                                 ("pdf" . "zen-browser"))))
 #+end_src
+
 *** [[https://github.com/nflath/sudo-edit][Sudo Edit]]
 #+begin_src emacs-lisp
 (use-package sudo-edit)
-#+end_src
-
-*** [[https://github.com/emacsmirror/zoxide][Zoxide]]
-#+begin_src emacs-lisp
-(use-package zoxide)
 #+end_src
 
 ** Editor
@@ -573,7 +578,17 @@
 
 (setq ispell-silently-savep t)
 (setq flyspell-issue-message-flag nil)
-;; (add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'text-mode-hook 'flyspell-mode)
+#+end_src
+
+*** [[https://github.com/jrblevin/markdown-mode][Markdown Mode]]
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :config
+  (setq markdown-hide-urls t)
+  (setq markdown-hide-markup nil)
+  :init (setq markdown-command "markdown"))
 #+end_src
 
 ** Applications
@@ -802,6 +817,11 @@
       tab-bar-tab-hints nil
       tab-bar-separator " "
       tab-bar-show 1)
+#+end_src
+
+**** Transparency
+#+begin_src emacs-lisp
+(add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
 #+end_src
 
 **** [[https://codeberg.org/joostkremers/visual-fill-column][Visual Fill Column]]

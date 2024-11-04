@@ -1,0 +1,12 @@
+:root {
+    --zen-primary-color: #E6E6E6 !important;
+}
+                                                   
+@media (prefers-color-scheme: dark) {
+    :root {
+        --zen-colors-primary: #4D4D4D !important;
+        --zen-colors-secondary: #3D3F4A !important;
+        --zen-colors-tertiary: #282A36 !important;
+        --zen-colors-border: #4D4D4D !important;
+    }
+}
