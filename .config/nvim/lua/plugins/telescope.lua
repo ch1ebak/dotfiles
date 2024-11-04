@@ -48,7 +48,10 @@ return {
     vim.keymap.set('n', '<leader>ht', builtin.colorscheme, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sb', builtin.current_buffer_fuzzy_find, { desc = 'Fuzy find in current buffer' })
     vim.keymap.set('n', '<leader>fp', function()
-      builtin.find_files { cwd = vim.fn.stdpath 'config' }
+      builtin.find_files { cwd = '~/.dotfiles/.config/nvim/' }
+    end, { desc = '[S]earch [N]eovim files' })
+    vim.keymap.set('n', '<leader>nN', function()
+      builtin.find_files { cwd = '~/Dokumenty/notatki/' }
     end, { desc = '[S]earch [N]eovim files' })
   end
 }
