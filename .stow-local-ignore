@@ -1,6 +1,7 @@
 \.git
 LICENSE
 ^/.*\.org
+.gitignore
 /backups
 /screenshots
 /browsers
