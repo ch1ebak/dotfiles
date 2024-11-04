@@ -13,8 +13,8 @@ o.wrap = true
 o.linebreak = true
 o.cursorline = true
 
-o.scrolloff = 8
-o.sidescrolloff = 8
+o.scrolloff = 4
+o.sidescrolloff = 4
 
 opt.termguicolors = true
 o.background = 'dark'

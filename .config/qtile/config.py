@@ -66,15 +66,15 @@ def start_once():
 
 ## Groups
 groups = [
-    Group("1", label="", layout='max', matches=[Match(wm_class=["ferdium"])]),
-    Group("2", label="", layout='max'),
-    Group("3", label="", layout='monadtall', matches=[Match(wm_class=["Alacritty"])]),
-    Group("4", label="", layout='monadtall'),
-    Group("5", label="", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
-    Group("6", label="", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "gimp-2.10", "nwg-look", "nitrogen"])]),
-    Group("7", label="", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
-    Group("8", label="", layout='max', matches=[Match(wm_class=["spotify"])]),
-    Group("9", label="", layout='max', matches=[Match(wm_class=["mpv"])])
+    Group("1", label="󰭹", layout='max', matches=[Match(wm_class=["ferdium"])]),
+    Group("2", label="󰈹", layout='max'),
+    Group("3", label="󰈚", layout='monadtall', matches=[Match(wm_class=["Alacritty"])]),
+    Group("4", label="󰅴", layout='monadtall'),
+    Group("5", label="󰝰", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
+    Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "gimp-2.10", "nwg-look", "nitrogen"])]),
+    Group("7", label="󰓓", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
+    Group("8", label="󰓇", layout='max', matches=[Match(wm_class=["spotify"])]),
+    Group("9", label="󰕧", layout='max', matches=[Match(wm_class=["mpv"])])
 ]
 
 ## Layouts
@@ -180,7 +180,7 @@ for i in groups:
         ]
     )
 
-    
+
 # BAR
 ## Widgets
 widget_defaults = dict(
@@ -218,8 +218,8 @@ screens = [
                 hide_unused = True,
                 rounded = True,
                 highlight_method = "line",
-                font='Font Awesome',
-                fontsize = 12,
+                font="JetBrainsMono Nerd Font Mono",
+                fontsize = 18,
                 margin_y = 3,
                 margin_x = 0,
                 padding_y = 5,
@@ -292,7 +292,7 @@ screens = [
                 ),
             widget.Clock(
                 foreground = colors[10],
-                format = " %a, %d.%m.%y - %H:%M"
+                format = "  %a, %d.%m.%y - %H:%M"
                 ),
             widget.Sep(
                 foreground = colors[0],
@@ -326,8 +326,8 @@ screens = [
                 hide_unused = True,
                 rounded = True,
                 highlight_method = "line",
-                font='Font Awesome',
-                fontsize = 12,
+                font="JetBrainsMono Nerd Font Mono",
+                fontsize = 18,
                 margin_y = 3,
                 margin_x = 0,
                 padding_y = 5,
@@ -400,7 +400,7 @@ screens = [
                 ),
             widget.Clock(
                 foreground = colors[10],
-                format = " %a, %d.%m.%y - %H:%M"
+                format = "  %a, %d.%m.%y - %H:%M"
                 ),
             widget.Sep(
                 foreground = colors[0],

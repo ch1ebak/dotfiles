@@ -164,6 +164,7 @@
     "f b" '((lambda () (interactive) (find-file "~/.dotfiles/.bashrc")) :wk "Bash Config")
     "f p" '((lambda () (interactive) (find-file "~/.dotfiles/.config/emacs/config.org")) :wk "Emacs Config")
     "f q" '((lambda () (interactive) (find-file "~/.dotfiles/.config/qtile/config.py")) :wk "Qtile Config")
+    "f n" '((lambda () (interactive) (find-file "~/Dokumenty/notatki/index.md")) :wk "Qtile Config")
     "f r" '(recentf :wk "Recent files")
     "f u" '(sudo-edit :wk "Sudo edit file")
     "f U" '(sudo-edit-find-file :wk "Sudo find file"))
@@ -291,6 +292,17 @@
 ** Completion
 *** [[https//github.com/minad/vertico][Vertico]]
 #+begin_src emacs-lisp
+(defun dw/minibuffer-backward-kill (arg)
+  "When minibuffer is completing a file name delete up to parent
+folder, otherwise delete a character backward"
+  (interactive "p")
+  (if minibuffer-completing-file-name
+      ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
+      (if (string-match-p "/." (minibuffer-contents))
+          (zap-up-to-char (- arg) ?/)
+        (delete-minibuffer-contents))
+      (delete-backward-char arg)))
+
 (use-package vertico
   :ensure t
   :bind (:map vertico-map
@@ -477,10 +489,10 @@
 (setq org-agenda-start-with-log-mode t)
 
 (setq org-agenda-files
-  '("~/Dokumenty/notatki/agenda-taski.org"
-    "~/Dokumenty/notatki/agenda-nawyki.org"
-    "~/Dokumenty/notatki/agenda-powtarzalne.org"
-    "~/Dokumenty/notatki/agenda-ważne.org"))
+  '("~/Dokumenty/notatki/agenda/agenda-taski.org"
+    "~/Dokumenty/notatki/agenda/agenda-nawyki.org"
+    "~/Dokumenty/notatki/agenda/agenda-powtarzalne.org"
+    "~/Dokumenty/notatki/agenda/agenda-ważne.org"))
 
 (setq org-agenda-span 10
       org-agenda-start-on-weekday nil
@@ -513,7 +525,7 @@
 *** Org Capture
 #+begin_src emacs-lisp
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/Dokumenty/notatki/agenda-taski.org" "ZADANIA")
+      '(("t" "Todo" entry (file+headline "~/Dokumenty/notatki/agenda/agenda-taski.org" "ZADANIA")
          "* TODO %?\n  %i\n ")))
 #+end_src
 
