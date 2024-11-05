@@ -78,7 +78,8 @@ groups = [
 ]
 
 ## Layouts
-layout_theme = {"border_width": 2,
+layout_theme = {
+    "border_width": 2,
     "margin": 6,
     "border_focus": colors[5],
     "border_normal": colors[2]
@@ -224,14 +225,10 @@ screens = [
                 margin_x = 0,
                 padding_y = 5,
                 padding_x = 5,
-                borderwidth = 3,
-                inactive = colors[2],
                 active = colors[3],
                 highlight_color = colors[0],
                 this_current_screen_border = colors[5],
                 this_screen_border = colors[3],
-                other_current_screen_border = colors[1],
-                other_screen_border = colors[1],
                 foreground = colors[3],
                 background = colors[0]
                 ),
@@ -332,14 +329,10 @@ screens = [
                 margin_x = 0,
                 padding_y = 5,
                 padding_x = 5,
-                borderwidth = 3,
-                inactive = colors[2],
                 active = colors[3],
                 highlight_color = colors[0],
                 this_current_screen_border = colors[5],
                 this_screen_border = colors[3],
-                other_current_screen_border = colors[1],
-                other_screen_border = colors[1],
                 foreground = colors[3],
                 background = colors[0]
                 ),
