@@ -15,4 +15,4 @@ Xft.autohint: true
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
-#include "/home/kd/.config/xresources/tokyonight"
+#include "/home/kd/.config/xresources/spacegray"

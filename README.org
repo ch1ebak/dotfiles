@@ -6,7 +6,7 @@
 |----------------+-----------------------|
 | Window Manager | Qtile                 |
 | Terminal       | Alacritty             |
-| Editor         | Neovim                |
+| Editor         | Emacs                 |
 | Shell          | Bash                  |
 | Notifications  | Dunst                 |
 | Launcher       | Rofi                  |

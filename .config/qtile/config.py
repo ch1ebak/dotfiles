@@ -20,7 +20,7 @@ from libqtile.widget import spacer
 from typing import List
 
 ## Color scheme
-from themes.tokyonight import colors
+from themes.spacegray import colors
 
 # SETTINGS
 ## General
@@ -68,8 +68,8 @@ def start_once():
 groups = [
     Group("1", label="󰭹", layout='max', matches=[Match(wm_class=["ferdium"])]),
     Group("2", label="󰈹", layout='max'),
-    Group("3", label="󰈚", layout='monadtall', matches=[Match(wm_class=["Alacritty"])]),
-    Group("4", label="󰅴", layout='monadtall'),
+    Group("3", label="󰈚", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
+    Group("4", label="󰅴", layout='monadtall', matches=[Match(wm_class=["Alacritty"])]),
     Group("5", label="󰝰", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
     Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "gimp-2.10", "nwg-look", "nitrogen"])]),
     Group("7", label="󰓓", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
@@ -113,7 +113,7 @@ keys = [
     Key([mod], "Return", lazy.spawn("alacritty")),
     Key([mod], "w", lazy.spawn("zen-browser")),
     Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
-    Key([mod], "e", lazy.spawn("alacritty -e nvim")),
+    Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'")),
     Key([mod], "a", lazy.spawn("alacritty -e yazi")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
 
@@ -194,7 +194,7 @@ widget_defaults = dict(
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
+        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -301,7 +301,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
+        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [

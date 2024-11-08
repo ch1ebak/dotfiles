@@ -110,6 +110,13 @@
 (setq org-return-follows-link  t)
 #+end_src
 
+*** [[https://github.com/linktohack/evil-commentary][Evil Commentary]]
+#+begin_src emacs-lisp
+(use-package evil-commentary
+  :init
+  (evil-commentary-mode))
+#+end_src
+
 ** [[https://github.com/noctuid/general.el][General]]
 #+begin_src emacs-lisp
 (use-package general
@@ -161,10 +168,7 @@
   
   (me/leader-keys
     "f" '(:ignore t :wk "Files")
-    "f b" '((lambda () (interactive) (find-file "~/.dotfiles/.bashrc")) :wk "Bash Config")
     "f p" '((lambda () (interactive) (find-file "~/.dotfiles/.config/emacs/config.org")) :wk "Emacs Config")
-    "f q" '((lambda () (interactive) (find-file "~/.dotfiles/.config/qtile/config.py")) :wk "Qtile Config")
-    "f n" '((lambda () (interactive) (find-file "~/Dokumenty/notatki/index.md")) :wk "Qtile Config")
     "f r" '(recentf :wk "Recent files")
     "f u" '(sudo-edit :wk "Sudo edit file")
     "f U" '(sudo-edit-find-file :wk "Sudo find file"))
@@ -178,6 +182,10 @@
     "h e d" '(elpaca-delete :wk "Elpaca: delete package")
     "h r" '(:ignore t :wk "Reload")
     "h r r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el") (ignore (elpaca-process-queues))) :wk "Reload emacs config"))
+  
+  (me/leader-keys
+    "n n" '((lambda () (interactive) (find-file "~/Dokumenty/notatki/index.md")) :wk "Notes")
+    "n N" '((lambda () (interactive) (consult-find "~/Dokumenty/notatki/")) :wk "Notes"))
 
   (me/leader-keys
     "p" '(:ignore t :wk "Packages")
@@ -420,12 +428,6 @@ folder, otherwise delete a character backward"
   ;; (evil-goggles-use-diff-faces)
 #+end_src
 
-*** [[https://github.com/DarthFennec/highlight-indent-guides][Highlight indent guides]]
-#+begin_src emacs-lisp
-(use-package highlight-indent-guides)
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-#+end_src
-
 *** [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]]
 #+begin_src emacs-lisp
 (use-package rainbow-delimiters
@@ -490,7 +492,6 @@ folder, otherwise delete a character backward"
 
 (setq org-agenda-files
   '("~/Dokumenty/notatki/agenda/agenda-taski.org"
-    "~/Dokumenty/notatki/agenda/agenda-nawyki.org"
     "~/Dokumenty/notatki/agenda/agenda-powtarzalne.org"
     "~/Dokumenty/notatki/agenda/agenda-ważne.org"))
 
@@ -559,6 +560,11 @@ folder, otherwise delete a character backward"
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
 #+end_src
 
+*** [[https://github.com/alphapapa/org-sidebar][Org Sidebar]]
+#+begin_src emacs-lisp
+(use-package org-sidebar)
+#+end_src
+
 *** Org Tempo
 #+begin_src emacs-lisp
 (require 'org-tempo)
@@ -601,6 +607,21 @@ folder, otherwise delete a character backward"
   (setq markdown-hide-urls t)
   (setq markdown-hide-markup nil)
   :init (setq markdown-command "markdown"))
+#+end_src
+
+*** [[https://github.com/SavchenkoValeriy/emacs-powerthesaurus][Powerthesaurus]]
+#+begin_src emacs-lisp
+(use-package powerthesaurus)
+#+end_src
+                                                                                       
+*** [[https://github.com/bnbeckwith/writegood-mode][Writegood Mode]]
+#+begin_src emacs-lisp
+(use-package writegood-mode
+  :config
+  (writegood-weasels-turn-on)
+  (writegood-passive-voice-turn-on)
+  (writegood-duplicates-turn-on))
+  ;; (add-hook 'text-mode-hook 'writegood-mode))
 #+end_src
 
 ** Applications
@@ -768,6 +789,14 @@ folder, otherwise delete a character backward"
   (beacon-mode 1))
 #+end_src
 
+**** [[https://github.com/catppuccin/emacs][Catppuccin]]
+#+begin_src emacs-lisp
+(use-package catppuccin-theme
+  :config
+  ;; (load-theme 'catppuccin t)
+)
+#+end_src
+
 **** [[https://github.com/seagle0128/doom-modeline][Doom Modeline]]
 #+begin_src emacs-lisp
 (use-package doom-modeline
@@ -787,7 +816,7 @@ folder, otherwise delete a character backward"
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-tokyo-night t)
+  (load-theme 'doom-spacegrey t)
   (doom-themes-org-config))
 #+end_src
 
