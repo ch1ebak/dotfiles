@@ -61,6 +61,7 @@ def start_once():
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
     qtile.cmd_spawn("brightnessctl set 60%")
+    qtile.cmd_spawn("/usr/bin/emacs --daemon &")
     for p in processes:
         subprocess.Popen(p)
 
@@ -71,7 +72,7 @@ groups = [
     Group("3", label="󰈚", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
     Group("4", label="󰅴", layout='monadtall', matches=[Match(wm_class=["Alacritty"])]),
     Group("5", label="󰝰", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
-    Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "gimp-2.10", "nwg-look", "nitrogen"])]),
+    Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "rawtherapee", "nwg-look", "nitrogen"])]),
     Group("7", label="󰓓", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
     Group("8", label="󰓇", layout='max', matches=[Match(wm_class=["spotify"])]),
     Group("9", label="󰕧", layout='max', matches=[Match(wm_class=["mpv"])])

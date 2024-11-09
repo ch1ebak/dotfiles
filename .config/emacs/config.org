@@ -131,7 +131,7 @@
 
   (me/leader-keys
     "SPC" '(execute-extended-command :wk "M-x")
-    "RET" '(consult-bookmark :wk "List bookmarks")
+    "RET" '(zoxide-travel :wk "List bookmarks")
     "/" '(consult-buffer :wk "Consult Buffer")
     "?" '(kill-buffer :wk "Kill buffer")
     "." '(find-file :wk "Find file")
@@ -418,6 +418,14 @@ folder, otherwise delete a character backward"
 (use-package sudo-edit)
 #+end_src
 
+*** [[https://github.com/emacsmirror/zoxide][Zoxide]]
+#+begin_src emacs-lisp
+(use-package zoxide)
+(defun dired-jump-with-zoxide (&optional other-window)
+   (interactive "P")
+   (zoxide-open-with nil (lambda (file) (dired-jump other-window file)) t))
+#+end_src
+
 ** Editor
 *** [[https://github.com/edkolev/evil-goggles][Evil Goggles]]
 #+begin_src emacs-lisp
@@ -603,10 +611,15 @@ folder, otherwise delete a character backward"
 #+begin_src emacs-lisp
 (use-package markdown-mode
   :ensure t
-  :config
-  (setq markdown-hide-urls t)
-  (setq markdown-hide-markup nil)
+  :mode ("README\\.md\\.njk\\'" . gfm-mode)
+  :custom
+  (markdown-hide-urls t)
   :init (setq markdown-command "markdown"))
+
+(add-to-list 'auto-mode-alist '("\\.njk\\'" . web-mode))
+(add-to-list 'auto-mode-alist
+             '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 #+end_src
 
 *** [[https://github.com/SavchenkoValeriy/emacs-powerthesaurus][Powerthesaurus]]
@@ -744,13 +757,17 @@ folder, otherwise delete a character backward"
       auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
 #+end_src
 
-*** Files
+*** Paths
 #+begin_src emacs-lisp
 (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
 (setq user-emacs-directory "~/.config/emacs")
 (setq bookmark-default-file "~/.config/emacs/files/bookmarks")
 (setq recentf-save-file "~/.config/emacs/files/recentf")
 (setq auth-sources '("~/Dokumenty/tajne/.authinfo.gpg"))
+
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(when (file-exists-p custom-file)
+  (load custom-file))
 #+end_src
 
 *** Recent files
@@ -793,7 +810,7 @@ folder, otherwise delete a character backward"
 #+begin_src emacs-lisp
 (use-package catppuccin-theme
   :config
-  ;; (load-theme 'catppuccin t)
+;  (load-theme 'catppuccin t)
 )
 #+end_src
 
