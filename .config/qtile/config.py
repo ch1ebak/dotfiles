@@ -20,7 +20,7 @@ from libqtile.widget import spacer
 from typing import List
 
 ## Color scheme
-from themes.spacegray import colors
+from themes.tokyonight import colors
 
 # SETTINGS
 ## General
@@ -61,7 +61,6 @@ def start_once():
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
     qtile.cmd_spawn("brightnessctl set 60%")
-    qtile.cmd_spawn("/usr/bin/emacs --daemon &")
     for p in processes:
         subprocess.Popen(p)
 
@@ -114,7 +113,7 @@ keys = [
     Key([mod], "Return", lazy.spawn("alacritty")),
     Key([mod], "w", lazy.spawn("zen-browser")),
     Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
-    Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'")),
+    Key([mod], "e", lazy.spawn("alacritty -e nvim")),
     Key([mod], "a", lazy.spawn("alacritty -e yazi")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
 
@@ -195,7 +194,7 @@ widget_defaults = dict(
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
+        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -302,7 +301,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
+        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [

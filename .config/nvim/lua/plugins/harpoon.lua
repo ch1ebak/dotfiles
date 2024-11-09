@@ -24,8 +24,8 @@ return {
     end
     return {
       {"<leader>bm", function() harpoon:list():add() end, desc ="Harpoon add file"},
-      {"<leader><leader>", function() toggle_telescope(harpoon:list() )end, desc ="Open Harpoon window"},
-      -- {"<leader><Return>", function() harpoon.ui:toggle_quick_menu(harpoon:list())end, desc ="Open Harpoon window"},
+      -- {"<leader><leader>", function() toggle_telescope(harpoon:list() )end, desc ="Open Harpoon window"},
+      {"<leader><Return>", function() harpoon.ui:toggle_quick_menu(harpoon:list())end, desc ="Open Harpoon window"},
     }
   end,
   opts = function(_, opts)
