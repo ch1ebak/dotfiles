@@ -5,7 +5,7 @@
 | Theme          | Tokyo Night/Spacegray |
 |----------------+-----------------------|
 | Window Manager | Qtile                 |
-| Terminal       | Alacritty             |
+| Terminal       | Wezterm               |
 | Editor         | Neovim                |
 | Shell          | Bash                  |
 | Notifications  | Dunst                 |

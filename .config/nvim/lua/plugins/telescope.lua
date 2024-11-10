@@ -50,7 +50,7 @@ return {
     vim.keymap.set('n', '<leader>fp', function()
       builtin.find_files { cwd = '~/.dotfiles/.config/nvim/' }
     end, { desc = '[S]earch [N]eovim files' })
-    vim.keymap.set('n', '<leader>nN', function()
+    vim.keymap.set('n', '<leader>nf', function()
       builtin.find_files { cwd = '~/Dokumenty/notatki/' }
     end, { desc = '[S]earch [N]eovim files' })
   end
