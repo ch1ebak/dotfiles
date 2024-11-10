@@ -4,7 +4,7 @@ return {
   },
   config = function ()
     require("twilight").setup({
-      vim.keymap.set("n", "<leader>tw", ":Twilight<CR>")
+      vim.keymap.set("n", "<leader>tw", ":Twilight<CR>", { desc = 'Toggle Twilight' })
     })
   end
 }

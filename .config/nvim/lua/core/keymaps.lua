@@ -21,14 +21,39 @@ keymap.set('n', '<leader><Tab>J', "<C-W>R", { desc = 'Move splits around' }, opt
 keymap.set('n', '<leader><Tab>K', "<C-W>R", { desc = 'Move splits around' }, opts)
 
 -- Movement
-keymap.set("v", "J", ":m '>+1<CR>gv=gv", opts)
-keymap.set("v", "K", ":m '<-2<CR>gv=gv", opts)
-keymap.set("n", "J", "mzJ`z", opts)
-keymap.set("n", "n", "nzzzv", opts)
-keymap.set("n", "N", "Nzzzv", opts)
+keymap.set({ "n", "v" }, "gh", "^", { desc = "Go to the beginning line" })
+keymap.set({ "n", "v" }, "gl", "$", { desc = "Go to the end of the line" })
+keymap.set("v", "gl", "$h", { desc = "Go to the end of the line" })
+keymap.set("n", "Y", "y$", { desc = "Yank to end of line" })
+keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'Move selected line down' }, opts)
+keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'Move selected line up' }, opts)
+keymap.set("n", "J", "mzJ`z", { desc = 'Combine line with the one below' }, opts)
+keymap.set("n", "n", "nzzzv", { desc = 'Better search next' }, opts)
+keymap.set("n", "N", "Nzzzv", { desc = 'Better search previous' }, opts)
 
 -- Toggles
-keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", opts)
+keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = 'Chmod open file' }, opts)
 
--- Fun stuff
-keymap.set("n", "<leader>?", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], opts)
+-- Spelling
+keymap.set("n", "<leader>ze", function()
+  vim.opt.spelllang = "en"
+  vim.cmd("echo 'Spell language set to English'")
+end, { desc = "Spelling language English" })
+
+keymap.set("n", "<leader>zp", function()
+  vim.opt.spelllang = "pl"
+  vim.cmd("echo 'Spell language set to Polish'")
+end, { desc = "Spelling language Polish" })
+
+keymap.set("n", "<leader>zb", function()
+  vim.opt.spelllang = "en,pl"
+  vim.cmd("echo 'Spell language set to English and Polish'")
+end, { desc = "[P]Spelling language English and Polish" })
+
+keymap.set("n", "<leader>zc", function()
+  vim.cmd("normal! 1z=")
+end, { desc = "Spelling suggestions" })
+
+keymap.set("n", "<leader>za", function()
+  vim.cmd("normal! zg")
+end, { desc = "Spelling add word to spellfile" })

@@ -23,14 +23,14 @@ div.internalVimiumHintMarker > .matchingCharacter {
   background-color: #3b4252;
 }
 #vomnibar .vomnibarSearchArea {
-  background-color: #3b4252;
+  background-color: #20242d;
   border: none;
 }
 
 #vomnibar input {
   color: #d8dee9;
-  background-color: #3b4252;
-  border: 1px solid #3b4252;
+  background-color: #20242d;
+  border: 1px solid #20242d;
   box-shadow: none;
   font-family: JetBrainsMono Nerd Font;
 }

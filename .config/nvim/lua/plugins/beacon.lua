@@ -1,6 +1,6 @@
 return {
   'danilamihailov/beacon.nvim',
-  config = {
+  opts = {
     enabled = true,
     speed = 2,
     width = 40,

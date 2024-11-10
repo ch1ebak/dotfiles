@@ -52,7 +52,7 @@ opt.backup = false
 
 opt.clipboard:append("unnamedplus")
 
-vim.opt.spelllang = 'pl,en_us'
+vim.opt.spelllang = 'en,pl'
 vim.opt.spell = true
 
 vim.api.nvim_create_autocmd('TextYankPost', {
