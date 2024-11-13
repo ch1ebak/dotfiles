@@ -8,7 +8,7 @@ return {
             return
         end
         url_open.setup ({})
-    vim.keymap.set('n', '<leader>mA', "<esc>:URLOpenUnderCursor<cr>", { desc = 'Open link at point' })
+    vim.keymap.set('n', '<leader>tb', "<esc>:URLOpenUnderCursor<cr>", { desc = 'Open link at point' })
     end,
 }
 

@@ -9,8 +9,10 @@ local opts = { noremap = true, silent = true }
 
 -- Windows/Splits/Buffers
 keymap.set('n', '<leader><Tab><Return>', "<C-w>v", { desc = 'Split window horizontally' }, opts)
-keymap.set('n', '<leader><Tab>h', "<C-w>h", { desc = 'Move to left window' }, opts)
-keymap.set('n', '<leader><Tab>l', "<C-w>l", { desc = 'Move to right window' }, opts)
+keymap.set('n', '<C-h>', "<C-w>h", { desc = 'Move to left window' }, opts)
+keymap.set('n', '<C-l>', "<C-w>l", { desc = 'Move to right window' }, opts)
+keymap.set('n', '<C-j>', "<C-w>j", { desc = 'Move to bottom window' }, opts)
+keymap.set('n', '<C-k>', "<C-w>k", { desc = 'Move to top window' }, opts)
 keymap.set('n', '<leader><Tab>n', "<cmd>tabnew<CR>", { desc = 'New tab' }, opts)
 keymap.set('n', '<leader><Tab>j', "<cmd>tabn<CR>", { desc = 'Next tab' }, opts)
 keymap.set('n', '<leader><Tab>k', "<cmd>tabp<CR>", { desc = 'Previous tab' }, opts)
@@ -33,6 +35,7 @@ keymap.set("n", "N", "Nzzzv", { desc = 'Better search previous' }, opts)
 
 -- Toggles
 keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = 'Chmod open file' }, opts)
+keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = 'Chmod open file' }, opts)
 
 -- Spelling
 keymap.set("n", "<leader>ze", function()

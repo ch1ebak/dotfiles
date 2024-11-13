@@ -51,7 +51,7 @@ return {
       builtin.find_files { cwd = '~/.dotfiles/.config/nvim/' }
     end, { desc = '[S]earch [N]eovim files' })
     vim.keymap.set('n', '<leader>nf', function()
-      builtin.find_files { cwd = '~/Dokumenty/notatki/' }
+      builtin.find_files { cwd = '/ssd/Obsidian/notatki' }
     end, { desc = '[S]earch [N]eovim files' })
   end
 }

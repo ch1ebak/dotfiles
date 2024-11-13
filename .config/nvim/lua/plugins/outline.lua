@@ -7,7 +7,7 @@ return {
   },
   opts = {
     outline_window = {
-      position = 'left',
+      position = 'right',
       split_command = nil,
       width = 25,
       relative_width = true,
