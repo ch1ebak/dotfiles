@@ -20,7 +20,7 @@ from libqtile.widget import spacer
 from typing import List
 
 ## Color scheme
-from themes.tokyonight import colors
+from themes.spacegray import colors
 
 # SETTINGS
 ## General
@@ -61,6 +61,7 @@ def start_once():
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
     qtile.cmd_spawn("brightnessctl set 60%")
+    qtile.cmd_spawn("/usr/bin/emacs --daemon &")
     for p in processes:
         subprocess.Popen(p)
 
@@ -68,7 +69,7 @@ def start_once():
 groups = [
     Group("1", label="󰭹", layout='max', matches=[Match(wm_class=["ferdium"])]),
     Group("2", label="󰈹", layout='max'),
-    Group("3", label="󰈚", layout='monadtall', matches=[Match(wm_class=["obsidian"])]),
+    Group("3", label="󰈚", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
     Group("4", label="󰅴", layout='monadtall', matches=[Match(wm_class=["org.wezfurlong.wezterm"])]),
     Group("5", label="󰝰", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
     Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "rawtherapee", "nwg-look", "nitrogen"])]),
@@ -113,7 +114,7 @@ keys = [
     Key([mod], "Return", lazy.spawn("wezterm")),
     Key([mod], "w", lazy.spawn("zen-browser")),
     Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
-    Key([mod], "e", lazy.spawn("obsidian")),
+    Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'")),
     Key([mod], "a", lazy.spawn("wezterm -e yazi")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
 
@@ -194,7 +195,7 @@ widget_defaults = dict(
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
+        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -301,7 +302,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
+        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
