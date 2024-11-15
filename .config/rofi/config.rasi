@@ -6,4 +6,4 @@ configuration {
   kb-row-down: "Control+j";
 }
 
-@theme "/home/kd/.config/rofi/themes/spacegray"
+@theme "/home/kd/.config/rofi/themes/tokyonight"

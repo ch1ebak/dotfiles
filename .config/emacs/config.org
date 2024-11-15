@@ -127,7 +127,7 @@
 (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 #+end_src
 
-*** Clean-up
+** Clean-up
 #+begin_src emacs-lisp
 (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
 
@@ -136,7 +136,7 @@
       auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
 #+end_src
 
-*** Files
+** Files
 #+begin_src emacs-lisp
 (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
 (setq user-emacs-directory "~/.config/emacs")
@@ -145,7 +145,7 @@
 (setq auth-sources '("~/Dokumenty/tajne/.authinfo.gpg"))
 #+end_src
 
-*** Recent files
+** Recent files
 #+begin_src emacs-lisp
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
@@ -235,6 +235,11 @@
     "c" '(:ignore t :wk "Comments")
     "c c" '(comment-line :wk "Comment Line")
     "c r" '(comment-or-uncomment-region :wk "Comment Region"))
+
+  (me/leader-keys
+    "d" '(:ignore t :wk "Directories")
+    "d z" '(zoxide-travel :wk "Zoxide")
+    "d n" '(neotree-toggle :wk "Neotree"))
   
   (me/leader-keys
     "f" '(:ignore t :wk "Files")
@@ -326,7 +331,8 @@
     "m L" 'markdown-demote
     "m J" 'markdown-move-down
     "m K" 'markdown-move-up
-    "t t" 'markdown-insert-table)
+    "t h" 'markdown-toggle-url-hiding
+    "t i" 'markdown-toggle-inline-images)
   
   (general-nmap
     :keymaps 'dired-mode-map
@@ -493,7 +499,7 @@ folder, otherwise delete a character backward"
 #+begin_src emacs-lisp
 (use-package catppuccin-theme
   :config
-; (load-theme 'catppuccin t)
+;; (load-theme 'catppuccin t)
 )
 #+end_src
 
@@ -516,7 +522,7 @@ folder, otherwise delete a character backward"
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-spacegrey t)
+  (load-theme 'doom-tokyo-night t)
   (doom-themes-org-config))
 #+end_src
 
@@ -579,13 +585,17 @@ folder, otherwise delete a character backward"
 #+begin_src emacs-lisp
 (use-package dired
   :ensure nil
-  :commands (dired dired-jump)
-  :custom ((dired-listing-switches "-agho --group-directories-first")))
-
-(setq delete-by-moving-to-trash t
-      trash-directory "~/.local/share/Trash/files/")
-
-(add-hook 'dired-mode-hook 'auto-revert-mode)
+  :defer
+  :hook ((dired-mode . dired-hide-details-mode)
+         (dired-mode . hl-line-mode))
+  :custom
+  (dired-do-revert-buffer t)
+  (dired-auto-revert-buffer t)
+  (delete-by-moving-to-trash t)
+  ;; (dired-mouse-drag-files t)
+  (dired-dwim-target t)
+  ;; (dired-guess-shell-alist-user)
+  (dired-listing-switches "-AlhoF --group-directories-first"))
 #+end_src
 
 **** Dired Open
@@ -625,6 +635,11 @@ folder, otherwise delete a character backward"
 *** [[https://github.com/nflath/sudo-edit][Sudo Edit]]
 #+begin_src emacs-lisp
 (use-package sudo-edit)
+#+end_src
+
+*** [[https://gitlab.com/Vonfry/zoxide.el][Zoxide]]
+#+begin_src emacs-lisp
+(use-package zoxide)
 #+end_src
 
 ** Editor
@@ -827,10 +842,14 @@ folder, otherwise delete a character backward"
 #+begin_src emacs-lisp
 (use-package markdown-mode
   :ensure t
-  :config
+  :init
+  (setq markdown-unordered-list-item-prefix "  -")
   (setq markdown-hide-urls t)
-  (setq markdown-hide-markup nil)
-  :init (setq markdown-command "markdown"))
+  (setq markdown-command
+      (concat
+      "pandoc"
+      " --from=markdown --to=html"
+      " --standalone --mathjax --highlight-style=pygments")))
 #+end_src
 
 ** Applications
@@ -878,7 +897,7 @@ folder, otherwise delete a character backward"
  eww-download-directory "~/Pobrane"
  eww-bookmarks-directory "~/.config/emacs/files/"
  eww-search-prefix "https://frogfind.com/?q="
- browse-url-secondary-browser-function 'browse-url-firefox)
+ browse-url-secondary-browser-function 'browse-url-xdg-open)
 
 (add-hook 'eww-after-render-hook 'eww-readable)
 
