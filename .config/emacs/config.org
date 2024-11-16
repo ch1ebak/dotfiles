@@ -326,6 +326,7 @@
     "m L" 'markdown-demote
     "m J" 'markdown-move-down
     "m K" 'markdown-move-up
+    "t p" 'markdown-preview
     "t h" 'markdown-toggle-url-hiding
     "t i" 'markdown-toggle-inline-images)
   
@@ -371,6 +372,13 @@
 #+end_src
 
 * PACKAGES
+** [[https://github.com/Malabarba/beacon][Beacon]]
+#+begin_src emacs-lisp
+(use-package beacon
+  :init
+  (beacon-mode 1))
+#+end_src
+
 ** Completion
 *** [[https//github.com/minad/vertico][Vertico]]
 #+begin_src emacs-lisp
@@ -448,118 +456,24 @@ folder, otherwise delete a character backward"
   (completion-category-overrides '((file (styles partial-completion)))))
 #+end_src
 
-** UI
-*** [[https://github.com/Malabarba/beacon][Beacon]]
-#+begin_src emacs-lisp
-(use-package beacon
-  :init
-  (beacon-mode 1))
-#+end_src
-
-*** [[https://github.com/catppuccin/emacs][Catppuccin]]
-#+begin_src emacs-lisp
-(use-package catppuccin-theme
-  :config
-;; (load-theme 'catppuccin t)
-)
-#+end_src
-
-*** [[https://github.com/seagle0128/doom-modeline][Doom Modeline]]
-#+begin_src emacs-lisp
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-  :config
- (setq doom-modeline-height 30
-       doom-modeline-bar-width 5
-       doom-modeline-enable-word-count t
-       doom-modeline-continuous-word-count-modes '(org-mode)
-       doom-modeline-buffer-file-name-style 'truncate-all))
-#+end_src
-
-*** [[https://github.com/doomemacs/themes][Doom Themes]]
-#+begin_src emacs-lisp
-(use-package doom-themes
-  :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (load-theme 'doom-tokyo-night t)
-  (doom-themes-org-config))
-#+end_src
-
-*** [[https://github.com/twlz0ne/nerd-fonts.el][Nerd Fonts]]
-#+begin_src emacs-lisp
-(use-package nerd-icons
-  :ensure t
-  :defer t)
-
-(use-package nerd-icons-dired
-  :ensure t
-  :defer t
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
-
-(use-package nerd-icons-completion
-  :ensure t
-  :after (:all nerd-icons marginalia)
-  :config
-  (nerd-icons-completion-mode)
-  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
-#+end_src
-
-*** [[https://github.com/hlissner/emacs-solaire-mode][Solaire Mode]]
-#+begin_src emacs-lisp
-(use-package solaire-mode
-  :init
-  (solaire-global-mode +1))
-#+end_src
-
-*** Tab Bar Mode
-#+begin_src emacs-lisp
-(setq tab-bar-new-tab-choice "*scratch*"
-      tab-bar-close-button-show nil
-      tab-bar-new-button-show nil
-      tab-bar-close-last-tab-choice 'tab-bar-mode-disable
-      tab-bar-close-tab-select 'recent
-      tab-bar-new-tab-to 'right
-      tab-bar-tab-hints nil
-      tab-bar-separator " "
-      tab-bar-show 1)
-#+end_src
-
-*** Transparency
-#+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
-#+end_src
-
-*** [[https://codeberg.org/joostkremers/visual-fill-column][Visual Fill Column]]
-#+begin_src emacs-lisp
-(use-package visual-fill-column
-  :ensure t
-  :custom
-  (visual-fill-column-width 120)
-  (visual-fill-column-center-text t))
-#+end_src
-
-** Files
-*** Dired
+** Dired
 #+begin_src emacs-lisp
 (use-package dired
   :ensure nil
   :defer
-  :hook ((dired-mode . dired-hide-details-mode)
-         (dired-mode . hl-line-mode))
+  :hook
+  (dired-mode . hl-line-mode)
+  :config
+  (setq dired-listing-switches
+      "-AGFhlv --group-directories-first")
   :custom
   (dired-do-revert-buffer t)
   (dired-auto-revert-buffer t)
   (delete-by-moving-to-trash t)
-  ;; (dired-mouse-drag-files t)
-  (dired-dwim-target t)
-  ;; (dired-guess-shell-alist-user)
-  (dired-listing-switches "-AlhoF --group-directories-first"))
+  (dired-dwim-target t))
 #+end_src
 
-**** Dired Open
+*** Dired Open
 #+begin_src emacs-lisp
 (use-package dired-open
   :config
@@ -571,7 +485,206 @@ folder, otherwise delete a character backward"
                                 ("pdf" . "zen-browser"))))
 #+end_src
 
-*** [[https://github.com/jaypei/emacs-neotree][Neotree]]
+*** Image Dired
+#+begin_src emacs-lisp
+(use-package image-dired
+  :ensure nil
+  :commands (image-dired)
+  :bind
+  ( :map image-dired-thumbnail-mode-map
+    ("<return>" . image-dired-thumbnail-display-external))
+  :config
+  (setq image-dired-thumbnail-storage 'standard)
+  (setq image-dired-external-viewer "xdg-open")
+  (setq image-dired-thumb-size 80)
+  (setq image-dired-thumb-margin 2)
+  (setq image-dired-thumb-relief 0)
+  (setq image-dired-thumbs-per-row 4))
+#+end_src
+
+*** Dired Preview
+#+begin_src emacs-lisp
+(use-package dired-preview
+  :ensure t
+  ;; :hook (dired-mode . (lambda ()
+  ;;                       (when (string-match-p "Obrazy" default-directory)
+  ;;                         (dired-preview-mode 1))))
+  :defer 1
+  :hook (after-init . dired-preview-global-mode)
+  :config
+  (setq dired-preview-max-size (* (expt 2 20) 10))
+  (setq dired-preview-delay 0)
+  (setq dired-preview-ignored-extensions-regexp
+        (concat "\\."
+                "\\(gz\\|"
+                "zst\\|"
+                "tar\\|"
+                "xz\\|"
+                "rar\\|"
+                "zip\\|"
+                "iso\\|"
+                "epub"
+                "\\)"))
+  ;; (setq dired-preview-display-action-alist
+  ;;       '((display-buffer-in-side-window)
+  ;;         (side . right)
+  ;;         (preserve-size . (t . t))
+  ;;         (window-parameters . ((mode-line-format . none)
+  ;;                               (header-line-format . none)))))
+  (dired-preview-global-mode 1))
+#+end_src
+
+** [[https://github.com/seagle0128/doom-modeline][Doom Modeline]]
+#+begin_src emacs-lisp
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-height 30
+        doom-modeline-bar-width 5
+        doom-modeline-enable-word-count t
+        doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)
+        doom-modeline-buffer-file-name-style 'truncate-all))
+#+end_src
+
+** [[https://github.com/skeeto/elfeed][Elfeed]]
+#+begin_src emacs-lisp
+(use-package elfeed
+  :config
+  (setq elfeed-search-feed-face ":foreground #b3b8c3 :weight bold")
+  (setq elfeed-db-directory "~/.config/emacs/files/elfeed/database"))
+
+(defun elfeed-mark-all-as-read ()
+  (interactive)
+  (elfeed-untag elfeed-search-entries 'unread)
+  (elfeed-search-update :force)) ; redraw
+#+end_src
+
+*** [[https://github.com/jeetelongname/elfeed-goodies][Elfeed Goodies]]
+#+begin_src emacs-lisp
+(use-package elfeed-goodies
+  :init
+  (elfeed-goodies/setup)
+  :config
+  (setq elfeed-goodies/entry-pane-size 0.5))
+#+end_src
+
+*** [[https://github.com/remyhonig/elfeed-org][Elfeed-org]]
+#+begin_src emacs-lisp
+(use-package elfeed-org
+  :ensure t
+  :config
+  (setq rmh-elfeed-org-files (list "~/.config/emacs/files/elfeed/elfeed.org"))
+  (elfeed-org))
+#+end_src
+
+** [[https://github.com/edkolev/evil-goggles][Evil Goggles]]
+#+begin_src emacs-lisp
+(use-package evil-goggles
+  :ensure t
+  :config
+  (evil-goggles-mode))
+  ;; (evil-goggles-use-diff-faces)
+#+end_src
+
+** EWW
+#+begin_src emacs-lisp
+(setq
+ browse-url-browser-function 'eww-browse-url
+ shr-use-fonts  nil
+ ;; shr-use-colors nil
+ shr-indentation 2
+ ;; shr-indentation 70 
+ shr-width 100
+ eww-auto-rename-buffer 1
+ eww-download-directory "~/Pobrane"
+ eww-bookmarks-directory "~/.config/emacs/files/"
+ eww-search-prefix "https://frogfind.com/?q="
+ browse-url-secondary-browser-function 'browse-url-xdg-open)
+
+(add-hook 'eww-after-render-hook 'eww-readable)
+
+(defun eww-new ()
+  (interactive)
+  (let ((url (read-from-minibuffer "Enter URL or keywords: ")))
+    (switch-to-buffer (generate-new-buffer "eww"))
+    (eww-mode)
+    (eww url)))
+#+end_src
+
+** Insert date / time 
+#+begin_src emacs-lisp
+(defun insert-todays-date (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%d-%m-%Y")
+          (format-time-string "%Y-%m-%d"))))
+
+(defun insert-current-time (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%R")
+          (format-time-string "%H:%M"))))
+#+end_src
+
+** Ispell / Flyspell
+#+begin_src emacs-lisp
+(with-eval-after-load "ispell"
+  (setenv "LANG" "pl_PL.UTF-8")
+  (setq ispell-program-name "hunspell")
+  (setq ispell-dictionary "pl_PL,en_US")
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "pl_PL,en_US")
+  (setq ispell-personal-dictionary "~/.config/emacs/files/hunspell_personal"))
+
+(setq ispell-silently-savep t)
+(setq flyspell-issue-message-flag nil)
+;; (add-hook 'text-mode-hook 'flyspell-mode)
+#+end_src
+
+** [[https://www.emacswiki.org/emacs/KillingBuffers#h5o-2][Kill Other Buffers]]
+#+begin_src emacs-lisp
+(defun kill-other-buffers ()
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+#+end_src
+
+** [[https://github.com/PillFall/languagetool.el][Language Tool]]
+#+begin_src emacs-lisp
+(use-package languagetool
+  :ensure t
+  :defer t
+  :commands (languagetool-check
+             languagetool-clear-suggestions
+             languagetool-correct-at-point
+             languagetool-correct-buffer
+             languagetool-set-language
+             languagetool-server-mode
+             languagetool-server-start
+             languagetool-server-stop)
+  :config
+  (setq languagetool-java-arguments '("-Dfile.encoding=UTF-8"
+                                      "-cp" "/usr/share/languagetool:/usr/share/java/languagetool/*")
+        languagetool-console-command "org.languagetool.commandline.Main"
+        languagetool-server-command "org.languagetool.server.HTTPServer"))
+#+end_src
+
+** [[https://github.com/jrblevin/markdown-mode][Markdown Mode]]
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :init
+  (setq markdown-unordered-list-item-prefix "  -")
+  (setq markdown-hide-urls t)
+  (setq markdown-command
+      (concat
+      "pandoc"
+      " --from=markdown --to=html"
+      " --standalone --mathjax --highlight-style=pygments")))
+#+end_src
+
+** [[https://github.com/jaypei/emacs-neotree][Neotree]]
 #+begin_src emacs-lisp
 (use-package neotree
   :ensure t
@@ -593,68 +706,24 @@ folder, otherwise delete a character backward"
            (setq auto-hscroll-mode nil)))))
 #+end_src
 
-*** [[https://github.com/nflath/sudo-edit][Sudo Edit]]
+** [[https://github.com/twlz0ne/nerd-fonts.el][Nerd Fonts]]
 #+begin_src emacs-lisp
-(use-package sudo-edit)
-#+end_src
-
-*** [[https://gitlab.com/Vonfry/zoxide.el][Zoxide]]
-#+begin_src emacs-lisp
-(use-package zoxide)
-#+end_src
-
-** Editor
-*** [[https://github.com/edkolev/evil-goggles][Evil Goggles]]
-#+begin_src emacs-lisp
-(use-package evil-goggles
+(use-package nerd-icons
   :ensure t
+  :defer t)
+
+(use-package nerd-icons-dired
+  :ensure t
+  :defer t
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+
+(use-package nerd-icons-completion
+  :ensure t
+  :after (:all nerd-icons marginalia)
   :config
-  (evil-goggles-mode))
-  ;; (evil-goggles-use-diff-faces)
-#+end_src
-
-*** [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]]
-#+begin_src emacs-lisp
-(use-package rainbow-delimiters
-  :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
-         (clojure-mode . rainbow-delimiters-mode)))
-#+end_src
-
-*** [[https://github.com/emacsmirror/rainbow-mode][Rainbow Mode]]
-#+begin_src emacs-lisp
-(use-package rainbow-mode
-  :defer
-  :ensure t
-  :hook (prog-mode . rainbow-mode))
-#+end_src
-
-*** [[https://github.com/emacsmirror/undo-fu][Undo-fu]]
-#+begin_src emacs-lisp
-(use-package undo-fu)
-#+end_src
-
-** Functions
-*** Insert date / time 
-#+begin_src emacs-lisp
-(defun insert-todays-date (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%d-%m-%Y")
-          (format-time-string "%Y-%m-%d"))))
-
-(defun insert-current-time (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%R")
-          (format-time-string "%H:%M"))))
-#+end_src
-
-*** [[https://www.emacswiki.org/emacs/KillingBuffers#h5o-2][Kill Other Buffers]]
-#+begin_src emacs-lisp
-(defun kill-other-buffers ()
-  "Kill all other buffers."
-  (interactive)
-  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+  (nerd-icons-completion-mode)
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 #+end_src
 
 ** Org-mode
@@ -740,114 +809,7 @@ folder, otherwise delete a character backward"
        (?C :foreground "#87b379"))))
 #+end_src
 
-** Writing
-*** Ispell / Flyspell
-#+begin_src emacs-lisp
-(with-eval-after-load "ispell"
-  (setenv "LANG" "pl_PL.UTF-8")
-  (setq ispell-program-name "hunspell")
-  (setq ispell-dictionary "pl_PL,en_US")
-  (ispell-set-spellchecker-params)
-  (ispell-hunspell-add-multi-dic "pl_PL,en_US")
-  (setq ispell-personal-dictionary "~/.config/emacs/files/hunspell_personal"))
-
-(setq ispell-silently-savep t)
-(setq flyspell-issue-message-flag nil)
-;; (add-hook 'text-mode-hook 'flyspell-mode)
-#+end_src
-
-*** [[https://github.com/PillFall/languagetool.el][Language Tool]]
-#+begin_src emacs-lisp
-(use-package languagetool
-  :ensure t
-  :defer t
-  :commands (languagetool-check
-             languagetool-clear-suggestions
-             languagetool-correct-at-point
-             languagetool-correct-buffer
-             languagetool-set-language
-             languagetool-server-mode
-             languagetool-server-start
-             languagetool-server-stop)
-  :config
-  (setq languagetool-java-arguments '("-Dfile.encoding=UTF-8"
-                                      "-cp" "/usr/share/languagetool:/usr/share/java/languagetool/*")
-        languagetool-console-command "org.languagetool.commandline.Main"
-        languagetool-server-command "org.languagetool.server.HTTPServer"))
-#+end_src
-
-*** [[https://github.com/jrblevin/markdown-mode][Markdown Mode]]
-#+begin_src emacs-lisp
-(use-package markdown-mode
-  :ensure t
-  :init
-  (setq markdown-unordered-list-item-prefix "  -")
-  (setq markdown-hide-urls t)
-  (setq markdown-command
-      (concat
-      "pandoc"
-      " --from=markdown --to=html"
-      " --standalone --mathjax --highlight-style=pygments")))
-#+end_src
-
-** Applications
-*** [[https://github.com/skeeto/elfeed][Elfeed]]
-#+begin_src emacs-lisp
-(use-package elfeed
-  :config
-  (setq elfeed-search-feed-face ":foreground #b3b8c3 :weight bold")
-  (setq elfeed-db-directory "~/.config/emacs/files/elfeed/database"))
-
-(defun elfeed-mark-all-as-read ()
-  (interactive)
-  (elfeed-untag elfeed-search-entries 'unread)
-  (elfeed-search-update :force)) ; redraw
-#+end_src
-
-**** [[https://github.com/jeetelongname/elfeed-goodies][Elfeed Goodies]]
-#+begin_src emacs-lisp
-(use-package elfeed-goodies
-  :init
-  (elfeed-goodies/setup)
-  :config
-  (setq elfeed-goodies/entry-pane-size 0.5))
-#+end_src
-
-**** [[https://github.com/remyhonig/elfeed-org][Elfeed-org]]
-#+begin_src emacs-lisp
-(use-package elfeed-org
-  :ensure t
-  :config
-  (setq rmh-elfeed-org-files (list "~/.config/emacs/files/elfeed/elfeed.org"))
-  (elfeed-org))
-#+end_src
-
-*** EWW
-#+begin_src emacs-lisp
-(setq
- browse-url-browser-function 'eww-browse-url
- shr-use-fonts  nil
- ;; shr-use-colors nil
- shr-indentation 2
- ;; shr-indentation 70 
- shr-width 100
- eww-auto-rename-buffer 1
- eww-download-directory "~/Pobrane"
- eww-bookmarks-directory "~/.config/emacs/files/"
- eww-search-prefix "https://frogfind.com/?q="
- browse-url-secondary-browser-function 'browse-url-xdg-open)
-
-(add-hook 'eww-after-render-hook 'eww-readable)
-
-(defun eww-new ()
-  (interactive)
-  (let ((url (read-from-minibuffer "Enter URL or keywords: ")))
-    (switch-to-buffer (generate-new-buffer "eww"))
-    (eww-mode)
-    (eww url)))
-#+end_src
-
-*** [[https://github.com/alphapapa/pocket-reader.el][Pocket Reader]]
+** [[https://github.com/alphapapa/pocket-reader.el][Pocket Reader]]
 #+begin_src emacs-lisp
 (use-package pocket-reader)
 (setq pocket-reader-open-url-default-function #'eww)
@@ -855,13 +817,96 @@ folder, otherwise delete a character backward"
 (add-hook 'pocket-reader-mode (lambda () (display-line-numbers-mode 0)))
 #+end_src
 
-*** xclip
+** [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]]
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
+         (clojure-mode . rainbow-delimiters-mode)))
+#+end_src
+
+** [[https://github.com/emacsmirror/rainbow-mode][Rainbow Mode]]
+#+begin_src emacs-lisp
+(use-package rainbow-mode
+  :defer
+  :ensure t
+  :hook (prog-mode . rainbow-mode))
+#+end_src
+
+** [[https://github.com/hlissner/emacs-solaire-mode][Solaire Mode]]
+#+begin_src emacs-lisp
+(use-package solaire-mode
+  :init
+  (solaire-global-mode +1))
+#+end_src
+
+** [[https://github.com/nflath/sudo-edit][Sudo Edit]]
+#+begin_src emacs-lisp
+(use-package sudo-edit)
+#+end_src
+
+** Tab Bar Mode
+#+begin_src emacs-lisp
+(setq tab-bar-new-tab-choice "*scratch*"
+      tab-bar-close-button-show nil
+      tab-bar-new-button-show nil
+      tab-bar-close-last-tab-choice 'tab-bar-mode-disable
+      tab-bar-close-tab-select 'recent
+      tab-bar-new-tab-to 'right
+      tab-bar-tab-hints nil
+      tab-bar-separator " "
+      tab-bar-show 1)
+#+end_src
+
+** Themes
+*** [[https://github.com/catppuccin/emacs][Catppuccin]]
+#+begin_src emacs-lisp
+(use-package catppuccin-theme
+  :config
+;; (load-theme 'catppuccin t)
+)
+#+end_src
+
+*** [[https://github.com/doomemacs/themes][Doom Themes]]
+#+begin_src emacs-lisp
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-tokyo-night t)
+  (doom-themes-org-config))
+#+end_src
+
+** Transparency
+#+begin_src emacs-lisp
+(add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
+#+end_src
+
+** [[https://github.com/emacsmirror/undo-fu][Undo-fu]]
+#+begin_src emacs-lisp
+(use-package undo-fu)
+#+end_src
+
+** [[https://codeberg.org/joostkremers/visual-fill-column][Visual Fill Column]]
+#+begin_src emacs-lisp
+(use-package visual-fill-column
+  :ensure t
+  :custom
+  (visual-fill-column-width 120)
+  (visual-fill-column-center-text t))
+#+end_src
+
+** xclip
 #+begin_src emacs-lisp
 (use-package xclip
   :ensure t
   :defer t
   :hook
   (after-init . xclip-mode))
+#+end_src
+
+** [[https://gitlab.com/Vonfry/zoxide.el][Zoxide]]
+#+begin_src emacs-lisp
+(use-package zoxide)
 #+end_src
 
 * RUNTIME PERFORMANCE
