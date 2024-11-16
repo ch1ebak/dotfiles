@@ -10,7 +10,6 @@
 export TERM="alacritty"
 export VISUAL="emacsclient -c -a emacs"
 export EDITOR="emacsclient -t -a """
-export MANPAGER="nvim +Man!"
 export FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! -type d \! -name '\''*.tags'\'' -printf '\''%P\n'\'
 
 ## Options
@@ -67,7 +66,7 @@ alias z...="z ../../.."
 alias z....="z ../../../.."
 
 ### directories
-alias ls="ls -lA --color=always --group-directories-first"
+alias ls="ls -AGFhlv --color=always --group-directories-first"
 alias mkd="mkdir -pv"
 
 ### files
@@ -97,8 +96,6 @@ alias xbl="brightnessctl set "
 alias dunres="killall -e dunst & sleep 1; dunstify "hello!" &"
 alias fehs="feh --bg-fill"
 alias lg="lazygit"
-alias nv="nvim"
-alias vim="nvim"
 alias yz="yazi"
 alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
 

@@ -86,6 +86,7 @@
   (winner-mode 1)
   :config
   (setq org-edit-src-content-indentation 0)
+  (setq vc-follow-symlinks nil)
   (setq use-file-dialog nil)
   (setq use-dialog-box nil)
   (setq pop-up-windows nil)
@@ -207,7 +208,7 @@
   (me/leader-keys
     "TAB" '(:ignore t :wk "Buffers/Tabs/Windows")
     "TAB q" '(evil-window-delete :wk "Close window")
-    "TAB Q" '(kill-emacs :wk "Close window")
+    "TAB Q" '(tab-close :wk "Close window")
     "TAB x" '(kill-other-buffers :wk "Kill other buffers")
     "TAB RET" '(evil-window-vnew :wk "New window")
     "TAB h" '(evil-window-left :wk "Window left")
@@ -332,6 +333,8 @@
   
   (general-nmap
     :keymaps 'dired-mode-map
+    "y d" 'dired-copy-dirname-as-kill
+    "y c" 'dired-copy-path-at-point
     "h" 'dired-up-directory
     "l" 'dired-open-file)
   
@@ -471,6 +474,21 @@ folder, otherwise delete a character backward"
   (dired-auto-revert-buffer t)
   (delete-by-moving-to-trash t)
   (dired-dwim-target t))
+#+end_src
+
+*** [[https://emacs.stackexchange.com/questions/36850/copy-to-kill-ring-selected-file-names-full-path][Copy path at point]]
+#+begin_src emacs-lisp
+(defun dired-copy-path-at-point ()
+    (interactive)
+    (dired-copy-filename-as-kill 0))
+#+end_src
+
+*** [[https://stackoverflow.com/questions/2416655/file-path-to-clipboard-in-emacs][Copy directory name]]
+#+begin_src emacs-lisp
+(defun dired-copy-dirname-as-kill ()
+  "Copy the current directory into the kill ring."
+  (interactive)
+  (kill-new default-directory))
 #+end_src
 
 *** Dired Open
