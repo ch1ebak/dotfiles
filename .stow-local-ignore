@@ -1,6 +1,7 @@
 \.git
 LICENSE
 ^/.*\.org
+^/.*\.md
 .gitignore
 /backups
 /screenshots

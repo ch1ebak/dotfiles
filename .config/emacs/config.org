@@ -197,9 +197,9 @@
 
   (me/leader-keys
     "SPC" '(execute-extended-command :wk "M-x")
-    "RET" '(consult-bookmark :wk "List bookmarks")
-    "/" '(consult-buffer :wk "Consult Buffer")
-    "?" '(kill-buffer :wk "Kill buffer")
+    "RET" '(consult-buffer :wk "Consult Buffer")
+    "/" '(neotree-toggle :wk "Neotree")
+    "?" '(zoxide-travel :wk "Zoxide")
     "." '(find-file :wk "Find file")
     ">" '(dired-jump :wk "Dired")
     "," '(consult-find :wk "Fuzzy finding")
@@ -233,11 +233,6 @@
     "c r" '(comment-or-uncomment-region :wk "Comment Region"))
 
   (me/leader-keys
-    "d" '(:ignore t :wk "Directories")
-    "d z" '(zoxide-travel :wk "Zoxide")
-    "d n" '(neotree-toggle :wk "Neotree"))
-  
-  (me/leader-keys
     "f" '(:ignore t :wk "Files")
     "f p" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Emacs Config")
     "f P" '((lambda () (interactive) (consult-find "~/.config/emacs/")) :wk "Emacs Config")
@@ -256,18 +251,11 @@
     "h r r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el") (ignore (elpaca-process-queues))) :wk "Reload emacs config"))
   
   (me/leader-keys
-    "n" '(:ignore t :wk "Notes")
-    "n f" '((lambda () (interactive) (consult-find "~/Dokumenty/notatki/")) :wk "Notatki FF")
-    "n F" '((lambda () (interactive) (find-file "~/Dokumenty/notatki/")) :wk "Notatki Dired"))
-
-  (me/leader-keys
     "p" '(:ignore t :wk "Packages")
     "p x" '(org-capture :wk "Org Capture")
     "p a" '(org-agenda :wk "Org Agenda")
-    "p A" '(consult-org-agenda :wk "Consult Org Agenda")
     "p e" '(elfeed :wk "Elfeed")
     "p p" '(pocket-reader :wk "Pocket")
-    "p t" '(term :wk "Terminal")
     "p w" '(eww :wk "EWW")
     "p W" '(eww-list-bookmarks :wk "EWW Bookmarks"))
 
@@ -322,11 +310,12 @@
   
   (general-nmap
     :keymaps 'markdown-mode-map
-    "m a" 'markdown-insert-link
     "m H" 'markdown-promote
     "m L" 'markdown-demote
     "m J" 'markdown-move-down
     "m K" 'markdown-move-up
+    "w l" 'markdown-insert-link
+    "w i" 'markdown-insert-image
     "t p" 'markdown-preview
     "t h" 'markdown-toggle-url-hiding
     "t i" 'markdown-toggle-inline-images)
@@ -335,6 +324,11 @@
     :keymaps 'dired-mode-map
     "y d" 'dired-copy-dirname-as-kill
     "y c" 'dired-copy-path-at-point
+    "." 'zoxide-travel
+    "c" 'dired-do-copy
+    "C" 'dired-do-copy
+    "r" 'dired-do-rename
+    "R" 'dired-do-rename
     "h" 'dired-up-directory
     "l" 'dired-open-file)
   
@@ -466,6 +460,7 @@ folder, otherwise delete a character backward"
   :defer
   :hook
   (dired-mode . hl-line-mode)
+  (dired-mode . auto-revert-mode)
   :config
   (setq dired-listing-switches
       "-AGFhlv --group-directories-first")
@@ -500,56 +495,9 @@ folder, otherwise delete a character backward"
                                 ("png" . "feh")
                                 ("mkv" . "mpv")
                                 ("mp4" . "mpv")
+                                ("flac" . "mpv")
+                                ("mp3" . "mpv")
                                 ("pdf" . "zen-browser"))))
-#+end_src
-
-*** Image Dired
-#+begin_src emacs-lisp
-(use-package image-dired
-  :ensure nil
-  :commands (image-dired)
-  :bind
-  ( :map image-dired-thumbnail-mode-map
-    ("<return>" . image-dired-thumbnail-display-external))
-  :config
-  (setq image-dired-thumbnail-storage 'standard)
-  (setq image-dired-external-viewer "xdg-open")
-  (setq image-dired-thumb-size 80)
-  (setq image-dired-thumb-margin 2)
-  (setq image-dired-thumb-relief 0)
-  (setq image-dired-thumbs-per-row 4))
-#+end_src
-
-*** Dired Preview
-#+begin_src emacs-lisp
-(use-package dired-preview
-  :ensure t
-  ;; :hook (dired-mode . (lambda ()
-  ;;                       (when (string-match-p "Obrazy" default-directory)
-  ;;                         (dired-preview-mode 1))))
-  :defer 1
-  :hook (after-init . dired-preview-global-mode)
-  :config
-  (setq dired-preview-max-size (* (expt 2 20) 10))
-  (setq dired-preview-delay 0)
-  (setq dired-preview-ignored-extensions-regexp
-        (concat "\\."
-                "\\(gz\\|"
-                "zst\\|"
-                "tar\\|"
-                "xz\\|"
-                "rar\\|"
-                "zip\\|"
-                "iso\\|"
-                "epub"
-                "\\)"))
-  ;; (setq dired-preview-display-action-alist
-  ;;       '((display-buffer-in-side-window)
-  ;;         (side . right)
-  ;;         (preserve-size . (t . t))
-  ;;         (window-parameters . ((mode-line-format . none)
-  ;;                               (header-line-format . none)))))
-  (dired-preview-global-mode 1))
 #+end_src
 
 ** [[https://github.com/seagle0128/doom-modeline][Doom Modeline]]

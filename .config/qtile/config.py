@@ -70,7 +70,7 @@ groups = [
     Group("1", label="󰭹", layout='max', matches=[Match(wm_class=["ferdium"])]),
     Group("2", label="󰈹", layout='max'),
     Group("3", label="󰈚", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
-    Group("4", label="󰅴", layout='monadtall', matches=[Match(wm_class=["Alacritty"])]),
+    Group("4", label="󰅴", layout='monadtall', matches=[Match(wm_class=["org.wezfurlong.wezterm"])]),
     Group("5", label="󰝰", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
     Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "rawtherapee", "nwg-look", "nitrogen"])]),
     Group("7", label="󰓓", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
@@ -111,11 +111,12 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 ## Keybindings
 keys = [
      # Apps
-    Key([mod], "Return", lazy.spawn("alacritty")),
+    Key([mod], "Return", lazy.spawn("wezterm")),
     Key([mod], "w", lazy.spawn("zen-browser")),
     Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
     Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'")),
-    Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'")),
+    # Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'")),
+    Key([mod], "a", lazy.spawn("wezterm -e yazi")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
 
     # Menu
