@@ -2,8 +2,8 @@
 | Type           | Package     |
 |----------------|-------------|
 | Window Manager | Qtile       |
-| Terminal       | Alacritty   |
-| Editor         | Emacs       |
+| Terminal       | Kitty       |
+| Editor         | Neovim      |
 | Shell          | Bash        |
 | Notifications  | Dunst       |
 | Launcher       | Rofi        |
