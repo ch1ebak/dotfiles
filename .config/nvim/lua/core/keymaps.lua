@@ -35,7 +35,7 @@ keymap.set("n", "N", "Nzzzv", { desc = 'Better search previous' }, opts)
 
 -- Toggles
 keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = 'Chmod open file' }, opts)
-keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = 'Chmod open file' }, opts)
+keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = 'Line wrapping' }, opts)
 
 -- Spelling
 keymap.set("n", "<leader>ze", function()

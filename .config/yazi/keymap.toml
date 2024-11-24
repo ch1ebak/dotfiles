@@ -45,6 +45,7 @@ keymap = [
 	{ on = ";",         run = "shell --interactive",         desc = "Run a shell command" },
 	{ on = ":",         run = "shell --block --interactive", desc = "Run a shell command (block until finishes)" },
 	{ on = "<C-s>",     run = "escape --search",             desc = "Cancel the ongoing search" },
+	{ on = "<C-v>",     run = "shell --confirm 'feh --bg-scale $1'", desc = "Change wallpaper" },
 
 	# Copy
 	{ on = [ "y", "c" ], run = "copy path",             desc = "Copy the file path" },

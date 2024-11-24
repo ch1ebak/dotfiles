@@ -10,7 +10,7 @@ return {
     { -- lazy style key map
       "<leader>tu",
       "<cmd>Telescope undo<cr>",
-      desc = "undo history",
+      desc = "Undo History",
     },
   },
   opts = {

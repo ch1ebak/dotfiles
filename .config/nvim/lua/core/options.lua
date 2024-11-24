@@ -47,6 +47,7 @@ opt.inccommand = 'split'
 opt.updatetime = 250
 opt.timeoutlen = 500
 
+opt.undofile = true
 opt.swapfile = false
 opt.backup = false
 

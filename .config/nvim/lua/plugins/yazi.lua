@@ -6,7 +6,7 @@ return {
     {
       "<leader>>",
       "<cmd>Yazi<cr>",
-      desc = "Open yazi at the current file",
+      desc = "Yazi",
     },
   },
   ---@type YaziConfig

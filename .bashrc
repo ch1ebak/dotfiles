@@ -103,10 +103,9 @@ alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[
 alias gc="git clone"
 alias gdots="git clone https://github.com/ch1ebak/dotfiles"
 
-## Emacs
-alias em="/usr/bin/emacs -nw"
-alias emacsd="/usr/bin/emacs --daemon &"
-alias kemacs="killall emacs"
+## Neovim
+alias nv="nvim"
+alias vim="nvim"
 
 ## Stow
 alias stow="stow ."
