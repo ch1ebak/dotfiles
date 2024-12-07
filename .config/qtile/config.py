@@ -20,7 +20,7 @@ from libqtile.widget import spacer
 from typing import List
 
 ## Color scheme
-from themes.tokyonight import colors
+from themes.spacegray import colors
 
 # SETTINGS
 ## General
@@ -56,7 +56,7 @@ floating_layout = layout.Floating(
 ## Autostart
 @hook.subscribe.startup_once
 def start_once():
-    qtile.cmd_spawn("xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --rate 144 --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --rate 165")
+    qtile.cmd_spawn("xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 0x0 --rate 144 --output DP-0 --mode 1920x1080 --pos 1920x0 --rate 165")
     qtile.cmd_spawn("nm-applet &")
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
@@ -129,8 +129,8 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown()),
 
     # Switch between screens (2 monitors)
-    Key([mod], "z", lazy.to_screen(1)),
-    Key([mod], "x", lazy.to_screen(0)),
+    Key([mod], "z", lazy.to_screen(0)),
+    Key([mod], "x", lazy.to_screen(1)),
 
     # Scroll through groups
     Key([mod], 'j', lazy.screen.prev_group(skip_managed=True, skip_empty=True)),
@@ -194,7 +194,7 @@ widget_defaults = dict(
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
+        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -301,7 +301,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
+        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [

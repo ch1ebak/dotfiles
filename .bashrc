@@ -93,6 +93,7 @@ alias shutdown="sudo shutdown now"
 alias xbl="brightnessctl set "
 
 ## Apps
+alias cal="cal -3 -m --color=auto"
 alias dunres="killall -e dunst & sleep 1; dunstify "hello!" &"
 alias fehs="feh --bg-fill"
 alias lg="lazygit"

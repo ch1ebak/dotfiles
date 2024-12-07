@@ -32,6 +32,7 @@ keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'Move selected line up' }, opt
 keymap.set("n", "J", "mzJ`z", { desc = 'Combine line with the one below' }, opts)
 keymap.set("n", "n", "nzzzv", { desc = 'Better search next' }, opts)
 keymap.set("n", "N", "Nzzzv", { desc = 'Better search previous' }, opts)
+keymap.set('n', 'yc', 'yy<cmd>normal gcc<CR>p')
 
 -- Toggles
 keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = 'Chmod open file' }, opts)
