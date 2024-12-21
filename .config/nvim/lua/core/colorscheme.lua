@@ -1,1 +1,1 @@
-vim.cmd 'colorscheme nordic'
+vim.cmd 'colorscheme tokyonight'

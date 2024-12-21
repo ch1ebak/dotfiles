@@ -20,7 +20,7 @@ from libqtile.widget import spacer
 from typing import List
 
 ## Color scheme
-from themes.spacegray import colors
+from themes.tokyonight import colors
 
 # SETTINGS
 ## General
@@ -114,6 +114,7 @@ keys = [
     Key([mod], "w", lazy.spawn("zen-browser")),
     Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
     Key([mod], "e", lazy.spawn("obsidian")),
+    Key([mod, "shift"], "e", lazy.spawn("kitty -e nvim")),
     Key([mod], "a", lazy.spawn("kitty -e yazi")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
 
@@ -194,7 +195,7 @@ widget_defaults = dict(
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
+        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -301,7 +302,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
+        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [

@@ -5,4 +5,4 @@ configuration {
   kb-row-up: "Control+k";
   kb-row-down: "Control+j";
 }
-@theme "/home/karna/.config/rofi/themes/spacegray"
+@theme "/home/karna/.config/rofi/themes/tokyonight"

@@ -90,7 +90,7 @@ alias merge="xrdb -merge ~/.Xresources"
 alias nvt="nvtop"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
-alias xbl="brightnessctl set "
+alias xbl="xbacklight -set "
 
 ## Apps
 alias cal="cal -3 -m --color=auto"
