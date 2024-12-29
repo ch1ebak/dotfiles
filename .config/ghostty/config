@@ -1,0 +1,17 @@
+font-family = JetBrainsMono NF
+font-synthetic-style = true
+font-size = 10
+
+theme = /usr/share/ghostty/themes/tokyonight
+
+background-opacity = 0.9
+gtk-titlebar = false
+gtk-adwaita = false
+
+cursor-style = block
+cursor-style-blink = true
+
+window-padding-x = 4,0
+window-padding-y = 4,0
+
+confirm-close-surface = false

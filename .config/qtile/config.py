@@ -56,7 +56,7 @@ floating_layout = layout.Floating(
 ## Autostart
 @hook.subscribe.startup_once
 def start_once():
-    qtile.cmd_spawn("xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 0x0 --rate 144 --output DP-0 --mode 1920x1080 --pos 1920x0 --rate 165")
+    qtile.cmd_spawn("xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1920x0 --rate 144 --output DP-0 --mode 1920x1080 --pos 0x0 --rate 165")
     qtile.cmd_spawn("nm-applet &")
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
@@ -69,7 +69,7 @@ groups = [
     Group("1", label="󰭹", layout='max', matches=[Match(wm_class=["ferdium"])]),
     Group("2", label="󰈹", layout='max'),
     Group("3", label="󰈚", layout='max', matches=[Match(wm_class=["obsidian"])]),
-    Group("4", label="󰅴", layout='monadtall', matches=[Match(wm_class=["kitty"])]),
+    Group("4", label="󰅴", layout='monadtall', matches=[Match(wm_class=["ghostty"])]),
     Group("5", label="󰝰", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
     Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "rawtherapee", "nwg-look", "nitrogen"])]),
     Group("7", label="󰓓", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
@@ -110,12 +110,12 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 ## Keybindings
 keys = [
      # Apps
-    Key([mod], "Return", lazy.spawn("kitty")),
+    Key([mod], "Return", lazy.spawn("ghostty")),
     Key([mod], "w", lazy.spawn("zen-browser")),
     Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
-    Key([mod], "e", lazy.spawn("obsidian")),
-    Key([mod, "shift"], "e", lazy.spawn("kitty -e nvim")),
-    Key([mod], "a", lazy.spawn("kitty -e yazi")),
+    Key([mod], "e", lazy.spawn("ghostty -e nvim")),
+    Key([mod, "shift"], "e", lazy.spawn("obsidian")),
+    Key([mod], "a", lazy.spawn("ghostty -e yazi")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
 
     # Menu
@@ -130,8 +130,8 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown()),
 
     # Switch between screens (2 monitors)
-    Key([mod], "z", lazy.to_screen(0)),
-    Key([mod], "x", lazy.to_screen(1)),
+    Key([mod], "x", lazy.to_screen(0)),
+    Key([mod], "z", lazy.to_screen(1)),
 
     # Scroll through groups
     Key([mod], 'j', lazy.screen.prev_group(skip_managed=True, skip_empty=True)),
