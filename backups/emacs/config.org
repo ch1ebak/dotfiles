@@ -249,6 +249,10 @@
     "h e d" '(elpaca-delete :wk "Elpaca: delete package")
     "h r" '(:ignore t :wk "Reload")
     "h r r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el") (ignore (elpaca-process-queues))) :wk "Reload emacs config"))
+
+  (me/leader-keys
+    "n" '(:ignore t :wk "Files")
+    "n f" '((lambda () (interactive) (consult-find "~/Dokumenty/notatki/")) :wk "Notes"))
   
   (me/leader-keys
     "p" '(:ignore t :wk "Packages")
@@ -708,9 +712,9 @@ folder, otherwise delete a character backward"
                           (plain-list-item . nil)))
   (setq org-agenda-start-with-log-mode t)
   (setq org-agenda-files
-  '("~/Dokumenty/notatki/agenda/agenda-taski.org"
-    "~/Dokumenty/notatki/agenda/agenda-powtarzalne.org"
-    "~/Dokumenty/notatki/agenda/agenda-ważne.org"))
+  '("~/Dokumenty/notatki/agenda/Taski.org"
+    "~/Dokumenty/notatki/agenda/Powtarzalne.org"
+    "~/Dokumenty/notatki/agenda/Ważne.org"))
   (setq org-agenda-span 10
       org-agenda-start-on-weekday nil
       org-agenda-start-day "-2d")
@@ -728,10 +732,10 @@ folder, otherwise delete a character backward"
                               " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
   (add-hook 'org-mode-hook 'org-indent-mode)
   (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/Dokumenty/notatki/agenda/agenda-taski.org" "ZADANIA")
+      '(("t" "Todo" entry (file+headline "~/Dokumenty/notatki/agenda/taski.org" "ZADANIA")
           "* TODO %?\n  %i\n ")))
   (setq org-refile-targets
-  '(("archiwum.org" :maxlevel . 1)))
+  '(("Archiwum.org" :maxlevel . 1)))
       ;; ("agenda-agenda.org" :maxlevel . 1)
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
   (setq org-todo-keywords
@@ -838,7 +842,7 @@ folder, otherwise delete a character backward"
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-tokyo-night t)
+  (load-theme 'doom-spacegrey t)
   (doom-themes-org-config))
 #+end_src
 

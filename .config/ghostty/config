@@ -2,7 +2,7 @@ font-family = JetBrainsMono NF
 font-synthetic-style = true
 font-size = 10
 
-theme = /usr/share/ghostty/themes/tokyonight
+theme = /usr/share/ghostty/themes/SpaceGray
 
 background-opacity = 0.9
 gtk-titlebar = false
@@ -15,3 +15,13 @@ window-padding-x = 4,0
 window-padding-y = 4,0
 
 confirm-close-surface = false
+
+keybind = ctrl+shift+r=reload_config
+keybind = ctrl+shift+q=reload_config
+keybind = ctrl+shift+w=close_surface
+keybind = ctrl+shift+m=new_split:right
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+l=goto_split:right
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+shift+k=next_tab
+keybind = ctrl+shift+j=previous_tab

@@ -20,7 +20,7 @@ from libqtile.widget import spacer
 from typing import List
 
 ## Color scheme
-from themes.tokyonight import colors
+from themes.spacegray import colors
 
 # SETTINGS
 ## General
@@ -60,6 +60,7 @@ def start_once():
     qtile.cmd_spawn("nm-applet &")
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
+    qtile.cmd_spawn("volumeicon &")
     qtile.cmd_spawn("xbacklight -set 60")
     for p in processes:
         subprocess.Popen(p)
@@ -111,10 +112,10 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 keys = [
      # Apps
     Key([mod], "Return", lazy.spawn("ghostty")),
-    Key([mod], "w", lazy.spawn("zen-browser")),
-    Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
-    Key([mod], "e", lazy.spawn("ghostty -e nvim")),
-    Key([mod, "shift"], "e", lazy.spawn("obsidian")),
+    Key([mod], "w", lazy.spawn("firefox")),
+    Key([mod, "shift"], "w", lazy.spawn("firefox --private-window")),
+    Key([mod], "e", lazy.spawn("obsidian")),
+    Key([mod, "shift"], "e", lazy.spawn("ghostty -e nvim")),
     Key([mod], "a", lazy.spawn("ghostty -e yazi")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
 
@@ -195,7 +196,7 @@ widget_defaults = dict(
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
+        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -302,7 +303,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
+        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
