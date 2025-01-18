@@ -8,19 +8,15 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 -- Windows/Splits/Buffers
-keymap.set('n', '<leader><Tab><Return>', "<C-w>v", { desc = 'Split window horizontally' }, opts)
-keymap.set('n', '<C-h>', "<C-w>h", { desc = 'Move to left window' }, opts)
-keymap.set('n', '<C-l>', "<C-w>l", { desc = 'Move to right window' }, opts)
-keymap.set('n', '<C-j>', "<C-w>j", { desc = 'Move to bottom window' }, opts)
-keymap.set('n', '<C-k>', "<C-w>k", { desc = 'Move to top window' }, opts)
 keymap.set('n', 'j', "gj", { desc = 'Move by line' }, opts)
 keymap.set('n', 'k', "gk", { desc = 'Move by line' }, opts)
-keymap.set('n', '<leader><Tab>n', "<cmd>tabnew<CR>", { desc = 'New tab' }, opts)
-keymap.set('n', '<leader><Tab>j', "<cmd>tabn<CR>", { desc = 'Next tab' }, opts)
-keymap.set('n', '<leader><Tab>k', "<cmd>tabp<CR>", { desc = 'Previous tab' }, opts)
-keymap.set('n', '<leader><Tab>q', ":q<CR>", { desc = 'Close' }, opts)
-keymap.set('n', '<leader><Tab>H', "<C-^>", { desc = 'Switch between buffers' }, opts)
-keymap.set('n', '<leader><Tab>L', "<C-^>", { desc = 'Switch between buffers' }, opts)
+keymap.set('n', '<C-q>', ":q<CR>", { desc = 'Close' }, opts)
+keymap.set('n', '<C-m>', "<C-w>v", { desc = 'Split window horizontally' }, opts)
+keymap.set('n', '<C-h>', "<C-w>h", { desc = 'Move to left window' }, opts)
+keymap.set('n', '<C-l>', "<C-w>l", { desc = 'Move to right window' }, opts)
+keymap.set('n', '<C-n>', "<cmd>tabnew<CR>", { desc = 'New tab' }, opts)
+keymap.set('n', '<C-j>', "<cmd>tabn<CR>", { desc = 'Next tab' }, opts)
+keymap.set('n', '<C-k>', "<cmd>tabp<CR>", { desc = 'Previous tab' }, opts)
 keymap.set('n', '<leader><Tab>J', "<C-W>R", { desc = 'Move splits around' }, opts)
 keymap.set('n', '<leader><Tab>K', "<C-W>R", { desc = 'Move splits around' }, opts)
 
