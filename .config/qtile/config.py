@@ -112,8 +112,8 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 keys = [
      # Apps
     Key([mod], "Return", lazy.spawn("ghostty")),
-    Key([mod], "w", lazy.spawn("firefox")),
-    Key([mod, "shift"], "w", lazy.spawn("firefox --private-window")),
+    Key([mod], "w", lazy.spawn("zen-browser")),
+    Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
     Key([mod], "e", lazy.spawn("obsidian")),
     Key([mod, "shift"], "e", lazy.spawn("ghostty -e nvim")),
     Key([mod], "a", lazy.spawn("ghostty -e yazi")),
