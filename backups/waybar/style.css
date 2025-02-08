@@ -16,69 +16,69 @@
 }
                               
 .modules-center {
-    background-color: #20242d;
+    background-color: #1a1b26;
 }
 
 #tray {
     padding-right: 20px;
     padding-left: 20px;
     margin-right: 10px;
-    background-color: #20242d;
-    color: #b3b8c3;
+    background-color: #1a1b26;
+    color: #a9b1d6;
 }
 
 #workspaces {
     padding-right: 10px;
     padding-left: 10px;
     margin-right: 10px;
-    background-color: #20242d;
+    background-color: #1a1b26;
 }
                                   
 #workspaces button.active {
-    background-color: #b04b57;
-    color: #20242d;
+    background-color: #f7768e;
+    color: #1a1b26;
 }
 
 window#waybar {
     background-color: transparent;
-    color: #b3b8c3;
+    color: #a9b1d6;
 }
 
 #window {
     padding-right: 20px;
     padding-left: 20px;
-    background-color: #20242d;
-    color: #87b379;
+    background-color: #1a1b26;
+    color: #9ece6a;
 }
 
 #battery {
     padding-right: 20px;
     padding-left: 20px;
     margin-left: 10px;
-    color: #e5c179;
-    background-color: #20242d;
+    color: #e0af68;
+    background-color: #1a1b26;
 }
 
 #cpu {
     padding-right: 20px;
     padding-left: 20px;
     margin-left: 10px;
-    background-color: #20242d;
-    color: #7d8fa4;
+    background-color: #1a1b26;
+    color: #7aa2f7;
 }
 
 #memory {
     padding-right: 20px;
     padding-left: 20px;
     margin-left: 10px;
-    background-color: #20242d;
-    color: #a47996;
+    background-color: #1a1b26;
+    color: #bb9af7;
 }
 
 #clock {
     padding-right: 20px;
     padding-left: 20px;
     margin-left: 10px;
-    background-color: #20242d;
-    color: #85a7a5;
+    background-color: #1a1b26;
+    color: #7dcfff;
 }

@@ -20,7 +20,7 @@ from libqtile.widget import spacer
 from typing import List
 
 ## Color scheme
-from themes.spacegray import colors
+from themes.tokyonight import colors
 
 # SETTINGS
 ## General
@@ -196,7 +196,7 @@ widget_defaults = dict(
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
+        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -303,7 +303,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
+        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -407,3 +407,4 @@ screens = [
         )
     )
 ]
+

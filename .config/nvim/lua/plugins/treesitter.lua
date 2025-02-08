@@ -34,6 +34,7 @@ return {
         "json",
         "html",
         "css",
+        "hyprlang",
       },
       incremental_selection = {
         enable = true,
@@ -45,5 +46,12 @@ return {
         },
       },
     })
+  vim.filetype.add {
+    extension = { rasi = 'rasi' },
+    pattern = {
+      ['.*/waybar/config'] = 'jsonc',
+      ['.*/hypr/.*%.conf'] = 'hyprlang',
+    },
+  }
   end,
 }
