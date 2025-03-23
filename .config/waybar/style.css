@@ -1,3 +1,5 @@
+@import "themes/kanagawa.css";
+
 * {
     font-family: 'JetBrainsMono NF', sans-serif;
     font-weight: bold;
@@ -16,70 +18,70 @@
 }
                               
 .modules-center {
-    background-color: #1a1b26;
+    background-color: @bg;
 }
 
 #tray {
     padding-right: 20px;
     padding-left: 20px;
     margin-right: 10px;
-    background-color: #1a1b26;
-    color: #a9b1d6;
+    background-color: @bg;
+    color: @fg;
 }
 
 #workspaces {
     padding-right: 10px;
     padding-left: 10px;
     margin-right: 10px;
-    background-color: #1a1b26;
+    background-color: @bg;
 }
                                   
 #workspaces button.active {
-    background-color: #f7768e;
-    color: #1a1b26;
+    background-color: @c1;
+    color: @bg;
 }
 
 window#waybar {
     background-color: transparent;
-    color: #a9b1d6;
+    color: @fg;
 }
 
 #window {
     padding-right: 20px;
     padding-left: 20px;
-    background-color: #1a1b26;
-    color: #9ece6a;
+    background-color: @bg;
+    color: @c2;
 }
 
 #battery {
     padding-right: 20px;
     padding-left: 20px;
     margin-left: 10px;
-    color: #e0af68;
-    background-color: #1a1b26;
+    color: @c3;
+    background-color: @bg;
 }
 
 #cpu {
     padding-right: 20px;
     padding-left: 20px;
     margin-left: 10px;
-    background-color: #1a1b26;
-    color: #7aa2f7;
+    background-color: @bg;
+    color: @c4;
 }
 
 #memory {
     padding-right: 20px;
     padding-left: 20px;
     margin-left: 10px;
-    background-color: #1a1b26;
-    color: #bb9af7;
+    background-color: @bg;
+    color: @c5;
 }
 
 #clock {
     padding-right: 20px;
     padding-left: 20px;
     margin-left: 10px;
-    background-color: #1a1b26;
-    color: #7dcfff;
+    background-color: @bg;
+    color: @c6;
 }
 

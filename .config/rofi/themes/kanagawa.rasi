@@ -1,18 +1,18 @@
 * {
   font:   "JetBrainsMono Nerd Font Bold 9";
 
-  bg0     : #20242d;
-  bg1     : #2b303b;
-  fg0     : #b3b8c3;
-  fg1     : #c0c5ce;
-  red     : #b04b57;
-  green   : #87b379;
-  yellow  : #e5c179;
-  blue    : #7d8fa4;
-  magenta : #D08770;
-  cyan    : #85a7a5;
+  bg0     : #1f1f28;
+  bg1     : #35353D;
+  fg0     : #c8c093;
+  fg1     : #dcd7ba;
+  red     : #c34043;
+  green   : #76946a;
+  yellow  : #c0a36e;
+  blue    : #2d4f67;
+  magenta : #957fb8;
+  cyan    : #6a9589;
 
-  accent: @red;
+  accent: @yellow;
   urgent: @yellow;
 
   background-color : transparent;
@@ -35,7 +35,7 @@ window {
 
   background-color: @bg0;
   border: 2px;
-  border-color: @red;
+  border-color: @blue;
   border-radius: 5px;
 }
 

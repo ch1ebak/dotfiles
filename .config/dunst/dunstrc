@@ -6,7 +6,7 @@
 
 
 [global]
-  monitor = 0
+  monitor = 1
   shrink = no
   padding = 25
   horizontal_padding = 25
@@ -46,14 +46,14 @@
 
 # Color scheme
 [urgency_low]
-   background = "#1a1b26"
-   foreground = "#a9b1d6"
-   frame_color = "#f7768e"
+   background = "#1f1f28"
+   foreground = "#dcd7ba"
+   frame_color = "#2d4f67"
 [urgency_normal]
-   background = "#1a1b26"
-   foreground = "#a9b1d6"
-   frame_color = "#f7768e"
+   background = "#1f1f28"
+   foreground = "#dcd7ba"
+   frame_color = "#2d4f67"
 [urgency_critical]
-   background = "#1a1b26"
-   foreground = "#a9b1d6"
-   frame_color = "#f7768e"
+   background = "#1f1f28"
+   foreground = "#dcd7ba"
+   frame_color = "#2d4f67"
