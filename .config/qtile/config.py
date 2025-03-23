@@ -61,7 +61,7 @@ def start_once():
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
     qtile.cmd_spawn("volumeicon &")
-    qtile.cmd_spawn("xbacklight -set 60")
+    qtile.cmd_spawn("brightnessctl set 50%")
     for p in processes:
         subprocess.Popen(p)
 

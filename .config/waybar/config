@@ -3,9 +3,9 @@
     "position": "top",
     "height": 10,
     "margin-top": 3,
-    "modules-left": ["tray", "hyprland/workspaces", "hyprland/window"],
-    "modules-center": [],
-    "modules-right": ["battery", "cpu", "memory", "clock"],
+    "modules-left": ["tray", "hyprland/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["battery", "clock"],
 
     "battery": {
         "interval": 60,
