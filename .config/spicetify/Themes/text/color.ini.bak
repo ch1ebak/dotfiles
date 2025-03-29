@@ -1,0 +1,107 @@
+; note: most of the accent colors are set to the green of that color scheme, feel free to change it to your preferred color
+
+[Spacegray]
+accent             = b04b57
+accent-active      = b04b57
+accent-inactive    = 20242d
+banner             = b04b57
+border-active      = b04b57
+border-inactive    = 62656c
+header             = 62656c
+highlight          = 363942
+main               = 20242d
+notification       = b04b57
+notification-error = b04b57
+subtext            = B3B8C3
+text               = B3B8C3
+
+[TokyoNight]
+accent             = 9ece6a
+accent-active      = 9ece6a
+accent-inactive    = 1a1b26
+banner             = 9ece6a
+border-active      = 9ece6a
+border-inactive    = 24283b
+header             = 565f89
+highlight          = 24283b
+main               = 1a1b26
+notification       = 7aa2f7
+notification-error = f7768e
+subtext            = 565f89
+text               = a9b1d6
+
+[Catppuccin]
+accent             = a6e3a1
+accent-active      = a6e3a1
+accent-inactive    = 1e1e2e
+banner             = a6e3a1
+border-active      = a6e3a1
+border-inactive    = 313244
+header             = 585b70
+highlight          = 585b70
+main               = 1e1e2e
+notification       = 89b4fa
+notification-error = f38ba8
+subtext            = a6adc8
+text               = cdd6f4
+
+[Dracula]
+accent             = 50fa7b
+accent-active      = 50fa7b
+accent-inactive    = 282a36
+banner             = 50fa7b
+border-active      = 50fa7b
+border-inactive    = 44475a
+header             = 44475a
+highlight          = 44475a
+main               = 282a36
+notification       = 8be9fd
+notification-error = ff5555
+subtext            = 6272a4
+text               = f8f8f2
+
+[Gruvbox]
+accent             = 98971a
+accent-active      = b8bb26
+accent-inactive    = 282828
+banner             = b8bb26
+border-active      = b8bb26
+border-inactive    = 3c3836
+header             = 665c54
+highlight          = 7c6f64
+main               = 282828
+notification       = 458588
+notification-error = cc241d
+subtext            = bdae93
+text               = fbf1c7
+
+[Kanagawa]
+accent             = 2d4f67
+accent-active      = 2d4f67
+accent-inactive    = 1f1f28
+banner             = 2d4f67
+border-active      = 2d4f67
+border-inactive    = 35353D
+header             = 4B4B53
+highlight          = 35353D
+main               = 1f1f28
+notification       = 76946a
+notification-error = c34043
+subtext            = dcd7ba
+text               = c8c093
+
+[Grayscale]
+accent             = aaaaaa
+accent-active      = aaaaaa
+accent-inactive    = 080808
+banner             = aaaaaa
+border-active      = aaaaaa
+border-inactive    = 2a2a2a
+header             = 444444
+highlight          = 2a2a2a
+main               = 080808
+notification       = 8e8e8e
+notification-error = 7a7a7a
+subtext            = cccccc
+text               = dddddd
+

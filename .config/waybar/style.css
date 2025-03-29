@@ -1,4 +1,4 @@
-@import "themes/kanagawa.css";
+@import "themes/everforest.css";
 
 * {
     font-family: 'JetBrainsMono NF', sans-serif;
@@ -34,6 +34,7 @@
     padding-left: 10px;
     margin-right: 10px;
     background-color: @bg;
+    color: @fg;
 }
                                   
 #workspaces button.active {

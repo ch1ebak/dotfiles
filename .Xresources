@@ -15,4 +15,4 @@ Xft.autohint: true
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
-#include "/home/karna/.config/xresources/kanagawa"
+#include "/home/karna/.config/xresources/everforest"
