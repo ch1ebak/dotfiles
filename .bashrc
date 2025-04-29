@@ -91,6 +91,8 @@ alias nvt="nvtop"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
 alias xbl="brightnessctl set "
+alias ss1="hyprshot -m output -m HDMI-A-1"
+alias ss2="hyprshot -m output -m eDP-1"
 
 ## Apps
 alias cal="cal -3 -m --color=auto"
