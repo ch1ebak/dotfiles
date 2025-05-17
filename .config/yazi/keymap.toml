@@ -66,10 +66,10 @@ keymap = [
 	{ on = "N", run = "find_arrow --previous", desc = "Go to the previous found" },
 
 	# Sorting
-	{ on = [ "s", "m" ], run = [ "sort modified --reverse=no", "linemode mtime" ], desc = "Sort by modified time" },
-	{ on = [ "s", "M" ], run = [ "sort modified --reverse", "linemode mtime" ],    desc = "Sort by modified time (reverse)" },
-	{ on = [ "s", "c" ], run = [ "sort created --reverse=no", "linemode ctime" ],  desc = "Sort by created time" },
-	{ on = [ "s", "C" ], run = [ "sort created --reverse", "linemode ctime" ],     desc = "Sort by created time (reverse)" },
+	{ on = [ "s", "m" ], run = [ "sort mtime --reverse=no", "linemode mtime" ], desc = "Sort by modified time" },
+	{ on = [ "s", "M" ], run = [ "sort mtime --reverse", "linemode mtime" ],    desc = "Sort by modified time (reverse)" },
+	{ on = [ "s", "c" ], run = [ "sort btime --reverse=no", "linemode ctime" ],  desc = "Sort by created time" },
+	{ on = [ "s", "C" ], run = [ "sort btime --reverse", "linemode ctime" ],     desc = "Sort by created time (reverse)" },
 	{ on = [ "s", "e" ], run = "sort extension --reverse=no",                      desc = "Sort by extension" },
 	{ on = [ "s", "E" ], run = "sort extension --reverse",                         desc = "Sort by extension (reverse)" },
 	{ on = [ "s", "a" ], run = "sort alphabetical --reverse=no",                   desc = "Sort alphabetically" },
