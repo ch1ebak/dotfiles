@@ -5,6 +5,6 @@ configuration {
   kb-row-up: "Control+k";
   kb-row-down: "Control+j";
 }
-//@theme "/home/karna/.config/rofi/themes/kanagawa"
+//@theme "/home/karna/.config/rofi/themes/grayscale"
 
-@theme "/home/karna/.config/rofi/themes/kanagawa"
+@theme "/home/karna/.config/rofi/themes/grayscale"

@@ -24,14 +24,11 @@ set bwcolor #b04b57
 escape Super_L
 
 ## Apps
-bind s-Return exec alacritty 
-bind s-w exec firefox
-bind s-e exec emacsclient -c -a 'emacs'
-bind s-a exec emacsclient -c -a 'emacs' --eval '(dired nil)'
-bind s-A exec pcmanfm
+bind s-Return exec ghostty
+bind s-w exec zen-browser
+bind s-a exec ghostty -e yazi
+bind s-A exec thunar
 bind s-s exec rofi -m 1 -show drun
-bind s-g exec steam
-bind s-d exec spotify
 
 ## Ratpoison
 bind s-t exec ratpoison -d :0.0 -c "echo `date +'%a, %d.%m.%y | %H:%M'`  `cal | tail -n +2 | sed -e 's/^Su/\n\n Su/' -e 's/.*/ & /' -e \"s/\ $(date +%e)\ /\/\"`"
