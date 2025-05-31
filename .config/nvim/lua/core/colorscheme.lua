@@ -1,1 +1,1 @@
-vim.cmd 'colorscheme lackluster'
+vim.cmd 'colorscheme nordic'
