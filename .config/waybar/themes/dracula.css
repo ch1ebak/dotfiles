@@ -58,8 +58,8 @@ window#waybar {
 #window {
     padding-right: 20px;
     padding-left: 20px;
-    background-color: @bg;
-    color: @c2;
+    background-color: @c1;
+    color: @bg;
 }
 
 #battery {

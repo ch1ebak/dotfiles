@@ -8,6 +8,7 @@
 @define-color c6 #cccccc;
 
 
+
 * {
     font-family: 'JetBrainsMono NF', sans-serif;
     font-weight: bold;
@@ -58,8 +59,8 @@ window#waybar {
 #window {
     padding-right: 20px;
     padding-left: 20px;
-    background-color: @bg;
-    color: @c2;
+    background-color: @c2;
+    color: @bg;
 }
 
 #battery {
