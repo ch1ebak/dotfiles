@@ -20,6 +20,7 @@ from libqtile.widget import spacer
 from typing import List
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration
+from qtile_extras.widget.decorations import PowerLineDecoration
 
 ## Color scheme
 from themes.tokyonight import colors
@@ -194,6 +195,30 @@ dec1 = {
     "padding": 15,
 }
 
+pleft = {
+    "decorations": [
+        PowerLineDecoration(path = "rounded_left")
+    ]
+}
+
+sleft = {
+    "decorations": [
+        PowerLineDecoration(path = "forward_slash")
+    ]
+}
+
+pright = {
+    "decorations": [
+        PowerLineDecoration(path = "rounded_right", override_colour = colors[0], override_next_colour = colors[1])
+    ]
+}
+
+sright = {
+    "decorations": [
+        PowerLineDecoration(path = "back_slash", override_colour = colors[1], override_next_colour = colors[2])
+    ]
+}
+
 ## Widgets
 widget_defaults = dict(
     font='JetBrainsMono NF',
@@ -202,12 +227,15 @@ widget_defaults = dict(
     foreground = colors[4],
     background = colors[0])
 
-sep = widget.Sep(foreground = colors[0], linewidth = 5)
-pipe = widget.TextBox(fontsize = 15, foreground = colors[1], text = "|")
 spacer1 = widget.Spacer()
+sep = widget.Sep(background = colors[2], foreground = colors[2], linewidth = 5)
+roundl = widget.Spacer(length = 1, background = colors[1], **pleft)
+slashl = widget.Spacer(length = 1, background = colors[2], **sleft)
+roundr = widget.Spacer(length = 1, **pright)
+slashr = widget.Spacer(length = 1, **sright)
 
-layouticon = widget.CurrentLayoutIcon(scale = 0.6)
-systray = widget.Systray(icon_size = 19)
+layouticon = widget.CurrentLayoutIcon(background = colors[2], scale = 0.6)
+systray = widget.Systray(background = colors[2],icon_size = 19)
 groupbox = widget.GroupBox(
                 disable_drag = True,
                 center_aligned = True,
@@ -220,15 +248,19 @@ groupbox = widget.GroupBox(
                 margin_x = 0,
                 padding_y = 5,
                 padding_x = 5,
-                active = colors[3],
-                highlight_color = colors[0],
+                active = colors[4],
+                inactive = colors[3],
+                highlight_color = colors[1],
                 this_current_screen_border = colors[5],
                 this_screen_border = colors[3],
+                other_screen_border=colors[3],
+                other_current_screen_border=colors[5],
+                background = colors[1],
                 foreground = colors[3]
                 )
 wname = widget.WindowName(width=bar.CALCULATED, empty_group_string="Desktop", max_chars=130, foreground = colors[6], **dec1)
-bat = widget.Battery(foreground = colors[7], format = '{char} {percent:2.0%}', low_foreground = "#AA4A44", low_percentage = 0.2, notify_below = 0.2, charge_char = "", discharge_char = "", full_char = "", empty_char = "", not_charging_char = "", unknown_char_char = "?")
-date = widget.Clock(foreground = colors[10], format = "  %a, %d.%m.%y - %H:%M")
+bat = widget.Battery(background = colors[1], foreground = colors[7], format = '{char} {percent:2.0%}', low_foreground = "#AA4A44", low_percentage = 0.2, notify_below = 0.2, charge_char = "", discharge_char = "", full_char = "", empty_char = "", not_charging_char = "", unknown_char_char = "?")
+date = widget.Clock(background = colors[2], foreground = colors[10], format = "  %a, %d.%m.%y - %H:%M")
 
 ## Screens
 screens = [
@@ -240,15 +272,15 @@ screens = [
             sep,
             layouticon,
             systray,
-            pipe,
+            slashl,
             groupbox,
-            pipe,
+            roundl,
             spacer1,
             wname,
             spacer1,
-            pipe,
+            roundr,
             bat,
-            pipe,
+            slashr,
             date,
             sep
             ],
@@ -263,15 +295,15 @@ screens = [
             [
             sep,
             layouticon,
-            pipe,
+            slashl,
             groupbox,
-            pipe,
+            roundl,
             spacer1,
             wname,
             spacer1,
-            pipe,
+            roundr,
             bat,
-            pipe,
+            slashr,
             date,
             sep
             ],
