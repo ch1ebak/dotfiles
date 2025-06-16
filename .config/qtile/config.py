@@ -20,7 +20,7 @@ from libqtile.widget import spacer
 from typing import List
 
 ## Color scheme
-from themes.everforest import colors
+from themes.tokyonight import colors
 
 # SETTINGS
 ## General
@@ -196,7 +196,7 @@ widget_defaults = dict(
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/everforest.png",
+        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -222,7 +222,7 @@ screens = [
                 rounded = True,
                 highlight_method = "line",
                 font="JetBrainsMono Nerd Font Mono",
-                fontsize = 18,
+                fontsize = 16,
                 margin_y = 3,
                 margin_x = 0,
                 padding_y = 5,
@@ -285,7 +285,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/everforest.png",
+        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
