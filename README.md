@@ -2,14 +2,17 @@
 | Type           | Package     |
 |----------------|-------------|
 | Window Manager | Qtile       |
-| Terminal       | Kitty       |
+| Terminal       | Ghostty     |
 | Editor         | Neovim      |
 | Shell          | Bash        |
 | Notifications  | Dunst       |
 | Launcher       | Rofi        |
 | Themes         | Catppuccin  |
 |                | Dracula     |
+|                | Everforest  |
+|                | Grayscale   |
 |                | Gruvbox     |
+|                | Kanagawa    |
 |                | Spacegray   |
 |                | Tokyo Night |
 
