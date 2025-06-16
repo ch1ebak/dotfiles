@@ -70,8 +70,3 @@ bind C-9 exec rpws 9
 # AUTOSTART
 exec xrdb -load ~/.Xresources
 exec xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --rate 144 --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --rate 144
-exec /usr/bin/emacs --daemon &
-exec nitrogen --restore &
-exec picom -b
-exec dunst &
-exec batsignal -w 20 -c 15 -d 5 -p -f 90 -b

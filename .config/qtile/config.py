@@ -18,6 +18,8 @@ from libqtile.config import Click, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.widget import spacer
 from typing import List
+from qtile_extras import widget
+from qtile_extras.widget.decorations import RectDecoration
 
 ## Color scheme
 from themes.tokyonight import colors
@@ -60,7 +62,6 @@ def start_once():
     qtile.cmd_spawn("nm-applet &")
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
-    qtile.cmd_spawn("volumeicon &")
     qtile.cmd_spawn("brightnessctl set 50%")
     for p in processes:
         subprocess.Popen(p)
@@ -185,6 +186,14 @@ for i in groups:
 
 
 # BAR
+## Decorations
+dec1 = {
+    "decorations": [
+        RectDecoration(colour = colors[1], radius = 5, filled = True, padding_y = 2, group = True)
+    ],
+    "padding": 15,
+}
+
 ## Widgets
 widget_defaults = dict(
     font='JetBrainsMono NF',
@@ -193,29 +202,13 @@ widget_defaults = dict(
     foreground = colors[4],
     background = colors[0])
 
-## Screens
-screens = [
-    Screen(
-        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
-        wallpaper_mode = "fill",
-        top=bar.Bar(
-            [
-            widget.Sep(
-                foreground = colors[0],
-                linewidth = 5
-                ),
-            widget.CurrentLayoutIcon(
-                scale = 0.6
-                ),
-            widget.Systray(
-                icon_size = 19
-                ),
-            widget.TextBox(
-                fontsize = 15,
-                foreground = colors[1],
-                text = "|"
-                ),
-            widget.GroupBox(
+sep = widget.Sep(foreground = colors[0], linewidth = 5)
+pipe = widget.TextBox(fontsize = 15, foreground = colors[1], text = "|")
+spacer1 = widget.Spacer()
+
+layouticon = widget.CurrentLayoutIcon(scale = 0.6)
+systray = widget.Systray(icon_size = 19)
+groupbox = widget.GroupBox(
                 disable_drag = True,
                 center_aligned = True,
                 hide_unused = True,
@@ -231,54 +224,33 @@ screens = [
                 highlight_color = colors[0],
                 this_current_screen_border = colors[5],
                 this_screen_border = colors[3],
-                foreground = colors[3],
-                background = colors[0]
-                ),
-            widget.TextBox(
-                fontsize = 15,
-                foreground = colors[1],
-                text = "|"
-                ),
-            widget.Spacer(),
-            widget.WindowName(
-                width=bar.CALCULATED,
-                empty_group_string="Desktop",
-                max_chars=130,
-                background = colors[0],
-                foreground = colors[6]
-                ),
-            widget.Spacer(),
-            widget.TextBox(
-                fontsize = 15,
-                foreground = colors[1],
-                text = "|"
-                ),
-            widget.Battery(
-                foreground = colors[7],
-                format = '{char} {percent:2.0%}',
-                low_foreground = "#AA4A44",
-                low_percentage = 0.2,
-                notify_below = 0.2,
-                charge_char = "",
-                discharge_char = "",
-                full_char = "",
-                empty_char = "",
-                not_charging_char = "",
-                unknown_char_char = "?"
-                ),
-            widget.TextBox(
-                fontsize = 15,
-                foreground = colors[1],
-                text = "|"
-                ),
-            widget.Clock(
-                foreground = colors[10],
-                format = "  %a, %d.%m.%y - %H:%M"
-                ),
-            widget.Sep(
-                foreground = colors[0],
-                linewidth = 5
+                foreground = colors[3]
                 )
+wname = widget.WindowName(width=bar.CALCULATED, empty_group_string="Desktop", max_chars=130, foreground = colors[6], **dec1)
+bat = widget.Battery(foreground = colors[7], format = '{char} {percent:2.0%}', low_foreground = "#AA4A44", low_percentage = 0.2, notify_below = 0.2, charge_char = "", discharge_char = "", full_char = "", empty_char = "", not_charging_char = "", unknown_char_char = "?")
+date = widget.Clock(foreground = colors[10], format = "  %a, %d.%m.%y - %H:%M")
+
+## Screens
+screens = [
+    Screen(
+        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
+        wallpaper_mode = "fill",
+        top=bar.Bar(
+            [
+            sep,
+            layouticon,
+            systray,
+            pipe,
+            groupbox,
+            pipe,
+            spacer1,
+            wname,
+            spacer1,
+            pipe,
+            bat,
+            pipe,
+            date,
+            sep
             ],
             25,
             margin = [6, 6, 0, 6]
@@ -289,82 +261,19 @@ screens = [
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
-            widget.Sep(
-                foreground = colors[0],
-                linewidth = 5
-                ),
-            widget.CurrentLayoutIcon(
-                scale = 0.6
-                ),
-            widget.TextBox(
-                fontsize = 15,
-                foreground = colors[1],
-                text = "|"
-                ),
-            widget.GroupBox(
-                disable_drag = True,
-                center_aligned = True,
-                hide_unused = True,
-                rounded = True,
-                highlight_method = "line",
-                font="JetBrainsMono Nerd Font Mono",
-                fontsize = 18,
-                margin_y = 3,
-                margin_x = 0,
-                padding_y = 5,
-                padding_x = 5,
-                active = colors[3],
-                highlight_color = colors[0],
-                this_current_screen_border = colors[5],
-                this_screen_border = colors[3],
-                foreground = colors[3],
-                background = colors[0]
-                ),
-            widget.TextBox(
-                fontsize = 15,
-                foreground = colors[1],
-                text = "|"
-                ),
-            widget.Spacer(),
-            widget.WindowName(
-                width=bar.CALCULATED,
-                empty_group_string="Desktop",
-                max_chars=130,
-                background = colors[0],
-                foreground = colors[6]
-                ),
-            widget.Spacer(),
-            widget.TextBox(
-                fontsize = 15,
-                foreground = colors[1],
-                text = "|"
-                ),
-            widget.Battery(
-                foreground = colors[7],
-                format = '{char} {percent:2.0%}',
-                low_foreground = "#AA4A44",
-                low_percentage = 0.2,
-                notify_below = 0.2,
-                charge_char = "",
-                discharge_char = "",
-                full_char = "",
-                empty_char = "",
-                not_charging_char = "",
-                unknown_char_char = "?"
-                ),
-            widget.TextBox(
-                fontsize = 15,
-                foreground = colors[1],
-                text = "|"
-                ),
-            widget.Clock(
-                foreground = colors[10],
-                format = "  %a, %d.%m.%y - %H:%M"
-                ),
-            widget.Sep(
-                foreground = colors[0],
-                linewidth = 5
-                )
+            sep,
+            layouticon,
+            pipe,
+            groupbox,
+            pipe,
+            spacer1,
+            wname,
+            spacer1,
+            pipe,
+            bat,
+            pipe,
+            date,
+            sep
             ],
             25,
             margin = [6, 6, 0, 6]
