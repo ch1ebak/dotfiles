@@ -192,18 +192,12 @@ dec1 = {
     "decorations": [
         RectDecoration(colour = colors[1], radius = 5, filled = True, padding_y = 2, group = True)
     ],
-    "padding": 15,
+    "padding": 20,
 }
 
 pleft = {
     "decorations": [
-        PowerLineDecoration(path = "rounded_left")
-    ]
-}
-
-sleft = {
-    "decorations": [
-        PowerLineDecoration(path = "forward_slash")
+        PowerLineDecoration(path = "rounded_left", override_colour = colors[1], override_next_colour = colors[0])
     ]
 }
 
@@ -213,9 +207,27 @@ pright = {
     ]
 }
 
+sleft = {
+    "decorations": [
+        PowerLineDecoration(path = "forward_slash", override_colour = colors[0], override_next_colour = colors[1])
+    ]
+}
+
 sright = {
     "decorations": [
-        PowerLineDecoration(path = "back_slash", override_colour = colors[1], override_next_colour = colors[2])
+        PowerLineDecoration(path = "back_slash", override_colour = colors[2], override_next_colour = colors[0])
+    ]
+}
+
+sleft1 = {
+    "decorations": [
+        PowerLineDecoration(path = "forward_slash", override_colour = colors[0], override_next_colour = colors[2])
+    ]
+}
+
+sright1 = {
+    "decorations": [
+        PowerLineDecoration(path = "back_slash", override_colour = colors[1], override_next_colour = colors[0])
     ]
 }
 
@@ -229,12 +241,16 @@ widget_defaults = dict(
 
 spacer1 = widget.Spacer()
 sep = widget.Sep(background = colors[2], foreground = colors[2], linewidth = 5)
-roundl = widget.Spacer(length = 1, background = colors[1], **pleft)
-slashl = widget.Spacer(length = 1, background = colors[2], **sleft)
+sep1 = widget.Sep(background = colors[0], foreground = colors[0], linewidth = 5)
+roundl = widget.Spacer(length = 1, **pleft)
 roundr = widget.Spacer(length = 1, **pright)
+slashl = widget.Spacer(length = 1, **sleft)
 slashr = widget.Spacer(length = 1, **sright)
+slashl1 = widget.Spacer(length = 1, **sleft1)
+slashr1 = widget.Spacer(length = 1, **sright1)
 
 layouticon = widget.CurrentLayoutIcon(background = colors[2], scale = 0.6)
+layout2 = widget.CurrentLayout(background = colors[1], foreground = colors[9])
 systray = widget.Systray(background = colors[2],icon_size = 19)
 groupbox = widget.GroupBox(
                 disable_drag = True,
@@ -250,17 +266,19 @@ groupbox = widget.GroupBox(
                 padding_x = 5,
                 active = colors[4],
                 inactive = colors[3],
-                highlight_color = colors[1],
+                highlight_color = colors[0],
                 this_current_screen_border = colors[5],
                 this_screen_border = colors[3],
                 other_screen_border=colors[3],
                 other_current_screen_border=colors[5],
-                background = colors[1],
+                background = colors[0],
                 foreground = colors[3]
                 )
 wname = widget.WindowName(width=bar.CALCULATED, empty_group_string="Desktop", max_chars=130, foreground = colors[6], **dec1)
 bat = widget.Battery(background = colors[1], foreground = colors[7], format = '{char} {percent:2.0%}', low_foreground = "#AA4A44", low_percentage = 0.2, notify_below = 0.2, charge_char = "", discharge_char = "", full_char = "", empty_char = "", not_charging_char = "", unknown_char_char = "?")
-date = widget.Clock(background = colors[2], foreground = colors[10], format = "  %a, %d.%m.%y - %H:%M")
+ram = widget.Memory(format = ' {MemUsed: .0f}{mm}', foreground = colors[8])
+cpu = widget.CPU(foreground = colors[10], format = '  {load_percent}%')
+date = widget.Clock(background = colors[2], foreground = colors[9], format = "  %a, %d.%m.%y - %H:%M")
 
 ## Screens
 screens = [
@@ -272,19 +290,25 @@ screens = [
             sep,
             layouticon,
             systray,
-            slashl,
+            slashr,
             groupbox,
+            slashl,
+            layout2,
             roundl,
             spacer1,
             wname,
             spacer1,
             roundr,
             bat,
-            slashr,
+            slashr1,
+            ram,
+            sep1,
+            cpu,
+            slashl1,
             date,
             sep
             ],
-            25,
+            26,
             margin = [6, 6, 0, 6]
         )
     ),
@@ -295,15 +319,21 @@ screens = [
             [
             sep,
             layouticon,
-            slashl,
+            slashr,
             groupbox,
+            slashl,
+            layout2,
             roundl,
             spacer1,
             wname,
             spacer1,
             roundr,
             bat,
-            slashr,
+            slashr1,
+            ram,
+            sep1,
+            cpu,
+            slashl1,
             date,
             sep
             ],
