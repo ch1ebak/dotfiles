@@ -2,7 +2,7 @@ font-family = JetBrainsMono NF
 font-synthetic-style = true
 font-size = 10
 
-theme = /usr/share/ghostty/themes/tokyonight
+theme = /usr/share/ghostty/themes/zenwritten_dark
 
 background-opacity = 0.9
 gtk-titlebar = false

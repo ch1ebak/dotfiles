@@ -23,7 +23,7 @@ from qtile_extras.widget.decorations import RectDecoration
 from qtile_extras.widget.decorations import PowerLineDecoration
 
 ## Color scheme
-from themes.tokyonight import colors
+from themes.grayscale import colors
 
 # SETTINGS
 ## General
@@ -190,14 +190,20 @@ for i in groups:
 ## Decorations
 dec1 = {
     "decorations": [
-        RectDecoration(colour = colors[1], radius = 5, filled = True, padding_y = 2, group = True)
+        RectDecoration(colour = colors[2], radius = 5, filled = True, padding_y = 2, group = True)
     ],
     "padding": 20,
 }
 
 pleft = {
     "decorations": [
-        PowerLineDecoration(path = "rounded_left", override_colour = colors[1], override_next_colour = colors[0])
+        PowerLineDecoration(path = "rounded_left")
+    ]
+}
+
+sleft = {
+    "decorations": [
+        PowerLineDecoration(path = "forward_slash")
     ]
 }
 
@@ -207,27 +213,9 @@ pright = {
     ]
 }
 
-sleft = {
-    "decorations": [
-        PowerLineDecoration(path = "forward_slash", override_colour = colors[0], override_next_colour = colors[1])
-    ]
-}
-
 sright = {
     "decorations": [
-        PowerLineDecoration(path = "back_slash", override_colour = colors[2], override_next_colour = colors[0])
-    ]
-}
-
-sleft1 = {
-    "decorations": [
-        PowerLineDecoration(path = "forward_slash", override_colour = colors[0], override_next_colour = colors[2])
-    ]
-}
-
-sright1 = {
-    "decorations": [
-        PowerLineDecoration(path = "back_slash", override_colour = colors[1], override_next_colour = colors[0])
+        PowerLineDecoration(path = "back_slash", override_colour = colors[1], override_next_colour = colors[2])
     ]
 }
 
@@ -241,16 +229,12 @@ widget_defaults = dict(
 
 spacer1 = widget.Spacer()
 sep = widget.Sep(background = colors[2], foreground = colors[2], linewidth = 5)
-sep1 = widget.Sep(background = colors[0], foreground = colors[0], linewidth = 5)
-roundl = widget.Spacer(length = 1, **pleft)
+roundl = widget.Spacer(length = 1, background = colors[1], **pleft)
+slashl = widget.Spacer(length = 1, background = colors[2], **sleft)
 roundr = widget.Spacer(length = 1, **pright)
-slashl = widget.Spacer(length = 1, **sleft)
 slashr = widget.Spacer(length = 1, **sright)
-slashl1 = widget.Spacer(length = 1, **sleft1)
-slashr1 = widget.Spacer(length = 1, **sright1)
 
 layouticon = widget.CurrentLayoutIcon(background = colors[2], scale = 0.6)
-layout2 = widget.CurrentLayout(background = colors[1], foreground = colors[9])
 systray = widget.Systray(background = colors[2],icon_size = 19)
 groupbox = widget.GroupBox(
                 disable_drag = True,
@@ -266,80 +250,67 @@ groupbox = widget.GroupBox(
                 padding_x = 5,
                 active = colors[4],
                 inactive = colors[3],
-                highlight_color = colors[0],
+                highlight_color = colors[1],
                 this_current_screen_border = colors[5],
                 this_screen_border = colors[3],
                 other_screen_border=colors[3],
                 other_current_screen_border=colors[5],
-                background = colors[0],
+                background = colors[1],
                 foreground = colors[3]
                 )
-wname = widget.WindowName(width=bar.CALCULATED, empty_group_string="Desktop", max_chars=130, foreground = colors[6], **dec1)
+wname = widget.WindowName(width=bar.CALCULATED, empty_group_string="Desktop", max_chars=130, foreground = colors[4], **dec1)
 bat = widget.Battery(background = colors[1], foreground = colors[7], format = '{char} {percent:2.0%}', low_foreground = "#AA4A44", low_percentage = 0.2, notify_below = 0.2, charge_char = "", discharge_char = "", full_char = "", empty_char = "", not_charging_char = "", unknown_char_char = "?")
-ram = widget.Memory(format = ' {MemUsed: .0f}{mm}', foreground = colors[8])
-cpu = widget.CPU(foreground = colors[10], format = '  {load_percent}%')
-date = widget.Clock(background = colors[2], foreground = colors[9], format = "  %a, %d.%m.%y - %H:%M")
+date = widget.Clock(background = colors[2], foreground = colors[10], format = "  %a, %d.%m.%y - %H:%M")
 
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
+        wallpaper = "~/.config/qtile/wallpapers/grayscale.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
             sep,
             layouticon,
             systray,
-            slashr,
-            groupbox,
             slashl,
-            layout2,
+            groupbox,
             roundl,
             spacer1,
             wname,
             spacer1,
             roundr,
             bat,
-            slashr1,
-            ram,
-            sep1,
-            cpu,
-            slashl1,
+            slashr,
             date,
             sep
             ],
             26,
-            margin = [6, 6, 0, 6]
+            margin = [6, 60, 0, 60]
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
+        wallpaper = "~/.config/qtile/wallpapers/grayscale.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
             sep,
             layouticon,
-            slashr,
-            groupbox,
             slashl,
-            layout2,
+            groupbox,
             roundl,
             spacer1,
             wname,
             spacer1,
             roundr,
             bat,
-            slashr1,
-            ram,
-            sep1,
-            cpu,
-            slashl1,
+            slashr,
             date,
             sep
             ],
-            25,
-            margin = [6, 6, 0, 6]
+            26,
+            margin = [6, 60, 0, 60]
         )
     )
 ]
+
 

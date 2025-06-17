@@ -15,4 +15,4 @@ Xft.autohint: true
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
-#include "/home/karna/.config/xresources/tokyonight"
+#include "/home/karna/.config/xresources/grayscale"
