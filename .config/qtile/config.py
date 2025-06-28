@@ -23,7 +23,7 @@ from qtile_extras.widget.decorations import RectDecoration
 from qtile_extras.widget.decorations import PowerLineDecoration
 
 ## Color scheme
-from themes.grayscale import colors
+from themes.tokyonight import colors
 
 # SETTINGS
 ## General
@@ -83,7 +83,7 @@ groups = [
 ## Layouts
 layout_theme = {
     "border_width": 2,
-    "margin": 6,
+    "margin": 8,
     "border_focus": colors[5],
     "border_normal": colors[2]
 }
@@ -237,27 +237,27 @@ slashr = widget.Spacer(length = 1, **sright)
 layouticon = widget.CurrentLayoutIcon(background = colors[2], scale = 0.6)
 systray = widget.Systray(background = colors[2],icon_size = 19)
 groupbox = widget.GroupBox(
-                disable_drag = True,
-                center_aligned = True,
-                hide_unused = True,
-                rounded = True,
-                highlight_method = "line",
-                font="JetBrainsMono Nerd Font Mono",
-                fontsize = 16,
-                margin_y = 3,
-                margin_x = 0,
-                padding_y = 5,
-                padding_x = 5,
-                active = colors[4],
-                inactive = colors[3],
-                highlight_color = colors[1],
-                this_current_screen_border = colors[5],
-                this_screen_border = colors[3],
-                other_screen_border=colors[3],
-                other_current_screen_border=colors[5],
-                background = colors[1],
-                foreground = colors[3]
-                )
+               disable_drag = True,
+               center_aligned = True,
+               hide_unused = True,
+               rounded = True,
+               highlight_method = "line",
+               font="JetBrainsMono Nerd Font Mono",
+               fontsize = 16,
+               margin_y = 3,
+               margin_x = 0,
+               padding_y = 5,
+               padding_x = 5,
+               background = colors[1],
+               foreground = colors[3],
+               active = colors[4],
+               inactive = colors[3],
+               highlight_color = colors[1],
+               this_current_screen_border = colors[5],
+               this_screen_border = colors[3],
+               other_screen_border = colors[3],
+               other_current_screen_border = colors[5]
+               )
 wname = widget.WindowName(width=bar.CALCULATED, empty_group_string="Desktop", max_chars=130, foreground = colors[4], **dec1)
 bat = widget.Battery(background = colors[1], foreground = colors[7], format = '{char} {percent:2.0%}', low_foreground = "#AA4A44", low_percentage = 0.2, notify_below = 0.2, charge_char = "", discharge_char = "", full_char = "", empty_char = "", not_charging_char = "", unknown_char_char = "?")
 date = widget.Clock(background = colors[2], foreground = colors[10], format = "  %a, %d.%m.%y - %H:%M")
@@ -265,7 +265,7 @@ date = widget.Clock(background = colors[2], foreground = colors[10], format = "�
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/grayscale.png",
+        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -285,11 +285,11 @@ screens = [
             sep
             ],
             26,
-            margin = [6, 60, 0, 60]
+            margin = [8, 60, 0, 60]
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/grayscale.png",
+        wallpaper = "~/.config/qtile/wallpapers/tokyonight.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -312,5 +312,3 @@ screens = [
         )
     )
 ]
-
-

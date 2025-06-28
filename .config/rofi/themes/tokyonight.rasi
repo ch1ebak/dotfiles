@@ -28,10 +28,10 @@ element-icon, element-text, scrollbar {
 }
 
 window {
-  location : northwest;
-  width    : 280px;
-  x-offset : 6px;
-  y-offset : 38px;
+  location : center;
+  width    : 500px;
+  x-offset : 0px;
+  y-offset : 0px;
 
   background-color: @bg0;
   border: 2px;
@@ -99,10 +99,4 @@ element-icon {
 
 element-text {
   text-color: inherit;
-}
-
-scrollbar {
-  handle-width : 4px;
-  handle-color : @fg1;
-  padding      : 0 4px;
 }

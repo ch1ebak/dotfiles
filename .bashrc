@@ -7,9 +7,8 @@
 
 # OPTIONS
 ## Exports
-export TERM="alacritty"
-export VISUAL="emacsclient -c -a emacs"
-export EDITOR="emacsclient -t -a """
+export TERM="ghostty"
+export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! -type d \! -name '\''*.tags'\'' -printf '\''%P\n'\'
 
 ## Options
@@ -91,22 +90,21 @@ alias nvt="nvtop"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
 alias xbl="brightnessctl set "
-alias ss1="hyprshot -m output -m HDMI-A-1"
-alias ss2="hyprshot -m output -m eDP-1"
+alias ssh="hyprshot -m output -m HDMI-A-1"
+alias ssq="hyprshot -m output -m eDP-1"
 
 ## Apps
 alias cal="cal -3 -m --color=auto"
 alias dunres="killall -e dunst & sleep 1; dunstify "hello!" &"
 alias fehs="feh --bg-fill"
 alias lg="lazygit"
-# alias wlp="shuf -e -n1 $HOME/Obrazy/tapety/* | xargs feh --bg-fill"
-alias wlp="hyprctl hyprpaper reload ,"
+alias wlq="shuf -e -n1 $HOME/Obrazy/tapety/* | xargs feh --bg-fill"
+alias wlh="hyprctl hyprpaper reload ,"
 alias yz="yazi"
 alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
 
 ## Git
 alias gc="git clone"
-alias gdots="git clone https://github.com/ch1ebak/dotfiles"
 
 ## Neovim
 alias nv="nvim"

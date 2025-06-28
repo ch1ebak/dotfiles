@@ -15,7 +15,7 @@
   width = 275
   height = 100
   origin = bottom-right
-  offset = 6x6
+  offset = 8x8
 
   frame_width = 2
   separator_height = 0
@@ -46,14 +46,14 @@
 
 # Color scheme
 [urgency_low]
-   background = "#080808"
-   foreground = "#cccccc"
-   frame_color = "#7a7a7a"
+   background = "#1a1b26"
+   foreground = "#a9b1d6"
+   frame_color = "#f7768e"
 [urgency_normal]
-   background = "#080808"
-   foreground = "#cccccc"
-   frame_color = "#7a7a7a"
+   background = "#1a1b26"
+   foreground = "#a9b1d6"
+   frame_color = "#f7768e"
 [urgency_critical]
-   background = "#080808"
-   foreground = "#cccccc"
-   frame_color = "#7a7a7a"
+   background = "#1a1b26"
+   foreground = "#a9b1d6"
+   frame_color = "#f7768e"
