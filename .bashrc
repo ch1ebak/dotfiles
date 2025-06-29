@@ -10,6 +10,7 @@
 export TERM="ghostty"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! -type d \! -name '\''*.tags'\'' -printf '\''%P\n'\'
+export PATH="/home/karna/Projekty/rofi/:$PATH"
 
 ## Options
 bind "set colored-stats on"

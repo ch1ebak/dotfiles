@@ -6,7 +6,8 @@
 
 
 [global]
-  monitor = 1
+  # monitor = 1
+  monitor = HDMI-A-1
   shrink = no
   padding = 25
   horizontal_padding = 25
