@@ -3,6 +3,7 @@
 set -e
 set -u
 
+
 Wallpaper () {
 if [ $XDG_SESSION_TYPE = 'wayland' ]; then
   directory=/home/$USER/Obrazy/tapety/
@@ -62,8 +63,20 @@ Themes () {
     cfg=$(printf '%s\n' "${choice}" | awk '{print $NF}')
     "$cfg"
   else
-    echo "Program Terminated." && exit 1
+    echo "What?" && exit 1
   fi
+}
+
+Screenshot () {
+if [ $XDG_SESSION_TYPE = 'wayland' ]; then
+  sleep 1; grim -o HDMI-A-1 -l 9 -t png
+  notify-send "Screenshot Taken"
+elif [ $XDG_SESSION_TYPE = 'x11' ]; then
+  scrot -d 1 -M 0 -q 9
+  notify-send "Screenshot Taken"
+else
+  echo "What?"
+fi
 }
 
 Reload () {
@@ -77,11 +90,13 @@ else
 fi
 }
 
+
 declare -a options=(
+Screenshot
 Wallpaper
 Themes
 Reload
-"quit"
+"Quit"
 )
 
 choice=$(printf '%s\n' "${options[@]}" | rofi -m 1 -dmenu -i -l 20 -p 'Utilities')
