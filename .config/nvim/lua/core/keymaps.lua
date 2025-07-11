@@ -7,6 +7,9 @@ g.maplocalleader = " "
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
+-- Config
+keymap.set('n', '<leader>hr', ":luafile %<cr>", { desc = 'Reload config' }, opts)
+
 -- Windows/Splits/Buffers
 keymap.set('n', 'j', "gj", { desc = 'Move by line' }, opts)
 keymap.set('n', 'k', "gk", { desc = 'Move by line' }, opts)
@@ -17,8 +20,6 @@ keymap.set('n', '<C-l>', "<C-w>l", { desc = 'Move to right window' }, opts)
 keymap.set('n', '<C-n>', "<cmd>tabnew<CR>", { desc = 'New tab' }, opts)
 keymap.set('n', '<C-j>', "<cmd>tabn<CR>", { desc = 'Next tab' }, opts)
 keymap.set('n', '<C-k>', "<cmd>tabp<CR>", { desc = 'Previous tab' }, opts)
-keymap.set('n', '<leader><Tab>J', "<C-W>R", { desc = 'Move splits around' }, opts)
-keymap.set('n', '<leader><Tab>K', "<C-W>R", { desc = 'Move splits around' }, opts)
 
 -- Movement
 keymap.set({ "n", "v" }, "gh", "^", { desc = "Go to the beginning line" })

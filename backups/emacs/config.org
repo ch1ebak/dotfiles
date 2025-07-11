@@ -177,7 +177,10 @@
   (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line))
+  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (define-key evil-normal-state-map (kbd "gh") 'evil-beginning-of-line)
+  (define-key evil-normal-state-map (kbd "gl") 'evil-end-of-line)
+)
 
 (setq-default evil-cross-lines t)
 (setq org-return-follows-link  t)
@@ -210,7 +213,7 @@
     "TAB q" '(evil-window-delete :wk "Close window")
     "TAB Q" '(tab-close :wk "Close window")
     "TAB x" '(kill-other-buffers :wk "Kill other buffers")
-    "TAB RET" '(evil-window-vnew :wk "New window")
+    "TAB m" '(evil-window-vnew :wk "New window")
     "TAB h" '(evil-window-left :wk "Window left")
     "TAB l" '(evil-window-right :wk "Window down")
     "TAB J" '(evil-window-move-far-left :wk "Move window left")
@@ -259,7 +262,6 @@
     "p x" '(org-capture :wk "Org Capture")
     "p a" '(org-agenda :wk "Org Agenda")
     "p e" '(elfeed :wk "Elfeed")
-    "p p" '(pocket-reader :wk "Pocket")
     "p w" '(eww :wk "EWW")
     "p W" '(eww-list-bookmarks :wk "EWW Bookmarks"))
 
@@ -340,13 +342,7 @@
     :keymaps 'elfeed-search-mode-map
     "W" 'elfeed-search-browse-url
     "M" 'elfeed-mark-all-as-read
-    "P" 'pocket-reader-elfeed-search-add-link
     "O" 'elfeed-update)
-  
-  (general-nmap
-    :keymaps 'pocket-reader-mode-map
-    "F" 'pocket-reader-show-unread-favorites
-    "&" 'pocket-reader-open-in-external-browser)
 )
 #+end_src
 
@@ -779,14 +775,6 @@ folder, otherwise delete a character backward"
        (?C :foreground "#87b379"))))
 #+end_src
 
-** [[https://github.com/alphapapa/pocket-reader.el][Pocket Reader]]
-#+begin_src emacs-lisp
-(use-package pocket-reader)
-(setq pocket-reader-open-url-default-function #'eww)
-(setq pocket-reader-pop-to-url-default-function #'eww)
-(add-hook 'pocket-reader-mode (lambda () (display-line-numbers-mode 0)))
-#+end_src
-
 ** [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]]
 #+begin_src emacs-lisp
 (use-package rainbow-delimiters
@@ -842,7 +830,7 @@ folder, otherwise delete a character backward"
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-spacegrey t)
+  (load-theme 'doom-tokyo-night t)
   (doom-themes-org-config))
 #+end_src
 
