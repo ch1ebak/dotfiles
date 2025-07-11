@@ -22,7 +22,8 @@
 
 # SCREENSHOTS
 
-![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/main/screenshots/tokyonight.png)
+![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/everforest-qtile.png)
+![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/everforest-hyprland.png)
 
 old screenshots [>>>](https://github.com/ch1ebak/dotfiles/tree/main/screenshots)
 
