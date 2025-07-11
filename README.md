@@ -1,7 +1,7 @@
 # Installed packages
 | Type           | Package     |
 |----------------|-------------|
-| Window Manager | Qtile       |
+| Window Manager | Qtile & Hyprland       |
 | Terminal       | Ghostty     |
 | Editor         | Neovim      |
 | Shell          | Bash        |
