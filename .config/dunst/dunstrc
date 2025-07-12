@@ -49,12 +49,12 @@
 [urgency_low]
    background = "#1e2326"
    foreground = "#d3c6aa"
-   frame_color = "#4f5b58"
+   frame_color = "#a7c080"
 [urgency_normal]
    background = "#1e2326"
    foreground = "#d3c6aa"
-   frame_color = "#4f5b58"
+   frame_color = "#a7c080"
 [urgency_critical]
    background = "#1e2326"
    foreground = "#d3c6aa"
-   frame_color = "#4f5b58"
+   frame_color = "#a7c080"

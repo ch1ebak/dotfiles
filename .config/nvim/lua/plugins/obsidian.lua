@@ -16,5 +16,6 @@ return {
   },
   picker = {
     name = "picker"
-  }
+  },
+  ui = { enable = false },
 }
