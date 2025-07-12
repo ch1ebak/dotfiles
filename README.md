@@ -1,17 +1,17 @@
 # CH1EBAK'S COOL DOTFILES
-![](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/everforest.png)
+![](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/everforest-qth.png)
 
 # THEMES
-| Theme       | Hyprland                                                                                                          |
+| Theme       | Qtile |
 |-------------|--------------------------------------------------------------------------------------------------------------------|
-| Catppuccin  | ![img]()                                                                                                          |
-| Dracula     | ![img]()                                                                                                          |
-| Everforest  | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/everforest-hyprland.png) |
-| Grayscale   | ![img]()                                                                                                          |
-| Gruvbox     | ![img]()                                                                                                          |
-| Kanagawa    | ![img]()                                                                                                          |
-| Spacegray   | ![img]()                                                                                                          |
-| Tokyo Night | ![img]()                                                                                                          |
+| Catppuccin  | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/catppuccin.png)                                                                                                          |
+| Dracula     | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/dracula.png)                                                                                                          |
+| Everforest  | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/everforest.png) |
+| Grayscale   | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/grayscale.png)                                                                                                          |
+| Gruvbox     | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/gruvbox.png)                                                                                                          |
+| Kanagawa    | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/kanagawa.png)                                                                                                          |
+| Spacegray   | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/spacegray.png)                                                                                                          |
+| Tokyo Night | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/tokyonight.png)                                                                                                          |
 
 > [!TIP]
 > Themes can be changed automatically using my [Rofi Utilities](https://github.com/ch1ebak/dotfiles/blob/main/.config/rofi/modules/rofi-utilities).
