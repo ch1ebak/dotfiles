@@ -6,6 +6,6 @@ configuration {
   kb-row-down: "Control+j";
 }
 
-//@theme "/home/karna/.config/rofi/themes/everforest"
+//@theme "/home/karna/.config/rofi/themes/spacegray"
 
-@theme "/home/karna/.config/rofi/themes/everforest"
+@theme "/home/karna/.config/rofi/themes/spacegray"

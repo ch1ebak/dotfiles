@@ -29,7 +29,6 @@ return {
         "markdown",
         "markdown_inline",
         "python",
-        "org",
         "toml",
         "json",
         "html",

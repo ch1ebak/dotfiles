@@ -23,7 +23,7 @@ from qtile_extras.widget.decorations import RectDecoration
 from qtile_extras.widget.decorations import PowerLineDecoration
 
 ## Color scheme
-from themes.everforest import colors
+from themes.spacegray import colors
 
 # SETTINGS
 ## General
@@ -75,7 +75,7 @@ groups = [
     Group("4", label="󰅴", layout='monadtall', matches=[Match(wm_class=["ghostty"])]),
     Group("5", label="󰝰", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
     Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "rawtherapee", "nwg-look", "nitrogen"])]),
-    Group("7", label="󰓓", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris"])]),
+    Group("7", label="󰓓", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris", "heroic"])]),
     Group("8", label="󰓇", layout='max', matches=[Match(wm_class=["spotify"])]),
     Group("9", label="󰕧", layout='max', matches=[Match(wm_class=["mpv"])])
 ]
@@ -117,7 +117,7 @@ keys = [
     Key([mod], "w", lazy.spawn("zen-browser")),
     Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
     Key([mod], "e", lazy.spawn("obsidian")),
-    Key([mod, "shift"], "e", lazy.spawn("ghostty -e nvim")),
+    Key([mod], "d", lazy.spawn("ghostty -e nvim")),
     Key([mod], "a", lazy.spawn("ghostty -e yazi")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
 
@@ -279,7 +279,7 @@ date = widget.Clock(background = colors[2], foreground = colors[10], format = "�
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/everforest.png",
+        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -303,7 +303,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/everforest.png",
+        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [

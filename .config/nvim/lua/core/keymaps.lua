@@ -14,10 +14,10 @@ keymap.set('n', '<leader>hr', ":luafile %<cr>", { desc = 'Reload config' }, opts
 keymap.set('n', 'j', "gj", { desc = 'Move by line' }, opts)
 keymap.set('n', 'k', "gk", { desc = 'Move by line' }, opts)
 keymap.set('n', '<C-q>', ":q<CR>", { desc = 'Close' }, opts)
-keymap.set('n', '<C-m>', "<C-w>v", { desc = 'Split window horizontally' }, opts)
+keymap.set('n', '<C-n>', "<C-w>v", { desc = 'Split window horizontally' }, opts)
 keymap.set('n', '<C-h>', "<C-w>h", { desc = 'Move to left window' }, opts)
 keymap.set('n', '<C-l>', "<C-w>l", { desc = 'Move to right window' }, opts)
-keymap.set('n', '<C-n>', "<cmd>tabnew<CR>", { desc = 'New tab' }, opts)
+keymap.set('n', '<C-t>', "<cmd>tabnew<CR>", { desc = 'New tab' }, opts)
 keymap.set('n', '<C-j>', "<cmd>tabn<CR>", { desc = 'Next tab' }, opts)
 keymap.set('n', '<C-k>', "<cmd>tabp<CR>", { desc = 'Previous tab' }, opts)
 

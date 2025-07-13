@@ -10,7 +10,7 @@
 export TERM="ghostty"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! -type d \! -name '\''*.tags'\'' -printf '\''%P\n'\'
-export PATH="/home/karna/Projekty/rofi/:$PATH"
+export PATH="/nvme/Projekty/minifetch:$PATH"
 
 ## Options
 bind "set colored-stats on"
@@ -43,7 +43,7 @@ export HISTCONTROL=erasedups:ignoredups:ignorespace
 PS1="\[\033[31m\]\w >\[\e[m\] "
 
 ## Fetch
-fastfetch
+minifetch.sh
 
 
 # ALIASES
@@ -84,23 +84,16 @@ alias tr="trash -vi"
 ### system
 alias bt="btop"
 alias df="df -hl --exclude-type=tmpfs --exclude-type=devtmpfs"
-alias ff="fastfetch"
-alias ffnc="fastfetch --config examples/6.jsonc"
-alias merge="xrdb -merge ~/.Xresources"
 alias nvt="nvtop"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
 alias xbl="brightnessctl set "
-alias ssh="hyprshot -m output -m HDMI-A-1"
-alias ssq="hyprshot -m output -m eDP-1"
 
 ## Apps
 alias cal="cal -3 -m --color=auto"
 alias dunres="killall -e dunst & sleep 1; dunstify "hello!" &"
 alias fehs="feh --bg-fill"
 alias lg="lazygit"
-alias wlq="shuf -e -n1 $HOME/Obrazy/tapety/* | xargs feh --bg-fill"
-alias wlh="hyprctl hyprpaper reload ,"
 alias yz="yazi"
 alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
 

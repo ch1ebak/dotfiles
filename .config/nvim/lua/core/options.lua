@@ -53,8 +53,8 @@ opt.backup = false
 
 opt.clipboard:append("unnamedplus")
 
-vim.opt.spelllang = 'en,pl'
-vim.opt.spell = true
+opt.spelllang = 'en,pl'
+opt.spell = true
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
