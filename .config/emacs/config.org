@@ -8,7 +8,7 @@
 
 * [[https://github.com/progfolio/elpaca][ELPACA]]
 #+begin_src emacs-lisp
-(defvar elpaca-installer-version 0.8)
+(defvar elpaca-installer-version 0.11)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
@@ -178,8 +178,21 @@
   (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (define-key evil-normal-state-map (kbd "C-n") 'evil-window-vnew)
+  (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+  (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+  (define-key evil-normal-state-map (kbd "C-t") 'tab-new)
+  (define-key evil-normal-state-map (kbd "C-j") 'tab-next)
+  (define-key evil-normal-state-map (kbd "C-k") 'tab-previous)
+  (define-key evil-normal-state-map (kbd "C-q") 'evil-window-delete)
+  (define-key evil-normal-state-map (kbd "C-S-J") 'evil-window-move-far-left)
+  (define-key evil-normal-state-map (kbd "C-S-K") 'evil-window-move-far-right)
+  (define-key evil-normal-state-map (kbd "C-S-H") 'previous-buffer)
+  (define-key evil-normal-state-map (kbd "C-S-L") 'next-buffer)
   (define-key evil-normal-state-map (kbd "gh") 'evil-beginning-of-line)
   (define-key evil-normal-state-map (kbd "gl") 'evil-end-of-line)
+  (define-key evil-normal-state-map (kbd "gcc") 'comment-line)
+  (define-key evil-normal-state-map (kbd "gcr") 'comment-or-uncomment-region)
 )
 
 (setq-default evil-cross-lines t)
@@ -200,30 +213,13 @@
 
   (me/leader-keys
     "SPC" '(execute-extended-command :wk "M-x")
-    "RET" '(consult-buffer :wk "Consult Buffer")
-    "/" '(neotree-toggle :wk "Neotree")
+    "RET" '(counsel-bookmark :wk "Bookmarks")
+    "/" '(counsel-ibuffer :wk "Buffers")
     "?" '(zoxide-travel :wk "Zoxide")
-    "." '(find-file :wk "Find file")
+    "." '(counsel-find-file :wk "Find file")
     ">" '(dired-jump :wk "Dired")
-    "," '(consult-find :wk "Fuzzy finding")
-    "<" '(consult-ripgrep :wk "Grep"))
-                                                                                    
-  (me/leader-keys
-    "TAB" '(:ignore t :wk "Buffers/Tabs/Windows")
-    "TAB q" '(evil-window-delete :wk "Close window")
-    "TAB Q" '(tab-close :wk "Close window")
-    "TAB x" '(kill-other-buffers :wk "Kill other buffers")
-    "TAB m" '(evil-window-vnew :wk "New window")
-    "TAB h" '(evil-window-left :wk "Window left")
-    "TAB l" '(evil-window-right :wk "Window down")
-    "TAB J" '(evil-window-move-far-left :wk "Move window left")
-    "TAB K" '(evil-window-move-far-right :wk "Move window right")
-    "TAB n" '(tab-new :wk "New tab")
-    "TAB j" '(tab-next :wk "Next tab")
-    "TAB k" '(tab-previous :wk "Previous tab")
-    "TAB r" '(tab-rename :wk "Rename tab")
-    "TAB H" '(previous-buffer :wk "Buffer previous")
-    "TAB L" '(next-buffer :wk "Buffer next"))
+    "," '(counsel-fzf :wk "Fuzzy finding")
+    "<" '(counsel-rg :wk "Grep"))
 
   (me/leader-keys
     "b" '(:ignore t :wk "Bookmarks")
@@ -231,21 +227,16 @@
     "b s" '(bookmark-save :wk "Save bookmarks"))
 
   (me/leader-keys
-    "c" '(:ignore t :wk "Comments")
-    "c c" '(comment-line :wk "Comment Line")
-    "c r" '(comment-or-uncomment-region :wk "Comment Region"))
-
-  (me/leader-keys
     "f" '(:ignore t :wk "Files")
     "f p" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Emacs Config")
-    "f P" '((lambda () (interactive) (consult-find "~/.config/emacs/")) :wk "Emacs Config")
-    "f r" '(recentf :wk "Recent files")
+    "f P" '((lambda () (interactive) (counsel-find-file "~/.config/emacs/")) :wk "Emacs Config")
+    "f r" '(counsel-recentf :wk "Recent files")
     "f u" '(sudo-edit :wk "Sudo edit file")
     "f U" '(sudo-edit-find-file :wk "Sudo find file"))
 
   (me/leader-keys
     "h" '(:ignore t :wk "Emacs")
-    "h t" '(consult-theme :wk "Change theme")
+    "h t" '(counsel-load-theme :wk "Change theme")
     "h e" '(:ignore t :wk "Elpaca")
     "h e m" '(elpaca-manager :wk "Elpaca manager")
     "h e u" '(elpaca-update-all :wk "Elpaca: update packages")
@@ -255,7 +246,7 @@
 
   (me/leader-keys
     "n" '(:ignore t :wk "Files")
-    "n f" '((lambda () (interactive) (consult-find "~/Dokumenty/notatki/")) :wk "Notes"))
+    "n n" '((lambda () (interactive) (counsel-find-file "~/Dokumenty/notatki/")) :wk "Notes"))
   
   (me/leader-keys
     "p" '(:ignore t :wk "Packages")
@@ -267,14 +258,12 @@
 
   (me/leader-keys
     "s" '(:ignore t :wk "Search")
-    "s b" '(consult-line :wk "Search line")
-    "s p" '(consult-yank-pop :wk "Yank pop")
-    "s l" '(consult-imenu :wk "Search headings"))
+    "s b" '(swiper :wk "Search line")
+    "s p" '(counsel-yank-pop :wk "Yank pop")
+    "s l" '(counsel-imenu :wk "Search headings"))
   
   (me/leader-keys
     "t" '(:ignore t :wk "Toggles")
-    "t l" '(org-toggle-link-display :wk "Toggle link display")
-    "t i" '(org-toggle-inlay-images :wk "Toggle inlay images")
     "t w" '(whitespace-mode :wk "Whitespace mode")
     "t v" '(visual-fill-column-mode :wk "Visual fill column")
     "t f" '(follow-mode :wk "Follow mode")
@@ -377,80 +366,64 @@
 #+end_src
 
 ** Completion
-*** [[https//github.com/minad/vertico][Vertico]]
+*** [[https://github.com/abo-abo/swiper][Counsel/Ivy]]
 #+begin_src emacs-lisp
-(defun dw/minibuffer-backward-kill (arg)
-  "When minibuffer is completing a file name delete up to parent
-folder, otherwise delete a character backward"
-  (interactive "p")
-  (if minibuffer-completing-file-name
-      ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
-      (if (string-match-p "/." (minibuffer-contents))
-          (zap-up-to-char (- arg) ?/)
-        (delete-minibuffer-contents))
-      (delete-backward-char arg)))
+(use-package ivy
+  :diminish
+  :bind (("C-s" . swiper)
+         :map ivy-minibuffer-map
+         ("TAB" . ivy-alt-done)
+         ("C-l" . ivy-alt-done)
+         ("C-j" . ivy-next-line)
+         ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+         ("C-k" . ivy-previous-line)
+         ("C-l" . ivy-done)
+         ("C-d" . ivy-switch-buffer-kill)
+         :map ivy-reverse-i-search-map
+         ("C-k" . ivy-previous-line)
+         ("C-d" . ivy-reverse-i-search-kill))
+  :custom
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq enable-recursive-minibuffers t)
+  :config
+  (ivy-mode 1))
 
-(use-package vertico
-  :ensure t
-  :bind (:map vertico-map
-         ("C-j" . vertico-next)
-         ("C-k" . vertico-previous)
-         ("C-f" . vertico-exit)
+(use-package counsel
+  :bind (("C-M-j" . 'counsel-switch-buffer)
          :map minibuffer-local-map
-         ("M-h" . backward-kill-word))
+         ("C-r" . 'counsel-minibuffer-history))
+  :custom
+  (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
   :config
-  (setq read-file-name-completion-ignore-case t
-      read-buffer-completion-ignore-case t
-      completion-ignore-case t)
-  :custom
-  (vertico-cycle t)
-  (vertico-count 10)
-  (vertico-resize t)
-  :init
-  (vertico-mode))
+  (counsel-mode 1)
+  (setq ivy-initial-inputs-alist nil)) ;; removes starting ^ regex in M-x
 #+end_src
-
-*** [[https://github.com/minad/marginalia][Marginalia]]
+*** [[https://github.com/Yevgnen/ivy-rich][Ivy Rich]]
 #+begin_src emacs-lisp
-(use-package marginalia
-  :after vertico
+(use-package ivy-rich
+  :after ivy
+  :init
+  (ivy-rich-mode 1)
   :custom
-  (marginalia-align 'right)
-  (marginalia-max-relative-age 0)
-  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
-  :init
-  (marginalia-mode))
-#+end_src
-
-*** [[https://github.com/minad/consult][Consult]]
-#+begin_src emacs-lisp
-(use-package consult
-  :hook (completion-list-mode . consult-preview-at-point-mode)
-  :init
-  (setq register-preview-delay 0.5
-        register-preview-function #'consult-register-format)
-  (advice-add #'register-preview :override #'consult-register-window)
-  (setq xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref)
+  (ivy-virtual-abbreviate 'full
+   ivy-rich-switch-buffer-align-virtual-buffer t
+   ivy-rich-path-style 'abbrev)
   :config
-  (consult-customize
-   consult-theme :preview-key '(:debounce 0.2 any)
-   consult-ripgrep consult-git-grep consult-grep
-   consult-bookmark consult-recent-file consult-xref
-   consult--source-bookmark consult--source-file-register
-   consult--source-recent-file consult--source-project-recent-file
-   :preview-key '(:debounce 0.4 any))
-  (setq consult-narrow-key "<")
-)
+  (ivy-set-display-transformer 'ivy-switch-buffer
+                               'ivy-rich-switch-buffer-transformer))
 #+end_src
-
-*** [[https://github.com/oantolin/orderless][Orderless]]
+*** [[https://github.com/radian-software/prescient.el][Ivy Prescient]]
 #+begin_src emacs-lisp
-(use-package orderless
+(use-package ivy-prescient
+  :after counsel
   :custom
-  (completion-styles '(orderless basic))
-  (completion-category-defaults nil)
-  (completion-category-overrides '((file (styles partial-completion)))))
+  (ivy-prescient-enable-filtering nil)
+  :config
+  ;; Uncomment the following line to have sorting remembered across sessions!
+  (prescient-persist-mode 1)
+  (ivy-prescient-mode 1))
 #+end_src
 
 ** Dired

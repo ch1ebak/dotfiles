@@ -8,7 +8,7 @@
 # OPTIONS
 ## Exports
 export TERM="ghostty"
-export EDITOR="nvim"
+export EDITOR="emacs"
 export FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! -type d \! -name '\''*.tags'\'' -printf '\''%P\n'\'
 export PATH="/nvme/Projekty/minifetch:$PATH"
 

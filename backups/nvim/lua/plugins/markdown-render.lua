@@ -8,7 +8,7 @@ return {
     require('render-markdown').setup({
       heading = {
         enabled = true,
-        sign = false,
+        sign = true,
         position = 'inline',
         icons = { ' ', ' ', ' ', ' ', ' ', ' ' },
         signs = { '󰫎 ' },
