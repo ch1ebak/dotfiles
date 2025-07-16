@@ -6,7 +6,7 @@
 |-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
 | Window Managers | [Qtile](https://github.com/ch1ebak/dotfiles/tree/main/.config/qtile) & [Hyprland](https://github.com/ch1ebak/dotfiles/tree/main/.config/hypr) |
 | Terminal        | [Ghostty](https://github.com/ch1ebak/dotfiles/tree/main/.config/ghostty)                                                                      |
-| Editor          | [Neovim](https://github.com/ch1ebak/dotfiles/tree/main/.config/nvim)                                                                          |
+| Editor          | [Neovim](https://github.com/ch1ebak/dotfiles/tree/main/.config/nvim) & [Emacs](https://github.com/ch1ebak/dotfiles/tree/main/.config/emacs)                                                                         |
 | Shell           | [Bash](https://github.com/ch1ebak/dotfiles/blob/main/.bashrc)                                                                                 |
 | Notifications   | [Dunst](https://github.com/ch1ebak/dotfiles/tree/main/.config/dunst)                                                                          |
 | Launcher        | [Rofi](https://github.com/ch1ebak/dotfiles/tree/main/.config/rofi)                                                                            |

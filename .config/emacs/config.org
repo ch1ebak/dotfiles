@@ -791,10 +791,18 @@
 ** Themes
 *** [[https://github.com/catppuccin/emacs][Catppuccin]]
 #+begin_src emacs-lisp
-(use-package catppuccin-theme
+(use-package catppuccin-theme)
+#+end_src
+
+*** [[https://github.com/Fabiokleis/kanagawa-emacs][Kanagawa]]
+#+begin_src emacs-lisp
+(use-package kanagawa-themes
   :config
-;; (load-theme 'catppuccin t)
-)
+  (setq kanagawa-themes-org-agenda-height nil
+        kanagawa-themes-org-bold nil
+        kanagawa-themes-org-height nil
+        kanagawa-themes-org-highlight nil
+        kanagawa-themes-org-priority-bold nil))
 #+end_src
 
 *** [[https://github.com/doomemacs/themes][Doom Themes]]

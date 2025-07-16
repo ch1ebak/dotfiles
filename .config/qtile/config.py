@@ -64,7 +64,6 @@ def start_once():
     qtile.cmd_spawn("picom -b")
     qtile.cmd_spawn("dunst &")
     qtile.cmd_spawn("brightnessctl set 50%")
-    qtile.cmd_spawn("/usr/bin/emacs --daemon &")
     for p in processes:
         subprocess.Popen(p)
 
@@ -72,7 +71,7 @@ def start_once():
 groups = [
     Group("1", label="󰭹", layout='max', matches=[Match(wm_class=["ferdium"])]),
     Group("2", label="󰈹", layout='max'),
-    Group("3", label="󰈚", layout='max', matches=[Match(wm_class=["emacs"])]),
+    Group("3", label="󰈚", layout='max', matches=[Match(wm_class=["emacs", "obsidian"])]),
     Group("4", label="󰅴", layout='monadtall', matches=[Match(wm_class=["ghostty"])]),
     Group("5", label="󰝰", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
     Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "virt-manager", "rawtherapee", "nwg-look", "nitrogen"])]),
@@ -117,7 +116,9 @@ keys = [
     Key([mod], "Return", lazy.spawn("ghostty")),
     Key([mod], "w", lazy.spawn("zen-browser")),
     Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
-    Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'")),
+    Key([mod], "e", lazy.spawn("obsidian")),
+    Key([mod, "shift"], "e", lazy.spawn("emacsclient -c -a 'emacs'")),
+    Key([mod], "d", lazy.spawn("ghostty -e nvim")),
     Key([mod], "a", lazy.spawn("ghostty -e yazi")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
 
