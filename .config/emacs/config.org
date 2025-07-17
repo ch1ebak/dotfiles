@@ -237,12 +237,8 @@
   (me/leader-keys
     "h" '(:ignore t :wk "Emacs")
     "h t" '(counsel-load-theme :wk "Change theme")
-    "h e" '(:ignore t :wk "Elpaca")
-    "h e m" '(elpaca-manager :wk "Elpaca manager")
-    "h e u" '(elpaca-update-all :wk "Elpaca: update packages")
-    "h e d" '(elpaca-delete :wk "Elpaca: delete package")
-    "h r" '(:ignore t :wk "Reload")
-    "h r r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el") (ignore (elpaca-process-queues))) :wk "Reload emacs config"))
+    "h l" '(elpaca-update-all :wk "Elpaca: update packages")
+    "h r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el") (ignore (elpaca-process-queues))) :wk "Reload emacs config"))
 
   (me/leader-keys
     "n" '(:ignore t :wk "Files")
@@ -486,6 +482,14 @@
         doom-modeline-buffer-file-name-style 'truncate-all))
 #+end_src
 
+** Eglot
+*** [[https://github.com/Automattic/harper/][Harper]]
+#+begin_src emacs-lisp
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(markdown-mode . ("harper-ls" "--stdio"))))
+#+end_src
+
 ** [[https://github.com/skeeto/elfeed][Elfeed]]
 #+begin_src emacs-lisp
 (use-package elfeed
@@ -645,7 +649,7 @@
            (setq auto-hscroll-mode nil)))))
 #+end_src
 
-** [[https://github.com/twlz0ne/nerd-fonts.el][Nerd Fonts]]
+** [[https://github.com/twlz0ne/nerd-fonts.el][Nerd Icons]]
 #+begin_src emacs-lisp
 (use-package nerd-icons
   :ensure t
