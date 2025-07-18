@@ -63,10 +63,10 @@ return {
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader><", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>.", function() Snacks.explorer() end, desc = "File Explorer" },
-    -- { "<leader>.", function() Snacks.picker.files() end, desc = "Find Files" },
     -- find
     { "<leader><return>", function() Snacks.picker.projects() end, desc = "Projects" },
     { "<leader>fp", function() Snacks.picker.files({ cwd = '~/.dotfiles/.config/nvim/' }) end, desc = "Find Config File" },
+    { "<leader>nn", function() Snacks.picker.files({ cwd = '/nvme/Dokumenty/notatki' }) end, desc = "Find Notes" },
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
     -- Grep
     { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },

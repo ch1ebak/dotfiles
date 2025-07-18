@@ -264,13 +264,16 @@
     "t v" '(visual-fill-column-mode :wk "Visual fill column")
     "t f" '(follow-mode :wk "Follow mode")
     "t r" '(rainbow-mode :wk "Rainbow mode"))
+
+  (me/leader-keys
+    "e" '(:ignore t :wk "Eglot")
+    "e l" '(eglot :wk "Launch Eglot")
+    "e a" '(eglot-code-actions :wk "Eglot Code Actions"))
   
   (me/leader-keys
     "z" '(:ignore t :wk "Spellcheck")
     "z f" '(flyspell-mode :wk "Flyspell mode")
     "z a" '(flyspell-correct-word-before-point :wk "Add word to dictionary")
-    "z l" '(languagetool-check :wk "Language Tool")
-    "z c" '(languagetool-correct-at-point :wk "Autocorrect with Language Tool")
     "z C" '(flyspell-auto-correct-word :wk "Autocorrect with Flyspell")
     "z i" '(ispell :wk "Ispell"))
   
@@ -488,6 +491,27 @@
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                '(markdown-mode . ("harper-ls" "--stdio"))))
+
+(setq-default eglot-workspace-configuration
+              '(:harper-ls (:userDictPath ""
+                            :fileDictPath ""
+                            :linters (:SpellCheck t
+                                      :SpelledNumbers :json-false
+                                      :AnA t
+                                      :SentenceCapitalization t
+                                      :UnclosedQuotes t
+                                      :WrongQuotes :json-false
+                                      :LongSentences t
+                                      :RepeatedWords t
+                                      :Spaces t
+                                      :Matcher t
+                                      :CorrectNumberSuffix t)
+                            :codeActions (:ForceStable :json-false)
+                            :markdown (:IgnoreLinkTitle :json-false)
+                            :diagnosticSeverity "hint"
+                            :isolateEnglish :json-false
+                            :dialect "American"
+                            :maxFileLength 120000)))
 #+end_src
 
 ** [[https://github.com/skeeto/elfeed][Elfeed]]
@@ -593,26 +617,6 @@
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 #+end_src
 
-** [[https://github.com/PillFall/languagetool.el][Language Tool]]
-#+begin_src emacs-lisp
-(use-package languagetool
-  :ensure t
-  :defer t
-  :commands (languagetool-check
-             languagetool-clear-suggestions
-             languagetool-correct-at-point
-             languagetool-correct-buffer
-             languagetool-set-language
-             languagetool-server-mode
-             languagetool-server-start
-             languagetool-server-stop)
-  :config
-  (setq languagetool-java-arguments '("-Dfile.encoding=UTF-8"
-                                      "-cp" "/usr/share/languagetool:/usr/share/java/languagetool/*")
-        languagetool-console-command "org.languagetool.commandline.Main"
-        languagetool-server-command "org.languagetool.server.HTTPServer"))
-#+end_src
-
 ** [[https://github.com/jrblevin/markdown-mode][Markdown Mode]]
 #+begin_src emacs-lisp
 (use-package markdown-mode
@@ -625,28 +629,6 @@
       "pandoc"
       " --from=markdown --to=html"
       " --standalone --mathjax --highlight-style=pygments")))
-#+end_src
-
-** [[https://github.com/jaypei/emacs-neotree][Neotree]]
-#+begin_src emacs-lisp
-(use-package neotree
-  :ensure t
-  :custom
-  ;; (neo-theme 'icons)
-  (neo-smart-open t)
-  (neo-autorefresh t)
-  (neo-window-width 40)
-  (neo-window-fixed-size nil)
-  (inhibit-compacting-font-caches t)
-  (neo-show-hidden-files t)
-  :config
-  (add-hook 'neo-after-create-hook
-     #'(lambda (_)
-         (with-current-buffer (get-buffer neo-buffer-name)
-           (setq truncate-lines t)
-           (setq word-wrap nil)
-           (make-local-variable 'auto-hscroll-mode)
-           (setq auto-hscroll-mode nil)))))
 #+end_src
 
 ** [[https://github.com/twlz0ne/nerd-fonts.el][Nerd Icons]]
