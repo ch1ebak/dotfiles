@@ -123,7 +123,7 @@ keys = [
 
     # Menu
     Key([mod], "s", lazy.spawn("rofi -m 1 -show drun")),
-    Key([mod], "u", lazy.spawn("/home/karna/.config/rofi/modules/rofi-utilities")),
+    Key([mod], "u", lazy.spawn("/home/karna/Projekty/scripts/rofi-utilities")),
     Key([mod], "p", lazy.spawn("slock")),
     Key([mod, "shift"], "p", lazy.spawn("rofi -m 1 -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu")),
 

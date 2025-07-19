@@ -10,7 +10,7 @@
 export TERM="ghostty"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! -type d \! -name '\''*.tags'\'' -printf '\''%P\n'\'
-export PATH="/nvme/Projekty/minifetch:$PATH"
+export PATH="/nvme/Projekty/scripts:$PATH"
 
 ## Options
 bind "set colored-stats on"
