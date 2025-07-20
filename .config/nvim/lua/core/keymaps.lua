@@ -31,9 +31,14 @@ keymap.set("n", "Y", "y$", { desc = "Yank to end of line" })
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'Move selected line down' }, opts)
 keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'Move selected line up' }, opts)
 keymap.set("n", "J", "mzJ`z", { desc = 'Combine line with the one below' }, opts)
+
+-- Search
 keymap.set("n", "n", "nzzzv", { desc = 'Better search next' }, opts)
 keymap.set("n", "N", "Nzzzv", { desc = 'Better search previous' }, opts)
-keymap.set('n', 'yc', 'yy<cmd>normal gcc<CR>p')
+
+-- Other
+keymap.set('n', 'yc', 'yy<cmd>normal gcc<CR>p', { desc = 'Uncomment and Copy' }, opts)
+keymap.set('i', 'jk', '<ESC>', { desc = 'Exit insert mode' }, opts)
 
 -- Toggles
 keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = 'Chmod open file' }, opts)

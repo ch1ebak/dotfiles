@@ -3,8 +3,12 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
-    animate = { enabled = true },
     bigfile = { enabled = true },
+    explorer = { enabled = true },
+    image = { enabled = true },
+    notifier = { enabled = true },
+    quickfile = { enabled = true },
+    scope = { enabled = true },
     dashboard = {
       preset = {
         keys = {
@@ -17,10 +21,10 @@ return {
         }
       }
     },
-    explorer = { enabled = true },
-    image = { enabled = true },
-    indent = { enabled = true },
-    notifier = { enabled = true },
+    indent = {
+      enabled = true,
+      animate = { enabled = false },
+    },
     picker = {
       sources = {
         files = { hidden = true },
@@ -52,10 +56,6 @@ return {
         },
       },
     },
-    quickfile = { enabled = true },
-    scroll = { enabled = true },
-    statuscolumn = { enabled = true },
-    words = { enabled = false },
   },
   keys = {
     -- Top Pickers & Explorer

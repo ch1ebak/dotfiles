@@ -23,7 +23,7 @@ from qtile_extras.widget.decorations import RectDecoration
 from qtile_extras.widget.decorations import PowerLineDecoration
 
 ## Color scheme
-from themes.spacegray import colors
+from themes.catppuccin import colors
 
 # SETTINGS
 ## General
@@ -279,7 +279,7 @@ date = widget.Clock(background = colors[2], foreground = colors[10], format = "ï
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
+        wallpaper = "~/.config/qtile/wallpapers/catppuccin.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -303,7 +303,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/spacegray.png",
+        wallpaper = "~/.config/qtile/wallpapers/catppuccin.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
