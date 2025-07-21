@@ -1,3 +1,4 @@
+-- Cursor highlighting when moving
 return {
   'danilamihailov/beacon.nvim',
   opts = {

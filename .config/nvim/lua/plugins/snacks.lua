@@ -1,10 +1,11 @@
+-- Plugin collection
 return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
   opts = {
     bigfile = { enabled = true },
-    explorer = { enabled = true },
+    explorer = { enabled = false },
     image = { enabled = true },
     notifier = { enabled = true },
     quickfile = { enabled = true },
@@ -12,10 +13,12 @@ return {
     dashboard = {
       preset = {
         keys = {
-          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+          { icon = " ", key = "e", desc = "New File", action = ":ene | startinsert" },
+          { icon = " ", key = "d", desc = "Dotfiles", action = ":lua Snacks.dashboard.pick('files', {cwd = '~/.dotfiles/' })" },
           { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = '~/.dotfiles/.config/nvim/' })" },
+          { icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.dashboard.pick('files', {cwd = '/nvme/Projekty/' })" },
+          { icon = " ", key = "n", desc = "Notes", action = ":lua Snacks.dashboard.pick('files', {cwd = '/nvme/Dokumenty/notatki' })" },
+          { icon = "󰂺 ", key = "w", desc = "Writing", action = ":lua Snacks.dashboard.pick('files', {cwd = '/nvme/Dokumenty/pisanie' })" },
           { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         }
@@ -62,7 +65,7 @@ return {
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader><", function() Snacks.picker.grep() end, desc = "Grep" },
-    { "<leader>.", function() Snacks.explorer() end, desc = "File Explorer" },
+    -- { "<leader>.", function() Snacks.explorer() end, desc = "File Explorer" },
     -- find
     { "<leader><return>", function() Snacks.picker.projects() end, desc = "Projects" },
     { "<leader>fp", function() Snacks.picker.files({ cwd = '~/.dotfiles/.config/nvim/' }) end, desc = "Find Config File" },
