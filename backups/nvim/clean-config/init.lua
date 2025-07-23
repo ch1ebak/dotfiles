@@ -7,6 +7,10 @@
 
 -- KEYMAPS
 -- Leader key
+local o = vim.o
+local opt = vim.opt
+local cmd = vim.cmd
+local api = vim.api
 local g = vim.g
 g.mapleader = " "
 g.maplocalleader = " "
@@ -110,12 +114,6 @@ keymap.set("i", "{", "{}<left>")
 
 
 -- OPTIONS
-local g = vim.g
-local o = vim.o
-local opt = vim.opt
-local cmd = vim.cmd
-local api = vim.api
-
 -- Basic settings
 api.nvim_command('filetype plugin indent on')
 o.fileencoding = "utf-8"
@@ -127,7 +125,10 @@ o.cursorline = true                            -- Highlight current line
 o.wrap = true                                  -- Line wrapping
 o.scrolloff = 4                                -- Keep n lines above/below cursor
 o.sidescrolloff = 4                            -- Keep n columns left/right of cursor
+g.editorconfig = false
 o.wildmenu = true
+opt.wildoptions = "fuzzy"
+opt.wildmode = "longest:full,full"
 
 -- Indentation
 o.tabstop = 2                                  -- Tab width
@@ -166,6 +167,7 @@ opt.errorbells = false                         -- No error bells
 opt.backspace = "indent,eol,start"             -- Better backspace behavior
 opt.mouse = "a"                                -- Mouse support
 opt.clipboard:append("unnamedplus")            -- System clipboard
+opt.path:append("**")                          -- include subdirectories in search
 
 -- Splits
 opt.splitright = true
@@ -176,13 +178,21 @@ opt.breakindent = true
 opt.list = true
 opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
+-- Treesitter
+cmd("syntax off")
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function(ev)
+        pcall(vim.treesitter.start, ev.buf)
+    end
+})
+
 -- Spelling
 -- opt.spelllang = "en,pl"                        -- Spellcheck languages
 -- opt.spell = true                               -- Enable spellcheck
 
 -- Netrw
 g.netrw_banner = 0                             -- Disable the banner
-g.netrw_altv = 0                               -- change from left splitting to right splitting
+-- g.netrw_altv = 0                               -- change from left splitting to right splitting
 g.netrw_liststyle = 3                          -- tree style view in netrw
 
 -- Highlight when yanking
@@ -211,20 +221,20 @@ vim.opt.tabline = ''     -- Use default tabline (empty string uses built-in)
 -- Transparent tabline appearance
 cmd([[
   hi TabLineFill guibg=NONE ctermfg=242 ctermbg=NONE
-  hi TabLineSel guibg=#313244 guifg=#cba6f7
-  hi TabLine guibg=none guifg=#a6adc8
+  hi TabLineSel guifg=#1c1d23 guibg=#aaedb7
+  hi TabLine guibg=#1c1d23 guifg=#c4c6cd
 ]])
 
 --statusline
-cmd "highlight StatusBG guibg=#313244 guifg=#a6adc8"
-cmd "highlight StatusLineExtra guibg=#1e1e2e  guifg=#cba6f7"
-cmd "highlight StatusLineAccent guibg=#1e1e2e guifg=#a6e3a1"
-cmd "highlight StatuslineAccent guibg=#1e1e2e guifg=#cba6f7"
-cmd "highlight StatuslineInsertAccent guibg=#1e1e2e guifg=#f9e2af"
-cmd "highlight StatuslineVisualAccent guibg=#1e1e2e guifg=#f38ba8"
-cmd "highlight StatuslineReplaceAccent guibg=#1e1e2e guifg=#94e2d5"
-cmd "highlight StatuslineCmdLineAccent guibg=#1e1e2e guifg=#89b4fa"
-cmd "highlight StatuslineTerminalAccent guibg=#1e1e2e guifg=#a6adc8"
+cmd "highlight StatusBG guibg=#1c1d23 guifg=#c4c6cd"
+cmd "highlight StatusLineExtra guifg=#1c1d23 guibg=#aaedb7"
+cmd "highlight StatusLineAccent guifg=#1c1d23 guibg=#ffc3fa"
+cmd "highlight StatuslineAccent guifg=#1c1d23 guibg=#aaedb7"
+cmd "highlight StatuslineInsertAccent guifg=#1c1d23 guibg=#f4d88c"
+cmd "highlight StatuslineVisualAccent guifg=#1c1d23 guibg=#ffbcb5"
+cmd "highlight StatuslineReplaceAccent guifg=#1c1d23 guibg=#83efef"
+cmd "highlight StatuslineCmdLineAccent guifg=#1c1d23 guibg=#9fd8ff"
+cmd "highlight StatuslineTerminalAccent guifg=#1c1d23 guibg=#c4c6cd"
 
 local modes = {
   ["n"] = "NORMAL",
@@ -291,7 +301,29 @@ local function filename()
 end
 
 local function filetype()
-  return string.format(" %s ", vim.bo.filetype):upper()
+  local filetype = vim.opt.filetype:get()
+
+  local map = {
+    lua = " 󰢱 LUA",
+    help = " 󰋗 HELP",
+    python = " 󰌠 PYTHON",
+    netrw = "  NETRW",
+    rust = " 󱘗 RUST",
+    php = " 󰌟 PHP",
+    fish = " 󰈺 FISH",
+    sh = "  SH",
+    zig = "  ZIG",
+    text = " 󰀬 TEXT",
+    markdown = "  MARKDOWN",
+    typescript = " 󰛦 TYPESCRIPT",
+    typescriptreact = " 󰛦 TYPESCRIPT (react)",
+    javascript = " 󰌞 JAVASCRIPT",
+    javascriptreact = " 󰌞 JAVASCRIPT (react)"
+  }
+
+  local result = map[filetype] or string.upper(filetype)
+
+  return result
 end
 
 local function lineinfo()
