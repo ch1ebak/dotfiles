@@ -36,6 +36,7 @@ opt.termguicolors = true                       -- Enable 24-bit colors
 opt.showmode = false                           -- Mode in command line
 opt.conceallevel = 2                           -- Don't hide markup 
 opt.concealcursor = "nc"                       -- Don't hide cursor line markup 
+vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
 
 -- File handling
 opt.backup = false                             -- Creating backup files

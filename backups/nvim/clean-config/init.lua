@@ -29,8 +29,6 @@ keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close" }, opts)
 keymap.set("n", "<C-n>", "<C-w>v", { desc = "Split window horizontally" }, opts)
 keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" }, opts)
 keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" }, opts)
-keymap.set("n", "<C-[>", "<C-w><", { desc = "Move to right window" }, opts)
-keymap.set("n", "<C-]>", "<C-w>>", { desc = "Move to right window" }, opts)
 keymap.set("n", "<C-t>", "<cmd>tabnew<CR>", { desc = "New tab" }, opts)
 keymap.set("n", "<C-j>", "<cmd>tabn<CR>", { desc = "Next tab" }, opts)
 keymap.set("n", "<C-k>", "<cmd>tabp<CR>", { desc = "Previous tab" }, opts)
@@ -129,6 +127,7 @@ o.cursorline = true                            -- Highlight current line
 o.wrap = true                                  -- Line wrapping
 o.scrolloff = 4                                -- Keep n lines above/below cursor
 o.sidescrolloff = 4                            -- Keep n columns left/right of cursor
+o.wildmenu = true
 
 -- Indentation
 o.tabstop = 2                                  -- Tab width
@@ -149,6 +148,7 @@ opt.termguicolors = true                       -- Enable 24-bit colors
 opt.showmode = false                           -- Mode in command line
 opt.conceallevel = 2                           -- Don't hide markup 
 opt.concealcursor = "nc"                       -- Don't hide cursor line markup 
+vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
 
 -- File handling
 opt.backup = false                             -- Creating backup files
@@ -194,6 +194,7 @@ api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- UI
 -- Color Scheme
 o.background = "dark"
 cmd "colorscheme default"
@@ -210,4 +211,129 @@ vim.opt.tabline = ''     -- Use default tabline (empty string uses built-in)
 -- Transparent tabline appearance
 cmd([[
   hi TabLineFill guibg=NONE ctermfg=242 ctermbg=NONE
+  hi TabLineSel guibg=#313244 guifg=#cba6f7
+  hi TabLine guibg=none guifg=#a6adc8
 ]])
+
+--statusline
+cmd "highlight StatusBG guibg=#313244 guifg=#a6adc8"
+cmd "highlight StatusLineExtra guibg=#1e1e2e  guifg=#cba6f7"
+cmd "highlight StatusLineAccent guibg=#1e1e2e guifg=#a6e3a1"
+cmd "highlight StatuslineAccent guibg=#1e1e2e guifg=#cba6f7"
+cmd "highlight StatuslineInsertAccent guibg=#1e1e2e guifg=#f9e2af"
+cmd "highlight StatuslineVisualAccent guibg=#1e1e2e guifg=#f38ba8"
+cmd "highlight StatuslineReplaceAccent guibg=#1e1e2e guifg=#94e2d5"
+cmd "highlight StatuslineCmdLineAccent guibg=#1e1e2e guifg=#89b4fa"
+cmd "highlight StatuslineTerminalAccent guibg=#1e1e2e guifg=#a6adc8"
+
+local modes = {
+  ["n"] = "NORMAL",
+  ["no"] = "NORMAL",
+  ["v"] = "VISUAL",
+  ["V"] = "VISUAL LINE",
+  [""] = "VISUAL BLOCK",
+  ["s"] = "SELECT",
+  ["S"] = "SELECT LINE",
+  [""] = "SELECT BLOCK",
+  ["i"] = "INSERT",
+  ["ic"] = "INSERT",
+  ["R"] = "REPLACE",
+  ["Rv"] = "VISUAL REPLACE",
+  ["c"] = "COMMAND",
+  ["cv"] = "VIM EX",
+  ["ce"] = "EX",
+  ["r"] = "PROMPT",
+  ["rm"] = "MOAR",
+  ["r?"] = "CONFIRM",
+  ["!"] = "SHELL",
+  ["t"] = "TERMINAL",
+}
+
+local function mode()
+  local current_mode = vim.api.nvim_get_mode().mode
+  return string.format(" %s ", modes[current_mode]):upper()
+end
+
+local function update_mode_colors()
+  local current_mode = vim.api.nvim_get_mode().mode
+  local mode_color = "%#StatusLineAccent#"
+  if current_mode == "n" then
+      mode_color = "%#StatuslineAccent#"
+  elseif current_mode == "i" or current_mode == "ic" then
+      mode_color = "%#StatuslineInsertAccent#"
+  elseif current_mode == "v" or current_mode == "V" or current_mode == "" then
+      mode_color = "%#StatuslineVisualAccent#"
+  elseif current_mode == "R" then
+      mode_color = "%#StatuslineReplaceAccent#"
+  elseif current_mode == "c" then
+      mode_color = "%#StatuslineCmdLineAccent#"
+  elseif current_mode == "t" then
+      mode_color = "%#StatuslineTerminalAccent#"
+  end
+  return mode_color
+end
+
+local function filepath()
+  local fpath = vim.fn.fnamemodify(vim.fn.expand "%", ":~:.:h")
+  if fpath == "" or fpath == "." then
+      return " "
+  end
+
+  return string.format(" %%<%s/", fpath)
+end
+
+local function filename()
+  local fname = vim.fn.expand "%:t"
+  if fname == "" then
+      return ""
+  end
+  return fname .. " "
+end
+
+local function filetype()
+  return string.format(" %s ", vim.bo.filetype):upper()
+end
+
+local function lineinfo()
+  if vim.bo.filetype == "alpha" then
+    return ""
+  end
+  return " %l:%c "
+end
+
+Statusline = {}
+
+Statusline.active = function()
+  return table.concat {
+    "%#Statusline#",
+    update_mode_colors(),
+    mode(),
+    "%#StatusBG# ",
+    filepath(),
+    filename(),
+    "%=%#StatusLineExtra#",
+    filetype(),
+    lineinfo(),
+  }
+end
+
+function Statusline.inactive()
+  return table.concat {
+    "%#StatusBG# ",
+    filepath(),
+    filename(),
+  }
+end
+
+function Statusline.short()
+  return "%#StatusLineNC#   NvimTree"
+end
+
+api.nvim_exec([[
+  augroup Statusline
+  au!
+  au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
+  au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
+  au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
+  augroup END
+]], false)

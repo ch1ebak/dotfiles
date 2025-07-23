@@ -9,10 +9,6 @@ local opts = { noremap = true, silent = true }
 
 -- Config
 keymap.set("n", "<leader>hr", ":luafile %<cr>", { desc = "Reload config" }, opts)
-keymap.set("n", "<leader>fP", ":Explore ~/.dotfiles/.config/nvim<cr>", { desc = "Edit config" }, opts)
-
--- Files
-keymap.set("n", "<leader>.", ":Explore<cr>", { desc = "Edit config" }, opts)
 
 -- Windows/Splits/Buffers
 keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close" }, opts)

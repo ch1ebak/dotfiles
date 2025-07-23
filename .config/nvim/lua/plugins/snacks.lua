@@ -5,11 +5,10 @@ return {
   lazy = false,
   opts = {
     bigfile = { enabled = true },
-    explorer = { enabled = false },
+    explorer = { enabled = true },
     image = { enabled = true },
     notifier = { enabled = true },
     quickfile = { enabled = true },
-    scope = { enabled = true },
     dashboard = {
       preset = {
         keys = {
@@ -65,7 +64,7 @@ return {
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader><", function() Snacks.picker.grep() end, desc = "Grep" },
-    -- { "<leader>.", function() Snacks.explorer() end, desc = "File Explorer" },
+    { "<leader>.", function() Snacks.explorer() end, desc = "File Explorer" },
     -- find
     { "<leader><return>", function() Snacks.picker.projects() end, desc = "Projects" },
     { "<leader>fp", function() Snacks.picker.files({ cwd = '~/.dotfiles/.config/nvim/' }) end, desc = "Find Config File" },
