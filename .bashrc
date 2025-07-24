@@ -103,7 +103,6 @@ alias gc="git clone"
 ## Neovim
 alias nv="nvim"
 alias vim="nvim"
-alias nvc="nvim --clean -u /home/karna/.dotfiles/backups/nvim/clean-config/init.lua"
 
 ## Stow
 alias stow="stow ."
