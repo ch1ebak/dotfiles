@@ -20,6 +20,7 @@
 | Grayscale   | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/grayscale.png)                                                                                                          |
 | Gruvbox     | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/gruvbox.png)                                                                                                          |
 | Kanagawa    | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/kanagawa.png)                                                                                                          |
+| Poimandres | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/poimandres.png) |
 | Spacegray   | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/spacegray.png)                                                                                                          |
 | Tokyo Night | ![img](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/tokyonight.png)                                                                                                          |
 
