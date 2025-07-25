@@ -43,7 +43,7 @@ export HISTCONTROL=erasedups:ignoredups:ignorespace
 PS1="\[\033[31m\]\w >\[\e[m\] "
 
 ## Fetch
-minifetch.sh
+minifetch
 
 
 # ALIASES

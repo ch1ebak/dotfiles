@@ -1,0 +1,56 @@
+{
+  "dark": {
+    "palette": {
+      "AlternateBase": "#1f1f28",
+      "Base": "#1f1f28",
+      "BrightText": "#dcd7ba",
+      "BrightText-disabled": "#dcd7ba",
+      "Button": "#1f1f28",
+      "ButtonText": "#dcd7ba",
+      "ButtonText-disabled": "#dcd7ba",
+      "Highlight": "#2d4f67",
+      "HighlightedText": "#dcd7ba",
+      "HighlightedText-disabled": "#dcd7ba",
+      "Link": "#7e9cd8",
+      "LinkVisited": "#957fb8",
+      "PlaceholderText": "#dcd7ba",
+      "PlaceholderText-disabled": "#1f1f28",
+      "Text": "#dcd7ba",
+      "Text-disabled": "#dcd7ba",
+      "ToolTipBase": "#1f1f28",
+      "ToolTipText": "#dcd7ba",
+      "ToolTipText-disabled": "#1f1f28",
+      "Window": "#1f1f28",
+      "WindowText": "#dcd7ba",
+      "WindowText-disabled": "#dcd7ba"
+    },
+    "use_custom": true
+  },
+  "light": {
+    "palette": {
+      "AlternateBase": "#f7f7f7",
+      "Base": "#ffffff",
+      "BrightText": "#ffffff",
+      "BrightText-disabled": "#ffffff",
+      "Button": "#efefef",
+      "ButtonText": "#000000",
+      "ButtonText-disabled": "#bebebe",
+      "Highlight": "#308cc6",
+      "HighlightedText": "#ffffff",
+      "HighlightedText-disabled": "#ffffff",
+      "Link": "#0000ff",
+      "LinkVisited": "#ff00ff",
+      "PlaceholderText": "#000000",
+      "PlaceholderText-disabled": "#000000",
+      "Text": "#000000",
+      "Text-disabled": "#bebebe",
+      "ToolTipBase": "#ffffdc",
+      "ToolTipText": "#000000",
+      "ToolTipText-disabled": "#000000",
+      "Window": "#efefef",
+      "WindowText": "#000000",
+      "WindowText-disabled": "#bebebe"
+    },
+    "use_custom": false
+  }
+}

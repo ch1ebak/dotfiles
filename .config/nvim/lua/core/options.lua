@@ -27,7 +27,7 @@ o.autoindent = true                            -- Copy indent from current line
 
 -- Search settings
 o.ignorecase = true                            -- Case insensitive search
-o.smartcase = true                             -- Case sensitive if uppercase in search
+o.smartcase = true                             -- Case-sensitive if uppercase in search
 o.hlsearch = false                             -- Search results highlighting
 o.incsearch = true                             -- Show matches as you type
 
@@ -76,8 +76,3 @@ api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
-
--- Netrw
-g.netrw_banner = 0                             -- Disable the banner
-g.netrw_altv = 0                               -- change from left splitting to right splitting
-g.netrw_liststyle = 3                          -- tree style view in netrw
