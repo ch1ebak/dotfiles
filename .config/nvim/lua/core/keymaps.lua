@@ -10,6 +10,9 @@ local opts = { noremap = true, silent = true }
 -- Config
 keymap.set("n", "<leader>hr", ":luafile %<cr>", { desc = "Reload config" }, opts)
 
+-- Files
+keymap.set("n", "<leader>ee", ":e /tmp/", { desc = "Create a file in /tmp" }, opts)
+
 -- Windows/Splits/Buffers
 keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close" }, opts)
 keymap.set("n", "<C-n>", "<C-w>v", { desc = "Split window horizontally" }, opts)

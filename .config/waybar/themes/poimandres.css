@@ -1,0 +1,103 @@
+@define-color bg #303340;
+@define-color fg #E4F0FB;
+@define-color c1 #5DE4C7;
+@define-color c2 #89DDFF;
+@define-color c3 #5FB3A1;
+@define-color c4 #FFFAC2;
+@define-color c5 #D0679D;
+
+* {
+    font-family: 'JetBrainsMono NF', sans-serif;
+    font-weight: bold;
+    font-size: 10px;
+    border-radius: 5px;
+}
+
+.modules-left {
+    padding-left: 8px;
+    padding-right: 6px;
+}
+                              
+.modules-right {
+    padding-right: 8px;
+    padding-left: 6px;
+}
+                              
+.modules-center {
+    background-color: @bg;
+}
+
+#tray {
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-right: 10px;
+    background-color: @bg;
+    color: @fg;
+}
+
+#workspaces {
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: 10px;
+    background-color: @bg;
+    color: @fg;
+}
+                                  
+#workspaces button.active {
+    background-color: @c1;
+    color: @bg;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: @fg;
+}
+
+#window {
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: @bg;
+    color: @c2;
+}
+
+#clock {
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-left: 10px;
+    background-color: @bg;
+    color: @c3;
+}
+
+#battery {
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-left: 10px;
+    color: @c5;
+    background-color: @bg;
+}
+
+#battery.full{
+    color: @bg;
+    background-color: @c4;
+}
+
+#battery.charging {
+    color: @c4;
+    background-color: @bg;
+}
+
+#battery.discharging {
+    color: @c5;
+    background-color: @bg;
+}
+
+#battery.discharging.warning {
+    color: @bg;
+    background-color: @c5;
+}
+
+#battery.discharging.critical {
+    color: @bg;
+    background-color: @c1;
+}
+

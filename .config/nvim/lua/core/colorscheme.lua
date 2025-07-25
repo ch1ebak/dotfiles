@@ -7,7 +7,7 @@ local api = vim.api
 
 -- Color Scheme
 o.background = "dark"
-cmd 'colorscheme tokyonight'
+cmd 'colorscheme poimandres'
 
 -- Transparency
 api.nvim_set_hl(0, "Normal", { bg = "none"})

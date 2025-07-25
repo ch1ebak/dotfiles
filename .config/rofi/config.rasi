@@ -6,6 +6,8 @@ configuration {
   kb-row-down: "Control+j";
 }
 
-//@theme "/home/karna/.config/rofi/themes/tokyonight"
+//@theme "/home/karna/.config/rofi/themes/poimandres"
 
-@theme "/home/karna/.config/rofi/themes/tokyonight"
+//@theme "/home/karna/.config/rofi/themes/poimandres"
+
+@theme "/home/karna/.config/rofi/themes/poimandres"
