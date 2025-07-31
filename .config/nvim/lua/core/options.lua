@@ -66,7 +66,7 @@ opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Spelling
 opt.spelllang = "en,pl"                       -- Spellcheck languages
-opt.spell = true                              -- Enable spellcheck
+opt.spell = false                             -- Enable spellcheck
 
 -- Highlight when yanking
 api.nvim_create_autocmd("TextYankPost", {

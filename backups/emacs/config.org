@@ -485,35 +485,6 @@
         doom-modeline-buffer-file-name-style 'truncate-all))
 #+end_src
 
-** Eglot
-*** [[https://github.com/Automattic/harper/][Harper]]
-#+begin_src emacs-lisp
-(with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs
-               '(markdown-mode . ("harper-ls" "--stdio"))))
-
-(setq-default eglot-workspace-configuration
-              '(:harper-ls (:userDictPath ""
-                            :fileDictPath ""
-                            :linters (:SpellCheck t
-                                      :SpelledNumbers :json-false
-                                      :AnA t
-                                      :SentenceCapitalization t
-                                      :UnclosedQuotes t
-                                      :WrongQuotes :json-false
-                                      :LongSentences t
-                                      :RepeatedWords t
-                                      :Spaces t
-                                      :Matcher t
-                                      :CorrectNumberSuffix t)
-                            :codeActions (:ForceStable :json-false)
-                            :markdown (:IgnoreLinkTitle :json-false)
-                            :diagnosticSeverity "hint"
-                            :isolateEnglish :json-false
-                            :dialect "American"
-                            :maxFileLength 120000)))
-#+end_src
-
 ** [[https://github.com/skeeto/elfeed][Elfeed]]
 #+begin_src emacs-lisp
 (use-package elfeed
@@ -594,7 +565,8 @@
           (format-time-string "%H:%M"))))
 #+end_src
 
-** Ispell / Flyspell
+** Spelling
+*** Ispell / Flyspell
 #+begin_src emacs-lisp
 (with-eval-after-load "ispell"
   (setenv "LANG" "pl_PL.UTF-8")
@@ -607,6 +579,34 @@
 (setq ispell-silently-savep t)
 (setq flyspell-issue-message-flag nil)
 ;; (add-hook 'text-mode-hook 'flyspell-mode)
+#+end_src
+
+*** [[https://github.com/Automattic/harper/][Harper]]
+#+begin_src emacs-lisp
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(markdown-mode . ("harper-ls" "--stdio"))))
+
+(setq-default eglot-workspace-configuration
+              '(:harper-ls (:userDictPath ""
+                            :fileDictPath ""
+                            :linters (:SpellCheck t
+                                      :SpelledNumbers :json-false
+                                      :AnA t
+                                      :SentenceCapitalization t
+                                      :UnclosedQuotes t
+                                      :WrongQuotes :json-false
+                                      :LongSentences t
+                                      :RepeatedWords t
+                                      :Spaces t
+                                      :Matcher t
+                                      :CorrectNumberSuffix t)
+                            :codeActions (:ForceStable :json-false)
+                            :markdown (:IgnoreLinkTitle :json-false)
+                            :diagnosticSeverity "hint"
+                            :isolateEnglish :json-false
+                            :dialect "American"
+                            :maxFileLength 120000)))
 #+end_src
 
 ** [[https://www.emacswiki.org/emacs/KillingBuffers#h5o-2][Kill Other Buffers]]
@@ -797,7 +797,7 @@
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-spacegrey t)
+  (load-theme 'catppuccin t)
   (doom-themes-org-config))
 #+end_src
 
