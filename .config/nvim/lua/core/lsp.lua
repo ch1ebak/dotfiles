@@ -36,7 +36,7 @@ vim.lsp.config['harper-ls'] = {
     },
   },
 }
--- vim.lsp.enable('harper-ls')
+vim.lsp.enable('harper-ls')
 
 -- Lua
 vim.lsp.config['luals'] = {

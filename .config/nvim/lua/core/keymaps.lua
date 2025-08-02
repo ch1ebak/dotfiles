@@ -8,10 +8,11 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 -- Config
-keymap.set("n", "<leader>hr", ":luafile %<cr>", { desc = "Reload config" }, opts)
+keymap.set("n", "<leader>hr", ":source %<cr>", { desc = "Reload config" }, opts)
 
--- Files
-keymap.set("n", "<leader>ee", ":e /tmp/", { desc = "Create a file in /tmp" }, opts)
+-- Sessions
+keymap.set("n", "<leader>ss", ":mksession! ~/.local/share/nvim/session/", { desc = "Save session" }, opts)
+keymap.set("n", "<leader>swm", ":source ~/.local/share/nvim/session/writing-m.vim<CR>", { desc = "Load session 1" }, opts)
 
 -- Windows/Splits/Buffers
 keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close" }, opts)
@@ -19,8 +20,8 @@ keymap.set("n", "<C-n>", "<C-w>v", { desc = "Split window horizontally" }, opts)
 keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" }, opts)
 keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" }, opts)
 keymap.set("n", "<C-t>", "<cmd>tabnew<CR>", { desc = "New tab" }, opts)
-keymap.set("n", "<C-j>", "<cmd>tabn<CR>", { desc = "Next tab" }, opts)
-keymap.set("n", "<C-k>", "<cmd>tabp<CR>", { desc = "Previous tab" }, opts)
+keymap.set("n", "<C-k>", "<cmd>tabn<CR>", { desc = "Next tab" }, opts)
+keymap.set("n", "<C-j>", "<cmd>tabp<CR>", { desc = "Previous tab" }, opts)
 
 -- Movement
 keymap.set("n", "j", "gj", { desc = "Move by line" }, opts)
@@ -29,7 +30,7 @@ keymap.set({ "n", "v" }, "gh", "^", { desc = "Go to the beginning line" })
 keymap.set({ "n", "v" }, "gl", "$", { desc = "Go to the end of the line" })
 keymap.set("v", "gl", "$h", { desc = "Go to the end of the line" })
 keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" }, opts)
-keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up(centered)" }, opts)
+keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" }, opts)
 
 -- Yanking
 keymap.set("n", "Y", "y$", { desc = "Yank to end of line" })
@@ -84,7 +85,7 @@ keymap.set("n", "<leader>za", function()
 end, { desc = "Spelling add word to spellfile" })
 
 -- Copy Full File-Path
-vim.keymap.set("n", "<leader>yc", function()
+vim.keymap.set("n", "<leader>my", function()
 	local path = vim.fn.expand("%:p")
 	vim.fn.setreg("+", path)
 	print("file:", path)

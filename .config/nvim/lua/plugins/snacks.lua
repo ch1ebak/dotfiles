@@ -8,6 +8,10 @@ return {
     image = { enabled = true },
     notifier = { enabled = true },
     quickfile = { enabled = true },
+    indent = {
+      enabled = true,
+      animate = { enabled = false },
+    },
     dashboard = {
       preset = {
         keys = {
@@ -21,10 +25,6 @@ return {
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         }
       }
-    },
-    indent = {
-      enabled = true,
-      animate = { enabled = false },
     },
     picker = {
       sources = {
@@ -72,10 +72,6 @@ return {
     { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
     -- search
-    { '<leader>?', function() Snacks.picker.search_history() end, desc = "Search History" },
-    { "<leader>:", function() Snacks.picker.commands() end, desc = "Commands" },
-    { "<leader>;", function() Snacks.picker.command_history() end, desc = "Command History" },
-    { "<leader>ti", function() Snacks.picker.icons() end, desc = "Icons" },
     { "<leader>tu", function() Snacks.picker.undo() end, desc = "Undo History" },
     { "<leader>hk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
     { "<leader>hh", function() Snacks.picker.help() end, desc = "Help Pages" },

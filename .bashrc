@@ -11,6 +11,7 @@ export TERM="ghostty"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! -type d \! -name '\''*.tags'\'' -printf '\''%P\n'\'
 export PATH="/nvme/Projekty/scripts:$PATH"
+export MANPAGER='nvim +Man!' 
 
 ## Options
 bind "set colored-stats on"
