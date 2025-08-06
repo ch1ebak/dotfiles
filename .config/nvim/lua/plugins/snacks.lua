@@ -7,25 +7,10 @@ return {
   opts = {
     bigfile = { enabled = true },
     image = { enabled = true },
-    notifier = { enabled = true },
     quickfile = { enabled = true },
     indent = {
       enabled = true,
       animate = { enabled = false },
-    },
-    dashboard = {
-      preset = {
-        keys = {
-          { icon = " ", key = "e", desc = "New File", action = ":ene | startinsert" },
-          { icon = " ", key = "d", desc = "Dotfiles", action = ":lua Snacks.dashboard.pick('files', {cwd = '~/.dotfiles/' })" },
-          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = '~/.dotfiles/.config/nvim/' })" },
-          { icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.dashboard.pick('files', {cwd = '/nvme/Projekty/' })" },
-          { icon = " ", key = "n", desc = "Notes", action = ":lua Snacks.dashboard.pick('files', {cwd = '/nvme/Dokumenty/notatki' })" },
-          { icon = "󰂺 ", key = "w", desc = "Writing", action = ":lua Snacks.dashboard.pick('files', {cwd = '/nvme/Dokumenty/pisanie' })" },
-          { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
-          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
-        }
-      }
     },
     picker = {
       sources = {

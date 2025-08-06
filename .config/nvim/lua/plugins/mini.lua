@@ -7,5 +7,6 @@ return {
     require("mini.surround").setup()
     require("mini.icons").setup()
     require("mini.tabline").setup()
+    require("mini.notify").setup()
   end
 }
