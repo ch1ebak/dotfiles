@@ -9,7 +9,7 @@ return {
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = 'poimandres',
+        theme = 'catppuccin',
         section_separators = { left = '', right = ''},
         disabled_filetypes = {
           statusline = {},

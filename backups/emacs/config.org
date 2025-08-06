@@ -193,6 +193,7 @@
   (define-key evil-normal-state-map (kbd "gl") 'evil-end-of-line)
   (define-key evil-normal-state-map (kbd "gcc") 'comment-line)
   (define-key evil-normal-state-map (kbd "gcr") 'comment-or-uncomment-region)
+  (define-key evil-normal-state-map (kbd "gra") 'eglot-code-actions)
 )
 
 (setq-default evil-cross-lines t)
@@ -212,14 +213,13 @@
     :global-prefix "M-SPC")
 
   (me/leader-keys
-    "SPC" '(execute-extended-command :wk "M-x")
     "RET" '(counsel-bookmark :wk "Bookmarks")
-    "/" '(counsel-ibuffer :wk "Buffers")
-    "?" '(zoxide-travel :wk "Zoxide")
+    "SPC" '(counsel-fzf :wk "Fuzzy finding")
     "." '(counsel-find-file :wk "Find file")
     ">" '(dired-jump :wk "Dired")
-    "," '(counsel-fzf :wk "Fuzzy finding")
-    "<" '(counsel-rg :wk "Grep"))
+    "," '(counsel-ibuffer :wk "Buffers")
+    "/" '(swiper :wk "Search line")
+    "?" '(counsel-rg :wk "Grep"))
 
   (me/leader-keys
     "b" '(:ignore t :wk "Bookmarks")
@@ -230,6 +230,7 @@
     "f" '(:ignore t :wk "Files")
     "f p" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Emacs Config")
     "f P" '((lambda () (interactive) (counsel-find-file "~/.config/emacs/")) :wk "Emacs Config")
+    "f n" '((lambda () (interactive) (counsel-find-file "~/Dokumenty/notatki/")) :wk "Notes")
     "f r" '(counsel-recentf :wk "Recent files")
     "f u" '(sudo-edit :wk "Sudo edit file")
     "f U" '(sudo-edit-find-file :wk "Sudo find file"))
@@ -241,10 +242,6 @@
     "h r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el") (ignore (elpaca-process-queues))) :wk "Reload emacs config"))
 
   (me/leader-keys
-    "n" '(:ignore t :wk "Files")
-    "n n" '((lambda () (interactive) (counsel-find-file "~/Dokumenty/notatki/")) :wk "Notes"))
-  
-  (me/leader-keys
     "p" '(:ignore t :wk "Packages")
     "p x" '(org-capture :wk "Org Capture")
     "p a" '(org-agenda :wk "Org Agenda")
@@ -252,12 +249,6 @@
     "p w" '(eww :wk "EWW")
     "p W" '(eww-list-bookmarks :wk "EWW Bookmarks"))
 
-  (me/leader-keys
-    "s" '(:ignore t :wk "Search")
-    "s b" '(swiper :wk "Search line")
-    "s p" '(counsel-yank-pop :wk "Yank pop")
-    "s l" '(counsel-imenu :wk "Search headings"))
-  
   (me/leader-keys
     "t" '(:ignore t :wk "Toggles")
     "t w" '(whitespace-mode :wk "Whitespace mode")
@@ -267,15 +258,9 @@
 
   (me/leader-keys
     "e" '(:ignore t :wk "Eglot")
-    "e l" '(eglot :wk "Launch Eglot")
+    "e h" '(eglot :wk "Launch Eglot")
+    "e d" '(eglot-shutdown :wk "Launch Eglot")
     "e a" '(eglot-code-actions :wk "Eglot Code Actions"))
-  
-  (me/leader-keys
-    "z" '(:ignore t :wk "Spellcheck")
-    "z f" '(flyspell-mode :wk "Flyspell mode")
-    "z a" '(flyspell-correct-word-before-point :wk "Add word to dictionary")
-    "z C" '(flyspell-auto-correct-word :wk "Autocorrect with Flyspell")
-    "z i" '(ispell :wk "Ispell"))
   
   (general-nmap
     :keymaps 'org-mode-map
@@ -775,6 +760,10 @@
 #+end_src
 
 ** Themes
+*** Setup
+#+begin_src emacs-lisp
+#+end_src
+
 *** [[https://github.com/catppuccin/emacs][Catppuccin]]
 #+begin_src emacs-lisp
 (use-package catppuccin-theme)
@@ -797,7 +786,7 @@
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'catppuccin t)
+  (load-theme 'doom-spacegrey t)
   (doom-themes-org-config))
 #+end_src
 

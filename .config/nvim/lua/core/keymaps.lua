@@ -1,18 +1,18 @@
--- Leader key
 local g = vim.g
-g.mapleader = " "
-g.maplocalleader = " "
-
--- Keymaps
+local g = vim.g
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
+
+-- Leader key
+g.mapleader = " "
+g.maplocalleader = " "
 
 -- Config
 keymap.set("n", "<leader>hr", ":source %<cr>", { desc = "Reload config" }, opts)
 
 -- Sessions
 keymap.set("n", "<leader>ss", ":mksession! ~/.local/share/nvim/session/", { desc = "Save session" }, opts)
-keymap.set("n", "<leader>swm", ":source ~/.local/share/nvim/session/writing-m.vim<CR>", { desc = "Load session 1" }, opts)
+keymap.set("n", "<leader>sl", ":source ~/.local/share/nvim/session/", { desc = "Load session" }, opts)
 
 -- Windows/Splits/Buffers
 keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close" }, opts)
@@ -49,6 +49,13 @@ keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" }, opts)
 -- Toggles
 keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
 keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = "Line wrapping" }, opts)
+
+-- LSP
+keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('harper-ls')<CR>", { desc = "Enable LSP" }, opts)
+keymap.set("n", "<leader>el", ":lua vim.lsp.enable('luals')<CR>", { desc = "Enable LSP" }, opts)
+keymap.set("n", "<leader>ed", ":lua vim.lsp.stop_client(vim.lsp.get_clients())<CR>", { desc = "Disable LSP" }, opts)
+keymap.set('n', '<leader>ew', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Diagnostics - at point" }, opts)
+keymap.set('n', '<leader>eW', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Diagnostics - all" }, opts)
 
 -- Spelling
 keymap.set("n", "<leader>z,", function()

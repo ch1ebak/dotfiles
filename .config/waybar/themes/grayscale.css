@@ -1,11 +1,8 @@
-@define-color bg #080808;
-@define-color fg #cccccc;
-@define-color c1 #cccccc;
-@define-color c2 #cccccc;
-@define-color c3 #cccccc;
-@define-color c4 #cccccc;
-@define-color c5 #cccccc;
-@define-color c6 #cccccc;
+@define-color bg #000000;
+@define-color fg #ffffff;
+@define-color c1 #44bc44;
+@define-color c2 #d0bc00;
+@define-color c3 #ff5f59;
 
 * {
     font-family: 'JetBrainsMono NF', sans-serif;
@@ -45,7 +42,7 @@
 }
                                   
 #workspaces button.active {
-    background-color: @c1;
+    background-color: @fg;
     color: @bg;
 }
 
@@ -58,7 +55,7 @@ window#waybar {
     padding-right: 20px;
     padding-left: 20px;
     background-color: @bg;
-    color: @c2;
+    color: @fg;
 }
 
 #clock {
@@ -66,39 +63,39 @@ window#waybar {
     padding-left: 20px;
     margin-left: 10px;
     background-color: @bg;
-    color: @c3;
+    color: @fg;
 }
 
 #battery {
     padding-right: 20px;
     padding-left: 20px;
     margin-left: 10px;
-    color: @c5;
+    color: @c2;
     background-color: @bg;
 }
 
 #battery.full{
     color: @bg;
-    background-color: @c4;
+    background-color: @c1;
 }
 
 #battery.charging {
-    color: @c4;
+    color: @c1;
     background-color: @bg;
 }
 
 #battery.discharging {
-    color: @c5;
+    color: @c2;
     background-color: @bg;
 }
 
 #battery.discharging.warning {
     color: @bg;
-    background-color: @c5;
+    background-color: @c2;
 }
 
 #battery.discharging.critical {
     color: @bg;
-    background-color: @c6;
+    background-color: @c3;
 }
 

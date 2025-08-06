@@ -3,6 +3,7 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+  ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
     image = { enabled = true },
@@ -59,19 +60,20 @@ return {
     },
   },
   keys = {
-    -- Top Pickers & Explorer
+    -- Top Pickers
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+    { "<leader><Return>", function() Snacks.picker.projects() end, desc = "Projects" },
     { "<leader>/", function() Snacks.picker.buffers() end, desc = "Buffers" },
-    { "<leader>,", function() Snacks.picker.grep() end, desc = "Grep" },
-    -- find
-    { "<leader><return>", function() Snacks.picker.projects() end, desc = "Projects" },
-    { "<leader>fp", function() Snacks.picker.files({ cwd = '~/.dotfiles/.config/nvim/' }) end, desc = "Find Config File" },
-    { "<leader>nn", function() Snacks.picker.files({ cwd = '/nvme/Dokumenty/notatki' }) end, desc = "Find Notes" },
+    { "<leader>.", function() Snacks.picker.files() end, desc = "Find Files" },
+    -- Find
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
-    -- Grep
+    { "<leader>fp", function() Snacks.picker.files({ cwd = '~/.dotfiles/.config/nvim/' }) end, desc = "Config File" },
+    -- Search
     { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
-    { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
-    -- search
+    { "<leader>,", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
+    { "<leader><", function() Snacks.picker.grep() end, desc = "Grep" },
+    -- Stuff
+    { "<leader>ti", function() Snacks.picker.icons() end, desc = "Icons" },
     { "<leader>tu", function() Snacks.picker.undo() end, desc = "Undo History" },
     { "<leader>hk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
     { "<leader>hh", function() Snacks.picker.help() end, desc = "Help Pages" },

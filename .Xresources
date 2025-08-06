@@ -15,4 +15,4 @@ Xft.autohint: true
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
-#include "/home/karna/.config/xresources/poimandres"
+#include "/home/karna/.config/xresources/catppuccin"
