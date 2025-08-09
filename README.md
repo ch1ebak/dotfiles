@@ -25,4 +25,4 @@
 - Tokyo Night
 
 > [!TIP]
-> Themes can be changed automatically using my [Rofi Utilities](https://github.com/ch1ebak/dotfiles/blob/main/.config/rofi/modules/rofi-utilities) (Super + U on both Qtile and Hyprland.)
+> Themes can be changed automatically using my [Rofi Utilities](https://github.com/ch1ebak/scripts/blob/main/rofi-utilities) (Super + U on both Qtile and Hyprland.)
