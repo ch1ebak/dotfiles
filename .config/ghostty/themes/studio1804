@@ -4,9 +4,9 @@
 
 # Standard ANSI colors (0-7) - Pure monochrome
 palette = 0=000000
-palette = 1=ffffff
+palette = 1=cccccc
 palette = 2=808080
-palette = 3=ffffff
+palette = 3=cccccc
 palette = 4=a0a0a0
 palette = 5=808080
 palette = 6=a0a0a0
@@ -14,19 +14,19 @@ palette = 7=f0f0f0
 
 # Bright ANSI colors (8-15) - Pure monochrome
 palette = 8=404040
-palette = 9=ffffff
+palette = 9=cccccc
 palette = 10=a0a0a0
-palette = 11=ffffff
+palette = 11=cccccc
 palette = 12=d0d0d0
 palette = 13=a0a0a0
 palette = 14=e0e0e0
-palette = 15=ffffff
+palette = 15=cccccc
 
 # Core terminal colors
 background = 000000
-foreground = ffffff
-cursor-color = ffffff
+foreground = cccccc
+cursor-color = cccccc
 
 # Selection colors
-selection-background = ffffff
+selection-background = cccccc
 selection-foreground = 000000

@@ -3,14 +3,14 @@
 
   bg0     : #000000;
   bg1     : #303030;
-  fg0     : #ffffff;
-  fg1     : #ffffff;
-  red     : #ffffff;
-  green   : #ffffff;
-  yellow  : #ffffff;
-  blue    : #ffffff;
-  magenta : #ffffff;
-  cyan    : #ffffff;
+  fg0     : #cccccc;
+  fg1     : #cccccc;
+  red     : #cccccc;
+  green   : #cccccc;
+  yellow  : #cccccc;
+  blue    : #cccccc;
+  magenta : #cccccc;
+  cyan    : #cccccc;
 
   accent: @red;
   urgent: @yellow;
