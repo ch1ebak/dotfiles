@@ -14,6 +14,7 @@
 
 
 # THEMES
+[Screenshots](https://github.com/ch1ebak/dotfiles/tree/main/screenshots)
 - Catppuccin
 - Dracula
 - Everforest
