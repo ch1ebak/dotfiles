@@ -6,4 +6,6 @@ configuration {
   kb-row-down: "Control+j";
 }
 
-@theme "/home/karna/.config/rofi/themes/catppuccin"
+//@theme "/home/karna/.config/rofi/themes/grayscale"
+
+@theme "/home/karna/.config/rofi/themes/grayscale"

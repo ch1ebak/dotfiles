@@ -9,7 +9,7 @@ return {
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = 'catppuccin',
+        theme = 'no-clown-fiesta',
         section_separators = { left = '', right = ''},
         disabled_filetypes = {
           statusline = {},

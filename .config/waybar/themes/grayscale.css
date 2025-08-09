@@ -1,8 +1,8 @@
 @define-color bg #000000;
 @define-color fg #ffffff;
-@define-color c1 #44bc44;
-@define-color c2 #d0bc00;
-@define-color c3 #ff5f59;
+@define-color c1 #90A959;
+@define-color c2 #F4BF75;
+@define-color c3 #b46958;
 
 * {
     font-family: 'JetBrainsMono NF', sans-serif;

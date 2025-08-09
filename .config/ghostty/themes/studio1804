@@ -1,0 +1,32 @@
+# studio1804 Monochrome Theme - Pure black and white terminal theme
+# Author: Ricardo Ledan
+# Description: Strict monochrome theme using only black, white, and greys
+
+# Standard ANSI colors (0-7) - Pure monochrome
+palette = 0=000000
+palette = 1=ffffff
+palette = 2=808080
+palette = 3=ffffff
+palette = 4=a0a0a0
+palette = 5=808080
+palette = 6=a0a0a0
+palette = 7=f0f0f0
+
+# Bright ANSI colors (8-15) - Pure monochrome
+palette = 8=404040
+palette = 9=ffffff
+palette = 10=a0a0a0
+palette = 11=ffffff
+palette = 12=d0d0d0
+palette = 13=a0a0a0
+palette = 14=e0e0e0
+palette = 15=ffffff
+
+# Core terminal colors
+background = 000000
+foreground = ffffff
+cursor-color = ffffff
+
+# Selection colors
+selection-background = ffffff
+selection-foreground = 000000

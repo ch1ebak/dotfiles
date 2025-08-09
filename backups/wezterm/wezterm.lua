@@ -3,6 +3,7 @@ local config = wezterm.config_builder()
 
 config = {
   automatically_reload_config = true,
+  enable_wayland = false,
   default_prog = { '/bin/bash' },
   color_scheme = 'Poimandres',
   font = wezterm.font 'JetBrainsMono NF',

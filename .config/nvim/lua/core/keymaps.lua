@@ -16,6 +16,7 @@ keymap.set("n", "<leader>sl", ":source ~/.local/share/nvim/session/", { desc = "
 
 -- Windows/Splits/Buffers
 keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close" }, opts)
+keymap.set("n", "<C-c>", ":bdelete<CR>", { desc = "Close" }, opts)
 keymap.set("n", "<C-n>", "<C-w>v", { desc = "Split window horizontally" }, opts)
 keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" }, opts)
 keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" }, opts)
@@ -54,8 +55,8 @@ keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = "Line wrapping" }, opts
 keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('harper-ls')<CR>", { desc = "Enable LSP" }, opts)
 keymap.set("n", "<leader>el", ":lua vim.lsp.enable('luals')<CR>", { desc = "Enable LSP" }, opts)
 keymap.set("n", "<leader>ed", ":lua vim.lsp.stop_client(vim.lsp.get_clients())<CR>", { desc = "Disable LSP" }, opts)
-keymap.set('n', '<leader>ew', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Diagnostics - at point" }, opts)
-keymap.set('n', '<leader>eW', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Diagnostics - all" }, opts)
+keymap.set('n', '<leader>ew', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Diagnostics - all" }, opts)
+keymap.set('n', 'grd', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Diagnostics - at point" }, opts)
 
 -- Spelling
 keymap.set("n", "<leader>z,", function()

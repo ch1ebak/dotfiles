@@ -29,6 +29,7 @@ return {
         input = {
           keys = {
             ["<Esc>"] = { "close", mode = { "n", "i" } },
+            ["q"] = "close",
             ["J"] = { "preview_scroll_down", mode = { "i", "n" } },
             ["K"] = { "preview_scroll_up", mode = { "i", "n" } },
             ["H"] = { "preview_scroll_left", mode = { "i", "n" } },
@@ -48,15 +49,15 @@ return {
     -- Top Pickers
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader><Return>", function() Snacks.picker.projects() end, desc = "Projects" },
-    { "<leader>/", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>.", function() Snacks.picker.files() end, desc = "Find Files" },
     -- Find
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
     { "<leader>fp", function() Snacks.picker.files({ cwd = '~/.dotfiles/.config/nvim/' }) end, desc = "Config File" },
+    { "<leader>fn", function() Snacks.picker.files({ cwd = '/nvme/Dokumenty/notatki/' }) end, desc = "Config File" },
     -- Search
-    { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
-    { "<leader>,", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
-    { "<leader><", function() Snacks.picker.grep() end, desc = "Grep" },
+    { "<leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+    { "<leader>?", function() Snacks.picker.grep() end, desc = "Grep" },
     -- Stuff
     { "<leader>ti", function() Snacks.picker.icons() end, desc = "Icons" },
     { "<leader>tu", function() Snacks.picker.undo() end, desc = "Undo History" },
