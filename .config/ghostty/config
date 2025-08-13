@@ -1,6 +1,6 @@
 font-family = JetBrainsMono NF
-font-synthetic-style = true
 font-size = 10
+font-synthetic-style = true
 
 theme = /usr/share/ghostty/themes/studio1804
 
@@ -29,3 +29,4 @@ keybind = alt+l=goto_split:right
 keybind = alt+t=new_tab
 keybind = alt+k=next_tab
 keybind = alt+j=previous_tab
+keybind = alt+r=reload_config

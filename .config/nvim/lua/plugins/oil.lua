@@ -11,6 +11,7 @@ return {
   config = function ()
 
     vim.keymap.set("n", "<leader>>", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+    vim.keymap.set("n", "<leader>fN", "<CMD>Oil /nvme/Dokumenty/notatki/<CR>", { desc = "Open notes directory" })
 
     require("oil").setup({
       default_file_explorer = true,
