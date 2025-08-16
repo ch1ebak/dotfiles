@@ -1,4 +1,3 @@
--- Plugin collection
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -8,6 +7,7 @@ return {
     bigfile = { enabled = true },
     image = { enabled = true },
     quickfile = { enabled = true },
+    notifier = { enabled = true },
     indent = {
       enabled = true,
       animate = { enabled = false },

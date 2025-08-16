@@ -4,13 +4,14 @@ return {
   ---@type oil.SetupOpts
   opts = {},
   -- Optional dependencies
-  dependencies = { { "echasnovski/mini.icons", opts = {} } },
-  -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+  -- dependencies = { { "echasnovski/mini.icons", opts = {} } },
+  dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
   -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
   lazy = false,
   config = function ()
 
     vim.keymap.set("n", "<leader>>", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+    vim.keymap.set("n", "<leader>fP", "<CMD>Oil ~/.dotfiles/.config/nvim/<CR>", { desc = "Open neovim directory" })
     vim.keymap.set("n", "<leader>fN", "<CMD>Oil /nvme/Dokumenty/notatki/<CR>", { desc = "Open notes directory" })
 
     require("oil").setup({

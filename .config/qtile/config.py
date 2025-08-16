@@ -74,7 +74,7 @@ groups = [
     Group("3", label="󰈚", layout='max', matches=[Match(wm_class=["emacs"])]),
     Group("4", label="󰅴", layout='monadtall', matches=[Match(wm_class=["ghostty"])]),
     Group("5", label="󰝰", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
-    Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "nwg-look"])]),
+    Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "nwg-look", "NexusMods.App"])]),
     Group("7", label="󰓓", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris", "heroic"])]),
     Group("8", label="󰓇", layout='max', matches=[Match(wm_class=["spotify"])]),
     Group("9", label="󰕧", layout='max', matches=[Match(wm_class=["mpv"])])

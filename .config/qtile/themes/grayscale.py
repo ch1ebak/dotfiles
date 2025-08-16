@@ -6,7 +6,7 @@ colors = [
     ["#cccccc"],  # 4
     ["#cccccc"],  # 5
     ["#cccccc"],  # 6
-    ["#cccccc"],  # 7
+    ["#F4BF75"],  # 7
     ["#cccccc"],  # 8
     ["#cccccc"],  # 9
     ["#cccccc"]   # 10

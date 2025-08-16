@@ -48,15 +48,21 @@ keymap.set("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Uncomment and Copy" },
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" }, opts)
 
 -- Toggles
-keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
-keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = "Line wrapping" }, opts)
+keymap.set("n", "<leader>ae", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
+keymap.set("n", "<leader>al", ":set wrap!<CR>", { desc = "Line wrapping" }, opts)
 
 -- LSP
 keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('harper-ls')<CR>", { desc = "Enable LSP" }, opts)
-keymap.set("n", "<leader>el", ":lua vim.lsp.enable('luals')<CR>", { desc = "Enable LSP" }, opts)
-keymap.set("n", "<leader>ed", ":lua vim.lsp.stop_client(vim.lsp.get_clients())<CR>", { desc = "Disable LSP" }, opts)
+keymap.set("n", "<leader>el", ":lua vim.lsp.stop_client(vim.lsp.get_clients())<CR>", { desc = "Disable LSP" }, opts)
 keymap.set('n', '<leader>ew', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Diagnostics - all" }, opts)
-keymap.set('n', 'grd', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Diagnostics - at point" }, opts)
+keymap.set('n', 'grh', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Diagnostics - at point" }, opts)
+
+-- Copy Full File-Path
+vim.keymap.set("n", "<leader>yc", function()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  print("file:", path)
+end)
 
 -- Spelling
 keymap.set("n", "<leader>z,", function()
@@ -91,11 +97,3 @@ end, { desc = "Spelling suggestions" })
 keymap.set("n", "<leader>za", function()
   vim.cmd("normal! zg")
 end, { desc = "Spelling add word to spellfile" })
-
--- Copy Full File-Path
-vim.keymap.set("n", "<leader>my", function()
-	local path = vim.fn.expand("%:p")
-	vim.fn.setreg("+", path)
-	print("file:", path)
-end)
-

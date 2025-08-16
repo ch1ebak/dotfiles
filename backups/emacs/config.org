@@ -213,13 +213,13 @@
     :global-prefix "M-SPC")
 
   (me/leader-keys
-    "SPC" '(counsel-fzf :wk "Fuzzy finding")
+    "SPC" '(execute-extended-command :wk "M-x")
     "RET" '(counsel-bookmark :wk "Bookmarks")
-    "." '(counsel-find-file :wk "Find file")
+    "." '(counsel-fzf :wk "Fuzzy finding")
     ">" '(dired-jump :wk "Dired")
-    "/" '(counsel-ibuffer :wk "Buffers")
-    "," '(counsel-rg :wk "Grep")
-    "s b" '(swiper :wk "Search line"))
+    "," '(counsel-ibuffer :wk "Buffers")
+    "?" '(counsel-rg :wk "Grep")
+    "/" '(swiper :wk "Search line"))
 
   (me/leader-keys
     "b" '(:ignore t :wk "Bookmarks")
@@ -231,6 +231,7 @@
     "f p" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Emacs Config")
     "f P" '((lambda () (interactive) (counsel-find-file "~/.config/emacs/")) :wk "Emacs Config")
     "f n" '((lambda () (interactive) (counsel-find-file "~/Dokumenty/notatki/")) :wk "Notes")
+    "f N" '((lambda () (interactive) (dired "~/Dokumenty/notatki/")) :wk "Notes")
     "f r" '(counsel-recentf :wk "Recent files")
     "f u" '(sudo-edit :wk "Sudo edit file")
     "f U" '(sudo-edit-find-file :wk "Sudo find file"))
@@ -251,15 +252,13 @@
 
   (me/leader-keys
     "t" '(:ignore t :wk "Toggles")
-    "t w" '(whitespace-mode :wk "Whitespace mode")
     "t v" '(visual-fill-column-mode :wk "Visual fill column")
-    "t f" '(follow-mode :wk "Follow mode")
     "t r" '(rainbow-mode :wk "Rainbow mode"))
 
   (me/leader-keys
     "e" '(:ignore t :wk "Eglot")
     "e h" '(eglot :wk "Launch Eglot")
-    "e d" '(eglot-shutdown :wk "Launch Eglot")
+    "e d" '(eglot-shutdown :wk "Shutdown Eglot")
     "e a" '(eglot-code-actions :wk "Eglot Code Actions"))
   
   (general-nmap
@@ -285,6 +284,7 @@
     "t n" 'org-table-insert-column
     "t h" 'org-table-move-column-left
     "t l" 'org-table-move-column-right
+    "t k" 'org-table-move-row-up
     "t j" 'org-table-move-row-down)
   
   (general-nmap
@@ -293,11 +293,11 @@
     "m L" 'markdown-demote
     "m J" 'markdown-move-down
     "m K" 'markdown-move-up
-    "w l" 'markdown-insert-link
-    "w i" 'markdown-insert-image
-    "t p" 'markdown-preview
-    "t h" 'markdown-toggle-url-hiding
-    "t i" 'markdown-toggle-inline-images)
+    "m l" 'markdown-insert-link
+    "m i" 'markdown-insert-image
+    "m p" 'markdown-preview
+    "m h" 'markdown-toggle-url-hiding
+    "m i" 'markdown-toggle-inline-images)
   
   (general-nmap
     :keymaps 'dired-mode-map

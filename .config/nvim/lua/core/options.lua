@@ -54,6 +54,7 @@ opt.errorbells = false                         -- No error bells
 opt.backspace = "indent,eol,start"             -- Better backspace behavior
 opt.mouse = "a"                                -- Mouse support
 opt.clipboard:append("unnamedplus")            -- System clipboard
+opt.cmdheight = 0
 
 -- Splits
 opt.splitright = true
@@ -76,3 +77,6 @@ api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
+
+-- Folding
+o.foldenable = false

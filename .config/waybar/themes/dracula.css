@@ -44,7 +44,7 @@
 }
                                   
 #workspaces button.active {
-    background-color: @c1;
+    background-color: @c2;
     color: @bg;
 }
 
@@ -57,7 +57,7 @@ window#waybar {
     padding-right: 20px;
     padding-left: 20px;
     background-color: @bg;
-    color: @c2;
+    color: @c1;
 }
 
 #clock {
