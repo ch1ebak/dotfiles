@@ -75,7 +75,7 @@ alias cp="cp -i"
 alias mv="mv -i"
 
 ### find
-alias fd="find . -type f -name"
+alias fd="fd -Hia --color always"
 alias rg="rg -i --hidden"
 
 ### remove
@@ -85,7 +85,6 @@ alias tr="trash -vi"
 ### system
 alias bt="btop"
 alias df="df -hl --exclude-type=tmpfs --exclude-type=devtmpfs"
-alias nvt="nvtop"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
 alias xbl="brightnessctl set "
@@ -95,6 +94,7 @@ alias cal="cal -3 -m --color=auto"
 alias dunres="killall -e dunst & sleep 1; dunstify "hello!" &"
 alias fehs="feh --bg-fill"
 alias lg="lazygit"
+alias nb="newsboat"
 alias yz="yazi"
 alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
 
@@ -103,6 +103,7 @@ alias gc="git clone"
 
 ## Neovim
 alias nv="nvim"
+alias nv.="nvim ."
 alias vim="nvim"
 
 ## Stow

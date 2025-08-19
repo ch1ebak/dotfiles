@@ -54,7 +54,7 @@ opt.errorbells = false                         -- No error bells
 opt.backspace = "indent,eol,start"             -- Better backspace behavior
 opt.mouse = "a"                                -- Mouse support
 opt.clipboard:append("unnamedplus")            -- System clipboard
-opt.cmdheight = 0
+opt.cmdheight = 1
 
 -- Splits
 opt.splitright = true

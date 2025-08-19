@@ -48,8 +48,8 @@ keymap.set("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Uncomment and Copy" },
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" }, opts)
 
 -- Toggles
-keymap.set("n", "<leader>ae", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
-keymap.set("n", "<leader>al", ":set wrap!<CR>", { desc = "Line wrapping" }, opts)
+keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
+keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = "Line wrapping" }, opts)
 
 -- LSP
 keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('harper-ls')<CR>", { desc = "Enable LSP" }, opts)
@@ -97,3 +97,21 @@ end, { desc = "Spelling suggestions" })
 keymap.set("n", "<leader>za", function()
   vim.cmd("normal! zg")
 end, { desc = "Spelling add word to spellfile" })
+
+-- Focus split
+keymap.set("n", "<C-e>", function()
+    local win     = vim.api.nvim_get_current_win()
+    local wwidth  = vim.api.nvim_win_get_width(win)
+    local wheight = vim.api.nvim_win_get_height(win)
+
+    local tab_width  = vim.o.columns
+    local tab_height = vim.o.lines - vim.o.cmdheight
+
+    local focused = wwidth >= tab_width * 0.9 and wheight >= tab_height * 0.9
+    if focused then
+        vim.cmd("wincmd =") --equalize all win size
+    else
+        vim.cmd("wincmd |")
+        vim.cmd("wincmd _")
+    end
+end)

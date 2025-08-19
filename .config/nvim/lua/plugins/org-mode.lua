@@ -18,6 +18,7 @@ return {
       org_agenda_start_day = '-1d',
       org_agenda_skip_scheduled_if_done = true,
       org_agenda_skip_deadline_if_done = true,
+      org_agenda_span = 'week',
       org_capture_templates = { t = { description = 'Task', template = '\n ** TODO %?\n' } },
       org_todo_keywords = {'TODO(t)', 'WAIT(w)', 'FIXME(f)', '|', 'CANCELED(c)', 'DONE(d)'},
       org_todo_keyword_faces = {

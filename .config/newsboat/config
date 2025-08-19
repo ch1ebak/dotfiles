@@ -5,20 +5,33 @@ reload-time 120
 reload-threads 4
 download-retries 4
 download-timeout 10
+history-limit 100
 prepopulate-query-feeds yes
 
 
 # -- display -------------------------------------------------------------------
 
 show-read-feeds no
+show-read-articles no
 feed-sort-order unreadarticlecount-asc
-
-color info default default reverse
-color listnormal_unread yellow default
-color listfocus blue default reverse bold
-color listfocus_unread blue default reverse bold
-
 text-width 80
+
+
+# -- colors --------------------------------------------------------------------
+
+color background color7 default
+color info color7 color0 dim
+color listnormal color7 default dim
+color listfocus color3 default
+color listnormal_unread color7 default
+color listfocus_unread color1 default
+
+# -- formatting ----------------------------------------------------------------
+
+feedlist-format " %4i %n :: › %t %> unread %U/%c total "
+feedlist-title-format " [%u unread] / [%t total] "
+articlelist-format " %4i %n :: %t %> %D "
+articlelist-title-format " %T ~ [%u unread] / [%t total] "
 
 
 # -- navigation ----------------------------------------------------------------
@@ -27,16 +40,25 @@ goto-next-feed no
 
 browser zen-browser
 
-bind-key j down feedlist
+bind-key g home
+bind-key G end
+bind-key l open
+bind-key h quit
 bind-key k up feedlist
-bind-key j next articlelist
-bind-key k prev articlelist
-bind-key J next-feed articlelist
-bind-key K prev-feed articlelist
-bind-key j down article
+bind-key j down feedlist
 bind-key k up article
+bind-key j down article
+bind-key k prev articlelist
+bind-key j next articlelist
+bind-key K prev-feed articlelist
+bind-key J next-feed articlelist
+bind-key U show-urls
+bind-key s sort
+bind-key S save
 bind-key a mark-feed-read feedlist
 bind-key A mark-all-feeds-read feedlist
+bind-key W open-in-browser-and-mark-read article
+bind-key W open-in-browser-and-mark-read articlelist
 
 
 # -- misc ----------------------------------------------------------------------
@@ -44,4 +66,3 @@ bind-key A mark-all-feeds-read feedlist
 unbind-key C feedlist
 confirm-exit no
 cleanup-on-quit no
-

@@ -4,7 +4,7 @@
 
 # Standard ANSI colors (0-7) - Pure monochrome
 palette = 0=000000
-palette = 1=cccccc
+palette = 1=b46958
 palette = 2=808080
 palette = 3=cccccc
 palette = 4=a0a0a0

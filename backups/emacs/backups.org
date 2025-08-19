@@ -1,0 +1,389 @@
+#+STARTUP: show2levels
+
+* EMACS
+** [[https://github.com/domtronn/all-the-icons.el][All the Icons]]
+#+begin_src emacs-lisp
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+#+end_src
+
+*** [[https://github.com/iyefrat/all-the-icons-completion][All the Icons: Completion]]
+#+begin_src emacs-lisp
+(use-package all-the-icons-completion
+  :after (marginalia all-the-icons)
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
+  :init
+  (all-the-icons-completion-mode))
+#+end_src
+
+*** [[https://github.com/jtbm37/all-the-icons-dired][All the Icons: Dired]]
+#+begin_src emacs-lisp
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+#+end_src
+
+*** [[https://github.com/mohkale/all-the-icons-nerd-fonts][All the Icons Nerd Fonts]]
+#+begin_src emacs-lisp
+(use-package all-the-icons-nerd-fonts
+  :after all-the-icons
+  :demand t
+  :config
+  (all-the-icons-nerd-fonts-prefer))
+#+end_src
+                                                                                       
+** Completion
+*** [[https//github.com/minad/vertico][Vertico]]
+#+begin_src emacs-lisp
+(use-package vertico
+  :ensure t
+  :bind (:map vertico-map
+         ("C-j" . vertico-next)
+         ("C-k" . vertico-previous)
+         ("C-f" . vertico-exit)
+         :map minibuffer-local-map
+         ("M-h" . backward-kill-word))
+  :config
+  (setq read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t
+      completion-ignore-case t)
+  :custom
+  (vertico-cycle t)
+  (vertico-count 10)
+  (vertico-resize t)
+  :init
+  (vertico-mode))
+#+end_src
+
+**** Savehist
+#+begin_src emacs-lisp
+(use-package savehist
+  :ensure nil
+  :hook (after-init . savehist-mode)
+  :config
+  (setq savehist-file "~/.config/emacs/files/savehist")
+  (setq history-length 100)
+  (setq history-delete-duplicates t)
+  (setq savehist-save-minibuffer-history t)
+  (add-to-list 'savehist-additional-variables 'kill-ring))
+#+end_src
+
+*** [[https://github.com/minad/marginalia][Marginalia]]
+#+begin_src emacs-lisp
+(use-package marginalia
+  :after vertico
+  :custom
+  (marginalia-align 'right)
+  (marginalia-max-relative-age 0)
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  :init
+  (marginalia-mode))
+#+end_src
+
+*** [[https://github.com/minad/consult][Consult]]
+#+begin_src emacs-lisp
+(use-package consult
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+  :init
+  (setq register-preview-delay 0.5
+        register-preview-function #'consult-register-format)
+  (advice-add #'register-preview :override #'consult-register-window)
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
+  :config
+  (consult-customize
+   consult-theme :preview-key '(:debounce 0.2 any)
+   consult-ripgrep consult-git-grep consult-grep
+   consult-bookmark consult-recent-file consult-xref
+   consult--source-bookmark consult--source-file-register
+   consult--source-recent-file consult--source-project-recent-file
+   :preview-key '(:debounce 0.4 any))
+  (setq consult-narrow-key "<")
+)
+#+end_src
+
+*** [[https://github.com/oantolin/orderless][Orderless]]
+#+begin_src emacs-lisp
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
+#+end_src
+
+** [[https://github.com/emacs-dashboard/emacs-dashboard][Dashboard]] 
+#+begin_src emacs-lisp
+(use-package dashboard
+  :ensure t 
+  :init
+  (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
+  (setq initial-buffer-choice 'dashboard-open)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-display-icons-p t)
+  (setq dashboard-icon-type 'nerd-icons)
+  (setq dashboard-banner-logo-title "Emacs?")
+  (setq dashboard-startup-banner 'official)
+  (setq dashboard-center-content t)
+  (setq dashboard-items '((recents . 10)
+                          (agenda . 10)
+                          (bookmarks . 5)))
+  :custom 
+  (dashboard-modify-heading-icons '((recents . "file-text")
+				      (bookmarks . "book")))
+  :config
+  (dashboard-setup-startup-hook))
+#+end_src
+
+** [[https://github.com/jrblevin/deft][Deft]]
+#+begin_src emacs-lisp
+(use-package deft
+  :commands (deft)
+  :config (setq deft-directory "~/Dokumenty/notatki"
+                deft-recursive t
+                deft-use-filename-as-title t
+                deft-extensions '("md" "org")))
+#+end_src
+
+** Desktop
+#+begin_src emacs-lisp
+(use-package desktop
+  :ensure nil
+  :init
+  (desktop-save-mode)
+  :config
+  (setq desktop-dirname "~/.config/emacs/files/sessions"
+      desktop-base-file-name "desktop"
+      desktop-base-lock-name "desktop.lock"
+      desktop-restore-frames t
+      desktop-restore-reuses-frames t
+      desktop-restore-in-current-display t
+      desktop-restore-forces-onscreen t))
+#+end_src
+
+** [[https://github.com/protesilaos/dired-preview][Dired Preview]]
+#+begin_src emacs-lisp
+(use-package dired-preview
+  :config
+  (setq dired-preview-delay 0.7)
+  (setq dired-preview-max-size (expt 2 20))
+  (setq dired-preview-ignored-extensions-regexp
+        (concat "\\."
+                "\\(mkv\\|webm\\|mp4\\|mp3\\|ogg\\|m4a"
+                "\\|gz\\|zst\\|tar\\|xz\\|rar\\|zip"
+                "\\|iso\\|epub\\|pdf\\)"))
+  (dired-preview-global-mode 1))
+#+end_src
+                                                                                       
+** [[https://github.com/jamescherti/easysession.el][Easy Session]] 
+#+begin_src emacs-lisp
+(use-package easysession
+  :ensure t
+  :commands (easysession-switch-to
+             easysession-save-as
+             easysession-save-mode
+             easysession-load-including-geometry)
+
+  :custom
+  (easysession-mode-line-misc-info t)  ; Display the session in the modeline
+  ;; (easysession-save-interval (* 10 60))  ; Save every 10 minutes
+
+  :init
+  (add-hook 'emacs-startup-hook #'easysession-load-including-geometry 102)
+  (add-hook 'emacs-startup-hook #'easysession-save-mode 103))
+#+end_src
+
+** Image Dired
+#+begin_src emacs-lisp
+(use-package image-dired
+  :ensure nil
+  :commands (image-dired)
+  :bind
+  ( :map image-dired-thumbnail-mode-map
+    ("<return>" . image-dired-thumbnail-display-external))
+  :config
+  (setq image-dired-thumbnail-storage 'standard)
+  (setq image-dired-external-viewer "xdg-open")
+  (setq image-dired-thumb-size 80)
+  (setq image-dired-thumb-margin 2)
+  (setq image-dired-thumb-relief 0)
+  (setq image-dired-thumbs-per-row 4))
+#+end_src
+
+** Dired Preview
+#+begin_src emacs-lisp
+(use-package dired-preview
+  :ensure t
+  ;; :hook (dired-mode . (lambda ()
+  ;;                       (when (string-match-p "Obrazy" default-directory)
+  ;;                         (dired-preview-mode 1))))
+  :defer 1
+  :hook (after-init . dired-preview-global-mode)
+  :config
+  (setq dired-preview-max-size (* (expt 2 20) 10))
+  (setq dired-preview-delay 0)
+  (setq dired-preview-ignored-extensions-regexp
+        (concat "\\."
+                "\\(gz\\|"
+                "zst\\|"
+                "tar\\|"
+                "xz\\|"
+                "rar\\|"
+                "zip\\|"
+                "iso\\|"
+                "epub"
+                "flac"
+                "mp3"
+                "pdf"
+                "\\)"))
+  ;; (setq dired-preview-display-action-alist
+  ;;       '((display-buffer-in-side-window)
+  ;;         (side . right)
+  ;;         (preserve-size . (t . t))
+  ;;         (window-parameters . ((mode-line-format . none)
+  ;;                               (header-line-format . none)))))
+  (dired-preview-global-mode 1))
+#+end_src
+
+** [[https://github.com/alexluigit/dirvish][Dirvish]]
+#+begin_src emacs-lisp
+(use-package dirvish
+  :config
+  (dirvish-override-dired-mode))
+#+end_src
+** [[https://www.emacswiki.org/emacs/FlyMake][Fly Make]]
+#+begin_src emacs-lisp
+(use-package flymake
+  :ensure t
+  :hook (prog-mode . flymake-mode))
+#+end_src
+                                                                                       
+** [[https://github.com/eval-exec/eee.el][EEE]]
+#+begin_src emacs-lisp
+(use-package eee
+  :ensure (:type git :host github :repo "eval-exec/eee.el"
+                 :files (:defaults "*.el" "*.sh"))
+  :config
+  (setq ee-terminal-command "alacritty")
+  (global-definer "y" 'ee-yazi-project)
+  (general-def "C-x C-f" 'ee-yazi)
+  (general-def "C-S-f" 'ee-rg)
+  (general-evil-define-key 'normal 'global "M-f" 'ee-line)
+)
+#+end_src
+** ERC
+#+begin_src emacs-lisp
+(setq erc-prompt (lambda () (concat "[" (buffer-name) "]"))
+      erc-server "irc.libera.chat"
+      erc-nick "ch1ebak"
+      erc-track-shorten-start 24
+      erc-autojoin-channels-alist '(("irc.libera.chat" "#archlinux" "#linux" "#emacs"))
+      erc-kill-buffer-on-part t
+      erc-fill-column 100
+      erc-fill-function 'erc-fill-static
+      erc-fill-static-center 20
+      )
+#+end_src
+
+** [[https://github.com/DarthFennec/highlight-indent-guides][Highlight indent guides]]
+#+begin_src emacs-lisp
+(use-package highlight-indent-guides)
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+#+end_src
+
+** [[https://github.com/tarsius/hl-todo][Highlight TODO]]
+#+begin_src emacs-lisp
+(use-package hl-todo
+  :hook ((org-mode . hl-todo-mode)
+         (prog-mode . hl-todo-mode))
+  :config
+  (setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        `(("TODO"      error bold)
+	        ("WAIT"      warning bold)
+          ("FIXME"     font-lock-constant-face bold)
+          ("CANCELED"  font-lock-keyword-face bold)
+          ("DONE"      success bold))))
+#+end_src
+
+** [[https://github.com/mickeynp/ligature.el][Ligature]]
+#+begin_src emacs-lisp
+(use-package ligature
+  :hook (prog-mode . ligature-mode)
+  :config
+  ;; Some ligatures supported by most fonts. E.g. Fira Code, Victor Mono
+  (ligature-set-ligatures 'prog-mode '("~~>" "##" "|-" "-|" "|->" "|=" ">-" "<-" "<--" "->"
+                                       "-->" "-<" ">->" ">>-" "<<-" "<->" "->>" "-<<" "<-<"
+                                       "==>" "=>" "=/=" "!==" "!=" "<==" ">>=" "=>>" ">=>"
+                                       "<=>" "<=<" "=<=" "=>=" "<<=" "=<<"
+                                       "=:=" "=!=" "==" "===" "::" ":=" ":>" ":<" ">:"
+                                       ";;" "__" "&&" "++")))
+#+end_src
+                                                                                       
+** [[https://github.com/ofosos/ox-epub][Ox-Epub]] 
+#+begin_src emacs-lisp
+(use-package ox-epub)
+#+end_src
+
+** [[https://protesilaos.com/emacs/pulsar#h:812f7616-7e0f-489f-a908-1cb759ca64ce][Pulsar]]
+#+begin_src emacs-lisp
+(use-package pulsar
+  :ensure t
+  :config
+  (setq pulsar-pulse t)
+  (setq pulsar-delay 0.055)
+  (setq pulsar-iterations 10)
+  (pulsar-global-mode 1))
+#+end_src
+
+** Treesit
+#+begin_src emacs-lisp
+(use-package treesit
+  :ensure nil
+  :defer
+  :custom
+  (treesit-font-lock-level 4))
+
+(setq treesit-language-source-alist
+   '((elisp "https://github.com/Wilfred/tree-sitter-elisp")
+     (python "https://github.com/tree-sitter/tree-sitter-python")
+     (bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (css "https://github.com/tree-sitter/tree-sitter-css")
+     (hyprlang "https://github.com/tree-sitter-grammars/tree-sitter-hyprlang")
+     (html "https://github.com/tree-sitter/tree-sitter-html")
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (toml "https://github.com/tree-sitter/tree-sitter-toml")
+     (yaml "https://github.com/ikatyang/tree-sitter-yaml")
+     (markdown "https://github.com/ikatyang/tree-sitter-markdown")))
+#+end_src
+
+*** [[https://github.com/renzmann/treesit-auto][Treesit Auto]] 
+#+begin_src emacs-lisp
+(use-package treesit-auto
+  :ensure t
+  :hook (emacs-startup . global-treesit-auto-mode)
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all))
+#+end_src
+
+*** [[https://github.com/Nathan-Melaku/hyprlang-ts-mode][Hyprlang TS Mode]] 
+#+begin_src emacs-lisp
+(use-package hyprlang-ts-mode
+  :ensure t
+  :custom
+  (hyprlang-ts-mode-indent-offset 2))
+#+end_src
+
+** Themes
+*** [[https://github.com/Fabiokleis/kanagawa-emacs][Kanagawa]]
+#+begin_src emacs-lisp
+(use-package kanagawa-themes
+  :config
+  (setq kanagawa-themes-org-agenda-height nil
+        kanagawa-themes-org-bold nil
+        kanagawa-themes-org-height nil
+        kanagawa-themes-org-highlight nil
+        kanagawa-themes-org-priority-bold nil))
+#+end_src

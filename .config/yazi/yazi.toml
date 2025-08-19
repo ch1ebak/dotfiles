@@ -11,7 +11,7 @@ sort_dir_first = true
 sort_translit  = false
 linemode       = "none"
 show_hidden    = true
-show_symlink   = true
+show_symlink   = false
 scrolloff      = 5
 mouse_events   = [ "click", "scroll" ]
 title_format   = "Yazi: {cwd}"
@@ -31,15 +31,11 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 
 [opener]
 edit = [
-	# { run = '/usr/bin/emacs -nw "$@"', desc = "$EDITOR", block = true, for = "unix" },
-	{ run = 'nvim "$@"', desc = "$EDITOR", block = true, for = "unix" },
-	{ run = 'code %*',    orphan = true, desc = "code",           for = "windows" },
-	{ run = 'code -w %*', block = true,  desc = "code (block)",   for = "windows" },
+  # { run = 'nvim "$@"', block = true }
+  { run = 'emacs -nw "$@"', block = true }
 ]
 open = [
-	{ run = 'xdg-open "$1"',                desc = "Open", for = "linux" },
-	{ run = 'open "$@"',                    desc = "Open", for = "macos" },
-	{ run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
+	{ run = 'xdg-open "$1"', desc = "Open", for = "linux" },
 ]
 reveal = [
 	{ run = 'xdg-open "$(dirname "$1")"',           desc = "Reveal", for = "linux" },
@@ -62,7 +58,7 @@ rules = [
 	# Folder
 	{ name = "*/", use = [ "edit", "open", "reveal" ] },
 	# Text
-	{ mime = "text/*", use = [ "edit", "reveal" ] },
+	{ mime = "text/*", use = [ "edit" ] },
 	# Image
 	{ mime = "image/*", use = [ "open", "reveal" ] },
 	# Media
