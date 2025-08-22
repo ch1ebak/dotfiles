@@ -13,7 +13,7 @@ return {
       org_hide_emphasis_markers = true,
       org_ellipsis = ' ▾',
       org_log_into_drawer = 'LOGBOOK',
-      org_adapt_indentation = true,
+      org_adapt_indentation = false,
       org_agenda_start_on_weekday = false,
       org_agenda_start_day = '-1d',
       org_agenda_skip_scheduled_if_done = true,
@@ -58,7 +58,7 @@ return {
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'org',
       callback = function()
-        vim.keymap.set('i', '<C-CR>', '<cmd>lua require("orgmode").action("org_mappings.meta_return")<CR>', {
+        vim.keymap.set('i', '<S-CR>', '<cmd>lua require("orgmode").action("org_mappings.meta_return")<CR>', {
           silent = true,
           buffer = true,
         })

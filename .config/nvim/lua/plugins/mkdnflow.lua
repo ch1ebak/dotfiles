@@ -18,6 +18,7 @@ return {
           cmp = false
       },
       mappings = {
+        MkdnToggleToDo = {{'n', 'v'}, 'mc'},
         MkdnUpdateNumbering = false,
         MkdnIncreaseHeading = {'n', 'mH'},
         MkdnDecreaseHeading = {'n', 'mL'},

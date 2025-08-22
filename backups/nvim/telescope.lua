@@ -39,18 +39,18 @@ return {
     })
     pcall(require('telescope').load_extension, 'fzf')
     local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>,', builtin.find_files, { desc = 'FZF' })
-    vim.keymap.set('n', '<leader><', builtin.live_grep, { desc = 'Grep' })
-    vim.keymap.set('n', '<leader>/', builtin.buffers, { desc = 'Buffers' })
+    vim.keymap.set('n', '<leader><space>', builtin.find_files, { desc = 'FZF' })
+    vim.keymap.set('n', '<leader>,', builtin.buffers, { desc = 'Buffers' })
+    vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = 'Fuzzy find in current buffer' })
+    vim.keymap.set('n', '<leader>?', builtin.live_grep, { desc = 'Grep' })
     vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Search Recent Files' })
-    vim.keymap.set('n', '<leader>h/', builtin.help_tags, { desc = 'Help Tags' })
-    vim.keymap.set('n', '<leader>h?', builtin.keymaps, { desc = 'Keymaps' })
+    vim.keymap.set('n', '<leader>hh', builtin.help_tags, { desc = 'Help Tags' })
+    vim.keymap.set('n', '<leader>hk', builtin.keymaps, { desc = 'Keymaps' })
     vim.keymap.set('n', '<leader>ht', builtin.colorscheme, { desc = 'Change color scheme' })
-    vim.keymap.set('n', '<leader>sb', builtin.current_buffer_fuzzy_find, { desc = 'Fuzzy find in current buffer' })
     vim.keymap.set('n', '<leader>fp', function()
       builtin.find_files { cwd = '~/.dotfiles/.config/nvim/' }
     end, { desc = 'Search Neovim files' })
-    vim.keymap.set('n', '<leader>nf', function()
+    vim.keymap.set('n', '<leader>fn', function()
       builtin.find_files { cwd = '~/Dokumenty/notatki/' }
     end, { desc = 'Search Notes' })
   end

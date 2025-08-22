@@ -4,4 +4,4 @@ local cmd = vim.cmd
 
 -- Color Scheme
 o.background = "dark"
-cmd 'colorscheme no-clown-fiesta'
+cmd 'colorscheme ayu-mirage'

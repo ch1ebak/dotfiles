@@ -7,9 +7,9 @@ return {
         list = "•",
         headlines = { "◉", "○", "◉", "○" },
         checkboxes = {
-          half = { "󰿟", "@org.checkbox.halfchecked" },
-          done = { "󰄬", "@org.keyword.done" },
-          todo = { "󰍴", "@org.keyword.todo" },
+          half = { '', '@org.checkbox.halfchecked' },
+          done = { '✓', '@org.checkbox.checked' },
+          todo = { ' ', '@org.checkbox' },
         },
       }
     }

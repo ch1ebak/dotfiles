@@ -57,6 +57,8 @@ bind-key s sort
 bind-key S save
 bind-key a mark-feed-read feedlist
 bind-key A mark-all-feeds-read feedlist
+bind-key Z toggle-show-read-feeds feedlist
+bind-key Z toggle-show-read-feeds articlelist
 bind-key W open-in-browser-and-mark-read article
 bind-key W open-in-browser-and-mark-read articlelist
 

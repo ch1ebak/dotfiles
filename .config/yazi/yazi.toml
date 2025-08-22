@@ -31,8 +31,7 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 
 [opener]
 edit = [
-  # { run = 'nvim "$@"', block = true }
-  { run = 'emacs -nw "$@"', block = true }
+  { run = 'nvim "$@"', block = true }
 ]
 open = [
 	{ run = 'xdg-open "$1"', desc = "Open", for = "linux" },

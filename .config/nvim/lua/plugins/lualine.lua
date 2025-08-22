@@ -8,7 +8,7 @@ return {
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = 'no-clown-fiesta',
+        theme = 'ayu',
         section_separators = { left = '', right = ''},
         disabled_filetypes = {
           statusline = {},
