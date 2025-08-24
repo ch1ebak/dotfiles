@@ -23,7 +23,7 @@ from qtile_extras.widget.decorations import RectDecoration
 from qtile_extras.widget.decorations import PowerLineDecoration
 
 ## Color scheme
-from themes.everforest import colors
+from themes.ayu import colors
 
 # SETTINGS
 ## General
@@ -279,7 +279,7 @@ date = widget.Clock(background = colors[2], foreground = colors[10], format = "ï
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/everforest.png",
+        wallpaper = "~/.config/qtile/wallpapers/ayu.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -303,7 +303,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/everforest.png",
+        wallpaper = "~/.config/qtile/wallpapers/ayu.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
