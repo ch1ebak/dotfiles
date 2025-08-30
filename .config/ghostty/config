@@ -2,7 +2,7 @@ font-family = JetBrainsMono NF
 font-size = 10
 font-synthetic-style = true
 
-theme = /usr/share/ghostty/themes/Ayu Mirage
+theme = /usr/share/ghostty/themes/GruvboxDark
 
 background-opacity = 0.9
 background-blur = true

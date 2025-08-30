@@ -6,8 +6,8 @@ configuration {
   kb-row-down: "Control+j";
 }
 
-//@theme "/home/karna/.config/rofi/themes/ayu"
+//@theme "/home/karna/.config/rofi/themes/gruvbox"
 
-//@theme "/home/karna/.config/rofi/themes/ayu"
+//@theme "/home/karna/.config/rofi/themes/gruvbox"
 
-@theme "/home/karna/.config/rofi/themes/ayu"
+@theme "/home/karna/.config/rofi/themes/gruvbox"

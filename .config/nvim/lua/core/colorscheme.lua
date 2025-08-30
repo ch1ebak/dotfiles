@@ -3,5 +3,10 @@ local o = vim.o
 local cmd = vim.cmd
 
 -- Color Scheme
-o.background = "dark"
-cmd 'colorscheme ayu-mirage'
+vim.o.background = "dark"
+vim.cmd 'colorscheme gruvbox'
+
+-- Transparency
+vim.api.nvim_set_hl(0, "Normal", { bg = "none"})
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none"})
+vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none"})

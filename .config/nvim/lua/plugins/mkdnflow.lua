@@ -18,6 +18,8 @@ return {
           cmp = false
       },
       mappings = {
+        MkdnEnter = {{'n', 'v'}, '<CR>'},
+        MkdnFollowLink = {'n', 'mo'},
         MkdnToggleToDo = {{'n', 'v'}, 'mc'},
         MkdnUpdateNumbering = false,
         MkdnIncreaseHeading = {'n', 'mH'},

@@ -1,11 +1,11 @@
 @define-color bg #1a1b26;
 @define-color fg #a9b1d6;
-@define-color c1 #f7768e;
+@define-color c1 #7aa2f7;
 @define-color c2 #7dcfff;
 @define-color c3 #bb9af7;
-@define-color c4 #9ece6a;
-@define-color c5 #e0af68;
-@define-color c6 #7aa2f7;
+@define-color c4 #e0af68;
+@define-color c5 #9ece6a;
+@define-color c6 #f7768e;
 
 * {
     font-family: 'JetBrainsMono NF', sans-serif;
@@ -73,37 +73,37 @@ window#waybar {
     padding-right: 20px;
     padding-left: 20px;
     margin-left: 10px;
-    color: @c5;
+    color: @c4;
     background-color: @bg;
 }
 
 #battery.good{
     color: @bg;
-    background-color: @c4;
+    background-color: @c5;
 }
 
 #battery.full{
     color: @bg;
-    background-color: @c4;
+    background-color: @c5;
 }
 
 #battery.charging {
-    color: @c4;
+    color: @c5;
     background-color: @bg;
 }
 
 #battery.discharging {
-    color: @c5;
+    color: @c4;
     background-color: @bg;
 }
 
 #battery.discharging.warning {
     color: @bg;
-    background-color: @c5;
+    background-color: @c4;
 }
 
 #battery.discharging.critical {
     color: @bg;
-    background-color: @c1;
+    background-color: @c6;
 }
 
