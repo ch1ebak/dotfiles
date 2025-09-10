@@ -1,6 +1,70 @@
 #+STARTUP: show2levels
 
-* EMACS
+* [[https://github.com/progfolio/elpaca][ELPACA]]
+#+begin_src emacs-lisp
+(defvar elpaca-installer-version 0.11)
+(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+(defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+(defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+(defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+			:ref nil
+			:files (:defaults (:exclude "extensions"))
+			:build (:not elpaca--activate-package)))
+(let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+ (build (expand-file-name "elpaca/" elpaca-builds-directory))
+ (order (cdr elpaca-order))
+ (default-directory repo))
+  (add-to-list 'load-path (if (file-exists-p build) build repo))
+  (unless (file-exists-p repo)
+    (make-directory repo t)
+    (when (< emacs-major-version 28) (require 'subr-x))
+    (condition-case-unless-debug err
+  (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+	   ((zerop (call-process "git" nil buffer t "clone"
+				 (plist-get order :repo) repo)))
+	   ((zerop (call-process "git" nil buffer t "checkout"
+				 (or (plist-get order :ref) "--"))))
+	   (emacs (concat invocation-directory invocation-name))
+	   ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+				 "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+	   ((require 'elpaca))
+	   ((elpaca-generate-autoloads "elpaca" repo)))
+      (progn (message "%s" (buffer-string)) (kill-buffer buffer))
+    (error "%s" (with-current-buffer buffer (buffer-string))))
+((error) (warn "%s" err) (delete-directory repo 'recursive))))
+  (unless (require 'elpaca-autoloads nil t)
+    (require 'elpaca)
+    (elpaca-generate-autoloads "elpaca" repo)
+    (load "./elpaca-autoloads")))
+(add-hook 'after-init-hook #'elpaca-process-queues)
+(elpaca `(,@elpaca-order))
+
+;; Install use-package support
+(elpaca elpaca-use-package
+  ;; Enable :elpaca use-package keyword.
+  (elpaca-use-package-mode)
+  ;; Assume :elpaca t unless otherwise specified.
+  (setq elpaca-use-package-by-default t))
+
+;; Block until current queue processed.
+(elpaca-wait)
+
+;;When installing a package which modifies a form used at the top-level
+;;(e.g. a package which adds a use-package key word),
+;;use `elpaca-wait' to block until that package has been installed/configured.
+;;For example:
+;;(use-package general :demand t)
+;;(elpaca-wait)
+
+;;Turns off elpaca-use-package-mode current declartion
+;;Note this will cause the declaration to be interpreted immediately (not deferred).
+;;Useful for configuring built-in emacs features.
+;;(use-package emacs :elpaca nil :config (setq ring-bell-function #'ignore))
+
+;; Don't install anything. Defer execution of BODY
+;;(elpaca nil (message "deferred"))
+#+end_src
+
 ** [[https://github.com/domtronn/all-the-icons.el][All the Icons]]
 #+begin_src emacs-lisp
 (use-package all-the-icons
@@ -32,7 +96,78 @@
   (all-the-icons-nerd-fonts-prefer))
 #+end_src
                                                                                        
-** Completion
+** [[https://github.com/Malabarba/beacon][Beacon]]
+#+begin_src emacs-lisp
+(use-package beacon
+  :init
+  (beacon-mode 1))
+#+end_src
+
+** Completion Ivy
+*** [[https://github.com/abo-abo/swiper][Counsel/Ivy]]
+#+begin_src emacs-lisp
+(use-package ivy
+  :diminish
+  :bind (("C-s" . swiper)
+         :map ivy-minibuffer-map
+         ("y" . self-insert-command)
+         ("TAB" . ivy-alt-done)
+         ("C-l" . ivy-alt-done)
+         ("C-j" . ivy-next-line)
+         ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+         ("C-k" . ivy-previous-line)
+         ("C-j" . ivy-next-line)
+         ("C-l" . ivy-done)
+         ("C-d" . ivy-switch-buffer-kill)
+         :map ivy-reverse-i-search-map
+         ("C-k" . ivy-previous-line)
+         ("C-j" . ivy-next-line)
+         ("C-d" . ivy-reverse-i-search-kill))
+  :custom
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq enable-recursive-minibuffers t)
+  :config
+  (ivy-mode 1))
+
+(use-package counsel
+  :bind (("C-M-j" . 'counsel-switch-buffer)
+         :map minibuffer-local-map
+         ("C-r" . 'counsel-minibuffer-history))
+  :custom
+  (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
+  :config
+  (counsel-mode 1)
+  (setq ivy-initial-inputs-alist nil)) ;; removes starting ^ regex in M-x
+#+end_src
+*** [[https://github.com/Yevgnen/ivy-rich][Ivy Rich]]
+#+begin_src emacs-lisp
+(use-package ivy-rich
+  :after ivy
+  :init
+  (ivy-rich-mode 1)
+  :custom
+  (ivy-virtual-abbreviate 'full
+   ivy-rich-switch-buffer-align-virtual-buffer t
+   ivy-rich-path-style 'abbrev)
+  :config
+  (ivy-set-display-transformer 'ivy-switch-buffer
+                               'ivy-rich-switch-buffer-transformer))
+#+end_src
+*** [[https://github.com/radian-software/prescient.el][Ivy Prescient]]
+#+begin_src emacs-lisp
+(use-package ivy-prescient
+  :after counsel
+  :custom
+  (ivy-prescient-enable-filtering nil)
+  :config
+  ;; Uncomment the following line to have sorting remembered across sessions!
+  (prescient-persist-mode 1)
+  (ivy-prescient-mode 1))
+#+end_src
+
+** Completion Vertico
 *** [[https//github.com/minad/vertico][Vertico]]
 #+begin_src emacs-lisp
 (use-package vertico
@@ -193,6 +328,17 @@
   (add-hook 'emacs-startup-hook #'easysession-save-mode 103))
 #+end_src
 
+** [[https://github.com/Somelauw/evil-org-mode][Evil Org Mode]] 
+#+begin_src emacs-lisp
+(use-package evil-org
+  :ensure t
+  :after org
+  :hook (org-mode . (lambda () evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+#+end_src
+
 ** Image Dired
 #+begin_src emacs-lisp
 (use-package image-dired
@@ -208,6 +354,21 @@
   (setq image-dired-thumb-margin 2)
   (setq image-dired-thumb-relief 0)
   (setq image-dired-thumbs-per-row 4))
+#+end_src
+
+** Insert date / time 
+#+begin_src emacs-lisp
+(defun insert-todays-date (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%d-%m-%Y")
+          (format-time-string "%Y-%m-%d"))))
+
+(defun insert-current-time (arg)
+  (interactive "U")
+  (insert (if arg
+          (format-time-string "%R")
+          (format-time-string "%H:%M"))))
 #+end_src
 
 ** Dired Preview
@@ -306,6 +467,14 @@
           ("DONE"      success bold))))
 #+end_src
 
+** [[https://www.emacswiki.org/emacs/KillingBuffers#h5o-2][Kill Other Buffers]]
+#+begin_src emacs-lisp
+(defun kill-other-buffers ()
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+#+end_src
+
 ** [[https://github.com/mickeynp/ligature.el][Ligature]]
 #+begin_src emacs-lisp
 (use-package ligature
@@ -386,4 +555,9 @@
         kanagawa-themes-org-height nil
         kanagawa-themes-org-highlight nil
         kanagawa-themes-org-priority-bold nil))
+#+end_src
+
+** [[https://github.com/emacsmirror/undo-fu][Undo-fu]]
+#+begin_src emacs-lisp
+(use-package undo-fu)
 #+end_src

@@ -1,78 +1,25 @@
-#+TITLE: ch1ebak's cool emacs config 2: electric boogaloo
-#+AUTHOR: ch1ebak
+(setq gc-cons-threshold #x40000000)
 
-* STARTUP PERFORMANCE
-#+begin_src emacs-lisp
-(setq gc-cons-threshold (* 50 1000 1000))
-#+end_src
+(setq read-process-output-max (* 1024 1024 4))
 
-* [[https://github.com/progfolio/elpaca][ELPACA]]
-#+begin_src emacs-lisp
-(defvar elpaca-installer-version 0.11)
-(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
-(defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
-(defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
-(defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
-			:ref nil
-			:files (:defaults (:exclude "extensions"))
-			:build (:not elpaca--activate-package)))
-(let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
- (build (expand-file-name "elpaca/" elpaca-builds-directory))
- (order (cdr elpaca-order))
- (default-directory repo))
-  (add-to-list 'load-path (if (file-exists-p build) build repo))
-  (unless (file-exists-p repo)
-    (make-directory repo t)
-    (when (< emacs-major-version 28) (require 'subr-x))
-    (condition-case-unless-debug err
-  (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
-	   ((zerop (call-process "git" nil buffer t "clone"
-				 (plist-get order :repo) repo)))
-	   ((zerop (call-process "git" nil buffer t "checkout"
-				 (or (plist-get order :ref) "--"))))
-	   (emacs (concat invocation-directory invocation-name))
-	   ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
-				 "--eval" "(byte-recompile-directory \".\" 0 'force)")))
-	   ((require 'elpaca))
-	   ((elpaca-generate-autoloads "elpaca" repo)))
-      (progn (message "%s" (buffer-string)) (kill-buffer buffer))
-    (error "%s" (with-current-buffer buffer (buffer-string))))
-((error) (warn "%s" err) (delete-directory repo 'recursive))))
-  (unless (require 'elpaca-autoloads nil t)
-    (require 'elpaca)
-    (elpaca-generate-autoloads "elpaca" repo)
-    (load "./elpaca-autoloads")))
-(add-hook 'after-init-hook #'elpaca-process-queues)
-(elpaca `(,@elpaca-order))
+;; Use Package
+(require 'use-package-ensure)
+(setq use-package-always-ensure t
+      package-enable-at-startup nil
+      package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+(package-initialize)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents) (package-install 'use-package))
+(eval-when-compile (require 'use-package))
+(setq use-package-always-ensure t)
 
-;; Install use-package support
-(elpaca elpaca-use-package
-  ;; Enable :elpaca use-package keyword.
-  (elpaca-use-package-mode)
-  ;; Assume :elpaca t unless otherwise specified.
-  (setq elpaca-use-package-by-default t))
 
-;; Block until current queue processed.
-(elpaca-wait)
+(setq package-quickstart t)
 
-;;When installing a package which modifies a form used at the top-level
-;;(e.g. a package which adds a use-package key word),
-;;use `elpaca-wait' to block until that package has been installed/configured.
-;;For example:
-;;(use-package general :demand t)
-;;(elpaca-wait)
-
-;;Turns off elpaca-use-package-mode current declartion
-;;Note this will cause the declaration to be interpreted immediately (not deferred).
-;;Useful for configuring built-in emacs features.
-;;(use-package emacs :elpaca nil :config (setq ring-bell-function #'ignore))
-
-;; Don't install anything. Defer execution of BODY
-;;(elpaca nil (message "deferred"))
-#+end_src
-
-* SETTINGS
-#+begin_src emacs-lisp
+;; Emacs Config
 (use-package emacs
   :ensure nil
   :custom
@@ -126,6 +73,7 @@
   (setq bookmark-default-file "~/.config/emacs/files/bookmarks")
   (setq auth-sources '("~/Dokumenty/tajne/.authinfo.gpg"))
   (setq custom-file (locate-user-emacs-file "custom-vars.el"))
+  (setq recentf-mode t)
   (setq recentf-save-file "~/.config/emacs/files/recentf")
   (load custom-file 'noerror 'nomessage)
   (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font"  :height 100)
@@ -146,15 +94,8 @@
   (setq history-delete-duplicates t)
   (setq savehist-save-minibuffer-history t)
   (add-to-list 'savehist-additional-variables 'kill-ring))
-#+end_src
 
-* KEYBINDINGS
-#+begin_src emacs-lisp
-(global-set-key [escape] 'keyboard-escape-quit)
-#+end_src
-
-** [[https://github.com/emacs-evil/evil][Evil Mode]]
-#+begin_src emacs-lisp
+;; Keymaps
 (use-package evil
     :init
     (setq evil-want-integration t
@@ -163,7 +104,7 @@
           evil-vsplit-window-right t
           evil-split-window-below t
           evil-shift-width 2
-          evil-undo-system 'undo-fu)
+          evil-undo-system 'undo-tree)
     :config
     (evil-mode 1)
     (define-key evil-motion-state-map (kbd "SPC") nil)
@@ -179,52 +120,33 @@
     (define-key evil-normal-state-map (kbd "C-t") 'tab-new)
     (define-key evil-normal-state-map (kbd "C-k") 'tab-next)
     (define-key evil-normal-state-map (kbd "C-j") 'tab-previous)
-    (define-key evil-normal-state-map (kbd "C-q") 'evil-window-delete)
+    (define-key evil-normal-state-map (kbd "C-w") 'evil-window-delete)
     (define-key evil-normal-state-map (kbd "C-S-J") 'evil-window-move-far-left)
     (define-key evil-normal-state-map (kbd "C-S-K") 'evil-window-move-far-right)
     (define-key evil-normal-state-map (kbd "C-S-H") 'previous-buffer)
     (define-key evil-normal-state-map (kbd "C-S-L") 'next-buffer)
     (define-key evil-normal-state-map (kbd "gh") 'evil-beginning-of-line)
     (define-key evil-normal-state-map (kbd "gl") 'evil-end-of-line)
-    (define-key evil-visual-state-map (kbd "gcc") 'comment-line)
-    (define-key evil-visual-state-map (kbd "gcr") 'comment-or-uncomment-region)
     (define-key evil-normal-state-map (kbd "gra") 'eglot-code-actions))
 
 (setq-default evil-cross-lines t)
 (setq org-return-follows-link t)
-#+end_src
 
-*** [[https://github.com/emacs-evil/evil-collection][Evil Collection]] 
-#+begin_src emacs-lisp
 (use-package evil-collection
   :after evil
   ;; :custom (evil-collection-setup-minibuffer t)
   :config
-  (add-to-list 'evil-collection-mode-list 'help) ;; evilify help mode
+  (add-to-list 'evil-collection-mode-list 'help)
   (evil-collection-init))
-#+end_src
 
-*** [[https://github.com/Somelauw/evil-org-mode][Evil Org Mode]] 
-#+begin_src emacs-lisp
-(use-package evil-org
-  :ensure t
-  :after org
-  :hook (org-mode . (lambda () evil-org-mode))
+(use-package evil-commentary
   :config
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
-#+end_src
+  (evil-commentary-mode))
 
-*** [[https://github.com/emacs-evil/evil-surround][Evil Surround]] 
-#+begin_src emacs-lisp
 (use-package evil-surround
-  :ensure t
   :config
   (global-evil-surround-mode 1))
-#+end_src
 
-** [[https://github.com/noctuid/general.el][General]]
-#+begin_src emacs-lisp
 (use-package general
   :config
   (general-evil-setup)
@@ -237,12 +159,12 @@
 
   (me/leader-keys
     "SPC" '(execute-extended-command :wk "M-x")
-    "RET" '(counsel-bookmark :wk "Bookmarks")
-    "." '(counsel-fzf :wk "Fuzzy finding")
+    "RET" '(consult-bookmark :wk "Bookmarks")
+    "." '(consult-find :wk "Fuzzy finding")
     ">" '(dired-jump :wk "Dired")
-    "," '(counsel-ibuffer :wk "Buffers")
-    "?" '(counsel-rg :wk "Grep")
-    "/" '(swiper :wk "Search line"))
+    "," '(consult-buffer :wk "Buffers")
+    "?" '(consult-ripgrep :wk "Grep")
+    "/" '(consult-line :wk "Search line"))
 
   (me/leader-keys
     "s" '(:ignore t :wk "Sessions")
@@ -257,19 +179,18 @@
 
   (me/leader-keys
     "f" '(:ignore t :wk "Files")
-    "f p" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Emacs Config")
-    "f n" '((lambda () (interactive) (counsel-find-file "~/Dokumenty/notatki/")) :wk "Notes")
-    "f g" '((lambda () (interactive) (counsel-find-file "~/Projekty")) :wk "Projects")
-    "f d" '((lambda () (interactive) (counsel-find-file "~/.dotfiles")) :wk "Dotfiles")
-    "f r" '(counsel-recentf :wk "Recent files")
+    "f p" '((lambda () (interactive) (find-file "~/.config/emacs/init.el")) :wk "Emacs Config")
+    "f n" '((lambda () (interactive) (consult-fd "~/Dokumenty/notatki/")) :wk "Notes")
+    "f r" '(consult-recent-file :wk "Recent files")
     "f u" '(sudo-edit :wk "Sudo edit file")
     "f U" '(sudo-edit-find-file :wk "Sudo find file"))
 
   (me/leader-keys
     "h" '(:ignore t :wk "Emacs")
-    "h t" '(counsel-load-theme :wk "Change theme")
-    "h l" '(elpaca-update-all :wk "Elpaca: update packages")
-    "h r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el") (ignore (elpaca-process-queues))) :wk "Reload emacs config"))
+    "h t" '(consult-theme :wk "Change theme")
+    "h l" '(package-upgrade-all :wk "Update packages")
+    "h r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el")) :wk "Reload emacs config")
+    "h R" '(restart-emacs :wk "Reload emacs config"))
 
   (me/leader-keys
     "p" '(:ignore t :wk "Packages")
@@ -346,7 +267,7 @@
     "y d" 'dired-copy-dirname-as-kill
     "y c" 'dired-copy-path-at-point
     "a" 'counsel-find-file
-    "," 'zoxide-travel
+    "." 'zoxide-travel
     "c" 'dired-do-copy
     "C" 'dired-do-copy
     "r" 'dired-do-rename
@@ -358,12 +279,8 @@
     :keymaps 'elfeed-search-mode-map
     "W" 'elfeed-search-browse-url
     "A" 'elfeed-mark-all-as-read
-    "O" 'elfeed-update)
-)
-#+end_src
+    "O" 'elfeed-update))
 
-** [[https://github.com/justbur/emacs-which-key][Which Key]]
-#+begin_src emacs-lisp
 (use-package which-key
   :init
     (which-key-mode 1)
@@ -382,136 +299,73 @@
 	  which-key-max-description-length 25
 	  which-key-allow-imprecise-window-fit nil
 	  which-key-separator " → " ))
-#+end_src
 
-* PACKAGES
-** [[https://github.com/Malabarba/beacon][Beacon]]
-#+begin_src emacs-lisp
-(use-package beacon
-  :init
-  (beacon-mode 1))
-#+end_src
-
-** [[https://github.com/alphapapa/burly.el][Burly]] 
-#+begin_src emacs-lisp
-(use-package burly)
-#+end_src
-
-** Completion
-*** [[https://github.com/abo-abo/swiper][Counsel/Ivy]]
-#+begin_src emacs-lisp
-(use-package ivy
-  :diminish
-  :bind (("C-s" . swiper)
-         :map ivy-minibuffer-map
-         ("y" . self-insert-command)
-         ("TAB" . ivy-alt-done)
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-j" . ivy-next-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-j" . ivy-next-line)
-         ("C-d" . ivy-reverse-i-search-kill))
-  :custom
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) ")
-  (setq enable-recursive-minibuffers t)
-  :config
-  (ivy-mode 1))
-
-(use-package counsel
-  :bind (("C-M-j" . 'counsel-switch-buffer)
-         :map minibuffer-local-map
-         ("C-r" . 'counsel-minibuffer-history))
-  :custom
-  (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
-  :config
-  (counsel-mode 1)
-  (setq ivy-initial-inputs-alist nil)) ;; removes starting ^ regex in M-x
-#+end_src
-*** [[https://github.com/Yevgnen/ivy-rich][Ivy Rich]]
-#+begin_src emacs-lisp
-(use-package ivy-rich
-  :after ivy
-  :init
-  (ivy-rich-mode 1)
-  :custom
-  (ivy-virtual-abbreviate 'full
-   ivy-rich-switch-buffer-align-virtual-buffer t
-   ivy-rich-path-style 'abbrev)
-  :config
-  (ivy-set-display-transformer 'ivy-switch-buffer
-                               'ivy-rich-switch-buffer-transformer))
-#+end_src
-*** [[https://github.com/radian-software/prescient.el][Ivy Prescient]]
-#+begin_src emacs-lisp
-(use-package ivy-prescient
-  :after counsel
-  :custom
-  (ivy-prescient-enable-filtering nil)
-  :config
-  ;; Uncomment the following line to have sorting remembered across sessions!
-  (prescient-persist-mode 1)
-  (ivy-prescient-mode 1))
-#+end_src
-
-** Dired
-#+begin_src emacs-lisp
-(use-package dired
-  :ensure nil
-  :defer
+;; Completion
+(use-package vertico
   :hook
-  (dired-mode . hl-line-mode)
-  (dired-mode . auto-revert-mode)
-  :config
-  (setq dired-listing-switches
-      "-AGFhlv --group-directories-first")
+  (after-init . vertico-mode)
   :custom
-  (dired-do-revert-buffer t)
-  (dired-auto-revert-buffer t)
-  (delete-by-moving-to-trash t)
-  (dired-dwim-target t))
-#+end_src
-
-*** [[https://emacs.stackexchange.com/questions/36850/copy-to-kill-ring-selected-file-names-full-path][Copy path at point]]
-#+begin_src emacs-lisp
-(defun dired-copy-path-at-point ()
-    (interactive)
-    (dired-copy-filename-as-kill 0))
-#+end_src
-
-*** [[https://stackoverflow.com/questions/2416655/file-path-to-clipboard-in-emacs][Copy directory name]]
-#+begin_src emacs-lisp
-(defun dired-copy-dirname-as-kill ()
-  "Copy the current directory into the kill ring."
-  (interactive)
-  (kill-new default-directory))
-#+end_src
-
-*** Dired Open
-#+begin_src emacs-lisp
-(use-package dired-open
+  (vertico-count 10)
+  (vertico-resize nil)
+  (vertico-cycle t)
   :config
-  (setq dired-open-extensions '(("gif" . "feh")
-                                ("jpg" . "feh")
-                                ("png" . "feh")
-                                ("mkv" . "mpv")
-                                ("mp4" . "mpv")
-                                ("flac" . "mpv")
-                                ("mp3" . "mpv")
-                                ("pdf" . "zen-browser"))))
-#+end_src
+  (advice-add #'vertico--format-candidate :around
+              (lambda (orig cand prefix suffix index _start)
+                (setq cand (funcall orig cand prefix suffix index _start))
+                (concat
+                 (if (= vertico--index index)
+                     (propertize "» " 'face '(:foreground "#80adf0" :weight bold))
+                   "  ")
+                 cand))))
 
-** [[https://github.com/seagle0128/doom-modeline][Doom Modeline]]
-#+begin_src emacs-lisp
+(use-package orderless
+  :defer t
+  :after vertico
+  :bind (:map vertico-map
+         ("C-j" . vertico-next)
+         ("C-k" . vertico-previous)
+         ("C-f" . vertico-exit)
+         :map minibuffer-local-map
+         ("M-h" . backward-kill-word))
+  :init
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
+
+(use-package marginalia
+  :custom
+  (marginalia-align 'right)
+  :hook
+  (after-init . marginalia-mode))
+
+(use-package consult
+  :defer t
+  :init
+  (advice-add #'register-preview :override #'consult-register-window)
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref))
+
+(use-package embark
+  :defer t)
+
+(use-package embark-consult
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
+
+;; UI
+(use-package catppuccin-theme)
+
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-ayu-dark t)
+  (doom-themes-org-config))
+
+(add-to-list 'default-frame-alist '(alpha-background . 90))
+
 (use-package doom-modeline
-  :ensure t
   :init (doom-modeline-mode 1)
   :config
   (setq doom-modeline-height 30
@@ -527,23 +381,68 @@
         doom-modeline-enable-word-count t
         doom-modeline-buffer-encoding nil
         doom-modeline-modal-modern-icon nil
-        doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode))
-)
-#+end_src
+        doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)))
 
-** Eglot
-#+begin_src emacs-lisp
+
+;; Icons
+(use-package nerd-icons)
+
+(use-package nerd-icons-dired
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+
+(use-package nerd-icons-completion
+  :after (:all nerd-icons marginalia)
+  :config
+  (nerd-icons-completion-mode)
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+
+
+;; Packages
+(use-package burly)
+
+(use-package dired
+  :ensure nil
+  :defer
+  :hook
+  (dired-mode . hl-line-mode)
+  (dired-mode . auto-revert-mode)
+  :config
+  (setq dired-listing-switches
+      "-AGFhlv --group-directories-first")
+  :custom
+  (dired-do-revert-buffer t)
+  (dired-auto-revert-buffer t)
+  (delete-by-moving-to-trash t)
+  (dired-dwim-target t))
+
+(defun dired-copy-path-at-point ()
+    (interactive)
+    (dired-copy-filename-as-kill 0))
+
+(defun dired-copy-dirname-as-kill ()
+  "Copy the current directory into the kill ring."
+  (interactive)
+  (kill-new default-directory))
+
+(use-package dired-open
+  :config
+  (setq dired-open-extensions '(("gif" . "feh")
+                                ("jpg" . "feh")
+                                ("png" . "feh")
+                                ("mkv" . "mpv")
+                                ("mp4" . "mpv")
+                                ("flac" . "mpv")
+                                ("mp3" . "mpv")
+                                ("pdf" . "zen-browser"))))
+
 (use-package eglot
   :ensure nil
   :custom
-  (eglot-events-buffer-size 0) ;; No event buffers (LSP server logs)
-  (eglot-autoshutdown t);; Shutdown unused servers.
-  (eglot-report-progress nil) ;; Disable LSP server logs (Don't show lsp messages at the bottom, java)
-)
-#+end_src
+  (eglot-events-buffer-size 0)
+  (eglot-autoshutdown t)
+  (eglot-report-progress nil))
 
-*** [[https://github.com/Automattic/harper/][Harper]]
-#+begin_src emacs-lisp
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                '(markdown-mode . ("harper-ls" "--stdio"))))
@@ -568,10 +467,7 @@
                             :isolateEnglish :json-false
                             :dialect "American"
                             :maxFileLength 120000)))
-#+end_src
 
-** [[https://github.com/skeeto/elfeed][Elfeed]]
-#+begin_src emacs-lisp
 (use-package elfeed
   :config
   (setq elfeed-search-feed-face ":foreground #b3b8c3 :weight bold")
@@ -581,51 +477,35 @@
   (interactive)
   (elfeed-untag elfeed-search-entries 'unread)
   (elfeed-search-update :force)) ; redraw
-#+end_src
 
-*** [[https://github.com/jeetelongname/elfeed-goodies][Elfeed Goodies]]
-#+begin_src emacs-lisp
 (use-package elfeed-goodies
   :init
   (elfeed-goodies/setup)
   :config
   (setq elfeed-goodies/entry-pane-size 0.5))
-#+end_src
 
-*** [[https://github.com/remyhonig/elfeed-org][Elfeed-org]]
-#+begin_src emacs-lisp
 (use-package elfeed-org
-  :ensure t
   :config
   (setq rmh-elfeed-org-files (list "~/.config/emacs/files/elfeed/elfeed.org"))
   (elfeed-org))
-#+end_src
 
-** [[https://github.com/edkolev/evil-goggles][Evil Goggles]]
-#+begin_src emacs-lisp
-(use-package evil-goggles
-  :ensure t
+(use-package eww
+  :ensure nil
   :config
-  (evil-goggles-mode))
-  ;; (evil-goggles-use-diff-faces)
-#+end_src
-
-** EWW
-#+begin_src emacs-lisp
-(setq
- browse-url-browser-function 'eww-browse-url
- shr-use-fonts  nil
- ;; shr-use-colors nil
- shr-indentation 2
- ;; shr-indentation 70 
- shr-width 100
- eww-auto-rename-buffer 1
- eww-download-directory "~/Pobrane"
- eww-bookmarks-directory "~/.config/emacs/files/"
- eww-search-prefix "https://frogfind.com/?q="
- browse-url-secondary-browser-function 'browse-url-xdg-open)
-
-(add-hook 'eww-after-render-hook 'eww-readable)
+  (setq
+  browse-url-browser-function 'eww-browse-url
+  shr-use-fonts  nil
+  ;; shr-use-colors nil
+  shr-indentation 2
+  ;; shr-indentation 70 
+  shr-width 100
+  eww-auto-rename-buffer 1
+  eww-download-directory "~/Pobrane"
+  eww-bookmarks-directory "~/.config/emacs/files/"
+  eww-search-prefix "https://frogfind.com/?q="
+  browse-url-secondary-browser-function 'browse-url-xdg-open)
+  :hook
+  (eww-after-render-hook . eww-readable))
 
 (defun eww-new ()
   (interactive)
@@ -633,26 +513,13 @@
     (switch-to-buffer (generate-new-buffer "eww"))
     (eww-mode)
     (eww url)))
-#+end_src
 
-** Insert date / time 
-#+begin_src emacs-lisp
-(defun insert-todays-date (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%d-%m-%Y")
-          (format-time-string "%Y-%m-%d"))))
+(use-package indent-guide
+  :hook
+  (prog-mode . indent-guide-mode)
+  :config
+  (setq indent-guide-char "│"))
 
-(defun insert-current-time (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%R")
-          (format-time-string "%H:%M"))))
-#+end_src
-
-** Spelling
-*** Ispell / Flyspell
-#+begin_src emacs-lisp
 (with-eval-after-load "ispell"
   (setenv "LANG" "pl_PL.UTF-8")
   (setq ispell-program-name "hunspell")
@@ -663,21 +530,8 @@
 
 (setq ispell-silently-savep t)
 (setq flyspell-issue-message-flag nil)
-;; (add-hook 'text-mode-hook 'flyspell-mode)
-#+end_src
 
-** [[https://www.emacswiki.org/emacs/KillingBuffers#h5o-2][Kill Other Buffers]]
-#+begin_src emacs-lisp
-(defun kill-other-buffers ()
-  "Kill all other buffers."
-  (interactive)
-  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
-#+end_src
-
-** [[https://github.com/jrblevin/markdown-mode][Markdown Mode]]
-#+begin_src emacs-lisp
 (use-package markdown-mode
-  :ensure t
   :init
   (setq markdown-unordered-list-item-prefix "  -")
   (setq markdown-hide-urls t)
@@ -686,35 +540,7 @@
       "pandoc"
       " --from=markdown --to=html"
       " --standalone --mathjax --highlight-style=pygments")))
-#+end_src
 
-** [[https://github.com/twlz0ne/nerd-fonts.el][Nerd Icons]]
-#+begin_src emacs-lisp
-(use-package nerd-icons
-  :ensure t
-  :defer t)
-#+end_src
-
-*** [[https://github.com/rainstormstudio/nerd-icons-dired][Nerd Icons Dired]] 
-#+begin_src emacs-lisp
-(use-package nerd-icons-dired
-  :ensure t
-  :defer t
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
-#+end_src
-
-*** [[https://github.com/seagle0128/nerd-icons-ivy-rich][Nerd Icons Ivy Rich]] 
-#+begin_src emacs-lisp
-(use-package nerd-icons-ivy-rich
-  :ensure t
-  :init
-  (nerd-icons-ivy-rich-mode 1)
-  (ivy-rich-mode 1))
-#+end_src
-
-** Org Mode
-#+begin_src emacs-lisp
 (use-package org
   :ensure nil
   :config
@@ -772,60 +598,37 @@
   :ensure nil
   :config
   (setq org-habit-graph-column 60))
-#+end_src
 
-*** [[https://github.com/sabof/org-bullets][Org Bullets]]
-#+begin_src emacs-lisp
-(use-package org-bullets
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-#+end_src
-
-*** [[https://github.com/harrybournis/org-fancy-priorities][Org Fancy Priorities]] 
-#+begin_src emacs-lisp
-(use-package org-fancy-priorities
-  :ensure t
+(use-package pulsar
   :hook
-  (org-mode . org-fancy-priorities-mode)
+  (after-init . pulsar-global-mode)
   :config
-  (setq
-     org-fancy-priorities-list '(" " " " "!")
-     org-priority-faces
-     '((?A :foreground "#b04b57")
-       (?B :foreground "#e5c179")
-       (?C :foreground "#87b379"))))
-#+end_src
+  (setq pulsar-pulse t)
+  (setq pulsar-delay 0.025)
+  (setq pulsar-iterations 10)
+  (setq pulsar-face 'evil-ex-lazy-highlight)
 
-** [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]]
-#+begin_src emacs-lisp
+  (add-to-list 'pulsar-pulse-functions 'evil-scroll-down)
+  (add-to-list 'pulsar-pulse-functions 'flymake-goto-next-error)
+  (add-to-list 'pulsar-pulse-functions 'flymake-goto-prev-error)
+  (add-to-list 'pulsar-pulse-functions 'evil-yank)
+  (add-to-list 'pulsar-pulse-functions 'evil-yank-line)
+  (add-to-list 'pulsar-pulse-functions 'evil-delete)
+  (add-to-list 'pulsar-pulse-functions 'evil-delete-line)
+  (add-to-list 'pulsar-pulse-functions 'evil-jump-item)
+  (add-to-list 'pulsar-pulse-functions 'diff-hl-next-hunk)
+  (add-to-list 'pulsar-pulse-functions 'diff-hl-previous-hunk))
+
 (use-package rainbow-delimiters
   :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
          (clojure-mode . rainbow-delimiters-mode)))
-#+end_src
 
-** [[https://github.com/emacsmirror/rainbow-mode][Rainbow Mode]]
-#+begin_src emacs-lisp
 (use-package rainbow-mode
   :defer
-  :ensure t
   :hook (prog-mode org-mode markdown-mode))
-#+end_src
 
-** [[https://github.com/hlissner/emacs-solaire-mode][Solaire Mode]]
-#+begin_src emacs-lisp
-(use-package solaire-mode
-  :init
-  (solaire-global-mode +1))
-#+end_src
-
-** [[https://github.com/nflath/sudo-edit][Sudo Edit]]
-#+begin_src emacs-lisp
 (use-package sudo-edit)
-#+end_src
 
-** Tab Bar Mode
-#+begin_src emacs-lisp
 (setq tab-bar-new-tab-choice "*scratch*"
       tab-bar-close-button-show nil
       tab-bar-new-button-show nil
@@ -835,59 +638,33 @@
       tab-bar-tab-hints nil
       tab-bar-separator " "
       tab-bar-show 1)
-#+end_src
 
-** Themes
-*** [[https://github.com/catppuccin/emacs][Catppuccin]]
-#+begin_src emacs-lisp
-(use-package catppuccin-theme)
-#+end_src
-
-*** [[https://github.com/doomemacs/themes][Doom Themes]]
-#+begin_src emacs-lisp
-(use-package doom-themes
+(use-package treesit-auto
+  :after emacs
+  :custom
+  (treesit-auto-install 'prompt)
   :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (load-theme 'catppuccin t)
-  (doom-themes-org-config))
-#+end_src
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode t))
 
-** Transparency
-#+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
-#+end_src
+(use-package undo-tree
+  :defer t
+  :hook
+  (after-init . global-undo-tree-mode)
+  :init
+  (setq undo-tree-visualizer-timestamps t
+        undo-tree-visualizer-diff t
+        undo-limit 800000
+        undo-strong-limit 12000000
+        undo-outer-limit 120000000)
+  :config
+  (setq undo-tree-history-directory-alist '(("." . "~/.config/emacs/tmp/undo"))))
 
-** [[https://github.com/emacsmirror/undo-fu][Undo-fu]]
-#+begin_src emacs-lisp
-(use-package undo-fu)
-#+end_src
-
-** [[https://codeberg.org/joostkremers/visual-fill-column][Visual Fill Column]]
-#+begin_src emacs-lisp
 (use-package visual-fill-column
-  :ensure t
   :custom
   (visual-fill-column-width 120)
   (visual-fill-column-center-text t))
-#+end_src
 
-** xclip
-#+begin_src emacs-lisp
-(use-package xclip
-  :ensure t
-  :defer t
-  :hook
-  (after-init . xclip-mode))
-#+end_src
-
-** [[https://gitlab.com/Vonfry/zoxide.el][Zoxide]]
-#+begin_src emacs-lisp
 (use-package zoxide)
-#+end_src
 
-* RUNTIME PERFORMANCE
-#+begin_src emacs-lisp
-;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
-#+end_src

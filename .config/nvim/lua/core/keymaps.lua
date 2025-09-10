@@ -15,7 +15,7 @@ keymap.set("n", "<leader>ss", ":mksession! ~/.local/share/nvim/session/", { desc
 keymap.set("n", "<leader>sl", ":source ~/.local/share/nvim/session/", { desc = "Load session" }, opts)
 
 -- Windows/Splits/Buffers
-keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close" }, opts)
+keymap.set("n", "<C-w>", ":q<CR>", { desc = "Close" }, opts)
 keymap.set("n", "<C-c>", ":bdelete<CR>", { desc = "Close" }, opts)
 keymap.set("n", "<C-n>", "<C-w>v", { desc = "Split window horizontally" }, opts)
 keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" }, opts)

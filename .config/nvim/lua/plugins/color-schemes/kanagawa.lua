@@ -16,8 +16,16 @@ return {
         palette = {},
         theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
     },
-    overrides = function(colors) -- add/modify highlights
-        return {}
+    overrides = function(colors)
+      local theme = colors.theme
+      return {
+        NormalFloat = { bg = "none" },
+        FloatBorder = { bg = "none" },
+        FloatTitle = { bg = "none" },
+        NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
+        LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+        MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+      }
     end,
     theme = "wave",              -- Load "wave" theme
     background = {               -- map the value of 'background' option to a theme
