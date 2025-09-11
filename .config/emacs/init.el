@@ -10,12 +10,6 @@
                          ("org" . "https://orgmode.org/elpa/")
                          ("elpa" . "https://elpa.gnu.org/packages/")
                          ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
-(package-initialize)
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents) (package-install 'use-package))
-(eval-when-compile (require 'use-package))
-(setq use-package-always-ensure t)
-
 
 (setq package-quickstart t)
 
@@ -72,10 +66,12 @@
   (setq user-emacs-directory "~/.config/emacs")
   (setq bookmark-default-file "~/.config/emacs/files/bookmarks")
   (setq auth-sources '("~/Dokumenty/tajne/.authinfo.gpg"))
-  (setq custom-file (locate-user-emacs-file "custom-vars.el"))
-  (setq recentf-mode t)
-  (setq recentf-save-file "~/.config/emacs/files/recentf")
+  (setq custom-file (locate-user-emacs-file "files/custom-vars.el"))
   (load custom-file 'noerror 'nomessage)
+  (setq recentf-save-file "~/.config/emacs/files/recentf")
+  (recentf-mode 1)
+  (setq recentf-max-menu-items 25)
+  (setq recentf-max-saved-items 25)
   (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font"  :height 100)
   (set-face-attribute 'fixed-pitch     nil :family "JetBrainsMono Nerd Font" :height 100)
   (set-face-attribute 'variable-pitch  nil :family "JetBrainsMono Nerd Font" :height 100)
@@ -160,7 +156,7 @@
   (me/leader-keys
     "SPC" '(execute-extended-command :wk "M-x")
     "RET" '(consult-bookmark :wk "Bookmarks")
-    "." '(consult-find :wk "Fuzzy finding")
+    "." '(find-file :wk "Find file")
     ">" '(dired-jump :wk "Dired")
     "," '(consult-buffer :wk "Buffers")
     "?" '(consult-ripgrep :wk "Grep")
@@ -181,6 +177,7 @@
     "f" '(:ignore t :wk "Files")
     "f p" '((lambda () (interactive) (find-file "~/.config/emacs/init.el")) :wk "Emacs Config")
     "f n" '((lambda () (interactive) (consult-fd "~/Dokumenty/notatki/")) :wk "Notes")
+    "f N" '((lambda () (interactive) (dired "~/Dokumenty/notatki/")) :wk "Notes")
     "f r" '(consult-recent-file :wk "Recent files")
     "f u" '(sudo-edit :wk "Sudo edit file")
     "f U" '(sudo-edit-find-file :wk "Sudo find file"))
@@ -202,6 +199,7 @@
 
   (me/leader-keys
     "t" '(:ignore t :wk "Toggles")
+    "t u" '(undo-tree-visualize :wk "Undo Tree")
     "t l" '(toggle-word-wrap :wk "Line wrapping")
     "t x" '(executable-set-magic :wk "Set interpreter")
     "t v" '(visual-fill-column-mode :wk "Visual fill column")
@@ -266,8 +264,10 @@
     :keymaps 'dired-mode-map
     "y d" 'dired-copy-dirname-as-kill
     "y c" 'dired-copy-path-at-point
-    "a" 'counsel-find-file
+    "a" 'find-file
+    "A" 'mkdir
     "." 'zoxide-travel
+    ">" 'zoxide-travel
     "c" 'dired-do-copy
     "C" 'dired-do-copy
     "r" 'dired-do-rename
@@ -354,14 +354,21 @@
 
 
 ;; UI
+(add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
+
+(use-package almost-mono-themes)
+
 (use-package catppuccin-theme)
 
 (use-package doom-themes
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-ayu-dark t)
   (doom-themes-org-config))
+
+(use-package kanagawa-themes)
+
+(load-theme 'doom-dracula :no-confirm)
 
 (add-to-list 'default-frame-alist '(alpha-background . 90))
 
@@ -638,14 +645,6 @@
       tab-bar-tab-hints nil
       tab-bar-separator " "
       tab-bar-show 1)
-
-(use-package treesit-auto
-  :after emacs
-  :custom
-  (treesit-auto-install 'prompt)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode t))
 
 (use-package undo-tree
   :defer t

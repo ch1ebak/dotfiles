@@ -1,13 +1,1 @@
-configuration {
-  modi: "drun,window";
-  kb-remove-to-eol: "";
-  kb-accept-entry: "Return";
-  kb-row-up: "Control+k";
-  kb-row-down: "Control+j";
-}
-
-//@theme "/home/karna/.config/rofi/themes/gruvbox"
-
-//@theme "/home/karna/.config/rofi/themes/gruvbox"
-
-@theme "/home/karna/.config/rofi/themes/gruvbox"
+@theme "/home/karna/.config/rofi/themes/dracula"

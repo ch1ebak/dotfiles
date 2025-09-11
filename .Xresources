@@ -15,4 +15,4 @@ Xft.autohint: true
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
-#include "/home/karna/.config/xresources/gruvbox"
+#include "/home/karna/.config/xresources/dracula"
