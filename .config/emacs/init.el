@@ -1,6 +1,19 @@
+;; ============================
+;; ▗▄▄▄▖▗▖  ▗▖ ▗▄▖  ▗▄▄▖ ▗▄▄▖
+;; ▐▌   ▐▛▚▞▜▌▐▌ ▐▌▐▌   ▐▌   
+;; ▐▛▀▀▘▐▌  ▐▌▐▛▀▜▌▐▌    ▝▀▚▖
+;; ▐▙▄▄▖▐▌  ▐▌▐▌ ▐▌▝▚▄▄▖▗▄▄▞▘
+;;
+;; github.com/ch1ebak/dotfiles
+;; ============================
+
+
+
 (setq gc-cons-threshold #x40000000)
 
 (setq read-process-output-max (* 1024 1024 4))
+
+
 
 ;; Use Package
 (require 'use-package-ensure)
@@ -12,6 +25,8 @@
                          ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 
 (setq package-quickstart t)
+
+
 
 ;; Emacs Config
 (use-package emacs
@@ -81,6 +96,7 @@
   (scroll-bar-mode -1)
   (tool-bar-mode -1))
 
+
 (use-package savehist
   :ensure nil
   :hook (after-init . savehist-mode)
@@ -90,6 +106,8 @@
   (setq history-delete-duplicates t)
   (setq savehist-save-minibuffer-history t)
   (add-to-list 'savehist-additional-variables 'kill-ring))
+
+
 
 ;; Keymaps
 (use-package evil
@@ -128,6 +146,7 @@
 (setq-default evil-cross-lines t)
 (setq org-return-follows-link t)
 
+
 (use-package evil-collection
   :after evil
   ;; :custom (evil-collection-setup-minibuffer t)
@@ -135,13 +154,24 @@
   (add-to-list 'evil-collection-mode-list 'help)
   (evil-collection-init))
 
+
 (use-package evil-commentary
   :config
   (evil-commentary-mode))
 
+
+(use-package evil-org
+  :after org
+  :hook (org-mode . (lambda () evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
+
 (use-package evil-surround
   :config
   (global-evil-surround-mode 1))
+
 
 (use-package general
   :config
@@ -193,6 +223,7 @@
     "p" '(:ignore t :wk "Packages")
     "p x" '(org-capture :wk "Org Capture")
     "p a" '(org-agenda :wk "Org Agenda")
+    "p m" '(magit-status :wk "Magit")
     "p e" '(elfeed :wk "Elfeed")
     "p w" '(eww :wk "EWW")
     "p W" '(eww-list-bookmarks :wk "EWW Bookmarks"))
@@ -281,6 +312,7 @@
     "A" 'elfeed-mark-all-as-read
     "O" 'elfeed-update))
 
+
 (use-package which-key
   :init
     (which-key-mode 1)
@@ -299,6 +331,8 @@
 	  which-key-max-description-length 25
 	  which-key-allow-imprecise-window-fit nil
 	  which-key-separator " → " ))
+
+
 
 ;; Completion
 (use-package vertico
@@ -353,6 +387,7 @@
   (embark-collect-mode . consult-preview-at-point-mode))
 
 
+
 ;; UI
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
 
@@ -370,7 +405,8 @@
 
 (load-theme 'doom-dracula :no-confirm)
 
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+;; (add-to-list 'default-frame-alist '(alpha-background . 90))
+
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -391,6 +427,7 @@
         doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)))
 
 
+
 ;; Icons
 (use-package nerd-icons)
 
@@ -405,8 +442,10 @@
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
 
+
 ;; Packages
 (use-package burly)
+
 
 (use-package dired
   :ensure nil
@@ -443,6 +482,7 @@
                                 ("mp3" . "mpv")
                                 ("pdf" . "zen-browser"))))
 
+
 (use-package eglot
   :ensure nil
   :custom
@@ -475,6 +515,7 @@
                             :dialect "American"
                             :maxFileLength 120000)))
 
+
 (use-package elfeed
   :config
   (setq elfeed-search-feed-face ":foreground #b3b8c3 :weight bold")
@@ -495,6 +536,7 @@
   :config
   (setq rmh-elfeed-org-files (list "~/.config/emacs/files/elfeed/elfeed.org"))
   (elfeed-org))
+
 
 (use-package eww
   :ensure nil
@@ -521,11 +563,13 @@
     (eww-mode)
     (eww url)))
 
+
 (use-package indent-guide
   :hook
   (prog-mode . indent-guide-mode)
   :config
   (setq indent-guide-char "│"))
+
 
 (with-eval-after-load "ispell"
   (setenv "LANG" "pl_PL.UTF-8")
@@ -538,6 +582,10 @@
 (setq ispell-silently-savep t)
 (setq flyspell-issue-message-flag nil)
 
+
+(use-package magit)
+
+
 (use-package markdown-mode
   :init
   (setq markdown-unordered-list-item-prefix "  -")
@@ -547,6 +595,7 @@
       "pandoc"
       " --from=markdown --to=html"
       " --standalone --mathjax --highlight-style=pygments")))
+
 
 (use-package org
   :ensure nil
@@ -606,6 +655,7 @@
   :config
   (setq org-habit-graph-column 60))
 
+
 (use-package pulsar
   :hook
   (after-init . pulsar-global-mode)
@@ -626,15 +676,19 @@
   (add-to-list 'pulsar-pulse-functions 'diff-hl-next-hunk)
   (add-to-list 'pulsar-pulse-functions 'diff-hl-previous-hunk))
 
+
 (use-package rainbow-delimiters
   :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
          (clojure-mode . rainbow-delimiters-mode)))
 
+
 (use-package rainbow-mode
-  :defer
+  :ensure t
   :hook (prog-mode org-mode markdown-mode))
 
+
 (use-package sudo-edit)
+
 
 (setq tab-bar-new-tab-choice "*scratch*"
       tab-bar-close-button-show nil
@@ -645,6 +699,7 @@
       tab-bar-tab-hints nil
       tab-bar-separator " "
       tab-bar-show 1)
+
 
 (use-package undo-tree
   :defer t
@@ -659,11 +714,14 @@
   :config
   (setq undo-tree-history-directory-alist '(("." . "~/.config/emacs/tmp/undo"))))
 
+
 (use-package visual-fill-column
   :custom
   (visual-fill-column-width 120)
   (visual-fill-column-center-text t))
 
+
 (use-package zoxide)
+
 
 (setq gc-cons-threshold (* 2 1000 1000))
