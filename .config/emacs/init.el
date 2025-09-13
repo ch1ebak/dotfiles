@@ -8,12 +8,9 @@
 ;; ============================
 
 
-
 (setq gc-cons-threshold #x40000000)
 
 (setq read-process-output-max (* 1024 1024 4))
-
-
 
 ;; Use Package
 (require 'use-package-ensure)
@@ -26,76 +23,54 @@
 
 (setq package-quickstart t)
 
-
-
 ;; Emacs Config
 (use-package emacs
   :ensure nil
+
   :custom
   (delete-selection-mode 1)
   (electric-indent-mode -1)
   (electric-pair-mode 1)
   (global-auto-revert-mode t)
-  (global-visual-line-mode t)
   (set-fringe-mode 5)
   (blink-cursor-mode 0)
-  (winner-mode 1)
+  (display-line-numbers-type 'relative) 
+  (global-display-line-numbers-mode 1)
+  (tab-width 2)
+  (inhibit-startup-message t)
+  (initial-scratch-message "")
+  (vc-follow-symlinks t)
+  (use-short-answers t)
+  (use-dialog-box nil)
+  (conf-unix-mode t)
+
   :config
-  (setq-default tab-width 2)
-  (setq org-edit-src-content-indentation 0)
-  (setq vc-follow-symlinks nil)
-  (setq use-file-dialog nil)
-  (setq use-dialog-box nil)
-  (setq pop-up-windows nil)
-  (setq inhibit-startup-screen nil)
-  (setq shell-file-name "/usr/bin/bash")
-  (setq-default indent-tabs-mode nil)
-  (setq use-short-answers t)
-  (setq electric-pair-pairs
-      '((?\( . ?\)) (?\[ . ?\]) (?\{ . ?\}) (?\< . ?\>)
-          (?\« . ?\») (?\" . ?\")))
-  (setq electric-pair-skip-whitespace 'chomp)
-  (add-hook 'org-mode-hook (lambda ()
-          (setq-local electric-pair-inhibit-predicate
-                  `(lambda (c)
-                  (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
-  (setq display-line-numbers-type 'relative) 
-  (global-display-line-numbers-mode)
-  (setq conf-unix-mode t)
-  (add-to-list 'auto-mode-alist '("\\.*rc$" . conf-unix-mode))
-  (defun crm-indicator (args)
-      (cons (format "[CRM%s] %s"
-                  (replace-regexp-in-string
-                  "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
-                  crm-separator)
-                  (car args))
-          (cdr args)))
-  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
-  (setq minibuffer-prompt-properties
-      '(read-only t cursor-intangible t face minibuffer-prompt))
-  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
-  (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
-  (setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
-      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
-  (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
-  (setq user-emacs-directory "~/.config/emacs")
-  (setq bookmark-default-file "~/.config/emacs/files/bookmarks")
-  (setq auth-sources '("~/Dokumenty/tajne/.authinfo.gpg"))
-  (setq custom-file (locate-user-emacs-file "files/custom-vars.el"))
-  (load custom-file 'noerror 'nomessage)
-  (setq recentf-save-file "~/.config/emacs/files/recentf")
-  (recentf-mode 1)
-  (setq recentf-max-menu-items 25)
-  (setq recentf-max-saved-items 25)
   (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font"  :height 100)
-  (set-face-attribute 'fixed-pitch     nil :family "JetBrainsMono Nerd Font" :height 100)
-  (set-face-attribute 'variable-pitch  nil :family "JetBrainsMono Nerd Font" :height 100)
+  (set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 100)
+  (set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 100)
+
+  (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory)))
+        auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
+        auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t))
+        backup-directory-alist '((".*" . "~/.local/share/Trash/files"))
+        user-emacs-directory "~/.config/emacs"
+        bookmark-default-file "~/.config/emacs/files/bookmarks"
+        auth-sources '("~/Dokumenty/tajne/.authinfo.gpg")
+        custom-file (locate-user-emacs-file "files/custom-vars.el"))
 
   :init
+  (indent-tabs-mode -1)
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
   (tool-bar-mode -1))
 
+(use-package recentf
+  :ensure nil
+  :hook (after-init . recentf-mode)
+  :config
+  (setq recentf-max-menu-items 25
+				recentf-max-saved-items 25
+				recentf-save-file "~/.config/emacs/files/recentf"))
 
 (use-package savehist
   :ensure nil
@@ -106,8 +81,6 @@
   (setq history-delete-duplicates t)
   (setq savehist-save-minibuffer-history t)
   (add-to-list 'savehist-additional-variables 'kill-ring))
-
-
 
 ;; Keymaps
 (use-package evil
@@ -146,7 +119,6 @@
 (setq-default evil-cross-lines t)
 (setq org-return-follows-link t)
 
-
 (use-package evil-collection
   :after evil
   ;; :custom (evil-collection-setup-minibuffer t)
@@ -154,11 +126,9 @@
   (add-to-list 'evil-collection-mode-list 'help)
   (evil-collection-init))
 
-
 (use-package evil-commentary
   :config
   (evil-commentary-mode))
-
 
 (use-package evil-org
   :after org
@@ -167,11 +137,9 @@
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
-
 (use-package evil-surround
   :config
   (global-evil-surround-mode 1))
-
 
 (use-package general
   :config
@@ -312,7 +280,6 @@
     "A" 'elfeed-mark-all-as-read
     "O" 'elfeed-update))
 
-
 (use-package which-key
   :init
     (which-key-mode 1)
@@ -331,8 +298,6 @@
 	  which-key-max-description-length 25
 	  which-key-allow-imprecise-window-fit nil
 	  which-key-separator " → " ))
-
-
 
 ;; Completion
 (use-package vertico
@@ -386,8 +351,6 @@
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
-
-
 ;; UI
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
 
@@ -405,8 +368,7 @@
 
 (load-theme 'doom-dracula :no-confirm)
 
-;; (add-to-list 'default-frame-alist '(alpha-background . 90))
-
+(add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -426,8 +388,6 @@
         doom-modeline-modal-modern-icon nil
         doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)))
 
-
-
 ;; Icons
 (use-package nerd-icons)
 
@@ -441,11 +401,8 @@
   (nerd-icons-completion-mode)
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
-
-
 ;; Packages
 (use-package burly)
-
 
 (use-package dired
   :ensure nil
@@ -482,7 +439,6 @@
                                 ("mp3" . "mpv")
                                 ("pdf" . "zen-browser"))))
 
-
 (use-package eglot
   :ensure nil
   :custom
@@ -515,7 +471,6 @@
                             :dialect "American"
                             :maxFileLength 120000)))
 
-
 (use-package elfeed
   :config
   (setq elfeed-search-feed-face ":foreground #b3b8c3 :weight bold")
@@ -536,7 +491,6 @@
   :config
   (setq rmh-elfeed-org-files (list "~/.config/emacs/files/elfeed/elfeed.org"))
   (elfeed-org))
-
 
 (use-package eww
   :ensure nil
@@ -563,13 +517,11 @@
     (eww-mode)
     (eww url)))
 
-
 (use-package indent-guide
   :hook
   (prog-mode . indent-guide-mode)
   :config
   (setq indent-guide-char "│"))
-
 
 (with-eval-after-load "ispell"
   (setenv "LANG" "pl_PL.UTF-8")
@@ -582,9 +534,7 @@
 (setq ispell-silently-savep t)
 (setq flyspell-issue-message-flag nil)
 
-
 (use-package magit)
-
 
 (use-package markdown-mode
   :init
@@ -595,7 +545,6 @@
       "pandoc"
       " --from=markdown --to=html"
       " --standalone --mathjax --highlight-style=pygments")))
-
 
 (use-package org
   :ensure nil
@@ -636,7 +585,6 @@
           "** TODO %?\n  %i\n ")))
   (setq org-refile-targets
   '(("Archiwum.org" :maxlevel . 1)))
-      ;; ("agenda-agenda.org" :maxlevel . 1)
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
   (setq org-todo-keywords
   '((sequence "TODO(t)" "WAIT(w)" "FIXME(f)" "|" "CANCELED(c)" "DONE(d)")))
@@ -654,7 +602,6 @@
   :ensure nil
   :config
   (setq org-habit-graph-column 60))
-
 
 (use-package pulsar
   :hook
@@ -676,19 +623,15 @@
   (add-to-list 'pulsar-pulse-functions 'diff-hl-next-hunk)
   (add-to-list 'pulsar-pulse-functions 'diff-hl-previous-hunk))
 
-
 (use-package rainbow-delimiters
   :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
          (clojure-mode . rainbow-delimiters-mode)))
-
 
 (use-package rainbow-mode
   :ensure t
   :hook (prog-mode org-mode markdown-mode))
 
-
 (use-package sudo-edit)
-
 
 (setq tab-bar-new-tab-choice "*scratch*"
       tab-bar-close-button-show nil
@@ -699,7 +642,6 @@
       tab-bar-tab-hints nil
       tab-bar-separator " "
       tab-bar-show 1)
-
 
 (use-package undo-tree
   :defer t
@@ -714,14 +656,11 @@
   :config
   (setq undo-tree-history-directory-alist '(("." . "~/.config/emacs/tmp/undo"))))
 
-
 (use-package visual-fill-column
   :custom
   (visual-fill-column-width 120)
   (visual-fill-column-center-text t))
 
-
 (use-package zoxide)
-
 
 (setq gc-cons-threshold (* 2 1000 1000))
