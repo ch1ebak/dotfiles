@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; ============================
 ;; ▗▄▄▄▖▗▖  ▗▖ ▗▄▖  ▗▄▄▖ ▗▄▄▖
 ;; ▐▌   ▐▛▚▞▜▌▐▌ ▐▌▐▌   ▐▌   
@@ -157,6 +159,7 @@
     "." '(find-file :wk "Find file")
     ">" '(dired-jump :wk "Dired")
     "," '(consult-buffer :wk "Buffers")
+    "<" '(kill-buffer :wk "Killing Buffers")
     "?" '(consult-ripgrep :wk "Grep")
     "/" '(consult-line :wk "Search line"))
 
@@ -189,12 +192,12 @@
 
   (me/leader-keys
     "p" '(:ignore t :wk "Packages")
-    "p x" '(org-capture :wk "Org Capture")
     "p a" '(org-agenda :wk "Org Agenda")
-    "p m" '(magit-status :wk "Magit")
+    "p x" '(org-capture :wk "Org Capture")
     "p e" '(elfeed :wk "Elfeed")
-    "p w" '(eww :wk "EWW")
-    "p W" '(eww-list-bookmarks :wk "EWW Bookmarks"))
+    "p m" '(magit-status :wk "Magit")
+    "p t" '(eat :wk "Terminal")
+    "p w" '(eww :wk "EWW"))
 
   (me/leader-keys
     "t" '(:ignore t :wk "Toggles")
@@ -267,6 +270,7 @@
     "A" 'mkdir
     "." 'zoxide-travel
     ">" 'zoxide-travel
+    "p" 'image-dired
     "c" 'dired-do-copy
     "C" 'dired-do-copy
     "r" 'dired-do-rename
@@ -438,6 +442,22 @@
                                 ("flac" . "mpv")
                                 ("mp3" . "mpv")
                                 ("pdf" . "zen-browser"))))
+
+(use-package image-dired
+  :ensure nil
+  :commands (image-dired)
+  :bind
+  ( :map image-dired-thumbnail-mode-map
+    ("<return>" . image-dired-thumbnail-display-external))
+  :config
+  (setq image-dired-thumbnail-storage 'standard)
+  (setq image-dired-external-viewer "xdg-open")
+  (setq image-dired-thumb-size 80)
+  (setq image-dired-thumb-margin 2)
+  (setq image-dired-thumb-relief 0)
+  (setq image-dired-thumbs-per-row 4))
+
+(use-package eat)
 
 (use-package eglot
   :ensure nil
@@ -664,3 +684,5 @@
 (use-package zoxide)
 
 (setq gc-cons-threshold (* 2 1000 1000))
+
+(provide 'init)
