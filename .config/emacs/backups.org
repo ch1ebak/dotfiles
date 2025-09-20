@@ -96,13 +96,12 @@
   (all-the-icons-nerd-fonts-prefer))
 #+end_src
                                                                                        
-** [[https://github.com/Malabarba/beacon][Beacon]]
+** Beacon
 #+begin_src emacs-lisp
 (use-package beacon
   :init
   (beacon-mode 1))
 #+end_src
-
 ** Completion Ivy
 *** [[https://github.com/abo-abo/swiper][Counsel/Ivy]]
 #+begin_src emacs-lisp
@@ -165,85 +164,6 @@
   ;; Uncomment the following line to have sorting remembered across sessions!
   (prescient-persist-mode 1)
   (ivy-prescient-mode 1))
-#+end_src
-
-** Completion Vertico
-*** [[https//github.com/minad/vertico][Vertico]]
-#+begin_src emacs-lisp
-(use-package vertico
-  :ensure t
-  :bind (:map vertico-map
-         ("C-j" . vertico-next)
-         ("C-k" . vertico-previous)
-         ("C-f" . vertico-exit)
-         :map minibuffer-local-map
-         ("M-h" . backward-kill-word))
-  :config
-  (setq read-file-name-completion-ignore-case t
-      read-buffer-completion-ignore-case t
-      completion-ignore-case t)
-  :custom
-  (vertico-cycle t)
-  (vertico-count 10)
-  (vertico-resize t)
-  :init
-  (vertico-mode))
-#+end_src
-
-**** Savehist
-#+begin_src emacs-lisp
-(use-package savehist
-  :ensure nil
-  :hook (after-init . savehist-mode)
-  :config
-  (setq savehist-file "~/.config/emacs/files/savehist")
-  (setq history-length 100)
-  (setq history-delete-duplicates t)
-  (setq savehist-save-minibuffer-history t)
-  (add-to-list 'savehist-additional-variables 'kill-ring))
-#+end_src
-
-*** [[https://github.com/minad/marginalia][Marginalia]]
-#+begin_src emacs-lisp
-(use-package marginalia
-  :after vertico
-  :custom
-  (marginalia-align 'right)
-  (marginalia-max-relative-age 0)
-  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
-  :init
-  (marginalia-mode))
-#+end_src
-
-*** [[https://github.com/minad/consult][Consult]]
-#+begin_src emacs-lisp
-(use-package consult
-  :hook (completion-list-mode . consult-preview-at-point-mode)
-  :init
-  (setq register-preview-delay 0.5
-        register-preview-function #'consult-register-format)
-  (advice-add #'register-preview :override #'consult-register-window)
-  (setq xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref)
-  :config
-  (consult-customize
-   consult-theme :preview-key '(:debounce 0.2 any)
-   consult-ripgrep consult-git-grep consult-grep
-   consult-bookmark consult-recent-file consult-xref
-   consult--source-bookmark consult--source-file-register
-   consult--source-recent-file consult--source-project-recent-file
-   :preview-key '(:debounce 0.4 any))
-  (setq consult-narrow-key "<")
-)
-#+end_src
-
-*** [[https://github.com/oantolin/orderless][Orderless]]
-#+begin_src emacs-lisp
-(use-package orderless
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-defaults nil)
-  (completion-category-overrides '((file (styles partial-completion)))))
 #+end_src
 
 ** [[https://github.com/emacs-dashboard/emacs-dashboard][Dashboard]] 
@@ -326,49 +246,6 @@
   :init
   (add-hook 'emacs-startup-hook #'easysession-load-including-geometry 102)
   (add-hook 'emacs-startup-hook #'easysession-save-mode 103))
-#+end_src
-
-** [[https://github.com/Somelauw/evil-org-mode][Evil Org Mode]] 
-#+begin_src emacs-lisp
-(use-package evil-org
-  :ensure t
-  :after org
-  :hook (org-mode . (lambda () evil-org-mode))
-  :config
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
-#+end_src
-
-** Image Dired
-#+begin_src emacs-lisp
-(use-package image-dired
-  :ensure nil
-  :commands (image-dired)
-  :bind
-  ( :map image-dired-thumbnail-mode-map
-    ("<return>" . image-dired-thumbnail-display-external))
-  :config
-  (setq image-dired-thumbnail-storage 'standard)
-  (setq image-dired-external-viewer "xdg-open")
-  (setq image-dired-thumb-size 80)
-  (setq image-dired-thumb-margin 2)
-  (setq image-dired-thumb-relief 0)
-  (setq image-dired-thumbs-per-row 4))
-#+end_src
-
-** Insert date / time 
-#+begin_src emacs-lisp
-(defun insert-todays-date (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%d-%m-%Y")
-          (format-time-string "%Y-%m-%d"))))
-
-(defun insert-current-time (arg)
-  (interactive "U")
-  (insert (if arg
-          (format-time-string "%R")
-          (format-time-string "%H:%M"))))
 #+end_src
 
 ** Dired Preview
@@ -492,57 +369,6 @@
 ** [[https://github.com/ofosos/ox-epub][Ox-Epub]] 
 #+begin_src emacs-lisp
 (use-package ox-epub)
-#+end_src
-
-** [[https://protesilaos.com/emacs/pulsar#h:812f7616-7e0f-489f-a908-1cb759ca64ce][Pulsar]]
-#+begin_src emacs-lisp
-(use-package pulsar
-  :ensure t
-  :config
-  (setq pulsar-pulse t)
-  (setq pulsar-delay 0.055)
-  (setq pulsar-iterations 10)
-  (pulsar-global-mode 1))
-#+end_src
-
-** Treesit
-#+begin_src emacs-lisp
-(use-package treesit
-  :ensure nil
-  :defer
-  :custom
-  (treesit-font-lock-level 4))
-
-(setq treesit-language-source-alist
-   '((elisp "https://github.com/Wilfred/tree-sitter-elisp")
-     (python "https://github.com/tree-sitter/tree-sitter-python")
-     (bash "https://github.com/tree-sitter/tree-sitter-bash")
-     (css "https://github.com/tree-sitter/tree-sitter-css")
-     (hyprlang "https://github.com/tree-sitter-grammars/tree-sitter-hyprlang")
-     (html "https://github.com/tree-sitter/tree-sitter-html")
-     (json "https://github.com/tree-sitter/tree-sitter-json")
-     (toml "https://github.com/tree-sitter/tree-sitter-toml")
-     (yaml "https://github.com/ikatyang/tree-sitter-yaml")
-     (markdown "https://github.com/ikatyang/tree-sitter-markdown")))
-#+end_src
-
-*** [[https://github.com/renzmann/treesit-auto][Treesit Auto]] 
-#+begin_src emacs-lisp
-(use-package treesit-auto
-  :ensure t
-  :hook (emacs-startup . global-treesit-auto-mode)
-  :custom
-  (treesit-auto-install 'prompt)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all))
-#+end_src
-
-*** [[https://github.com/Nathan-Melaku/hyprlang-ts-mode][Hyprlang TS Mode]] 
-#+begin_src emacs-lisp
-(use-package hyprlang-ts-mode
-  :ensure t
-  :custom
-  (hyprlang-ts-mode-indent-offset 2))
 #+end_src
 
 ** Themes

@@ -7,7 +7,7 @@
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | Window Managers | [Hyprland](https://github.com/ch1ebak/dotfiles/tree/main/.config/hypr) |
 | Terminal        | [Ghostty](https://github.com/ch1ebak/dotfiles/tree/main/.config/ghostty)                                                                      |
-| Editor          | [Neovim](https://github.com/ch1ebak/dotfiles/tree/main/.config/nvim)                                                                          |
+| Editor          | [Emacs](https://github.com/ch1ebak/dotfiles/tree/main/.config/emacs)                                                                          |
 | Shell           | [Bash](https://github.com/ch1ebak/dotfiles/blob/main/.bashrc)                                                                                 |
 | Notifications   | [Dunst](https://github.com/ch1ebak/dotfiles/tree/main/.config/dunst)                                                                          |
 | Launcher        | [Rofi](https://github.com/ch1ebak/dotfiles/tree/main/.config/rofi)                                                                            |
@@ -15,12 +15,14 @@
 
 # THEMES
 [Screenshots](https://github.com/ch1ebak/dotfiles/tree/main/screenshots)
+- Ayu
 - Catppuccin
 - Dracula
 - Everforest
 - Grayscale
 - Gruvbox
 - Kanagawa
+- One Dark
 - Poimandres
 - Spacegray
 - Tokyo Night

@@ -271,6 +271,7 @@
     "." 'zoxide-travel
     ">" 'zoxide-travel
     "p" 'image-dired
+		"s" 'dired-sort-toggle-or-edit
     "c" 'dired-do-copy
     "C" 'dired-do-copy
     "r" 'dired-do-rename
@@ -282,7 +283,7 @@
     :keymaps 'elfeed-search-mode-map
     "W" 'elfeed-search-browse-url
     "A" 'elfeed-mark-all-as-read
-    "O" 'elfeed-update))
+    "R" 'elfeed-update))
 
 (use-package which-key
   :init
@@ -522,7 +523,7 @@
   shr-indentation 2
   ;; shr-indentation 70 
   shr-width 100
-  eww-auto-rename-buffer 1
+  eww-auto-rename-buffer 'title
   eww-download-directory "~/Pobrane"
   eww-bookmarks-directory "~/.config/emacs/files/"
   eww-search-prefix "https://frogfind.com/?q="
@@ -543,16 +544,21 @@
   :config
   (setq indent-guide-char "│"))
 
-(with-eval-after-load "ispell"
-  (setenv "LANG" "pl_PL.UTF-8")
-  (setq ispell-program-name "hunspell")
-  (setq ispell-dictionary "pl_PL,en_US")
+(use-package ispell
+  :ensure nil
+  :config
+  (setq ispell-program-name "hunspell"
+        ispell-dictionary "pl_PL,en_US"
+        ispell-personal-dictionary "~/.config/emacs/files/hunspell_personal"
+        ispell-silently-savep t)
+  :custom
   (ispell-set-spellchecker-params)
-  (ispell-hunspell-add-multi-dic "pl_PL,en_US")
-  (setq ispell-personal-dictionary "~/.config/emacs/files/hunspell_personal"))
+  (ispell-hunspell-add-multi-dic "pl_PL,en_US"))
 
-(setq ispell-silently-savep t)
-(setq flyspell-issue-message-flag nil)
+(defun kill-other-buffers ()
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
 (use-package magit)
 
@@ -653,15 +659,40 @@
 
 (use-package sudo-edit)
 
-(setq tab-bar-new-tab-choice "*scratch*"
-      tab-bar-close-button-show nil
-      tab-bar-new-button-show nil
-      tab-bar-close-last-tab-choice 'tab-bar-mode-disable
-      tab-bar-close-tab-select 'recent
-      tab-bar-new-tab-to 'right
-      tab-bar-tab-hints nil
-      tab-bar-separator " "
-      tab-bar-show 1)
+(use-package tab-bar
+  :ensure nil
+  :defer t
+  :config
+  (setq tab-bar-new-tab-choice "*scratch*"
+        tab-bar-close-button-show nil
+        tab-bar-new-button-show nil
+        tab-bar-close-last-tab-choice 'tab-bar-mode-disable
+        tab-bar-close-tab-select 'recent
+        tab-bar-new-tab-to 'right
+        tab-bar-tab-hints nil
+        tab-bar-separator " "
+        tab-bar-show 1))
+
+(use-package treesit
+  :ensure nil
+  :defer
+	:config
+	(setq treesit-language-source-alist
+		'((bash "https://github.com/tree-sitter/tree-sitter-bash")
+			(elisp "https://github.com/Wilfred/tree-sitter-elisp")
+			(html "https://github.com/tree-sitter/tree-sitter-html")
+      (hyprlang "https://github.com/tree-sitter-grammars/tree-sitter-hyprlang")
+			(markdown "https://github.com/ikatyang/tree-sitter-markdown")))
+  :custom
+  (treesit-font-lock-level 2))
+
+(use-package treesit-auto
+  :ensure t
+  :hook (emacs-startup . global-treesit-auto-mode)
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all))
 
 (use-package undo-tree
   :defer t
