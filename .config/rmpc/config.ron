@@ -170,6 +170,13 @@
                 panes: [(size: "100%", borders: "ALL", pane: Pane(Artists))],
             ),
         ),
+				(
+            name: "Album Artists",
+            pane: Split(
+                direction: Horizontal,
+                panes: [(size: "100%", borders: "ALL", pane: Pane(AlbumArtists))],
+            ),
+        ),
         (
             name: "Albums",
             pane: Split(

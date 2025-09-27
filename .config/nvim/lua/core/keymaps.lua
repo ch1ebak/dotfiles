@@ -52,7 +52,7 @@ keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file"
 keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = "Line wrapping" }, opts)
 
 -- LSP
-keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('harper-ls')<CR>", { desc = "Enable LSP" }, opts)
+keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('ltex-ls')<CR>", { desc = "Enable LSP" }, opts)
 keymap.set("n", "<leader>el", ":lua vim.lsp.stop_client(vim.lsp.get_clients())<CR>", { desc = "Disable LSP" }, opts)
 keymap.set('n', '<leader>ew', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Diagnostics - all" }, opts)
 keymap.set('n', 'grh', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Diagnostics - at point" }, opts)

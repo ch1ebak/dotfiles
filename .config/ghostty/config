@@ -7,7 +7,6 @@ theme = /usr/share/ghostty/themes/Dracula
 background-opacity = 0.9
 background-blur = true
 gtk-titlebar = false
-gtk-adwaita = false
 
 desktop-notifications = true
 

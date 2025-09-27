@@ -23,7 +23,7 @@ from qtile_extras.widget.decorations import RectDecoration
 from qtile_extras.widget.decorations import PowerLineDecoration
 
 ## Color scheme
-from themes.ayu import colors
+from themes.catppuccin import colors
 
 # SETTINGS
 ## General
@@ -116,8 +116,8 @@ keys = [
     Key([mod], "Return", lazy.spawn("ghostty")),
     Key([mod], "w", lazy.spawn("zen-browser")),
     Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
-    Key([mod], "e", lazy.spawn("emacsclient -c -a 'emacs'")),
     Key([mod], "d", lazy.spawn("ghostty -e nvim")),
+    Key([mod, "shift"], "d", lazy.spawn("emacsclient -c -a 'emacs'")),
     Key([mod], "a", lazy.spawn("ghostty -e yazi")),
     Key([mod, "shift"], "a", lazy.spawn("thunar")),
 
@@ -279,7 +279,7 @@ date = widget.Clock(background = colors[2], foreground = colors[10], format = "ï
 ## Screens
 screens = [
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/ayu.png",
+        wallpaper = "~/.config/qtile/wallpapers/catppuccin.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [
@@ -303,7 +303,7 @@ screens = [
         )
     ),
     Screen(
-        wallpaper = "~/.config/qtile/wallpapers/ayu.png",
+        wallpaper = "~/.config/qtile/wallpapers/catppuccin.png",
         wallpaper_mode = "fill",
         top=bar.Bar(
             [

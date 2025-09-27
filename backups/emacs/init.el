@@ -123,7 +123,6 @@
 
 (use-package evil-collection
   :after evil
-  ;; :custom (evil-collection-setup-minibuffer t)
   :config
   (add-to-list 'evil-collection-mode-list 'help)
   (evil-collection-init))
@@ -202,7 +201,7 @@
   (me/leader-keys
     "t" '(:ignore t :wk "Toggles")
     "t u" '(undo-tree-visualize :wk "Undo Tree")
-    "t l" '(toggle-word-wrap :wk "Line wrapping")
+    "t l" '(toggle-truncate-lines :wk "Line wrapping")
     "t x" '(executable-set-magic :wk "Set interpreter")
     "t v" '(visual-fill-column-mode :wk "Visual fill column")
     "t r" '(rainbow-mode :wk "Rainbow mode"))
@@ -373,7 +372,7 @@
 
 (load-theme 'doom-dracula :no-confirm)
 
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+;; (add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)

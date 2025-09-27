@@ -92,9 +92,11 @@ alias xbl="brightnessctl set "
 ## Apps
 alias cal="cal -3 -m --color=auto"
 alias dunres="killall -e dunst & sleep 1; dunstify "hello!" &"
-alias em="emacs -nw"
 alias fehs="feh --bg-fill"
+alias lg="lazygit"
 alias nb="newsboat"
+alias nv="nvim"
+alias nv.="nvim ."
 alias yz="yazi"
 alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
 
