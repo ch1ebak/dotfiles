@@ -97,6 +97,7 @@ alias lg="lazygit"
 alias nb="newsboat"
 alias nv="nvim"
 alias nv.="nvim ."
+alias nvl="nvim --clean -u /nvme/Projekty/pocket.nvim/init.lua"
 alias yz="yazi"
 alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
 
