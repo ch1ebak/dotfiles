@@ -1,7 +1,7 @@
 return {
   "folke/zen-mode.nvim",
   keys = {
-      { "<leader>tv", ":ZenMode | SoftPencil<CR>", desc = "Center text" }
+      { "<leader>tv", ":ZenMode<CR>", desc = "Center text" }
   },
   opts = {
     -- your configuration comes here
