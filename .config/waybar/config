@@ -8,9 +8,10 @@
   "battery": {
     "interval": 60,
     "states": {
-      "good": 90,
-      "warning": 20,
-      "critical": 10
+      "full": 90,
+      "good": 80,
+      "warning": 30,
+      "critical": 15
     },
     "format": "battery: {capacity}%",
     "max-length": 25
