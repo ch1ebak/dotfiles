@@ -1,5 +1,5 @@
 # CH1EBAK'S COOL DOTFILES
-![](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/everforest-qth.png)
+![](https://raw.githubusercontent.com/ch1ebak/dotfiles/refs/heads/main/screenshots/mini-pills.png)
 
 
 # PACKAGES
