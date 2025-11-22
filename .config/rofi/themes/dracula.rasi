@@ -13,14 +13,14 @@ configuration {
   bg1     : #3D3F4A;
   fg0     : #BFBFBF;
   fg1     : #E6E6E6;
-  red     : #5AF78E;
-  green   : #FF6E67;
+  red     : #FF6E67;
+  green   : #5AF78E;
   yellow  : #F4F99D;
   blue    : #CAA9FA;
   magenta : #FF92D0;
   cyan    : #9AEDFE;
 
-  accent: @red;
+  accent: @green;
   urgent: @yellow;
 
   background-color : transparent;
@@ -43,7 +43,7 @@ window {
 
   background-color: @bg0;
   border: 2px;
-  border-color: @red;
+  border-color: @green;
   border-radius: 5px;
 }
 
