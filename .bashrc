@@ -76,7 +76,7 @@ alias mv="mv -i"
 
 ### find
 alias fd="fd -Hia --color always"
-alias rg="rg -i --hidden"
+alias rg="rg -i --hidden --follow"
 
 ### remove
 alias rm="trash -vi"

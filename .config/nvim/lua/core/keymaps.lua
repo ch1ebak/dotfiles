@@ -23,6 +23,7 @@ keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" }, opts)
 keymap.set("n", "<C-t>", "<cmd>tabnew<CR>", { desc = "New tab" }, opts)
 keymap.set("n", "<C-k>", "<cmd>tabn<CR>", { desc = "Next tab" }, opts)
 keymap.set("n", "<C-j>", "<cmd>tabp<CR>", { desc = "Previous tab" }, opts)
+keymap.set("n", "<C-S-h>", "<C-^>", { desc = "Previous tab" }, opts)
 
 -- Movement
 keymap.set("n", "j", "gj", { desc = "Move by line" }, opts)
@@ -44,8 +45,21 @@ keymap.set("n", "n", "nzzzv", { desc = "Better search next" }, opts)
 keymap.set("n", "N", "Nzzzv", { desc = "Better search previous" }, opts)
 
 -- Other
+keymap.set("i", "HL", "<ESC>", { desc = "Exit insert mode" }, opts)
 keymap.set("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Uncomment and Copy" }, opts)
-keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" }, opts)
+
+local function duplicate_and_comment()
+  local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+  vim.api.nvim_feedkeys(esc, "x", false)
+  local start_line = vim.fn.line("'<")
+  local end_line = vim.fn.line("'>")
+  vim.cmd(start_line .. "," .. end_line .. "yank")
+  vim.cmd((end_line + 1) .. "put")
+  vim.api.nvim_feedkeys("gv", "n", false)
+  vim.api.nvim_feedkeys("gc", "v", false)
+end
+
+keymap.set("v", "yc", duplicate_and_comment, { noremap = true, desc = "Duplicate selection and comment original" })
 
 -- Toggles
 keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
@@ -53,7 +67,7 @@ keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = "Line wrapping" }, opts
 
 -- LSP
 keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('harper-ls')<CR>", { desc = "Enable LSP" }, opts)
-keymap.set("n", "<leader>el", ":lua vim.lsp.stop_client(vim.lsp.get_clients())<CR>", { desc = "Disable LSP" }, opts)
+keymap.set("n", "<leader>ed", ":lua vim.lsp.stop_client(vim.lsp.get_clients())<CR>", { desc = "Disable LSP" }, opts)
 keymap.set('n', '<leader>ew', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Diagnostics - all" }, opts)
 keymap.set('n', 'grh', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Diagnostics - at point" }, opts)
 
