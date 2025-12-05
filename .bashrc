@@ -59,12 +59,11 @@ alias pp="paru -Ss"
                                                                
 ## Commands
 ### cd
-alias cd="z"
-alias ..="z .."
-alias z.="z .."
-alias z..="z ../.."
-alias z...="z ../../.."
-alias z....="z ../../../.."
+alias ..="cd .."
+alias cd.="cd .."
+alias cd..="cd ../.."
+alias cd...="cd ../../.."
+alias cd....="cd ../../../.."
 
 ### directories
 alias ls="ls -AGFhlv --color=always --group-directories-first"
@@ -95,11 +94,6 @@ alias dunres="killall -e dunst & sleep 1; dunstify "hello!" &"
 alias fehs="feh --bg-fill"
 alias lg="lazygit"
 alias nb="newsboat"
-alias nv="nvim"
-alias nv.="nvim ."
-alias nvl="nvim --clean -u /nvme/Projekty/pocket.nvim/init.lua"
-alias nvl.="nvim --clean -u /nvme/Projekty/pocket.nvim/init.lua ."
-alias yz="yazi"
 alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
 
 ## Git
@@ -112,6 +106,3 @@ alias stowa="stow . --adopt"
 
 # FZF
 eval "$(fzf --bash)"
-
-# Zoxide
-eval "$(zoxide init bash)"

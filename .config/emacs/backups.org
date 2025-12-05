@@ -96,12 +96,6 @@
   (all-the-icons-nerd-fonts-prefer))
 #+end_src
                                                                                        
-** Beacon
-#+begin_src emacs-lisp
-(use-package beacon
-  :init
-  (beacon-mode 1))
-#+end_src
 ** Completion Ivy
 *** [[https://github.com/abo-abo/swiper][Counsel/Ivy]]
 #+begin_src emacs-lisp
@@ -344,14 +338,6 @@
           ("DONE"      success bold))))
 #+end_src
 
-** [[https://www.emacswiki.org/emacs/KillingBuffers#h5o-2][Kill Other Buffers]]
-#+begin_src emacs-lisp
-(defun kill-other-buffers ()
-  "Kill all other buffers."
-  (interactive)
-  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
-#+end_src
-
 ** [[https://github.com/mickeynp/ligature.el][Ligature]]
 #+begin_src emacs-lisp
 (use-package ligature
@@ -371,6 +357,28 @@
 (use-package ox-epub)
 #+end_src
 
+** Pulsar
+#+begin_src 
+(use-package pulsar
+  :hook
+  (after-init . pulsar-global-mode)
+  :config
+  (setq pulsar-pulse t)
+  (setq pulsar-delay 0.025)
+  (setq pulsar-iterations 10)
+  (setq pulsar-face 'evil-ex-lazy-highlight)
+
+  (add-to-list 'pulsar-pulse-functions 'evil-scroll-down)
+  (add-to-list 'pulsar-pulse-functions 'flymake-goto-next-error)
+  (add-to-list 'pulsar-pulse-functions 'flymake-goto-prev-error)
+  (add-to-list 'pulsar-pulse-functions 'evil-yank)
+  (add-to-list 'pulsar-pulse-functions 'evil-yank-line)
+  (add-to-list 'pulsar-pulse-functions 'evil-delete)
+  (add-to-list 'pulsar-pulse-functions 'evil-delete-line)
+  (add-to-list 'pulsar-pulse-functions 'evil-jump-item)
+  (add-to-list 'pulsar-pulse-functions 'diff-hl-next-hunk)
+  (add-to-list 'pulsar-pulse-functions 'diff-hl-previous-hunk))
+#+end_src
 ** Themes
 *** [[https://github.com/Fabiokleis/kanagawa-emacs][Kanagawa]]
 #+begin_src emacs-lisp
@@ -386,4 +394,9 @@
 ** [[https://github.com/emacsmirror/undo-fu][Undo-fu]]
 #+begin_src emacs-lisp
 (use-package undo-fu)
+#+end_src
+
+** Zoxide
+#+begin_src 
+(use-package zoxide)
 #+end_src

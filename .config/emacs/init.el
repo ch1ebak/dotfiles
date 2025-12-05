@@ -30,6 +30,7 @@
   :ensure nil
 
   :custom
+	(global-visual-line-mode t)
   (delete-selection-mode 1)
   (electric-indent-mode -1)
   (electric-pair-mode 1)
@@ -99,10 +100,18 @@
     (define-key evil-motion-state-map (kbd "SPC") nil)
     (define-key evil-motion-state-map (kbd "RET") nil)
     (define-key evil-motion-state-map (kbd "TAB") nil)
+    ;; line movement
     (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
     (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
     (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
     (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+    ;; other
+    (define-key evil-visual-state-map (kbd "J") 'evil-collection-unimpaired-move-text-down)
+    (define-key evil-visual-state-map (kbd "K") 'evil-collection-unimpaired-move-text-up)
+    (define-key evil-normal-state-map (kbd "gh") 'evil-beginning-of-line)
+    (define-key evil-normal-state-map (kbd "gl") 'evil-end-of-line)
+    (define-key evil-normal-state-map (kbd "gra") 'eglot-code-actions)
+    ;; frames/tabs/windows/buffers
     (define-key evil-normal-state-map (kbd "C-n") 'evil-window-vnew)
     (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
@@ -110,13 +119,19 @@
     (define-key evil-normal-state-map (kbd "C-k") 'tab-next)
     (define-key evil-normal-state-map (kbd "C-j") 'tab-previous)
     (define-key evil-normal-state-map (kbd "C-w") 'evil-window-delete)
+    (define-key evil-normal-state-map (kbd "C-o") 'my-min-max-window)
+    (define-key evil-insert-state-map (kbd "C-n") 'evil-window-vnew)
+    (define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
+    (define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)
+    (define-key evil-insert-state-map (kbd "C-t") 'tab-new)
+    (define-key evil-insert-state-map (kbd "C-k") 'tab-next)
+    (define-key evil-insert-state-map (kbd "C-j") 'tab-previous)
+    (define-key evil-insert-state-map (kbd "C-w") 'evil-window-delete)
+    (define-key evil-insert-state-map (kbd "C-o") 'my-min-max-window)
     (define-key evil-normal-state-map (kbd "C-S-J") 'evil-window-move-far-left)
     (define-key evil-normal-state-map (kbd "C-S-K") 'evil-window-move-far-right)
     (define-key evil-normal-state-map (kbd "C-S-H") 'previous-buffer)
-    (define-key evil-normal-state-map (kbd "C-S-L") 'next-buffer)
-    (define-key evil-normal-state-map (kbd "gh") 'evil-beginning-of-line)
-    (define-key evil-normal-state-map (kbd "gl") 'evil-end-of-line)
-    (define-key evil-normal-state-map (kbd "gra") 'eglot-code-actions))
+    (define-key evil-normal-state-map (kbd "C-S-L") 'next-buffer))
 
 (setq-default evil-cross-lines t)
 (setq org-return-follows-link t)
@@ -155,7 +170,7 @@
   (me/leader-keys
     "SPC" '(execute-extended-command :wk "M-x")
     "RET" '(consult-bookmark :wk "Bookmarks")
-    "." '(find-file :wk "Find file")
+    "." '(consult-find :wk "Find file")
     ">" '(dired-jump :wk "Dired")
     "," '(consult-buffer :wk "Buffers")
     "<" '(kill-buffer :wk "Killing Buffers")
@@ -164,9 +179,8 @@
 
   (me/leader-keys
     "s" '(:ignore t :wk "Sessions")
-    "s s" '(burly-bookmark-frames :wk "Create new session from open frames")
-    "s S" '(burly-bookmark-windows :wk "Create new session from open windows")
-    "s l" '(burly-open-bookmark :wk "Load session"))
+    "s s" '(wg-create-workgroup :wk "Create new session from open frames")
+    "s l" '(wg-open-workgroup :wk "Load session"))
 
   (me/leader-keys
     "b" '(:ignore t :wk "Bookmarks")
@@ -209,8 +223,14 @@
   (me/leader-keys
     "e" '(:ignore t :wk "Eglot")
     "e h" '(eglot :wk "Launch Eglot")
-    "e d" '(eglot-shutdown :wk "Shutdown Eglot")
+    "e l" '(eglot-shutdown :wk "Shutdown Eglot")
     "e w" '(eglot-code-actions :wk "Eglot Code Actions"))
+
+  (me/leader-keys
+    "z" '(:ignore t :wk "Langtool")
+    "z h" '(langtool-check :wk "Launch Langtool")
+    "z l" '(langtool-check-done :wk "Shutdown Langtool")
+    "z w" '(langtool-correct-buffer :wk "Langtool Correct"))
 
   (general-nmap
     :keymaps 'org-mode-map
@@ -267,8 +287,7 @@
     "y c" 'dired-copy-path-at-point
     "a" 'find-file
     "A" 'mkdir
-    "." 'zoxide-travel
-    ">" 'zoxide-travel
+    "M" 'dired-unmark
     "p" 'image-dired
 		"s" 'dired-sort-toggle-or-edit
     "c" 'dired-do-copy
@@ -358,8 +377,6 @@
 ;; UI
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
 
-(use-package almost-mono-themes)
-
 (use-package catppuccin-theme)
 
 (use-package doom-themes
@@ -370,9 +387,11 @@
 
 (use-package kanagawa-themes)
 
-(load-theme 'doom-dracula :no-confirm)
+(use-package real-mono-themes)
 
-;; (add-to-list 'default-frame-alist '(alpha-background . 90))
+(load-theme 'real-mono-dark :no-confirm)
+
+(add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -406,7 +425,9 @@
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
 ;; Packages
-(use-package burly)
+(use-package beacon
+  :init
+  (beacon-mode 1))
 
 (use-package dired
   :ensure nil
@@ -464,11 +485,9 @@
   :custom
   (eglot-events-buffer-size 0)
   (eglot-autoshutdown t)
-  (eglot-report-progress nil))
-
-(with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs
-               '(markdown-mode . ("harper-ls" "--stdio"))))
+  (eglot-report-progress nil)
+	:config
+  (add-to-list 'eglot-server-programs '(markdown-mode . ("harper-ls" "--stdio"))))
 
 (setq-default eglot-workspace-configuration
               '(:harper-ls (:userDictPath ""
@@ -559,6 +578,13 @@
   (interactive)
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
+(use-package langtool
+  :ensure t
+  :config
+  (setq langtool-java-classpath "/usr/share/languagetool:/usr/share/java/languagetool/*")
+  (setq langtool-default-language "en-US")
+  (setq langtool-mother-tongue "pl"))
+
 (use-package magit)
 
 (use-package markdown-mode
@@ -570,6 +596,15 @@
       "pandoc"
       " --from=markdown --to=html"
       " --standalone --mathjax --highlight-style=pygments")))
+
+;; https://www.reddit.com/r/emacs/comments/yzjmmf/comment/ix1y211
+(defvar my-min-max-window nil)
+(defun my-min-max-window()
+  (interactive)
+  (if (and (one-window-p) my-min-max-window)
+      (window-state-put my-min-max-window)
+    (setq my-min-max-window (window-state-get))
+    (delete-other-windows)))
 
 (use-package org
   :ensure nil
@@ -627,26 +662,6 @@
   :ensure nil
   :config
   (setq org-habit-graph-column 60))
-
-(use-package pulsar
-  :hook
-  (after-init . pulsar-global-mode)
-  :config
-  (setq pulsar-pulse t)
-  (setq pulsar-delay 0.025)
-  (setq pulsar-iterations 10)
-  (setq pulsar-face 'evil-ex-lazy-highlight)
-
-  (add-to-list 'pulsar-pulse-functions 'evil-scroll-down)
-  (add-to-list 'pulsar-pulse-functions 'flymake-goto-next-error)
-  (add-to-list 'pulsar-pulse-functions 'flymake-goto-prev-error)
-  (add-to-list 'pulsar-pulse-functions 'evil-yank)
-  (add-to-list 'pulsar-pulse-functions 'evil-yank-line)
-  (add-to-list 'pulsar-pulse-functions 'evil-delete)
-  (add-to-list 'pulsar-pulse-functions 'evil-delete-line)
-  (add-to-list 'pulsar-pulse-functions 'evil-jump-item)
-  (add-to-list 'pulsar-pulse-functions 'diff-hl-next-hunk)
-  (add-to-list 'pulsar-pulse-functions 'diff-hl-previous-hunk))
 
 (use-package rainbow-delimiters
   :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
@@ -711,7 +726,11 @@
   (visual-fill-column-width 120)
   (visual-fill-column-center-text t))
 
-(use-package zoxide)
+(use-package workgroups2
+	:init
+	(workgroups-mode 1))
+
+(use-package mpdel)
 
 (setq gc-cons-threshold (* 2 1000 1000))
 

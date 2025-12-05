@@ -3,14 +3,14 @@
 
 
 # PACKAGES
-| Type            | Package                                                                  |
-| --------------- | ------------------------------------------------------------------------ |
-| Window Managers | [Hyprland](https://github.com/ch1ebak/dotfiles/tree/main/.config/hypr)   |
-| Terminal        | [Ghostty](https://github.com/ch1ebak/dotfiles/tree/main/.config/ghostty) |
-| Editor          | [Neovim](https://github.com/ch1ebak/dotfiles/tree/main/.config/nvim)     |
-| Shell           | [Bash](https://github.com/ch1ebak/dotfiles/blob/main/.bashrc)            |
-| Notifications   | [Dunst](https://github.com/ch1ebak/dotfiles/tree/main/.config/dunst)     |
-| Launcher        | [Rofi](https://github.com/ch1ebak/dotfiles/tree/main/.config/rofi)       |
+| Type            | Package  |
+|-----------------|----------|
+| Window Managers | Hyprland |
+| Terminal        | Ghostty  |
+| Editor          | Emacs    |
+| Shell           | Bash     |
+| Notifications   | Dunst    |
+| Launcher        | Rofi     |
 
 
 # THEMES
