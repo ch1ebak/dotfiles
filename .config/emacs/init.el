@@ -389,7 +389,7 @@
 
 (use-package real-mono-themes)
 
-(load-theme 'real-mono-dark :no-confirm)
+(load-theme 'doom-tokyo-night :no-confirm)
 
 (add-to-list 'default-frame-alist '(alpha-background . 90))
 

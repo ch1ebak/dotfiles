@@ -2,7 +2,7 @@ font-family = JetBrainsMono NF
 font-size = 10
 font-synthetic-style = true
 
-theme = /usr/share/ghostty/themes/studio1804
+theme = /usr/share/ghostty/themes/TokyoNight
 
 background-opacity = 1
 background-blur = false
