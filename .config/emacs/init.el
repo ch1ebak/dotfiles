@@ -48,9 +48,9 @@
   (conf-unix-mode t)
 
   :config
-  (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font"  :height 100)
-  (set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 100)
-  (set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 100)
+  (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font"  :height 105)
+  (set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 105)
+  (set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 105)
 
   (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory)))
         auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
@@ -112,7 +112,7 @@
     (define-key evil-normal-state-map (kbd "gl") 'evil-end-of-line)
     (define-key evil-normal-state-map (kbd "gra") 'eglot-code-actions)
     ;; frames/tabs/windows/buffers
-    (define-key evil-normal-state-map (kbd "C-n") 'evil-window-vnew)
+    (define-key evil-normal-state-map (kbd "C-n") 'split-window-right)
     (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
     (define-key evil-normal-state-map (kbd "C-t") 'tab-new)
@@ -391,7 +391,7 @@
 
 (load-theme 'doom-tokyo-night :no-confirm)
 
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+;; (add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -477,8 +477,6 @@
   (setq image-dired-thumb-margin 2)
   (setq image-dired-thumb-relief 0)
   (setq image-dired-thumbs-per-row 4))
-
-(use-package eat)
 
 (use-package eglot
   :ensure nil
