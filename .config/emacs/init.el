@@ -198,6 +198,7 @@
 
   (me/leader-keys
     "h" '(:ignore t :wk "Emacs")
+    "h d" '(redraw-display :wk "Redraw display (some issues on wayland)")
     "h t" '(consult-theme :wk "Change theme")
     "h l" '(package-upgrade-all :wk "Update packages")
     "h r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el")) :wk "Reload emacs config")
@@ -209,7 +210,6 @@
     "p x" '(org-capture :wk "Org Capture")
     "p e" '(elfeed :wk "Elfeed")
     "p m" '(magit-status :wk "Magit")
-    "p t" '(eat :wk "Terminal")
     "p w" '(eww :wk "EWW"))
 
   (me/leader-keys
@@ -271,13 +271,15 @@
     "<<" 'markdown-demote
     "] d" 'markdown-next-link
     "[ d" 'markdown-previous-link
-    "g j" 'markdown-next-visible-heading
-    "g k" 'markdown-previous-visible-heading
+    "] h" 'markdown-next-visible-heading
+    "[ h" 'markdown-previous-visible-heading
+    "m w" 'count-words-region
     "m J" 'markdown-move-down
     "m K" 'markdown-move-up
     "m l" 'markdown-insert-link
     "m i" 'markdown-insert-image
     "m p" 'markdown-preview
+    "m c" 'markdown-toggle-markup-hiding
     "m h" 'markdown-toggle-url-hiding
     "m i" 'markdown-toggle-inline-images)
   
@@ -391,7 +393,7 @@
 
 (load-theme 'doom-tokyo-night :no-confirm)
 
-;; (add-to-list 'default-frame-alist '(alpha-background . 90))
+(add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -724,11 +726,20 @@
   (visual-fill-column-width 120)
   (visual-fill-column-center-text t))
 
+(use-package wdired
+  :ensure nil
+  :commands (wdired-change-to-wdired-mode)
+  :config
+  (setq wdired-allow-to-change-permissions t)
+  (setq wdired-create-parent-directories t))
+
+(use-package writegood-mode)
+
 (use-package workgroups2
+	:config
+	(setq wg-session-file "~/.config/emacs/files/emacs_workgroups")
 	:init
 	(workgroups-mode 1))
-
-(use-package mpdel)
 
 (setq gc-cons-threshold (* 2 1000 1000))
 
