@@ -184,6 +184,26 @@
   (dashboard-setup-startup-hook))
 #+end_src
 
+** Doom Modeline
+#+begin_src emacs-lisp
+(use-package doom-modeline
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-height 25
+        doom-modeline-bar-width 5
+        doom-modeline-major-mode-icon nil
+        doom-modeline-window-width-limit 85
+        doom-modeline-spc-face-overrides nil
+        doom-modeline-buffer-file-name-style 'truncate-all
+        doom-modeline-buffer-state-icon nil
+        doom-modeline-buffer-modification-icon nil
+        doom-modeline-highlight-modified-buffer-name t
+        doom-modeline-minor-modes nil
+        doom-modeline-enable-word-count t
+        doom-modeline-buffer-encoding nil
+        doom-modeline-modal-modern-icon nil
+        doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)))
+#+end_src
 ** [[https://github.com/jrblevin/deft][Deft]]
 #+begin_src emacs-lisp
 (use-package deft
@@ -352,13 +372,23 @@
                                        ";;" "__" "&&" "++")))
 #+end_src
                                                                                        
+** Modeline
+#+begin_src emacs-lisp
+(setq-default mode-line-format
+              '("  "
+                "file: %f"
+                "    "
+                "status: "
+                mode-line-modified
+                "  "))
+#+end_src
 ** [[https://github.com/ofosos/ox-epub][Ox-Epub]] 
 #+begin_src emacs-lisp
 (use-package ox-epub)
 #+end_src
 
 ** Pulsar
-#+begin_src 
+#+begin_src emacs-lisp
 (use-package pulsar
   :hook
   (after-init . pulsar-global-mode)
@@ -378,6 +408,22 @@
   (add-to-list 'pulsar-pulse-functions 'evil-jump-item)
   (add-to-list 'pulsar-pulse-functions 'diff-hl-next-hunk)
   (add-to-list 'pulsar-pulse-functions 'diff-hl-previous-hunk))
+#+end_src
+** Tab Bar
+#+begin_src emacs-lisp
+(use-package tab-bar
+  :ensure nil
+  :defer t
+  :config
+  (setq tab-bar-new-tab-choice "*scratch*"
+        tab-bar-close-button-show nil
+        tab-bar-new-button-show nil
+        tab-bar-close-last-tab-choice 'tab-bar-mode-disable
+        tab-bar-close-tab-select 'recent
+        tab-bar-new-tab-to 'right
+        tab-bar-tab-hints nil
+        tab-bar-separator " "
+        tab-bar-show 1))
 #+end_src
 ** Themes
 *** [[https://github.com/Fabiokleis/kanagawa-emacs][Kanagawa]]

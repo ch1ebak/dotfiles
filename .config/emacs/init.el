@@ -174,7 +174,7 @@
     ">" '(dired-jump :wk "Dired")
     "," '(consult-buffer :wk "Buffers")
     "<" '(kill-buffer :wk "Killing Buffers")
-    "?" '(consult-ripgrep :wk "Grep")
+    "?" '(consult-imenu :wk "IMenu")
     "/" '(consult-line :wk "Search line"))
 
   (me/leader-keys
@@ -190,6 +190,7 @@
   (me/leader-keys
     "f" '(:ignore t :wk "Files")
     "f p" '((lambda () (interactive) (find-file "~/.config/emacs/init.el")) :wk "Emacs Config")
+    "f P" '((lambda () (interactive) (consult-fd "~/.config/emacs/")) :wk "Notes")
     "f n" '((lambda () (interactive) (consult-fd "~/Dokumenty/notatki/")) :wk "Notes")
     "f N" '((lambda () (interactive) (dired "~/Dokumenty/notatki/")) :wk "Notes")
     "f r" '(consult-recent-file :wk "Recent files")
@@ -227,10 +228,13 @@
     "e w" '(eglot-code-actions :wk "Eglot Code Actions"))
 
   (me/leader-keys
-    "z" '(:ignore t :wk "Langtool")
-    "z h" '(langtool-check :wk "Launch Langtool")
-    "z l" '(langtool-check-done :wk "Shutdown Langtool")
-    "z w" '(langtool-correct-buffer :wk "Langtool Correct"))
+    "w" '(:ignore t :wk "Writing")
+    "w c" '(count-words-region :wk "Word count")
+    "w s" '(ispell :wk "iSpell")
+    "w g" '(writegood-mode :wk "Writegood")
+    "w l h" '(langtool-check :wk "Launch Langtool")
+    "w l l" '(langtool-check-done :wk "Shutdown Langtool")
+    "w l w" '(langtool-correct-buffer :wk "Langtool Correct"))
 
   (general-nmap
     :keymaps 'org-mode-map
@@ -271,9 +275,6 @@
     "<<" 'markdown-demote
     "] d" 'markdown-next-link
     "[ d" 'markdown-previous-link
-    "] h" 'markdown-next-visible-heading
-    "[ h" 'markdown-previous-visible-heading
-    "m w" 'count-words-region
     "m J" 'markdown-move-down
     "m K" 'markdown-move-up
     "m l" 'markdown-insert-link
@@ -306,8 +307,9 @@
     "R" 'elfeed-update))
 
 (use-package which-key
+  :ensure nil
   :init
-    (which-key-mode 1)
+    ;; (which-key-mode 1)
   :diminish
   :config
   (setq which-key-side-window-location 'bottom
@@ -389,16 +391,14 @@
 
 (use-package kanagawa-themes)
 
-(use-package real-mono-themes)
-
 (load-theme 'doom-tokyo-night :no-confirm)
 
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+;; (add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :config
-  (setq doom-modeline-height 30
+  (setq doom-modeline-height 25
         doom-modeline-bar-width 5
         doom-modeline-major-mode-icon nil
         doom-modeline-window-width-limit 85
@@ -412,6 +412,50 @@
         doom-modeline-buffer-encoding nil
         doom-modeline-modal-modern-icon nil
         doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)))
+
+(use-package tab-bar
+  :ensure nil
+  :defer t
+  :custom
+  (tab-bar-new-tab-choice "*scratch*")
+  (tab-bar-close-button-show nil)
+  (tab-bar-new-button-show nil)
+  (tab-bar-tab-hints t)
+  (tab-bar-auto-width nil)
+  (tab-bar-separator "  ")
+  (tab-bar-format '(tab-bar-format-tabs-groups
+                    tab-bar-separator))
+  :init
+  (defun tab-bar-tab-name-format-hints (name _tab i)
+    (if tab-bar-tab-hints (concat (format "»%d«" i) "") name))
+  (defun tab-bar-tab-group-format-default (tab _i &optional current-p)
+    (propertize
+     (concat (funcall tab-bar-tab-group-function tab))
+     'face (if current-p 'tab-bar-tab-group-current 'tab-bar-tab-group-inactive)))
+  (defun emacs-solo/tab-group-from-project ()
+    "Call `tab-group` with the current project name as the group."
+    (interactive)
+    (when-let* ((proj (project-current))
+                (name (file-name-nondirectory
+                       (directory-file-name (project-root proj)))))
+      (tab-group (format "[%s]" name))))
+  (defun emacs-solo/tab-switch-to-group ()
+    (interactive)
+    (let* ((tabs (funcall tab-bar-tabs-function)))
+      (let* ((groups (delete-dups (mapcar (lambda (tab)
+                                            (funcall tab-bar-tab-group-function tab))
+                                          tabs)))
+             (group (completing-read "Switch to group: " groups nil t)))
+        (let ((i 1) (found nil))
+          (dolist (tab tabs)
+            (let ((tab-group (funcall tab-bar-tab-group-function tab)))
+              (when (and (not found)
+                         (string= tab-group group))
+                (setq found t)
+                (tab-bar-select-tab i)))
+            (setq i (1+ i)))))))
+  (tab-bar-mode 1)
+  (tab-bar-history-mode 1))
 
 ;; Icons
 (use-package nerd-icons)
@@ -588,14 +632,17 @@
 (use-package magit)
 
 (use-package markdown-mode
+  :commands gfm-mode markdown-mode
+  :mode
+  ("README\\.md\\'" . gfm-mode)
+  ("\\.md\\'" . markdown-mode)
+  ("\\.markdown\\'" . markdown-mode)
   :init
-  (setq markdown-unordered-list-item-prefix "  -")
-  (setq markdown-hide-urls t)
-  (setq markdown-command
-      (concat
-      "pandoc"
-      " --from=markdown --to=html"
-      " --standalone --mathjax --highlight-style=pygments")))
+  (setq markdown-unordered-list-item-prefix "  -"
+				markdown-hide-urls t
+				markdown-list-indent-width 2
+        markdown-enable-highlighting-syntax t
+				markdown-command (concat "pandoc" " --from=markdown --to=html")))
 
 ;; https://www.reddit.com/r/emacs/comments/yzjmmf/comment/ix1y211
 (defvar my-min-max-window nil)
@@ -604,6 +651,7 @@
   (if (and (one-window-p) my-min-max-window)
       (window-state-put my-min-max-window)
     (setq my-min-max-window (window-state-get))
+		(visual-fill-column-mode)
     (delete-other-windows)))
 
 (use-package org
@@ -672,20 +720,6 @@
   :hook (prog-mode org-mode markdown-mode))
 
 (use-package sudo-edit)
-
-(use-package tab-bar
-  :ensure nil
-  :defer t
-  :config
-  (setq tab-bar-new-tab-choice "*scratch*"
-        tab-bar-close-button-show nil
-        tab-bar-new-button-show nil
-        tab-bar-close-last-tab-choice 'tab-bar-mode-disable
-        tab-bar-close-tab-select 'recent
-        tab-bar-new-tab-to 'right
-        tab-bar-tab-hints nil
-        tab-bar-separator " "
-        tab-bar-show 1))
 
 (use-package treesit
   :ensure nil
