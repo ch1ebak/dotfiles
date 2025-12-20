@@ -91,6 +91,7 @@ alias xbl="brightnessctl set "
 ## Apps
 alias cal="cal -3 -m --color=auto"
 alias dunres="killall -e dunst & sleep 1; dunstify "hello!" &"
+alias em="emacs -nw"
 alias fehs="feh --bg-fill"
 alias lg="lazygit"
 alias nb="newsboat"
