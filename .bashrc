@@ -49,13 +49,13 @@ minifetch
 
 # ALIASES
 ## Package Manager
-alias pi="paru -S"
-alias pr="paru -Rns"
-alias pup="paru -Syu"
-alias pkglist="paru -Qqe > ~/Dokumenty/packages.txt"
-alias pq="paru -Q | rg"
+alias pi="yay -S"
+alias pr="yay -Rns"
+alias pup="yay -Syu"
+alias pkglist="yay -Qqe > ~/Dokumenty/packages.txt"
+alias pq="yay -Q | rg"
 alias ps="pacman -Ss"
-alias pp="paru -Ss"
+alias pp="yay -Ss"
                                                                
 ## Commands
 ### cd
