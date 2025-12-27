@@ -15,14 +15,14 @@
 
 .modules-left {
   margin-top: 3px;
-  padding-left: 8px;
+  padding-left: 6px;
   padding-right: 6px;
 }
                               
 .modules-right {
   margin-top: 3px;
-  padding-right: 8px;
   padding-left: 6px;
+  padding-right: 6px;
 }
                               
 .modules-center {
@@ -64,16 +64,16 @@ window#waybar {
 }
 
 #clock {
-  padding-right: 20px;
-  padding-left: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   margin-left: 10px;
   background-color: @bg;
   color: @c5;
 }
 
 #battery {
-  padding-right: 20px;
-  padding-left: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   margin-left: 10px;
   color: @c1;
   background-color: @bg;

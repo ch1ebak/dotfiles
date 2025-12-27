@@ -19,7 +19,7 @@ from libqtile.lazy import lazy
 from typing import List
 
 ## Color scheme
-from themes.pillstokyonight import colors, screens, widget_defaults
+from themes.minitokyonight import colors, screens, widget_defaults
 
 # SETTINGS
 ## General
@@ -69,7 +69,7 @@ def start_once():
 groups = [
     Group("1", label="󰭹", layout='max', matches=[Match(wm_class=["ferdium"])]),
     Group("2", label="󰈹", layout='max'),
-    Group("3", label="󰈚", layout='max', matches=[Match(wm_class=["emacs"])]),
+    Group("3", label="󰈚", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
     Group("4", label="󰅴", layout='monadtall', matches=[Match(wm_class=["ghostty"])]),
     Group("5", label="󰝰", layout='monadtall', matches=[Match(wm_class=["Thunar"])]),
     Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "nwg-look", "NexusMods.App", "eartag"])]),

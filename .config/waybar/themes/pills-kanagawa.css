@@ -16,14 +16,14 @@
 
 .modules-left {
   margin-top: 3px;
-  padding-left: 8px;
+  padding-left: 6px;
   padding-right: 6px;
 }
                               
 .modules-right {
   margin-top: 3px;
-  padding-right: 8px;
   padding-left: 6px;
+  padding-right: 6px;
 }
                               
 .modules-center {
@@ -49,7 +49,7 @@
                                   
 #workspaces button.active {
   background-color: @c1;
-  color: @bg;
+  color: @fg;
 }
 
 window#waybar {
@@ -65,16 +65,16 @@ window#waybar {
 }
 
 #clock {
-  padding-right: 20px;
-  padding-left: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   margin-left: 10px;
   background-color: @bg;
   color: @c3;
 }
 
 #battery {
-  padding-right: 20px;
-  padding-left: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   margin-left: 10px;
   color: @c5;
   background-color: @bg;

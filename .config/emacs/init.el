@@ -393,7 +393,7 @@
 
 (load-theme 'doom-tokyo-night :no-confirm)
 
-;; (add-to-list 'default-frame-alist '(alpha-background . 90))
+(add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -599,6 +599,18 @@
     (switch-to-buffer (generate-new-buffer "eww"))
     (eww-mode)
     (eww url)))
+
+(use-package grease
+  :load-path "~/.config/emacs/lisp/grease"
+  :commands (grease-open grease-toggle grease-here)
+  :init
+  (setq grease-use-icons t)
+  (setq grease-sort-method 'type)
+  (setq grease-sort-directories-first t)
+  (setq grease-show-hidden t)
+  (setq grease-preview-window-width 0.4)
+  (setq grease-preview-writable nil)
+  )
 
 (use-package indent-guide
   :hook
