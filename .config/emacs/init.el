@@ -232,6 +232,7 @@
     "w c" '(count-words-region :wk "Word count")
     "w s" '(ispell :wk "iSpell")
     "w g" '(writegood-mode :wk "Writegood")
+    "w t" '(typopunct-mode :wk "Typopunct")
     "w l h" '(langtool-check :wk "Launch Langtool")
     "w l l" '(langtool-check-done :wk "Shutdown Langtool")
     "w l w" '(langtool-correct-buffer :wk "Langtool Correct"))
@@ -275,8 +276,8 @@
     "<<" 'markdown-demote
     "] d" 'markdown-next-link
     "[ d" 'markdown-previous-link
-    "m J" 'markdown-move-down
-    "m K" 'markdown-move-up
+    "] h" 'markdown-move-down
+    "[ h" 'markdown-move-up
     "m l" 'markdown-insert-link
     "m i" 'markdown-insert-image
     "m p" 'markdown-preview
@@ -664,6 +665,8 @@
       (window-state-put my-min-max-window)
     (setq my-min-max-window (window-state-get))
 		(visual-fill-column-mode)
+    (markdown-toggle-markup-hiding)
+    (typopunct-mode)
     (delete-other-windows)))
 
 (use-package org
@@ -753,6 +756,11 @@
   (treesit-auto-install 'prompt)
   :config
   (treesit-auto-add-to-auto-mode-alist 'all))
+
+(use-package typopunct
+  :load-path "~/.config/emacs/lisp/typopunct"
+  :custom
+  (typopunct-buffer-language 'english))
 
 (use-package undo-tree
   :defer t
