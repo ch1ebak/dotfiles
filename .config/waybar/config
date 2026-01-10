@@ -6,7 +6,7 @@
   "modules-center": ["hyprland/window"],
   "modules-right": ["battery", "clock"],
   "battery": {
-    "interval": 60,
+		"interval": 60,
     "states": {
       "full": 90,
       "good": 80,
@@ -15,7 +15,7 @@
     },
     "format": "battery: {capacity}%",
     "max-length": 25
-  },
+    },
   "clock": {
     "format": "date: {:%a, %d.%m.%y - %H:%M}"
   },

@@ -56,7 +56,7 @@ alias pkglist="yay -Qqe > ~/Dokumenty/packages.txt"
 alias pq="yay -Q | rg"
 alias ps="pacman -Ss"
 alias pp="yay -Ss"
-                                                               
+
 ## Commands
 ### cd
 alias ..="cd .."
@@ -94,7 +94,8 @@ alias dunres="killall -e dunst & sleep 1; dunstify "hello!" &"
 alias em="emacs -nw"
 alias fehs="feh --bg-fill"
 alias lg="lazygit"
-alias nb="newsboat"
+alias nv="nvim" 
+alias nv.="nvim ." 
 alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
 
 ## Git
