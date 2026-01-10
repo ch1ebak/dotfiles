@@ -229,7 +229,8 @@
 
   (me/leader-keys
     "w" '(:ignore t :wk "Writing")
-    "w c" '(count-words-region :wk "Word count")
+    "w c" '(count-words-region :wk "Word count region")
+    "w w" '(count-words :wk "Word count")
     "w s" '(ispell :wk "iSpell")
     "w g" '(writegood-mode :wk "Writegood")
     "w t" '(typopunct-mode :wk "Typopunct")
@@ -310,7 +311,7 @@
 (use-package which-key
   :ensure nil
   :init
-    ;; (which-key-mode 1)
+  (which-key-mode 1)
   :diminish
   :config
   (setq which-key-side-window-location 'bottom
@@ -396,23 +397,13 @@
 
 (add-to-list 'default-frame-alist '(alpha-background . 90))
 
-(use-package doom-modeline
-  :init (doom-modeline-mode 1)
-  :config
-  (setq doom-modeline-height 25
-        doom-modeline-bar-width 5
-        doom-modeline-major-mode-icon nil
-        doom-modeline-window-width-limit 85
-        doom-modeline-spc-face-overrides nil
-        doom-modeline-buffer-file-name-style 'truncate-all
-        doom-modeline-buffer-state-icon nil
-        doom-modeline-buffer-modification-icon nil
-        doom-modeline-highlight-modified-buffer-name t
-        doom-modeline-minor-modes nil
-        doom-modeline-enable-word-count t
-        doom-modeline-buffer-encoding nil
-        doom-modeline-modal-modern-icon nil
-        doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)))
+(setq-default mode-line-format
+              '("  "
+                "file: %f"
+                "    "
+                "status: "
+                mode-line-modified
+                "  "))
 
 (use-package tab-bar
   :ensure nil
