@@ -1,1 +1,8 @@
+configuration {
+  modi: "drun,window";
+  kb-remove-to-eol: "";
+  kb-accept-entry: "Return";
+}
+
+
 @theme "/home/karna/.config/rofi/themes/tokyonight"

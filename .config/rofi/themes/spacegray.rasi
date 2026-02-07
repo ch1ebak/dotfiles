@@ -1,11 +1,3 @@
-configuration {
-  modi: "drun,window";
-  kb-remove-to-eol: "";
-  kb-accept-entry: "Return";
-  kb-row-up: "Control+k";
-  kb-row-down: "Control+j";
-}
-
 * {
   font:   "JetBrainsMono Nerd Font Bold 9";
 
