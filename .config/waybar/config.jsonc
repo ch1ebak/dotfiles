@@ -1,0 +1,48 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 10,
+  "modules-left": ["ext/workspaces"],
+  "modules-center": ["dwl/window"],
+  "modules-right": ["battery", "clock"],
+  "battery": {
+		"interval": 60,
+    "states": {
+      "full": 90,
+      "good": 80,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "battery: {capacity}%",
+    "max-length": 25
+    },
+  "clock": {
+    "format": "date: {:%a, %d.%m.%y - %H:%M}"
+  },
+  "ext/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "chat",
+      "2": "net",
+      "3": "notes",
+      "4": "term",
+      "5": "files",
+      "6": "apps",
+      "7": "games",
+      "8": "music",
+      "9": "video",
+    },
+    "ignore-hidden": true,
+    "on-click": "activate",
+    "on-click-right": "deactivate",
+    "sort-by-id": true
+  },
+  "dwl/tags": {
+    "num-tags": 9
+  },
+  "dwl/window": {
+    "separate-outputs": true,
+    "format": "{title}"
+  }
+}
+

@@ -395,7 +395,7 @@
 
 (load-theme 'doom-tokyo-night :no-confirm)
 
-;; (add-to-list 'default-frame-alist '(alpha-background . 90))
+(add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (setq-default mode-line-format
               '("  "

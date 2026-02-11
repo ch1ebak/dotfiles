@@ -4,8 +4,8 @@ font-synthetic-style = true
 
 theme = /usr/share/ghostty/themes/TokyoNight
 
-background-opacity = 1
-background-blur = false
+background-opacity = 0.9
+background-blur = true
 gtk-titlebar = false
 
 desktop-notifications = true
