@@ -232,11 +232,7 @@
     "w c" '(count-words-region :wk "Word count region")
     "w w" '(count-words :wk "Word count")
     "w s" '(ispell :wk "iSpell")
-    "w g" '(writegood-mode :wk "Writegood")
-    "w t" '(typopunct-mode :wk "Typopunct")
-    "w l h" '(langtool-check :wk "Launch Langtool")
-    "w l l" '(langtool-check-done :wk "Shutdown Langtool")
-    "w l w" '(langtool-correct-buffer :wk "Langtool Correct"))
+    "w t" '(typopunct-mode :wk "Typopunct"))
 
   (general-nmap
     :keymaps 'org-mode-map
@@ -592,18 +588,6 @@
     (eww-mode)
     (eww url)))
 
-(use-package grease
-  :load-path "~/.config/emacs/lisp/grease"
-  :commands (grease-open grease-toggle grease-here)
-  :init
-  (setq grease-use-icons t)
-  (setq grease-sort-method 'type)
-  (setq grease-sort-directories-first t)
-  (setq grease-show-hidden t)
-  (setq grease-preview-window-width 0.4)
-  (setq grease-preview-writable nil)
-  )
-
 (use-package indent-guide
   :hook
   (prog-mode . indent-guide-mode)
@@ -625,13 +609,6 @@
   "Kill all other buffers."
   (interactive)
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
-
-(use-package langtool
-  :ensure t
-  :config
-  (setq langtool-java-classpath "/usr/share/languagetool:/usr/share/java/languagetool/*")
-  (setq langtool-default-language "en-US")
-  (setq langtool-mother-tongue "pl"))
 
 (use-package magit)
 
@@ -659,10 +636,6 @@
     (markdown-toggle-markup-hiding)
     (typopunct-mode)
     (delete-other-windows)))
-
-(use-package nov
-	:config
-	(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 
 (use-package org
   :ensure nil
@@ -781,8 +754,6 @@
   :config
   (setq wdired-allow-to-change-permissions t)
   (setq wdired-create-parent-directories t))
-
-(use-package writegood-mode)
 
 (use-package workgroups2
 	:config
