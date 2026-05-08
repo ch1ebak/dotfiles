@@ -4,4 +4,4 @@ configuration {
   kb-accept-entry: "Return";
 }
 
-@theme "~/.config/rofi/themes/tokyonight"
+@theme "~/.config/rofi/themes/nvim-alt"
