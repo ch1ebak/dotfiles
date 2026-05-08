@@ -205,7 +205,6 @@
   (me/leader-keys
     "h" '(:ignore t :wk "Emacs")
     "h d" '(redraw-display :wk "Redraw display (some issues on wayland)")
-    "h t" '(counsel-load-theme 'doom-rouge :no-confirm)
     "h l" '(package-upgrade-all :wk "Update packages")
     "h r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el")) :wk "Reload emacs config")
     "h R" '(restart-emacs :wk "Reload emacs config"))
@@ -405,7 +404,7 @@
 
 (use-package kanagawa-themes)
 
-(load-theme 'doom-rouge :no-confirm)
+(load-theme 'doom-tokyo-night :no-confirm)
 
 ;; Transparency
 ;; (add-to-list 'default-frame-alist '(alpha-background . 90))

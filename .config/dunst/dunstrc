@@ -47,14 +47,14 @@
 
 # Color scheme
 [urgency_low]
-   background = "#1a212d"
-   foreground = "#d7dae1"
-   frame_color = "#aaedb7"
+   background = "#1a1b26"
+   foreground = "#a9b1d6"
+   frame_color = "#7aa2f7"
 [urgency_normal]
-   background = "#1a212d"
-   foreground = "#d7dae1"
-   frame_color = "#aaedb7"
+   background = "#1a1b26"
+   foreground = "#a9b1d6"
+   frame_color = "#7aa2f7"
 [urgency_critical]
-   background = "#1a212d"
-   foreground = "#d7dae1"
-   frame_color = "#aaedb7"
+   background = "#1a1b26"
+   foreground = "#a9b1d6"
+   frame_color = "#7aa2f7"
