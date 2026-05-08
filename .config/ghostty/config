@@ -1,0 +1,31 @@
+font-family = JetBrainsMono NF
+font-size = 10.5
+font-synthetic-style = true
+
+theme = /usr/share/ghostty/themes/nvim-alt
+
+background-opacity = 1
+background-blur = true
+gtk-titlebar = false
+
+desktop-notifications = true
+
+gtk-single-instance = false
+
+cursor-style = block
+cursor-style-blink = true
+
+window-padding-x = 4,0
+window-padding-y = 4,0
+
+confirm-close-surface = false
+
+keybind = alt+q=close_surface
+keybind = alt+w=close_surface
+keybind = alt+n=new_split:right
+keybind = alt+h=goto_split:left
+keybind = alt+l=goto_split:right
+keybind = alt+t=new_tab
+keybind = alt+k=next_tab
+keybind = alt+j=previous_tab
+keybind = alt+r=reload_config

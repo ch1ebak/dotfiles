@@ -1,0 +1,217 @@
+environment {
+  XCURSOR_SIZE "15"
+  XCURSOR_THEME "capitaine-cursors-light"
+  GTK_THEME "Nordic-darker"
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+	QT_QPA_PLATFORM "wayland"
+  QT_QPA_PLATFORMTHEME "qt6ct"
+	XDG_CURRENT_DESKTOP "niri"
+  LIBVA_DRIVER_NAME "nvidia"
+  XDG_SESSION_TYPE "wayland"
+  GBM_BACKEND "nvidia-drm"
+  __GLX_VENDOR_LIBRARY_NAME "nvidia"
+}
+
+spawn-at-startup "waybar"
+spawn-at-startup "xdg-desktop-portal-gtk"
+spawn-at-startup "systemctl --user start hyprpolkitagent"
+spawn-at-startup "nm-applet &"
+spawn-at-startup "hyprpaper"
+spawn-at-startup "dunst &"
+spawn-at-startup "hypridle"
+spawn-at-startup "brightnessctl set 50%"
+spawn-at-startup "wl-paste --type text --watch cliphist store"
+prefer-no-csd
+
+hotkey-overlay {
+  skip-at-startup
+}
+
+
+input {
+  keyboard {
+    xkb {
+      layout "pl"
+      options "caps:swapescape"
+    }
+  }
+
+  touchpad {
+    tap
+    natural-scroll
+  }
+
+  mouse {
+    accel-speed 0
+    accel-profile "flat"
+  }
+}
+
+output "HDMI-A-1" {
+  mode "1920x1080@144"
+  scale 1
+  transform "normal"
+  position x=1920 y=0
+}
+
+output "eDP-1" {
+  mode "1920x1080@60"
+  scale 1
+  transform "normal"
+  position x=0 y=0
+}
+
+layout {
+  gaps 6
+  center-focused-column "never"
+  preset-column-widths {
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
+  }
+  default-column-width { proportion 0.5; }
+  focus-ring {
+    off
+  }
+  border {
+    width 2
+    active-color "#cba6f7"
+    inactive-color "#45475a"
+  }
+  shadow {
+    on
+    softness 30
+    spread 5
+    offset x=0 y=5
+    color "#313244"
+  }
+}
+
+animations {
+  window-close {
+    duration-ms 200
+    curve "linear"
+
+    custom-shader r"
+      // Example: make the window 'fall down' with slight rotation.
+      vec4 close_color(vec3 coords_geo, vec3 size_geo) {
+        // For this shader, set animation curve to linear for best results.
+
+        // Simulate an accelerated fall: square the (linear) progress.
+        float progress = niri_clamped_progress * niri_clamped_progress;
+
+        // Get our rotation pivot point coordinates at the bottom center of the window.
+        vec2 coords = (coords_geo.xy - vec2(0.5, 1.0)) * size_geo.xy;
+
+        // Move the window down to simulate a fall.
+        coords.y -= progress * 200.0;
+
+        // Randomize rotation direction and maximum angle.
+        float random = (niri_random_seed - 0.5) / 2.0;
+        random = sign(random) - random;
+        float max_angle = 0.05 * random;
+
+        // Rotate the window around our pivot point.
+        float angle = progress * max_angle;
+        mat2 rotate = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
+        coords = rotate * coords;
+
+        // Transform the coordinates back.
+        coords_geo = vec3(coords / size_geo.xy + vec2(0.5, 1.0), 1.0);
+
+        // Sample the window texture.
+        vec3 coords_tex = niri_geo_to_tex * coords_geo;
+        vec4 color = texture2D(niri_tex, coords_tex.st);
+
+        // Multiply by alpha to fade out.
+        return color * (1.0 - niri_clamped_progress);
+      }
+    "
+  }
+}
+
+// Keymaps
+binds {
+  Mod+Shift+Slash { show-hotkey-overlay; }
+  Mod+Tab repeat=false { toggle-overview; }
+
+  // Apps
+  Mod+Return hotkey-overlay-title="Open a Terminal: Ghostty" { spawn "ghostty"; }
+  Mod+W hotkey-overlay-title="Run an Application: Zen Browser" { spawn "zen-browser"; }
+  Mod+Shift+W hotkey-overlay-title="Run an Application: Zen Browser (Private)" { spawn "zen-browser --private-window"; }
+  Mod+D hotkey-overlay-title="Run an Application: Neovim" { spawn-sh "ghostty -e nvim"; }
+  Mod+A hotkey-overlay-title="Run an Application: Yazi" { spawn-sh "ghostty -e yazi"; }
+  Mod+Shift+A hotkey-overlay-title="Run an Application: Thunar" { spawn "thunar"; }
+
+  // Other
+  Mod+S hotkey-overlay-title="Run an Application: Rofi" { spawn-sh "rofi -m 1 -show drun"; }
+  Mod+U hotkey-overlay-title=null { spawn-sh "/home/$USER/Projekty/scripts/rofi-utilities"; }
+  Mod+P hotkey-overlay-title="Lock the Screen: Hyprlock" { spawn "hyprlock"; }
+  Mod+Shift+P hotkey-overlay-title="Power Menu" { spawn-sh "rofi -m 1 -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu"; }
+
+  // App control
+  Mod+Q repeat=false { close-window; }
+  Mod+Ctrl+Q { quit; }
+
+  Mod+Ctrl+H { consume-or-expel-window-left; }
+  Mod+Ctrl+L { consume-or-expel-window-right; }
+  Mod+M { reset-window-height; }
+  Mod+Space { maximize-column; }
+  Mod+Shift+Space { fullscreen-window; }
+  Mod+N { expand-column-to-available-width; }
+  Mod+B { switch-preset-column-width; }
+  Mod+Shift+B { switch-preset-window-height; }
+  Mod+C { center-column; }
+  Mod+Ctrl+C { center-visible-columns; }
+
+  // Move the focused window between the floating and the tiling layout.
+  Mod+V       { toggle-window-floating; }
+  Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+  // Move focus
+  Mod+H     { focus-column-left; }
+  Mod+L     { focus-column-right; }
+
+  // Move window
+  Mod+Shift+H     { move-column-left; }
+  Mod+Shift+L     { move-column-right; }
+
+  // Alternative commands that move across workspaces when reaching
+  Mod+J     { focus-window-or-workspace-down; }
+  Mod+K     { focus-window-or-workspace-up; }
+
+  // Column width
+  Mod+Shift+J { set-column-width "-10%"; }
+  Mod+Shift+K { set-column-width "+10%"; }
+
+  // Switch focus between monitors
+  Mod+Z     { focus-monitor-left; }
+  Mod+X     { focus-monitor-right; }
+
+  // Move windows between monitors
+  Mod+Shift+Z     { move-column-to-monitor-left; }
+  Mod+Shift+X     { move-column-to-monitor-right; }
+
+  // Switch workspaces with Mod + [0-9]
+  Mod+1 { focus-workspace 1; }
+  Mod+2 { focus-workspace 2; }
+  Mod+3 { focus-workspace 3; }
+  Mod+4 { focus-workspace 4; }
+  Mod+5 { focus-workspace 5; }
+  Mod+6 { focus-workspace 6; }
+  Mod+7 { focus-workspace 7; }
+  Mod+8 { focus-workspace 8; }
+  Mod+9 { focus-workspace 9; }
+
+  // Move active window to a workspace with Mod + [0-9]
+  Mod+Shift+1 { move-column-to-workspace 1; }
+  Mod+Shift+2 { move-column-to-workspace 2; }
+  Mod+Shift+3 { move-column-to-workspace 3; }
+  Mod+Shift+4 { move-column-to-workspace 4; }
+  Mod+Shift+5 { move-column-to-workspace 5; }
+  Mod+Shift+6 { move-column-to-workspace 6; }
+  Mod+Shift+7 { move-column-to-workspace 7; }
+  Mod+Shift+8 { move-column-to-workspace 8; }
+  Mod+Shift+9 { move-column-to-workspace 9; }
+
+}

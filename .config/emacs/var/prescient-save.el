@@ -1,0 +1,2 @@
+;;; -*- lexical-binding: t; -*-
+(funcall prescient-cache-callback :version '5 :history '#s(hash-table test equal data ("find-file" 4 ".config/" 3 "emacs/" 2 "./" 1 "~/.dotfiles/.config/qtile/config.py" 0)) :frequency '#s(hash-table test equal data ("find-file" 0.9821344612135428 ".config/" 0.985089730404757 "emacs/" 0.988053892081 "./" 0.991026973 "~/.dotfiles/.config/qtile/config.py" 1.9910089999999998)) :serial-number '6)

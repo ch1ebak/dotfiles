@@ -1,0 +1,55 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 10,
+  "modules-left": ["tray", "ext/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": ["cpu", "memory", "battery"],
+  "tray": {
+    "icon-size": 14,
+    "spacing": 10
+  },
+  "ext/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "chat",
+      "2": "net",
+      "3": "notes",
+      "4": "term",
+      "5": "files",
+      "6": "apps",
+      "7": "games",
+      "8": "music",
+      "9": "video",
+    },
+    "ignore-hidden": true,
+    "on-click": "activate",
+    "on-click-right": "deactivate",
+    "sort-by-id": true
+  },
+  "dwl/tags": {
+    "num-tags": 9
+  },
+  "clock": {
+    "format": "{:%a %d.%m.%y | %H:%M}"
+  },
+  "cpu": {
+    "format": "cpu: {usage}%",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "memory: {percentage}%"
+  },
+  "battery": {
+    "interval": 60,
+    "states": {
+      "full": 90,
+      "good": 80,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "battery: {capacity}%",
+    "max-length": 25
+  }
+}
+

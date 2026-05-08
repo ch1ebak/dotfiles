@@ -1,0 +1,91 @@
+@import "themes/nvim-alt.css";
+
+* {
+  font-family: 'JetBrainsMono NF', sans-serif;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.modules-left {
+  margin-top: 5px;
+  margin-left: 6px;
+  background-color: @bg;
+  border-radius: 5px;
+}
+
+.modules-right {
+  margin-top: 3px;
+  margin-right: 6px;
+  background-color: @bg;
+  border-radius: 5px;
+}
+
+.modules-center {
+  margin-top: 3px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: @bg;
+  border-radius: 5px;
+}
+
+window#waybar {
+  background-color: transparent;
+  color: @fg;
+}
+
+#tray {
+  padding-left: 15px;
+  color: @fg;
+}
+
+#workspaces {
+  padding-left: 10px;
+  padding-right: 5px;
+  color: @fg;
+}
+
+#workspaces button.active {
+  border-radius: 4px;
+  background-color: @c1;
+  color: @bg;
+}
+
+#clock {
+  color: @fg;
+}
+
+#cpu {
+  padding-left: 15px;
+  padding-right: 15px;
+  color: @c5;
+}
+
+#memory {
+  padding-right: 15px;
+  color: @c6;
+}
+
+#battery {
+  padding-right: 15px;
+  color: @c3;
+}
+
+#battery.full{
+  color: @c2;
+}
+
+#battery.charging {
+  color: @c2;
+}
+
+#battery.discharging {
+  color: @c3;
+}
+
+#battery.discharging.warning {
+  color: @c3;
+}
+
+#battery.discharging.critical {
+  color: @c4;
+}

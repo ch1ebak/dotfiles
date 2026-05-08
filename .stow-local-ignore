@@ -1,0 +1,6 @@
+\.git
+LICENSE
+^/.*\.md
+/backups
+/screenshots
+/wallpapers

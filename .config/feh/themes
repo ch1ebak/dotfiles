@@ -1,0 +1,4 @@
+feh -B black \
+-d \
+-N \
+--scale-down

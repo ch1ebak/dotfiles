@@ -1,0 +1,7 @@
+configuration {
+  modi: "drun,window";
+  kb-remove-to-eol: "";
+  kb-accept-entry: "Return";
+}
+
+@theme "~/.config/rofi/themes/nvim-alt"
