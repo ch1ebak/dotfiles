@@ -54,7 +54,7 @@ return {
     -- Find
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
     { "<leader>fp", function() Snacks.picker.files({ cwd = '~/.dotfiles/.config/nvim/' }) end, desc = "Config File" },
-    { "<leader>fn", function() Snacks.picker.files({ cwd = '/nvme/Dokumenty/notatki/' }) end, desc = "Config File" },
+    { "<leader>fn", function() Snacks.picker.files({ cwd = '~/Dokumenty/notatki/' }) end, desc = "Config File" },
     -- Search
     { "<leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>?", function() Snacks.picker.grep() end, desc = "Grep" },

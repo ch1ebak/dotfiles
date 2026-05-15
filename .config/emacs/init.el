@@ -116,6 +116,7 @@
     (define-key evil-normal-state-map (kbd "gh") 'evil-beginning-of-line)
     (define-key evil-normal-state-map (kbd "gl") 'evil-end-of-line)
     (define-key evil-normal-state-map (kbd "gra") 'eglot-code-actions)
+    (define-key evil-normal-state-map (kbd "C-.") 'zoxide-travel)
     ;; frames/tabs/windows/buffers
     (define-key evil-normal-state-map (kbd "C-n") 'split-window-right)
     (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
@@ -143,8 +144,8 @@
 
 (use-package evil-collection
   :after evil
+  :ensure t
   :config
-  (add-to-list 'evil-collection-mode-list 'help)
   (evil-collection-init))
 
 (use-package evil-commentary
@@ -179,7 +180,7 @@
     ">" '(dired-jump :wk "Dired")
     "," '(counsel-ibuffer :wk "Buffers")
     "<" '(kill-buffer :wk "Killing Buffers")
-    "?" '(counsel-imenu :wk "IMenu")
+    "?" '(counsel-rg :wk "Grep")
     "/" '(swiper :wk "Search line"))
 
   (me/leader-keys
@@ -215,7 +216,6 @@
     "p x" '(org-capture :wk "Org Capture")
     "p e" '(elfeed :wk "Elfeed")
     "p m" '(magit-status :wk "Magit")
-    "p g" '(grease-toggle :wk "Grease")
     "p w" '(eww :wk "EWW"))
 
   (me/leader-keys
@@ -407,7 +407,7 @@
 (load-theme 'doom-rouge :no-confirm)
 
 ;; Transparency
-;; (add-to-list 'default-frame-alist '(alpha-background . 90))
+(add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -596,17 +596,6 @@
     (eww-mode)
     (eww url)))
 
-(use-package grease
-  :load-path "~/.dotfiles/.config/emacs/lisp/grease/"
-  :commands (grease-open grease-toggle grease-here)
-  :init
-  (setq grease-use-icons t)
-  (setq grease-sort-method 'type)
-  (setq grease-sort-directories-first t)
-  (setq grease-show-hidden t)
-  (setq grease-preview-window-width 0.4)
-  (setq grease-preview-writable nil))
-
 (use-package hl-todo
   :hook ((org-mode . hl-todo-mode)
          (markdown-mode . hl-todo-mode)
@@ -794,6 +783,8 @@
 	(setq wg-session-file "~/.config/emacs/files/emacs_workgroups")
 	:init
 	(workgroups-mode 1))
+
+(use-package zoxide)
 
 (setq gc-cons-threshold (* 2 1000 1000))
 

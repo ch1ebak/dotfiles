@@ -10,7 +10,7 @@
 export TERM="ghostty"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! -type d \! -name '\''*.tags'\'' -printf '\''%P\n'\'
-export PATH="/nvme/Projekty/scripts:~/.local/scripts:$PATH"
+export PATH="~/Projekty/scripts:~/.local/scripts:$PATH"
 export MANPAGER='nvim +Man!' 
 
 ## Options
@@ -83,7 +83,8 @@ alias tr="trash -vi"
 
 ### system
 alias bt="btop"
-alias df="df -hl --exclude-type=tmpfs --exclude-type=devtmpfs"
+alias df="df -hl --exclude-type=tmpfs --exclude-type=devtmpfs --exclude-type=efivarfs"
+alias duf="duf -only local -hide-mp /boot"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
 alias xbl="brightnessctl set "

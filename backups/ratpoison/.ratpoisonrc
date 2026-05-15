@@ -25,9 +25,9 @@ escape Super_L
 
 ## Apps
 bind s-Return exec ghostty
-bind s-w exec zen-browser
+bind s-w exec firefox
 bind s-a exec ghostty -e yazi
-bind s-A exec thunar
+bind s-A exec pcmanfm
 bind s-s exec rofi -m 1 -show drun
 
 ## Ratpoison
@@ -38,22 +38,22 @@ bind s-p exec slock
 bind s-P exec rofi -m 1 -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu
 
 ## Apps control
-bind q delete
+bind s-q delete
 
 ## Window manipulation
-bind c hsplit
-bind C split
-bind z prevscreen
-bind x nextscreen
-bind h focusleft
-bind l focusright
-bind j next
-bind k prev
-bind H exchangeleft
-bind L exchangeright
-bind n only
-bind J resize
-bind K resize
+bind s-c hsplit
+bind s-C split
+bind s-z prevscreen
+bind s-x nextscreen
+bind s-h focusleft
+bind s-l focusright
+bind s-j next
+bind s-k prev
+bind s-H exchangeleft
+bind s-L exchangeright
+bind s-n only
+bind s-J resize
+bind s-K resize
 
 ## Workspaces
 exec /usr/bin/rpws init 9 -k
@@ -68,5 +68,4 @@ bind C-8 exec rpws 8
 bind C-9 exec rpws 9
 
 # AUTOSTART
-exec xrdb -load ~/.Xresources
 exec xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --rate 144 --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --rate 144

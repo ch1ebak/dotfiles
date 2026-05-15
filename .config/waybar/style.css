@@ -14,14 +14,14 @@
 }
 
 .modules-right {
-  margin-top: 3px;
+  margin-top: 5px;
   margin-right: 6px;
   background-color: @bg;
   border-radius: 5px;
 }
 
 .modules-center {
-  margin-top: 3px;
+  margin-top: 5px;
   padding-left: 15px;
   padding-right: 15px;
   background-color: @bg;
