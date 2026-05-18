@@ -404,7 +404,7 @@
 
 (use-package kanagawa-themes)
 
-(load-theme 'doom-rouge :no-confirm)
+(load-theme 'doom-tokyo-night :no-confirm)
 
 ;; Transparency
 ;; (add-to-list 'default-frame-alist '(alpha-background . 90))
