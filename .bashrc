@@ -50,13 +50,9 @@ fastfetch
 
 # ALIASES
 ## Package Manager
-alias pi="yay -S"
-alias pr="yay -Rns"
-alias pup="yay -Syu"
-alias pkglist="yay -Qqe > ~/Dokumenty/packages.txt"
-alias pq="yay -Q | rg"
-alias ps="pacman -Ss"
-alias pp="yay -Ss"
+alias nfu="sudo nix flake update"
+alias nurse="sudo nixos-rebuild switch --impure --flake ~/.nixos-btw#nixos-btw"
+alias nconf="nvim ~/.nixos-btw/"
 
 ## Commands
 ### cd
@@ -85,7 +81,6 @@ alias tr="trash -vi"
 ### system
 alias bt="btop"
 alias df="df -hl --exclude-type=tmpfs --exclude-type=devtmpfs --exclude-type=efivarfs"
-alias duf="duf -only local -hide-mp /boot"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
 alias xbl="brightnessctl set "
@@ -94,11 +89,8 @@ alias xbl="brightnessctl set "
 alias cal="cal -3 -m --color=auto"
 alias dunres="killall -e dunst & sleep 1; dunstify "hello!" &"
 alias fehs="feh --bg-fill"
-alias lg="lazygit"
 alias n="nvim" 
 alias n.="nvim ." 
-alias nb="newsboat"
-alias s="surge"
 alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
 alias y="yazi"
 

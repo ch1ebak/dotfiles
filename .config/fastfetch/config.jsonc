@@ -67,12 +67,12 @@
         {
             "key": "│ {#36}󰉉 ssd     {#keys}│",
             "type": "disk",
-            "folders": "/ssd"
+            "folders": "/mnt/User"
         },
         {
             "key": "│ {#31}󰉉 nvme    {#keys}│",
             "type": "disk",
-            "folders": "/nvme"
+            "folders": "/mnt/Games"
         },
         {
             "key": "├───────────┤",
