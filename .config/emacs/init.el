@@ -407,7 +407,7 @@
 (load-theme 'doom-rouge :no-confirm)
 
 ;; Transparency
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+;; (add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -735,10 +735,10 @@
 		'((bash "https://github.com/tree-sitter/tree-sitter-bash")
 			(elisp "https://github.com/Wilfred/tree-sitter-elisp")
 			(html "https://github.com/tree-sitter/tree-sitter-html")
-      (hyprlang "https://github.com/tree-sitter-grammars/tree-sitter-hyprlang")
+			(nix "https://github.com/nix-community/tree-sitter-nix")
 			(markdown "https://github.com/ikatyang/tree-sitter-markdown")))
   :custom
-  (treesit-font-lock-level 2))
+  (treesit-font-lock-level 4))
 
 (use-package treesit-auto
   :ensure t

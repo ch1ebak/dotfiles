@@ -6,30 +6,22 @@
   font-size: 10px;
 }
 
-.modules-left {
-  margin-top: 5px;
-  margin-left: 6px;
-  background-color: @bg;
-  border-radius: 5px;
-}
-
+.modules-left,
 .modules-right {
-  margin-top: 5px;
-  margin-right: 6px;
   background-color: @bg;
   border-radius: 5px;
 }
 
 .modules-center {
-  margin-top: 5px;
   padding-left: 15px;
   padding-right: 15px;
   background-color: @bg;
   border-radius: 5px;
 }
 
-window#waybar {
-  background-color: transparent;
+#waybar {
+  /* background-color: transparent; */
+  background-color: @bg;
   color: @fg;
 }
 
