@@ -26,7 +26,7 @@
             "format": "{host-name}"
         },
         {
-            "key": "│ {#33}󰉉 OS Age  {#keys}│",
+            "key": "│ {#33}󰉉 os age  {#keys}│",
             "type": "command",
 						"text": "birth_install=$(stat -c %W /); current=$(date +%s); time_progression=$((current - birth_install)); days_difference=$((time_progression / 86400)); echo $days_difference days"
         },
@@ -65,12 +65,12 @@
             "folders": "/"
         },
         {
-            "key": "│ {#36}󰉉 ssd     {#keys}│",
+            "key": "│ {#36}󰉉 user    {#keys}│",
             "type": "disk",
             "folders": "/mnt/User"
         },
         {
-            "key": "│ {#31}󰉉 nvme    {#keys}│",
+            "key": "│ {#31}󰉉 games   {#keys}│",
             "type": "disk",
             "folders": "/mnt/Games"
         },

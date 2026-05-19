@@ -736,6 +736,7 @@
 			(elisp "https://github.com/Wilfred/tree-sitter-elisp")
 			(html "https://github.com/tree-sitter/tree-sitter-html")
 			(nix "https://github.com/nix-community/tree-sitter-nix")
+			(lua "https://github.com/tjdevries/tree-sitter-lua")
 			(markdown "https://github.com/ikatyang/tree-sitter-markdown")))
   :custom
   (treesit-font-lock-level 4))
