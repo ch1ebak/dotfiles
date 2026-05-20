@@ -234,8 +234,7 @@
 
   (me/leader-keys
     "w" '(:ignore t :wk "Writing")
-    "w c" '(count-words-region :wk "Word count region")
-    "w w" '(count-words :wk "Word count")
+    "w c" '(org-timer-set-timer :wk "Timer")
     "w s" '(ispell :wk "iSpell")
     "w t" '(typopunct-mode :wk "Typopunct"))
 
