@@ -654,7 +654,7 @@
       (window-state-put my-min-max-window)
     (setq my-min-max-window (window-state-get))
 		(visual-fill-column-mode)
-    (markdown-toggle-markup-hiding)
+    ;; (markdown-toggle-markup-hiding)
     (typopunct-mode)
     (global-visual-line-mode)
     (delete-other-windows)))
@@ -735,7 +735,6 @@
 			(elisp "https://github.com/Wilfred/tree-sitter-elisp")
 			(html "https://github.com/tree-sitter/tree-sitter-html")
 			(nix "https://github.com/nix-community/tree-sitter-nix")
-			(lua "https://github.com/tjdevries/tree-sitter-lua")
 			(markdown "https://github.com/ikatyang/tree-sitter-markdown")))
   :custom
   (treesit-font-lock-level 4))
