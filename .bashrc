@@ -84,7 +84,8 @@ alias bt="btop"
 alias df="df -hl --exclude-type=tmpfs --exclude-type=devtmpfs --exclude-type=efivarfs"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
-alias xbl="brightnessctl set "
+# alias xbl="brightnessctl set "
+alias xbl="brightnessctl --device=intel_backlight set "
 
 ## Apps
 alias cal="cal -3 -m --color=auto"
