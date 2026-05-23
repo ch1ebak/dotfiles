@@ -73,7 +73,7 @@ alias mv="mv -i"
 
 ### find
 alias fd="fd -Hia --color always"
-alias rg="rg -i --hidden --follow"
+alias rg="rg -i --unrestricted --follow --pretty"
 
 ### remove
 alias rm="trash -vi"

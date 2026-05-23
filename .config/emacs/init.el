@@ -381,7 +381,6 @@
   :custom
   (ivy-prescient-enable-filtering nil)
   :config
-  ;; Uncomment the following line to have sorting remembered across sessions!
   (prescient-persist-mode 1)
   (ivy-prescient-mode 1))
 
@@ -407,7 +406,8 @@
 (load-theme 'doom-tokyo-night :no-confirm)
 
 ;; Transparency
-;; (add-to-list 'default-frame-alist '(alpha-background . 90))
+(set-frame-parameter nil 'alpha-background 90)
+(add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -603,11 +603,11 @@
   :config
   (setq hl-todo-highlight-punctuation ":"
         hl-todo-keyword-faces
-        `(("TODO"      error bold)
-	        ("WAIT"      warning bold)
-          ("FIXME"     font-lock-constant-face bold)
-          ("CANCELED"  font-lock-keyword-face bold)
-          ("DONE"      success bold))))
+        '(("TODO" . (:foreground "#1a1b26" :background "#f7768e" :weight bold))
+          ("WAIT" . (:foreground "#1a1b26" :background "#e0af68" :weight bold))
+          ("FIXME" . (:foreground "#1a1b26" :background "#7aa2f7" :weight bold))
+          ("CANCELED" . (:foreground "#1a1b26" :background "#73daca" :weight bold))
+          ("DONE" . (:foreground "#1a1b26" :background "#9ece6a" :weight bold)))))
 
 (use-package indent-guide
   :hook
@@ -709,13 +709,7 @@
   '(("Archiwum.org" :maxlevel . 1)))
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
   (setq org-todo-keywords
-  '((sequence "TODO(t)" "WAIT(w)" "FIXME(f)" "|" "CANCELED(c)" "DONE(d)")))
-  (setq org-todo-keyword-faces
-      '(("TODO" . (:foreground "#b04b57" :weight bold))
-        ("WAIT" . (:foreground "#e5c179" :weight bold))
-        ("FIXME" . (:foreground "#a47996" :weight bold))
-        ("CANCELED" . (:foreground "#85a7a5" :weight bold))
-        ("DONE" . (:foreground "#87b379" :weight bold)))))
+  '((sequence "TODO(t)" "WAIT(w)" "FIXME(f)" "|" "CANCELED(c)" "DONE(d)"))))
 
 (use-package org-tempo
   :ensure nil)
