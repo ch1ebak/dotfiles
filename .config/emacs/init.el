@@ -401,12 +401,9 @@
         doom-themes-enable-italic t)
   (doom-themes-org-config))
 
-(use-package kanagawa-themes)
-
 (load-theme 'doom-tokyo-night :no-confirm)
 
 ;; Transparency
-(set-frame-parameter nil 'alpha-background 90)
 (add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (use-package doom-modeline

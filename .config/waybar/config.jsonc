@@ -15,13 +15,15 @@
   "ext/workspaces": {
     "format": "{icon}",
     "format-icons": {
-      "1": "net",
-      "2": "notes",
-      "3": "term",
-      "4": "files",
-      "5": "apps",
-      "6": "games",
-      "7": "media",
+      "1": "chat",
+      "2": "net",
+      "3": "notes",
+      "4": "term",
+      "5": "files",
+      "6": "apps",
+      "7": "games",
+      "8": "music",
+      "9": "video",
     },
     "ignore-hidden": true,
     "on-click": "activate",
@@ -29,7 +31,7 @@
     "sort-by-id": true
   },
   "dwl/tags": {
-    "num-tags": 7
+    "num-tags": 9
   },
   "clock": {
     "format": "{:%a %d.%m.%y | %H:%M}"

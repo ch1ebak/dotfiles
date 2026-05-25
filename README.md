@@ -15,16 +15,11 @@
 
 # THEMES
 [Screenshots](https://github.com/ch1ebak/dotfiles/tree/main/screenshots)
-- Ayu
 - Catppuccin
 - Dracula
 - Everforest
 - Grayscale
 - Gruvbox
-- Kanagawa
-- Nvim Alt
-- One Dark
-- Poimandres
 - Spacegray
 - Tokyo Night
 

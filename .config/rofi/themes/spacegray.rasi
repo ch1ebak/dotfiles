@@ -8,9 +8,9 @@
   red     : #b04b57;
   green   : #87b379;
   yellow  : #e5c179;
-  blue    : #7d8fa4;
-  magenta : #D08770;
-  cyan    : #85a7a5;
+  blue    : #2257A0;
+  magenta : #a47996;
+  cyan    : #5699AF;
 
   accent: @red;
   urgent: @yellow;

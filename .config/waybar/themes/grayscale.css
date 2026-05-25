@@ -2,7 +2,74 @@
 @define-color fg #cccccc;
 @define-color c1 #cccccc;
 @define-color c2 #cccccc;
-@define-color c3 #f4d88c;
-@define-color c4 #cccccc;
+@define-color c3 #cccccc;
+@define-color c4 #f4d88c;
 @define-color c5 #cccccc;
 @define-color c6 #cccccc;
+@define-color c7 #cccccc;
+
+* {
+  font-family: 'JetBrainsMono NF', sans-serif;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.modules-left,
+.modules-right {
+  background-color: @bg;
+  border-radius: 5px;
+}
+
+.modules-center {
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: @bg;
+  border-radius: 5px;
+}
+
+#waybar {
+  /* background-color: transparent; */
+  background-color: @bg;
+  color: @fg;
+}
+
+#tray {
+  padding-left: 15px;
+  color: @fg;
+}
+
+#workspaces {
+  padding-left: 10px;
+  padding-right: 5px;
+  color: @fg;
+}
+
+#workspaces button.active {
+  border-radius: 4px;
+  background-color: @c1;
+  color: @bg;
+}
+
+#clock {
+  color: @c3;
+}
+
+#cpu {
+  padding-left: 15px;
+  padding-right: 15px;
+  color: @c7;
+}
+
+#memory {
+  padding-right: 15px;
+  color: @c5;
+}
+
+#battery {
+  padding-right: 15px;
+  color: @c4;
+}
+
+#battery.discharging.critical {
+  color: @c2;
+}

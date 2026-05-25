@@ -5,15 +5,15 @@
   bg1     : #313244;
   fg0     : #a6adc8;
   fg1     : #cdd6f4;
-  red     : #cba6f7;
+  red			: #f38ba8;
   green   : #a6e3a1;
-  yellow  : #f9e2af;
+  yellow	: #fab387;
   blue    : #89b4fa;
-  magenta : #f38ba8;
-  cyan    : #94e2d5;
+  magenta : #cba6f7;
+  cyan    : #89dceb;
 
-  accent: @red;
-  urgent: @yellow;
+  accent: @magenta;
+  urgent: @magenta;
 
   background-color : transparent;
   text-color       : @fg0;
@@ -35,7 +35,7 @@ window {
 
   background-color: @bg0;
   border: 2px;
-  border-color: @red;
+  border-color: @magenta;
   border-radius: 5px;
 }
 

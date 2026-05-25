@@ -8,8 +8,8 @@
   red     : #FF6E67;
   green   : #5AF78E;
   yellow  : #F4F99D;
-  blue    : #CAA9FA;
-  magenta : #FF92D0;
+  blue    : #6272A4;
+  magenta : #CAA9FA;
   cyan    : #9AEDFE;
 
   accent: @green;
