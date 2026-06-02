@@ -49,11 +49,12 @@ fastfetch
 
 
 # ALIASES
-## Package Manager
+## Nix
 alias nsp="nix-shell -p"
 alias nfu="sudo nix flake update --flake ~/.nixos-btw"
 alias nurse="sudo nixos-rebuild switch --impure --flake ~/.nixos-btw#nixos-btw"
-alias nconf="nvim ~/.nixos-btw/"
+alias nso="nix-store --optimise"
+alias fu="flatpak update"
 
 ## Commands
 ### cd

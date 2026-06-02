@@ -2,9 +2,9 @@
   "layer": "top",
   "position": "top",
   "height": 10,
-  "margin-top": 0,
-  "margin-left": 0,
-  "margin-right": 0,
+  "margin-top": 5,
+  "margin-left": 5,
+  "margin-right": 5,
   "modules-left": ["tray", "ext/workspaces"],
   "modules-center": ["clock"],
   "modules-right": ["cpu", "memory", "battery"],
@@ -30,9 +30,6 @@
     "on-click-right": "deactivate",
     "sort-by-id": true
   },
-  "dwl/tags": {
-    "num-tags": 9
-  },
   "clock": {
     "format": "{:%a %d.%m.%y | %H:%M}"
   },
@@ -47,9 +44,7 @@
     "interval": 60,
     "states": {
       "full": 90,
-      "good": 80,
-      "warning": 30,
-      "critical": 15
+      "warning": 20,
     },
     "format": "battery: {capacity}%",
     "max-length": 25

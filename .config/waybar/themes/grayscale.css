@@ -28,8 +28,7 @@
 }
 
 #waybar {
-  /* background-color: transparent; */
-  background-color: @bg;
+	background-color: transparent;
   color: @fg;
 }
 
@@ -70,6 +69,7 @@
   color: @c4;
 }
 
-#battery.discharging.critical {
-  color: @c2;
+#battery.discharging.warning {
+  background-color: @c4;
+  color: @bg;
 }
