@@ -1,12 +1,7 @@
-@define-color bg #202020;
+@define-color bg #393939;
+@define-color ac #202020;
 @define-color fg #cccccc;
-@define-color c1 #cccccc;
-@define-color c2 #cccccc;
-@define-color c3 #cccccc;
-@define-color c4 #f4d88c;
-@define-color c5 #cccccc;
-@define-color c6 #cccccc;
-@define-color c7 #cccccc;
+@define-color c1 #f4d88c;
 
 * {
   font-family: 'JetBrainsMono NF', sans-serif;
@@ -16,60 +11,56 @@
 
 .modules-left,
 .modules-right {
-  background-color: @bg;
-  border-radius: 5px;
-}
-
-.modules-center {
-  padding-left: 15px;
-  padding-right: 15px;
-  background-color: @bg;
-  border-radius: 5px;
+  background-color: @ac;
 }
 
 #waybar {
-	background-color: transparent;
+  background-color: @bg;
   color: @fg;
 }
 
 #tray {
-  padding-left: 15px;
+  padding-right: 10px;
   color: @fg;
 }
 
 #workspaces {
-  padding-left: 10px;
-  padding-right: 5px;
   color: @fg;
 }
 
 #workspaces button.active {
-  border-radius: 4px;
-  background-color: @c1;
+	border-radius: 0;
+  background-color: @fg;
   color: @bg;
 }
 
+#window {
+  padding-left: 10px;
+  background-color: @bg;
+  color: @fg;
+}
+
 #clock {
-  color: @c3;
+  padding-right: 15px;
+  color: @fg;
 }
 
 #cpu {
   padding-left: 15px;
   padding-right: 15px;
-  color: @c7;
+  color: @fg;
 }
 
 #memory {
   padding-right: 15px;
-  color: @c5;
+  color: @fg;
 }
 
 #battery {
   padding-right: 15px;
-  color: @c4;
+  color: @fg;
 }
 
 #battery.discharging.warning {
-  background-color: @c4;
-  color: @bg;
+  color: @c1;
 }

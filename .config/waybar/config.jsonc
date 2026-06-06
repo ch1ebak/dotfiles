@@ -2,12 +2,9 @@
   "layer": "top",
   "position": "top",
   "height": 10,
-  "margin-top": 5,
-  "margin-left": 5,
-  "margin-right": 5,
-  "modules-left": ["tray", "ext/workspaces"],
-  "modules-center": ["clock"],
-  "modules-right": ["cpu", "memory", "battery"],
+  "modules-left": ["ext/workspaces", "dwl/window"],
+  "modules-center": [],
+  "modules-right": ["cpu", "memory", "battery", "clock", "tray"],
   "tray": {
     "icon-size": 14,
     "spacing": 10
@@ -15,20 +12,23 @@
   "ext/workspaces": {
     "format": "{icon}",
     "format-icons": {
-      "1": "chat",
-      "2": "net",
-      "3": "notes",
-      "4": "term",
-      "5": "files",
-      "6": "apps",
-      "7": "games",
-      "8": "music",
-      "9": "video",
+      "1": "󰭹",
+      "2": "󰈹",
+      "3": "󰈚",
+      "4": "󰅴",
+      "5": "󰝰",
+      "6": "󰕊",
+      "7": "󰊗",
+      "8": "󰝚",
+      "9": "󰕧",
     },
     "ignore-hidden": true,
     "on-click": "activate",
     "on-click-right": "deactivate",
     "sort-by-id": true
+  },
+  "dwl/window": {
+    "format": "{title}"
   },
   "clock": {
     "format": "{:%a %d.%m.%y | %H:%M}"
@@ -44,7 +44,9 @@
     "interval": 60,
     "states": {
       "full": 90,
-      "warning": 20,
+      "good": 80,
+      "warning": 30,
+      "critical": 15
     },
     "format": "battery: {capacity}%",
     "max-length": 25

@@ -1,4 +1,5 @@
-@define-color bg #20242d;
+@define-color bg #191c24;
+@define-color ac #20242d;
 @define-color fg #B3B8C3;
 @define-color c1 #a47996;
 @define-color c2 #b04b57;
@@ -16,52 +17,49 @@
 
 .modules-left,
 .modules-right {
-  background-color: @bg;
-  border-radius: 5px;
-}
-
-.modules-center {
-  padding-left: 15px;
-  padding-right: 15px;
-  background-color: @bg;
-  border-radius: 5px;
+  background-color: @ac;
 }
 
 #waybar {
-	background-color: transparent;
+  background-color: @bg;
   color: @fg;
 }
 
 #tray {
-  padding-left: 15px;
+  padding-right: 10px;
   color: @fg;
 }
 
 #workspaces {
-  padding-left: 10px;
-  padding-right: 5px;
   color: @fg;
 }
 
 #workspaces button.active {
-  border-radius: 4px;
+	border-radius: 0;
   background-color: @c2;
   color: @bg;
 }
 
+#window {
+  padding-left: 10px;
+  background-color: @bg;
+  color: @fg;
+}
+
 #clock {
-  color: @c6;
+  padding-right: 15px;
+  color: @c1;
 }
 
 #cpu {
   padding-left: 15px;
   padding-right: 15px;
-  color: @c1;
+  color: @c5;
 }
 
 #memory {
   padding-right: 15px;
-  color: @c5;
+  color: @c6;
 }
 
 #battery {
@@ -70,5 +68,5 @@
 }
 
 #battery.discharging.warning {
-  color: @c2;
+  color: @c3;
 }
