@@ -175,11 +175,11 @@
 
   (me/leader-keys
     "SPC" '(counsel-M-x :wk "M-x")
-    "RET" '(counsel-fzf :wk "FZF")
+    "RET" '(counsel-bookmark :wk "Bookmarks")
     "." '(counsel-find-file :wk "Find file")
     ">" '(dired-jump :wk "Dired")
-    "," '(counsel-ibuffer :wk "Buffers")
-    "<" '(kill-buffer :wk "Killing Buffers")
+    "," '(counsel-fzf :wk "FZF")
+    "<" '(counsel-ibuffer :wk "Buffers")
     "?" '(counsel-rg :wk "Grep")
     "/" '(swiper :wk "Search line"))
 
@@ -190,7 +190,6 @@
 
   (me/leader-keys
     "b" '(:ignore t :wk "Bookmarks")
-    "b b" '(counsel-bookmark :wk "Bookmarks")
     "b m" '(bookmark-set :wk "Add to bookmarks")
     "b s" '(bookmark-save :wk "Save bookmarks"))
 
@@ -735,17 +734,10 @@
 			(elisp "https://github.com/Wilfred/tree-sitter-elisp")
 			(html "https://github.com/tree-sitter/tree-sitter-html")
 			(nix "https://github.com/nix-community/tree-sitter-nix")
+			(lua "https://github.com/tree-sitter-grammars/tree-sitter-lua")
 			(markdown "https://github.com/ikatyang/tree-sitter-markdown")))
   :custom
   (treesit-font-lock-level 4))
-
-(use-package treesit-auto
-  :ensure t
-  :hook (emacs-startup . global-treesit-auto-mode)
-  :custom
-  (treesit-auto-install 'prompt)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all))
 
 (use-package typopunct
   :load-path "~/.config/emacs/lisp/typopunct"

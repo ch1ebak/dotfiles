@@ -44,17 +44,17 @@ export HISTCONTROL=erasedups:ignoredups:ignorespace
 PS1="\[\033[31m\]\w >\[\e[m\] "
 
 ## Fetch
-# minifetch
 fastfetch
 
 
 # ALIASES
 ## Nix
 alias nsp="nix-shell -p"
-alias nfu="sudo nix flake update --flake ~/.nixos-btw"
 alias nurse="sudo nixos-rebuild switch --impure --flake ~/.nixos-btw#nixos-btw"
-alias nso="nix-store --optimise"
+alias nfu="sudo nix flake update --flake ~/.nixos-btw"
 alias fu="flatpak update"
+alias ffs="flatpak update; sudo nix flake update --flake ~/.nixos-btw; sudo nixos-rebuild switch --impure --flake ~/.nixos-btw#nixos-btw"
+alias nso="nix-store --optimise"
 
 ## Commands
 ### cd
@@ -90,7 +90,8 @@ alias xbl="brightnessctl --device=intel_backlight set "
 ## Apps
 alias cal="cal -3 -m --color=auto"
 alias dunres="killall -e dunst & sleep 1; dunstify "hello!" &"
-alias fehs="feh --bg-fill"
+alias em="emacs -nw" 
+alias lg="lazygit"
 alias n="nvim" 
 alias n.="nvim ." 
 alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"

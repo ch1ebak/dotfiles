@@ -24,28 +24,6 @@ config = {
     top = 6,
     bottom = 6,
   },
-	keys = {
-		{
-			key = 'n',
-			mods = 'ALT',
-			action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
-		},
-		{
-			key = 'w',
-			mods = 'ALT',
-			action = wezterm.action.CloseCurrentPane { confirm = false },
-		},
-		{
-			key = 'k',
-			mods = 'ALT',
-			action = wezterm.action.ActivatePaneDirection 'Up',
-		},
-		{
-			key = 'j',
-			mods = 'ALT',
-			action = wezterm.action.ActivatePaneDirection 'Down',
-		},
-	},
 }
 
 return config
