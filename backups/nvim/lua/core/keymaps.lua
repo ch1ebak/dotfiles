@@ -8,7 +8,6 @@ g.mapleader = " "
 g.maplocalleader = " "
 
 -- Config
--- keymap.set("n", "<leader>hr", ":source %<cr>", { desc = "Reload config" }, opts)
 keymap.set("n", "<leader>hr", ":restart<cr>", { desc = "Reload config" }, opts)
 
 -- Sessions
@@ -25,6 +24,12 @@ keymap.set("n", "<C-t>", "<cmd>tabnew<CR>", { desc = "New tab" }, opts)
 keymap.set("n", "<C-k>", "<cmd>tabn<CR>", { desc = "Next tab" }, opts)
 keymap.set("n", "<C-j>", "<cmd>tabp<CR>", { desc = "Previous tab" }, opts)
 keymap.set("n", "<C-S-h>", "<C-^>", { desc = "Previous tab" }, opts)
+
+-- keymap.set("n", "<left>", "<C-w>h", { desc = "Move to left window" }, opts)
+-- keymap.set("n", "<down>", "<C-w>j", { desc = "Move to left window" }, opts)
+-- keymap.set("n", "<up>", "<C-w>k", { desc = "Move to left window" }, opts)
+-- keymap.set("n", "<right>", "<C-w>l", { desc = "Move to right window" }, opts)
+
 
 -- Movement
 keymap.set("n", "j", "gj", { desc = "Move by line" }, opts)
@@ -47,7 +52,6 @@ keymap.set("n", "N", "Nzzzv", { desc = "Better search previous" }, opts)
 
 -- Other
 keymap.set("i", "HL", "<ESC>", { desc = "Exit insert mode" }, opts)
-keymap.set("n", "<leader>tu", ":Undotree<CR>", { desc = "Undotree" }, opts)
 keymap.set("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Uncomment and Copy" }, opts)
 
 local function duplicate_and_comment()
@@ -66,6 +70,7 @@ keymap.set("v", "yc", duplicate_and_comment, { noremap = true, desc = "Duplicate
 -- Toggles
 keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
 keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = "Line wrapping" }, opts)
+keymap.set("n", "<leader>tt", ":split<CR>:term<CR>", { desc = "Terminal" }, opts)
 
 -- LSP
 keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('harper-ls')<CR>", { desc = "Enable LSP" }, opts)
@@ -81,19 +86,19 @@ vim.keymap.set("n", "<leader>yc", function()
 end)
 
 -- Focus split
--- keymap.set("n", "<C-o>", function()
---     local win     = vim.api.nvim_get_current_win()
---     local wwidth  = vim.api.nvim_win_get_width(win)
---     local wheight = vim.api.nvim_win_get_height(win)
---
---     local tab_width  = vim.o.columns
---     local tab_height = vim.o.lines - vim.o.cmdheight
---
---     local focused = wwidth >= tab_width * 0.9 and wheight >= tab_height * 0.9
---     if focused then
---         vim.cmd("wincmd =") --equalize all win size
---     else
---         vim.cmd("wincmd |")
---         vim.cmd("wincmd _")
---     end
--- end)
+keymap.set("n", "<C-o>", function()
+    local win     = vim.api.nvim_get_current_win()
+    local wwidth  = vim.api.nvim_win_get_width(win)
+    local wheight = vim.api.nvim_win_get_height(win)
+
+    local tab_width  = vim.o.columns
+    local tab_height = vim.o.lines - vim.o.cmdheight
+
+    local focused = wwidth >= tab_width * 0.9 and wheight >= tab_height * 0.9
+    if focused then
+        vim.cmd("wincmd =") --equalize all win size
+    else
+        vim.cmd("wincmd |")
+        vim.cmd("wincmd _")
+    end
+end)

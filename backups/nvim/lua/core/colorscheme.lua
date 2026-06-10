@@ -4,7 +4,7 @@ local cmd = vim.cmd
 
 -- Color Scheme
 vim.o.background = "dark"
-vim.cmd 'colorscheme default'
+vim.cmd 'colorscheme everforest'
 
 -- Transparency
 vim.api.nvim_set_hl(0, "Normal", { bg = "none"})

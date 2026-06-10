@@ -50,7 +50,7 @@ end)
 -- LOOK AND FEEL
 
 -- Theme
-require("themes/tokyonight")
+require("themes/everforest")
 
 -- Settings
 hl.config({

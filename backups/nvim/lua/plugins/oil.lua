@@ -10,7 +10,7 @@ return {
   lazy = false,
   config = function ()
 
-    vim.keymap.set("n", "<leader>>", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+    vim.keymap.set("n", "<leader>fo", "<CMD>Oil<CR>", { desc = "Open parent directory" })
     vim.keymap.set("n", "<leader>fP", "<CMD>Oil ~/.dotfiles/.config/nvim/<CR>", { desc = "Open neovim directory" })
     vim.keymap.set("n", "<leader>fN", "<CMD>Oil ~/Dokumenty/notatki/<CR>", { desc = "Open notes directory" })
 

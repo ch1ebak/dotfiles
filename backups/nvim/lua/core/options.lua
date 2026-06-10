@@ -81,7 +81,3 @@ api.nvim_create_autocmd("TextYankPost", {
 
 -- Folding
 o.foldenable = false
-
--- PLUGINS
-cmd.packadd('nvim.undotree')
-cmd.packadd('nvim.difftool')

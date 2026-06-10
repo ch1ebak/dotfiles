@@ -8,7 +8,7 @@ return {
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = 'nvim-alt',
+        theme = 'everforest',
         section_separators = { left = '', right = ''},
         disabled_filetypes = {
           statusline = {},

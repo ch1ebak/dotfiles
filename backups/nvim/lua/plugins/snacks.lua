@@ -8,6 +8,7 @@ return {
     image = { enabled = true },
     quickfile = { enabled = true },
     notifier = { enabled = true },
+    explorer = { enabled = true },
     indent = {
       enabled = true,
       animate = { enabled = false },
@@ -50,16 +51,16 @@ return {
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader><Return>", function() Snacks.picker.projects() end, desc = "Projects" },
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
-    { "<leader>.", function() Snacks.picker.files() end, desc = "Find Files" },
+    { "<leader>.", function() Snacks.explorer.open() end, desc = "Find Files" },
+    { "<leader>>", function() Snacks.picker.files() end, desc = "Find Files" },
     -- Find
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
-    { "<leader>fp", function() Snacks.picker.files({ cwd = '~/.dotfiles/.config/nvim/' }) end, desc = "Config File" },
+    { "<leader>fp", function() Snacks.picker.files({ cwd = '~/.config/nvim/' }) end, desc = "Config File" },
     { "<leader>fn", function() Snacks.picker.files({ cwd = '~/Dokumenty/notatki/' }) end, desc = "Config File" },
     -- Search
     { "<leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>?", function() Snacks.picker.grep() end, desc = "Grep" },
     -- Stuff
-    { "<leader>ti", function() Snacks.picker.icons() end, desc = "Icons" },
     { "<leader>hk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
     { "<leader>hh", function() Snacks.picker.help() end, desc = "Help Pages" },
     { "<leader>ht", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },

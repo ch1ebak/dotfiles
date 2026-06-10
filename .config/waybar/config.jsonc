@@ -2,15 +2,14 @@
   "layer": "top",
   "position": "top",
   "height": 10,
-  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-left": ["ext/workspaces", "dwl/window"],
   "modules-center": [],
   "modules-right": ["cpu", "memory", "battery", "clock", "tray"],
   "tray": {
     "icon-size": 14,
     "spacing": 10
   },
-  "hyprland/workspaces": {
-    "sort-by-id": true,
+  "ext/workspaces": {
     "format": "{icon}",
     "format-icons": {
       "1": "󰭹",
@@ -19,14 +18,20 @@
       "4": "󰅴",
       "5": "󰝰",
       "6": "󰕊",
-      "7": "󰓓",
+      "7": "󰊗",
       "8": "󰝚",
-      "9": "󰕧"
+      "9": "󰕧",
     },
+    "ignore-hidden": true,
+    "on-click": "activate",
+    "on-click-right": "deactivate",
+    "sort-by-id": true
   },
-  "hyprland/window": {
-    "format": "{title}",
-    "separate-outputs": true
+  "dwl/tags": {
+    "num-tags": 9
+  },
+  "dwl/window": {
+    "format": "{title}"
   },
   "clock": {
     "format": "{:%a %d.%m.%y %H:%M}"
@@ -42,9 +47,7 @@
     "interval": 60,
     "states": {
       "full": 90,
-      "good": 80,
-      "warning": 30,
-      "critical": 15
+      "warning": 15,
     },
     "format": "BAT {capacity}%",
     "max-length": 25
