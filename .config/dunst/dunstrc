@@ -11,12 +11,14 @@
   shrink = no
   padding = 25
   horizontal_padding = 25
-  corner_radius = 5
+  # corner_radius = 5
+  corner_radius = 0
 
   width = 275
   height = 100
   origin = bottom-right
-  offset = 5x5
+  # offset = 5x5
+  offset = 0x0
 	
   frame_width = 2
   separator_height = 0

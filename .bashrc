@@ -89,7 +89,7 @@ alias xbl="brightnessctl --device=intel_backlight set "
 
 ## Apps
 alias cal="cal -3 -m --color=auto"
-alias dunres="killall -e dunst & sleep 1; dunstify "hello!" &"
+alias dunres="killall -e .dunst-wrapped & sleep 1; dunstify "hello!" &"
 alias em="emacs -nw" 
 alias lg="lazygit"
 alias n="nvim" 

@@ -403,7 +403,7 @@
 (load-theme 'doom-tokyo-night :no-confirm)
 
 ;; Transparency
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+;; (add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
