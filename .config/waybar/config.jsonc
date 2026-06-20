@@ -2,7 +2,7 @@
   "layer": "top",
   "position": "top",
   "height": 10,
-  "modules-left": ["ext/workspaces", "dwl/window"],
+  "modules-left": ["ext/workspaces"],
   "modules-center": [],
   "modules-right": ["cpu", "memory", "battery", "clock", "tray"],
   "tray": {
@@ -10,46 +10,26 @@
     "spacing": 10
   },
   "ext/workspaces": {
+    "sort-by-id": true,
     "format": "{icon}",
-    "format-icons": {
-      "1": "󰭹",
-      "2": "󰈹",
-      "3": "󰈚",
-      "4": "󰅴",
-      "5": "󰝰",
-      "6": "󰕊",
-      "7": "󰊗",
-      "8": "󰝚",
-      "9": "󰕧",
-    },
-    "ignore-hidden": true,
-    "on-click": "activate",
-    "on-click-right": "deactivate",
-    "sort-by-id": true
-  },
-  "dwl/tags": {
-    "num-tags": 9
-  },
-  "dwl/window": {
-    "format": "{title}"
   },
   "clock": {
-    "format": "{:%a %d.%m.%y %H:%M}"
+    "format": "󰃭 {:%a %d.%m.%y - %H:%M}"
   },
   "cpu": {
-    "format": "CPU {usage}%",
+    "format": "󰘚 {usage}%",
     "tooltip": false
   },
   "memory": {
-    "format": "MEM {percentage}%"
+    "format": "  {percentage}%"
   },
   "battery": {
     "interval": 60,
     "states": {
       "full": 90,
-      "warning": 15,
+      "warning": 20,
     },
-    "format": "BAT {capacity}%",
+    "format": "󰁹 {capacity}%",
     "max-length": 25
   }
 }

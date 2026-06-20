@@ -9,5 +9,8 @@ return {
   cmd = "Neogit",
   keys = {
     { "<leader>pm", "<cmd>Neogit<cr>", desc = "Show Neogit UI" }
-  }
+  },
+  commit_editor = {
+    spell_check = false,
+  },
 }

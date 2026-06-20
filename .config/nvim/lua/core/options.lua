@@ -67,7 +67,6 @@ opt.list = true
 opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Spelling
-opt.spelllang = "en,pl"                       -- Spellcheck languages
 opt.spell = false                             -- Enable spellcheck
 
 -- Highlight when yanking

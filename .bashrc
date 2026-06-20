@@ -51,8 +51,6 @@ fastfetch
 ## Nix
 alias nsp="nix-shell -p"
 alias nurse="sudo nixos-rebuild switch --impure --flake ~/.nixos-btw#nixos-btw"
-alias nfu="sudo nix flake update --flake ~/.nixos-btw"
-alias fu="flatpak update"
 alias ffs="flatpak update; sudo nix flake update --flake ~/.nixos-btw; sudo nixos-rebuild switch --impure --flake ~/.nixos-btw#nixos-btw"
 alias nso="nix-store --optimise"
 

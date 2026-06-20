@@ -43,34 +43,21 @@
             "type": "kernel"
         },
         {
-            "key": "│ {#31}󰇄 apps    {#keys}│",
+            "key": "│ {#37}󰇄 apps    {#keys}│",
             "type": "packages"
         },
         {
-            "key": "│ {#32} cpu     {#keys}│",
-            "type": "cpu",
-            "showPeCoreCount": true
-        },
-        {
-            "key": "│ {#33} gpu     {#keys}│",
-            "type": "gpu"
-        },
-        {
-            "key": "│ {#34} memory  {#keys}│",
-            "type": "memory"
-        },
-        {
-            "key": "│ {#35}󰉉 root    {#keys}│",
+            "key": "│ {#31}󰉉 root    {#keys}│",
             "type": "disk",
             "folders": "/"
         },
         {
-            "key": "│ {#36}󰉉 user    {#keys}│",
+            "key": "│ {#32}󰉉 user    {#keys}│",
             "type": "disk",
             "folders": "/mnt/User"
         },
         {
-            "key": "│ {#31}󰉉 games   {#keys}│",
+            "key": "│ {#33}󰉉 games   {#keys}│",
             "type": "disk",
             "folders": "/mnt/Games"
         },

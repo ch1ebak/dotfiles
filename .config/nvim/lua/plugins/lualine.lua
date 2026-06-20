@@ -8,7 +8,7 @@ return {
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = 'everforest',
+        theme = 'tokyonight',
         section_separators = { left = '', right = ''},
         disabled_filetypes = {
           statusline = {},

@@ -400,10 +400,10 @@
         doom-themes-enable-italic t)
   (doom-themes-org-config))
 
-(load-theme 'doom-tokyo-night :no-confirm)
+(load-theme 'doom-homage-black :no-confirm)
 
 ;; Transparency
-;; (add-to-list 'default-frame-alist '(alpha-background . 90))
+;; (add-to-list 'default-frame-alist '(alpha-background . 80))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)

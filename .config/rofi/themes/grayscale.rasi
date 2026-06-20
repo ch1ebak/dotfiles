@@ -1,9 +1,9 @@
 * {
   font:   "JetBrainsMono Nerd Font Bold 9";
 
-  bg0     : #000000;
-  bg1     : #303030;
-  fg0     : #cccccc;
+  bg0     : #151515;
+  bg1     : #202020;
+  fg0     : #E1E1E1;
 
   accent: @fg0;
   urgent: @fg0;

@@ -17,8 +17,7 @@
   width = 275
   height = 100
   origin = bottom-right
-  # offset = 5x5
-  offset = 0x0
+  offset = 5x5
 	
   frame_width = 2
   separator_height = 0
