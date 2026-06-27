@@ -214,6 +214,7 @@
     "p" '(:ignore t :wk "Packages")
     "p a" '(org-agenda :wk "Org Agenda")
     "p x" '(org-capture :wk "Org Capture")
+    "p t" '(ghostel :wk "Terminal")
     "p e" '(elfeed :wk "Elfeed")
     "p m" '(magit-status :wk "Magit")
     "p w" '(eww :wk "EWW"))
@@ -400,10 +401,10 @@
         doom-themes-enable-italic t)
   (doom-themes-org-config))
 
-(load-theme 'doom-homage-black :no-confirm)
+(load-theme 'doom-tokyo-night :no-confirm)
 
 ;; Transparency
-;; (add-to-list 'default-frame-alist '(alpha-background . 80))
+(add-to-list 'default-frame-alist '(alpha-background . 80))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -592,6 +593,13 @@
     (eww-mode)
     (eww url)))
 
+(use-package ghostel
+  :ensure t)
+
+(use-package evil-ghostel
+  :after (ghostel evil)
+  :hook (ghostel-mode . evil-ghostel-mode))
+
 (use-package hl-todo
   :hook ((org-mode . hl-todo-mode)
          (markdown-mode . hl-todo-mode)
@@ -663,6 +671,9 @@
     (typopunct-mode)
     (global-visual-line-mode)
     (delete-other-windows)))
+
+(use-package nix-ts-mode
+ :mode "\\.nix\\'")
 
 (use-package org
   :ensure nil
@@ -738,6 +749,13 @@
 			(markdown "https://github.com/ikatyang/tree-sitter-markdown")))
   :custom
   (treesit-font-lock-level 4))
+
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
 
 (use-package typopunct
   :load-path "~/.config/emacs/lisp/typopunct"
