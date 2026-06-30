@@ -2,7 +2,7 @@
 
 ;; ============================
 ;; ▗▄▄▄▖▗▖  ▗▖ ▗▄▖  ▗▄▄▖ ▗▄▄▖
-;; ▐▌   ▐▛▚▞▜▌▐▌ ▐▌▐▌   ▐▌   
+;; ▐▌   ▐▛▚▞▜▌▐▌ ▐▌▐▌   ▐▌
 ;; ▐▛▀▀▘▐▌  ▐▌▐▛▀▜▌▐▌    ▝▀▚▖
 ;; ▐▙▄▄▖▐▌  ▐▌▐▌ ▐▌▝▚▄▄▖▗▄▄▞▘
 ;;
@@ -17,377 +17,375 @@
 ;; Use Package
 (require 'use-package-ensure)
 (setq use-package-always-ensure t
-      package-enable-at-startup nil
-      package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")
-                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+			package-enable-at-startup nil
+			package-archives '(("melpa" . "https://melpa.org/packages/")
+												 ("org" . "https://orgmode.org/elpa/")
+												 ("elpa" . "https://elpa.gnu.org/packages/")
+												 ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 
 (setq package-quickstart t)
 
 ;; Emacs Config
 (use-package emacs
-  :ensure nil
+	:ensure nil
 
-  :custom
+	:custom
 	(global-visual-line-mode 1)
-  (delete-selection-mode 1)
-  (electric-indent-mode -1)
-  (electric-pair-mode 1)
-  (global-auto-revert-mode t)
-  (set-fringe-mode 5)
-  (blink-cursor-mode 0)
-  (display-line-numbers-type 'relative) 
-  (global-display-line-numbers-mode 1)
-  (tab-width 2)
-  (inhibit-startup-message t)
-  (initial-scratch-message "")
-  (vc-follow-symlinks t)
-  (use-short-answers t)
-  (use-dialog-box nil)
-  (conf-unix-mode t)
-  (bidi-display-reordering 'left-to-right)
-  (bidi-paragraph-direction 'left-to-right)
-  (bidi-inhibit-bpa t)
-  (cursor-in-non-selected-windows nil)
-  (highlight-nonselected-windows nil)
+	(delete-selection-mode 1)
+	(electric-indent-mode -1)
+	(electric-pair-mode 1)
+	(global-auto-revert-mode t)
+	(set-fringe-mode 5)
+	(blink-cursor-mode 0)
+	(display-line-numbers-type 'relative)
+	(global-display-line-numbers-mode 1)
+	(tab-width 2)
+	(inhibit-startup-message t)
+	(initial-scratch-message "")
+	(vc-follow-symlinks t)
+	(use-short-answers t)
+	(use-dialog-box nil)
+	(conf-unix-mode t)
+	(bidi-display-reordering 'left-to-right)
+	(bidi-paragraph-direction 'left-to-right)
+	(bidi-inhibit-bpa t)
+	(cursor-in-non-selected-windows nil)
+	(highlight-nonselected-windows nil)
 
-  :config
-  (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font"  :height 105)
-  (set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 105)
-  (set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 105)
+	:config
+	(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font" :height 105)
+	(set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 105)
+	(set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 105)
 
-  (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory)))
-        auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
-        auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t))
-        backup-directory-alist '((".*" . "~/.local/share/Trash/files"))
-        user-emacs-directory "~/.config/emacs"
-        bookmark-default-file "~/.config/emacs/files/bookmarks"
-        auth-sources '("~/Dokumenty/tajne/.authinfo.gpg")
-        custom-file (locate-user-emacs-file "files/custom-vars.el"))
 
-  :init
-  (indent-tabs-mode -1)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
-  (tool-bar-mode -1))
+	(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory)))
+				auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
+				auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t))
+				backup-directory-alist '((".*" . "~/.local/share/Trash/files"))
+				user-emacs-directory "~/.config/emacs"
+				bookmark-default-file "~/.config/emacs/files/bookmarks"
+				auth-sources '("~/Dokumenty/tajne/.authinfo.gpg")
+				custom-file (locate-user-emacs-file "files/custom-vars.el"))
+
+	:init
+	(indent-tabs-mode -1)
+	(menu-bar-mode -1)
+	(scroll-bar-mode -1)
+	(tool-bar-mode -1))
 
 (use-package recentf
-  :ensure nil
-  :hook (after-init . recentf-mode)
-  :config
-  (setq recentf-max-menu-items 25
+	:ensure nil
+	:hook (after-init . recentf-mode)
+	:config
+	(setq recentf-max-menu-items 25
 				recentf-max-saved-items 25
 				recentf-save-file "~/.config/emacs/files/recentf"))
 
 (use-package savehist
-  :ensure nil
-  :hook (after-init . savehist-mode)
-  :config
-  (setq savehist-file "~/.config/emacs/files/savehist")
-  (setq history-length 100)
-  (setq history-delete-duplicates t)
-  (setq savehist-save-minibuffer-history t)
-  (add-to-list 'savehist-additional-variables 'kill-ring))
+	:ensure nil
+	:hook (after-init . savehist-mode)
+	:config
+	(setq savehist-file "~/.config/emacs/files/savehist")
+	(setq history-length 100)
+	(setq history-delete-duplicates t)
+	(setq savehist-save-minibuffer-history t)
+	(add-to-list 'savehist-additional-variables 'kill-ring))
 
 ;; Keymaps
 (use-package evil
-    :init
-    (setq evil-want-integration t
-          evil-want-keybinding nil
-          evil-want-Y-yank-to-eol t
-          evil-vsplit-window-right t
-          evil-split-window-below t
-          evil-shift-width 2
-          evil-undo-system 'undo-tree)
-    :config
-    (evil-mode 1)
-    (define-key evil-motion-state-map (kbd "SPC") nil)
-    (define-key evil-motion-state-map (kbd "RET") nil)
-    (define-key evil-motion-state-map (kbd "TAB") nil)
-    ;; line movement
-    (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-    (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-    (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-    (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-    ;; other
-    (define-key evil-visual-state-map (kbd "J") 'evil-collection-unimpaired-move-text-down)
-    (define-key evil-visual-state-map (kbd "K") 'evil-collection-unimpaired-move-text-up)
-    (define-key evil-normal-state-map (kbd "gh") 'evil-beginning-of-line)
-    (define-key evil-normal-state-map (kbd "gl") 'evil-end-of-line)
-    (define-key evil-normal-state-map (kbd "gra") 'eglot-code-actions)
-    (define-key evil-normal-state-map (kbd "C-.") 'zoxide-travel)
-    ;; frames/tabs/windows/buffers
-    (define-key evil-normal-state-map (kbd "C-n") 'split-window-right)
-    (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-    (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-    (define-key evil-normal-state-map (kbd "C-t") 'tab-new)
-    (define-key evil-normal-state-map (kbd "C-k") 'tab-next)
-    (define-key evil-normal-state-map (kbd "C-j") 'tab-previous)
-    (define-key evil-normal-state-map (kbd "C-w") 'evil-window-delete)
-    (define-key evil-normal-state-map (kbd "C-o") 'my-min-max-window)
-    (define-key evil-insert-state-map (kbd "C-n") 'evil-window-vnew)
-    (define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
-    (define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)
-    (define-key evil-insert-state-map (kbd "C-t") 'tab-new)
-    (define-key evil-insert-state-map (kbd "C-k") 'tab-next)
-    (define-key evil-insert-state-map (kbd "C-j") 'tab-previous)
-    (define-key evil-insert-state-map (kbd "C-w") 'evil-window-delete)
-    (define-key evil-insert-state-map (kbd "C-o") 'my-min-max-window)
-    (define-key evil-normal-state-map (kbd "C-S-J") 'evil-window-move-far-left)
-    (define-key evil-normal-state-map (kbd "C-S-K") 'evil-window-move-far-right)
-    (define-key evil-normal-state-map (kbd "C-S-H") 'previous-buffer)
-    (define-key evil-normal-state-map (kbd "C-S-L") 'next-buffer))
+		:init
+		(setq evil-want-integration t
+					evil-want-keybinding nil
+					evil-want-Y-yank-to-eol t
+					evil-vsplit-window-right t
+					evil-split-window-below t
+					evil-shift-width 2
+					evil-undo-system 'undo-tree)
+		:config
+		(evil-mode 1)
+		(define-key evil-motion-state-map (kbd "SPC") nil)
+		(define-key evil-motion-state-map (kbd "RET") nil)
+		(define-key evil-motion-state-map (kbd "TAB") nil)
+		;; line movement
+		(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+		(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+		(define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+		(define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+		;; other
+		(define-key evil-visual-state-map (kbd "J") 'evil-collection-unimpaired-move-text-down)
+		(define-key evil-visual-state-map (kbd "K") 'evil-collection-unimpaired-move-text-up)
+		(define-key evil-normal-state-map (kbd "gh") 'evil-beginning-of-line)
+		(define-key evil-normal-state-map (kbd "gl") 'evil-end-of-line)
+		(define-key evil-normal-state-map (kbd "gra") 'eglot-code-actions)
+		(define-key evil-normal-state-map (kbd "C-.") 'zoxide-travel)
+		;; frames/tabs/windows/buffers
+		(define-key evil-normal-state-map (kbd "C-n") 'split-window-right)
+		(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+		(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+		(define-key evil-normal-state-map (kbd "C-t") 'tab-new)
+		(define-key evil-normal-state-map (kbd "C-k") 'tab-next)
+		(define-key evil-normal-state-map (kbd "C-j") 'tab-previous)
+		(define-key evil-normal-state-map (kbd "C-w") 'evil-window-delete)
+		(define-key evil-normal-state-map (kbd "C-o") 'my-min-max-window)
+		(define-key evil-insert-state-map (kbd "C-n") 'evil-window-vnew)
+		(define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
+		(define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)
+		(define-key evil-insert-state-map (kbd "C-t") 'tab-new)
+		(define-key evil-insert-state-map (kbd "C-k") 'tab-next)
+		(define-key evil-insert-state-map (kbd "C-j") 'tab-previous)
+		(define-key evil-insert-state-map (kbd "C-w") 'evil-window-delete)
+		(define-key evil-insert-state-map (kbd "C-o") 'my-min-max-window)
+		(define-key evil-normal-state-map (kbd "C-S-J") 'evil-window-move-far-left)
+		(define-key evil-normal-state-map (kbd "C-S-K") 'evil-window-move-far-right)
+		(define-key evil-normal-state-map (kbd "C-S-H") 'previous-buffer)
+		(define-key evil-normal-state-map (kbd "C-S-L") 'next-buffer))
 
 (setq-default evil-cross-lines t)
 (setq org-return-follows-link t)
 
 (use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  (evil-collection-init))
+	:after evil
+	:ensure t
+	:config
+	(evil-collection-init))
 
 (use-package evil-commentary
-  :config
-  (evil-commentary-mode))
+	:config
+	(evil-commentary-mode))
 
 (use-package evil-org
-  :after org
-  :hook (org-mode . (lambda () evil-org-mode))
-  :config
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
+	:after org
+	:hook (org-mode . (lambda () evil-org-mode))
+	:config
+	(require 'evil-org-agenda)
+	(evil-org-agenda-set-keys))
 
 (use-package evil-surround
-  :config
-  (global-evil-surround-mode 1))
+	:config
+	(global-evil-surround-mode 1))
 
 (use-package general
-  :config
-  (general-evil-setup)
+	:config
+	(general-evil-setup)
 
-  (general-create-definer me/leader-keys
-    :states '(normal insert visual emacs)
-    :keymaps 'override
-    :prefix "SPC"
-    :global-prefix "M-SPC")
+	(general-create-definer me/leader-keys
+		:states '(normal insert visual emacs)
+		:keymaps 'override
+		:prefix "SPC"
+		:global-prefix "M-SPC")
 
-  (me/leader-keys
-    "SPC" '(counsel-M-x :wk "M-x")
-    "RET" '(counsel-bookmark :wk "Bookmarks")
-    "." '(counsel-find-file :wk "Find file")
-    ">" '(dired-jump :wk "Dired")
-    "," '(counsel-fzf :wk "FZF")
-    "<" '(counsel-ibuffer :wk "Buffers")
-    "?" '(counsel-rg :wk "Grep")
-    "/" '(swiper :wk "Search line"))
+	(me/leader-keys
+		"SPC" '(counsel-M-x :wk "M-x")
+		"RET" '(counsel-bookmark :wk "Bookmarks")
+		;; "." '(counsel-find-file :wk "Find file")
+		"." '(dired-sidebar-toggle-with-current-directory :wk "Find file")
+		">" '(dired-jump :wk "Dired")
+		"," '(counsel-fzf :wk "FZF")
+		"<" '(counsel-ibuffer :wk "Buffers")
+		"?" '(counsel-rg :wk "Grep")
+		"/" '(swiper :wk "Search line"))
 
-  (me/leader-keys
-    "s" '(:ignore t :wk "Sessions")
-    "s s" '(wg-create-workgroup :wk "Create new session from open frames")
-    "s l" '(wg-open-workgroup :wk "Load session"))
+	(me/leader-keys
+		"s" '(:ignore t :wk "Sessions")
+		"s s" '(wg-create-workgroup :wk "Create new session from open frames")
+		"s l" '(wg-open-workgroup :wk "Load session"))
 
-  (me/leader-keys
-    "b" '(:ignore t :wk "Bookmarks")
-    "b m" '(bookmark-set :wk "Add to bookmarks")
-    "b s" '(bookmark-save :wk "Save bookmarks"))
+	(me/leader-keys
+		"b" '(:ignore t :wk "Bookmarks")
+		"b m" '(bookmark-set :wk "Add to bookmarks")
+		"b s" '(bookmark-save :wk "Save bookmarks"))
 
-  (me/leader-keys
-    "f" '(:ignore t :wk "Files")
-    "f p" '((lambda () (interactive) (find-file "~/.config/emacs/init.el")) :wk "Emacs Config")
-    "f P" '((lambda () (interactive) (counsel-find-file "~/.config/emacs/")) :wk "Notes")
-    "f n" '((lambda () (interactive) (counsel-find-file "~/Dokumenty/notatki/")) :wk "Notes")
-    "f N" '((lambda () (interactive) (dired "~/Dokumenty/notatki/")) :wk "Notes")
-    "f r" '(counsel-recentf :wk "Recent files")
-    "f u" '(sudo-edit :wk "Sudo edit file")
-    "f U" '(sudo-edit-find-file :wk "Sudo find file"))
+	(me/leader-keys
+		"f" '(:ignore t :wk "Files")
+		"f p" '((lambda () (interactive) (find-file "~/.config/emacs/init.el")) :wk "Emacs Config")
+		"f P" '((lambda () (interactive) (counsel-find-file "~/.config/emacs/")) :wk "Notes")
+		"f n" '((lambda () (interactive) (counsel-find-file "~/Dokumenty/notatki/")) :wk "Notes")
+		"f N" '((lambda () (interactive) (dired "~/Dokumenty/notatki/")) :wk "Notes")
+		"f r" '(counsel-recentf :wk "Recent files")
+		"f u" '(sudo-edit :wk "Sudo edit file")
+		"f U" '(sudo-edit-find-file :wk "Sudo find file"))
 
-  (me/leader-keys
-    "h" '(:ignore t :wk "Emacs")
-    "h d" '(redraw-display :wk "Redraw display (some issues on wayland)")
-    "h l" '(package-upgrade-all :wk "Update packages")
-    "h r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el")) :wk "Reload emacs config")
-    "h R" '(restart-emacs :wk "Reload emacs config"))
+	(me/leader-keys
+		"h" '(:ignore t :wk "Emacs")
+		"h d" '(redraw-display :wk "Redraw display (some issues on wayland)")
+		"h l" '(package-upgrade-all :wk "Update packages")
+		"h r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el")) :wk "Reload emacs config")
+		"h R" '(restart-emacs :wk "Reload emacs config"))
 
-  (me/leader-keys
-    "p" '(:ignore t :wk "Packages")
-    "p a" '(org-agenda :wk "Org Agenda")
-    "p x" '(org-capture :wk "Org Capture")
-    "p t" '(ghostel :wk "Terminal")
-    "p e" '(elfeed :wk "Elfeed")
-    "p m" '(magit-status :wk "Magit")
-    "p w" '(eww :wk "EWW"))
+	(me/leader-keys
+		"p" '(:ignore t :wk "Packages")
+		"p a" '(org-agenda :wk "Org Agenda")
+		"p x" '(org-capture :wk "Org Capture")
+		"p t" '(ghostel :wk "Terminal")
+		"p e" '(elfeed :wk "Elfeed")
+		"p m" '(magit-status :wk "Magit")
+		"p w" '(eww :wk "EWW"))
 
-  (me/leader-keys
-    "t" '(:ignore t :wk "Toggles")
-    "t u" '(undo-tree-visualize :wk "Undo Tree")
-    "t l" '(toggle-truncate-lines :wk "Line wrapping")
-    "t x" '(executable-set-magic :wk "Set interpreter")
-    "t v" '(visual-fill-column-mode :wk "Visual fill column")
-    "t r" '(rainbow-mode :wk "Rainbow mode"))
+	(me/leader-keys
+		"t" '(:ignore t :wk "Toggles")
+		"t d" '(magit-diff :wk "Diff")
+		"t u" '(undo-tree-visualize :wk "Undo Tree")
+		"t l" '(toggle-truncate-lines :wk "Line wrapping")
+		"t x" '(executable-set-magic :wk "Set interpreter")
+		"t v" '(visual-fill-column-mode :wk "Visual fill column")
+		"t r" '(rainbow-mode :wk "Rainbow mode"))
 
-  (me/leader-keys
-    "e" '(:ignore t :wk "Eglot")
-    "e h" '(eglot :wk "Launch Eglot")
-    "e l" '(eglot-shutdown :wk "Shutdown Eglot")
-    "e w" '(eglot-code-actions :wk "Eglot Code Actions"))
+	(me/leader-keys
+		"e" '(:ignore t :wk "Eglot")
+		"e h" '(eglot :wk "Launch Eglot")
+		"e l" '(eglot-shutdown :wk "Shutdown Eglot")
+		"e w" '(eglot-code-actions :wk "Eglot Code Actions"))
 
-  (me/leader-keys
-    "w" '(:ignore t :wk "Writing")
-    "w c" '(org-timer-set-timer :wk "Timer")
-    "w s" '(ispell :wk "iSpell")
-    "w t" '(typopunct-mode :wk "Typopunct"))
+	(me/leader-keys
+		"w" '(:ignore t :wk "Writing")
+		"w c" '(org-timer-set-timer :wk "Timer")
+		"w s" '(ispell :wk "iSpell")
+		"w t" '(typopunct-mode :wk "Typopunct"))
 
-  (general-nmap
-    :keymaps 'org-mode-map
-    "C-RET" 'org-meta-return
-    "C-SPC" 'org-toggle-checkbox
-    "C-k" 'tab-next
-    "C-j" 'tab-previous
-    ">>" 'org-metaleft
-    "<<" 'org-metaright
-    "] d" 'org-next-link
-    "[ d" 'org-previous-link
-    "g j" 'org-next-visible-heading
-    "g k" 'org-previous-visible-heading
-    "m" '(:ignore t :wk "Org")
-    "m a" 'org-insert-link
-    "m A" 'link-hint-copy-link-at-point
-    "m t" 'org-todo
-    "m d" 'org-deadline
-    "m s" 'org-schedule
-    "m r" 'org-refile
-    "m p" 'org-priority
-    "m n" 'org-add-note
-    "m l" 'org-cycle-list-bullet
-    "m J" 'org-metadown
-    "m K" 'org-metaup
-    "t" '(:ignore t :wk "Tabela")
-    "t s" 'org-table-sort-lines
-    "t a" 'org-table-sum
-    "t n" 'org-table-insert-column
-    "t h" 'org-table-move-column-left
-    "t l" 'org-table-move-column-right
-    "t k" 'org-table-move-row-up
-    "t j" 'org-table-move-row-down)
-  
-  (general-nmap
-    :keymaps 'markdown-mode-map
-    ">>" 'markdown-promote
-    "<<" 'markdown-demote
-    "] d" 'markdown-next-link
-    "[ d" 'markdown-previous-link
-    "] h" 'markdown-move-down
-    "[ h" 'markdown-move-up
-    "m l" 'markdown-insert-link
-    "m i" 'markdown-insert-image
-    "m p" 'markdown-preview
-    "m c" 'markdown-toggle-markup-hiding
-    "m h" 'markdown-toggle-url-hiding
-    "m i" 'markdown-toggle-inline-images)
-  
-  (general-nmap
-    :keymaps 'dired-mode-map
-    "y d" 'dired-copy-dirname-as-kill
-    "y c" 'dired-copy-path-at-point
-    "a" 'find-file
-    "A" 'mkdir
-    "M" 'dired-unmark
+	(general-nmap
+		:keymaps 'org-mode-map
+		"C-RET" 'org-meta-return
+		"C-SPC" 'org-toggle-checkbox
+		"C-k" 'tab-next
+		"C-j" 'tab-previous
+		">>" 'org-metaleft
+		"<<" 'org-metaright
+		"] d" 'org-next-link
+		"[ d" 'org-previous-link
+		"g j" 'org-next-visible-heading
+		"g k" 'org-previous-visible-heading
+		"m" '(:ignore t :wk "Org")
+		"m a" 'org-insert-link
+		"m A" 'link-hint-copy-link-at-point
+		"m t" 'org-todo
+		"m d" 'org-deadline
+		"m s" 'org-schedule
+		"m r" 'org-refile
+		"m p" 'org-priority
+		"m n" 'org-add-note
+		"m l" 'org-cycle-list-bullet
+		"m J" 'org-metadown
+		"m K" 'org-metaup
+		"t" '(:ignore t :wk "Tabela")
+		"t s" 'org-table-sort-lines
+		"t a" 'org-table-sum
+		"t n" 'org-table-insert-column
+		"t h" 'org-table-move-column-left
+		"t l" 'org-table-move-column-right
+		"t k" 'org-table-move-row-up
+		"t j" 'org-table-move-row-down)
+
+	(general-nmap
+		:keymaps 'markdown-mode-map
+		">>" 'markdown-promote
+		"<<" 'markdown-demote
+		"] d" 'markdown-next-link
+		"[ d" 'markdown-previous-link
+		"] h" 'markdown-move-down
+		"[ h" 'markdown-move-up
+		"m l" 'markdown-insert-link
+		"m i" 'markdown-insert-image
+		"m p" 'markdown-preview
+		"m c" 'markdown-toggle-markup-hiding
+		"m h" 'markdown-toggle-url-hiding
+		"m i" 'markdown-toggle-inline-images)
+
+	(general-nmap
+		:keymaps 'dired-mode-map
+		"y d" 'dired-copy-dirname-as-kill
+		"y c" 'dired-copy-path-at-point
+		"a" 'find-file
+		"A" 'mkdir
+		"M" 'dired-unmark
 		"s" 'dired-sort-toggle-or-edit
-    "c" 'dired-do-copy
-    "C" 'dired-do-copy
-    "r" 'dired-do-rename
-    "R" 'dired-do-rename
-    "h" 'dired-up-directory
-    "l" 'dired-open-file)
-  
-  (general-nmap
-    :keymaps 'elfeed-search-mode-map
-    "W" 'elfeed-search-browse-url
-    "A" 'elfeed-mark-all-as-read
-    "R" 'elfeed-update))
+		"c" 'dired-do-copy
+		"C" 'dired-do-copy
+		"r" 'dired-do-rename
+		"R" 'dired-do-rename
+		"h" 'dired-up-directory
+		"l" 'dired-open-file)
+
+	(general-nmap
+		:keymaps 'elfeed-search-mode-map
+		"W" 'elfeed-search-browse-url
+		"A" 'elfeed-mark-all-as-read
+		"R" 'elfeed-update))
 
 (use-package which-key
-  :ensure nil
-  :init
-  (which-key-mode 1)
-  :diminish
-  :config
-  (setq which-key-side-window-location 'bottom
-	  which-key-sort-order #'which-key-key-order-alpha
-	  which-key-allow-imprecise-window-fit nil
-	  which-key-sort-uppercase-first nil
-	  which-key-add-column-padding 1
-	  which-key-max-display-columns nil
-	  which-key-min-display-lines 6
-	  which-key-side-window-slot -10
-	  which-key-side-window-max-height 0.25
-	  which-key-idle-delay 0.8
-	  which-key-max-description-length 25
-	  which-key-allow-imprecise-window-fit nil
-	  which-key-separator " → " ))
+	:ensure nil
+	:init
+	(which-key-mode 1)
+	:diminish
+	:config
+	(setq which-key-side-window-location 'bottom
+		which-key-sort-order #'which-key-key-order-alpha
+		which-key-allow-imprecise-window-fit nil
+		which-key-sort-uppercase-first nil
+		which-key-add-column-padding 1
+		which-key-max-display-columns nil
+		which-key-min-display-lines 6
+		which-key-side-window-slot -10
+		which-key-side-window-max-height 0.25
+		which-key-idle-delay 0.8
+		which-key-max-description-length 25
+		which-key-allow-imprecise-window-fit nil
+		which-key-separator " → " ))
 
 ;; Completion
 (use-package ivy
-  :diminish
-  :bind (("C-s" . swiper)
-         :map ivy-minibuffer-map
-         ("y" . self-insert-command)
-         ("TAB" . ivy-alt-done)
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-j" . ivy-next-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-j" . ivy-next-line)
-         ("C-d" . ivy-reverse-i-search-kill))
-  :custom
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) ")
-  (setq enable-recursive-minibuffers t)
-  :config
-  (ivy-mode 1))
+	:diminish
+	:bind (("C-s" . swiper)
+				 :map ivy-minibuffer-map
+				 ("y" . self-insert-command)
+				 ("TAB" . ivy-alt-done)
+				 ("C-l" . ivy-alt-done)
+				 ("C-j" . ivy-next-line)
+				 ("C-k" . ivy-previous-line)
+				 :map ivy-switch-buffer-map
+				 ("C-k" . ivy-previous-line)
+				 ("C-j" . ivy-next-line)
+				 ("C-l" . ivy-done)
+				 ("C-d" . ivy-switch-buffer-kill)
+				 :map ivy-reverse-i-search-map
+				 ("C-k" . ivy-previous-line)
+				 ("C-j" . ivy-next-line)
+				 ("C-d" . ivy-reverse-i-search-kill))
+	:custom
+	(setq ivy-use-virtual-buffers t)
+	(setq ivy-count-format "(%d/%d) ")
+	(setq enable-recursive-minibuffers t)
+	:config
+	(ivy-mode 1))
 
 (use-package counsel
-  :bind (("C-M-j" . 'counsel-switch-buffer)
-         :map minibuffer-local-map
-         ("C-r" . 'counsel-minibuffer-history))
-  :custom
-  (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
-  :config
-  (counsel-mode 1)
-  (setq ivy-initial-inputs-alist nil))
+	:bind (("C-M-j" . 'counsel-switch-buffer)
+				 :map minibuffer-local-map
+				 ("C-r" . 'counsel-minibuffer-history))
+	:custom
+	(counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
+	:config
+	(counsel-mode 1)
+	(setq ivy-initial-inputs-alist nil))
 
 (use-package ivy-rich
-  :after ivy
-  :init
-  (ivy-rich-mode 1)
-  :custom
-  (ivy-virtual-abbreviate 'full
-   ivy-rich-switch-buffer-align-virtual-buffer t
-   ivy-rich-path-style 'abbrev)
-  :config
-  (ivy-set-display-transformer 'ivy-switch-buffer
-                               'ivy-rich-switch-buffer-transformer))
+	:after ivy
+	:init
+	(ivy-rich-mode 1)
+	:custom
+	(ivy-virtual-abbreviate 'full
+	 ivy-rich-switch-buffer-align-virtual-buffer t
+	 ivy-rich-path-style 'abbrev)
+	:config
+	(ivy-set-display-transformer 'ivy-switch-buffer
+															 'ivy-rich-switch-buffer-transformer))
 
 (use-package ivy-prescient
-  :after counsel
-  :custom
-  (ivy-prescient-enable-filtering nil)
-  :config
-  (prescient-persist-mode 1)
-  (ivy-prescient-mode 1))
-
-(use-package ivy-posframe
+	:after counsel
+	:custom
+	(ivy-prescient-enable-filtering nil)
 	:config
-	(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
-	(ivy-posframe-mode 1))
+	(prescient-persist-mode 1)
+	(ivy-prescient-mode 1))
 
 
 ;; UI
@@ -396,10 +394,10 @@
 (use-package catppuccin-theme)
 
 (use-package doom-themes
-  :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (doom-themes-org-config))
+	:config
+	(setq doom-themes-enable-bold t
+				doom-themes-enable-italic t)
+	(doom-themes-org-config))
 
 (load-theme 'doom-tokyo-night :no-confirm)
 
@@ -407,338 +405,343 @@
 (add-to-list 'default-frame-alist '(alpha-background . 80))
 
 (use-package doom-modeline
-  :init (doom-modeline-mode 1)
-  :config
-  (setq doom-modeline-height 25
-        doom-modeline-bar-width 5
-        doom-modeline-major-mode-icon nil
-        doom-modeline-window-width-limit 85
-        doom-modeline-spc-face-overrides nil
-        doom-modeline-buffer-file-name-style 'truncate-all
-        doom-modeline-buffer-state-icon nil
-        doom-modeline-buffer-modification-icon nil
-        doom-modeline-highlight-modified-buffer-name t
-        doom-modeline-minor-modes nil
-        doom-modeline-enable-word-count t
-        doom-modeline-buffer-encoding nil
-        doom-modeline-modal-modern-icon nil
-        doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)))
+	:init (doom-modeline-mode 1)
+	:config
+	(setq doom-modeline-height 25
+				doom-modeline-bar-width 5
+				doom-modeline-major-mode-icon nil
+				doom-modeline-window-width-limit 85
+				doom-modeline-spc-face-overrides nil
+				doom-modeline-buffer-file-name-style 'truncate-all
+				doom-modeline-buffer-state-icon nil
+				doom-modeline-buffer-modification-icon nil
+				doom-modeline-highlight-modified-buffer-name t
+				doom-modeline-minor-modes nil
+				doom-modeline-enable-word-count t
+				doom-modeline-buffer-encoding nil
+				doom-modeline-modal-modern-icon nil
+				doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)))
 
 (use-package tab-bar
-  :ensure nil
-  :defer t
-  :custom
-  (tab-bar-new-tab-choice "*scratch*")
-  (tab-bar-close-button-show nil)
-  (tab-bar-new-button-show nil)
-  (tab-bar-tab-hints t)
-  (tab-bar-auto-width nil)
-  (tab-bar-separator "  ")
-  (tab-bar-format '(tab-bar-format-tabs-groups
-                    tab-bar-separator))
-  :init
-  (defun tab-bar-tab-name-format-hints (name _tab i)
-    (if tab-bar-tab-hints (concat (format "»%d«" i) "") name))
-  (defun tab-bar-tab-group-format-default (tab _i &optional current-p)
-    (propertize
-     (concat (funcall tab-bar-tab-group-function tab))
-     'face (if current-p 'tab-bar-tab-group-current 'tab-bar-tab-group-inactive)))
-  (defun emacs-solo/tab-group-from-project ()
-    "Call `tab-group` with the current project name as the group."
-    (interactive)
-    (when-let* ((proj (project-current))
-                (name (file-name-nondirectory
-                       (directory-file-name (project-root proj)))))
-      (tab-group (format "[%s]" name))))
-  (defun emacs-solo/tab-switch-to-group ()
-    (interactive)
-    (let* ((tabs (funcall tab-bar-tabs-function)))
-      (let* ((groups (delete-dups (mapcar (lambda (tab)
-                                            (funcall tab-bar-tab-group-function tab))
-                                          tabs)))
-             (group (completing-read "Switch to group: " groups nil t)))
-        (let ((i 1) (found nil))
-          (dolist (tab tabs)
-            (let ((tab-group (funcall tab-bar-tab-group-function tab)))
-              (when (and (not found)
-                         (string= tab-group group))
-                (setq found t)
-                (tab-bar-select-tab i)))
-            (setq i (1+ i)))))))
-  (tab-bar-mode 1)
-  (tab-bar-history-mode 1))
+	:ensure nil
+	:defer t
+	:custom
+	(tab-bar-new-tab-choice "*scratch*")
+	(tab-bar-close-button-show nil)
+	(tab-bar-new-button-show nil)
+	(tab-bar-tab-hints t)
+	(tab-bar-auto-width nil)
+	(tab-bar-separator "  ")
+	(tab-bar-format '(tab-bar-format-tabs-groups
+										tab-bar-separator))
+	:init
+	(defun tab-bar-tab-name-format-hints (name _tab i)
+		(if tab-bar-tab-hints (concat (format "»%d«" i) "") name))
+	(defun tab-bar-tab-group-format-default (tab _i &optional current-p)
+		(propertize
+		 (concat (funcall tab-bar-tab-group-function tab))
+		 'face (if current-p 'tab-bar-tab-group-current 'tab-bar-tab-group-inactive)))
+	(defun emacs-solo/tab-group-from-project ()
+		"Call `tab-group` with the current project name as the group."
+		(interactive)
+		(when-let* ((proj (project-current))
+								(name (file-name-nondirectory
+											 (directory-file-name (project-root proj)))))
+			(tab-group (format "[%s]" name))))
+	(defun emacs-solo/tab-switch-to-group ()
+		(interactive)
+		(let* ((tabs (funcall tab-bar-tabs-function)))
+			(let* ((groups (delete-dups (mapcar (lambda (tab)
+																						(funcall tab-bar-tab-group-function tab))
+																					tabs)))
+						 (group (completing-read "Switch to group: " groups nil t)))
+				(let ((i 1) (found nil))
+					(dolist (tab tabs)
+						(let ((tab-group (funcall tab-bar-tab-group-function tab)))
+							(when (and (not found)
+												 (string= tab-group group))
+								(setq found t)
+								(tab-bar-select-tab i)))
+						(setq i (1+ i)))))))
+	(tab-bar-mode 1)
+	(tab-bar-history-mode 1))
 
 ;; Icons
 (use-package nerd-icons)
 
 (use-package nerd-icons-dired
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
+	:hook
+	(dired-mode . nerd-icons-dired-mode))
 
 (use-package nerd-icons-completion
-  :config
-  (nerd-icons-completion-mode))
+	:config
+	(nerd-icons-completion-mode))
 
 ;; Packages
 (use-package beacon
-  :init
-  (beacon-mode 1))
+	:init
+	(beacon-mode 1))
 
 (use-package dired
-  :ensure nil
-  :defer
-  :hook
-  (dired-mode . hl-line-mode)
-  (dired-mode . auto-revert-mode)
-  :config
-  (setq dired-listing-switches
-      "-AGFhlv --group-directories-first")
-  :custom
-  (dired-do-revert-buffer t)
-  (dired-auto-revert-buffer t)
-  (delete-by-moving-to-trash t)
-  (dired-dwim-target t))
+	:ensure nil
+	:defer
+	:hook
+	(dired-mode . hl-line-mode)
+	(dired-mode . auto-revert-mode)
+	:config
+	(setq dired-listing-switches
+			"-AGFhlv --group-directories-first")
+	:custom
+	(dired-do-revert-buffer t)
+	(dired-auto-revert-buffer t)
+	(delete-by-moving-to-trash t)
+	(dired-dwim-target t))
 
 (defun dired-copy-path-at-point ()
-    (interactive)
-    (dired-copy-filename-as-kill 0))
+		(interactive)
+		(dired-copy-filename-as-kill 0))
 
 (defun dired-copy-dirname-as-kill ()
-  "Copy the current directory into the kill ring."
-  (interactive)
-  (kill-new default-directory))
+	"Copy the current directory into the kill ring."
+	(interactive)
+	(kill-new default-directory))
 
 (use-package dired-open
-  :config
-  (setq dired-open-extensions '(("gif" . "feh")
-                                ("jpg" . "feh")
-                                ("png" . "feh")
-                                ("mkv" . "mpv")
-                                ("mp4" . "mpv")
-                                ("flac" . "mpv")
-                                ("mp3" . "mpv")
-                                ("pdf" . "zen-browser"))))
+	:config
+	(setq dired-open-extensions '(("gif" . "feh")
+																("jpg" . "feh")
+																("png" . "feh")
+																("mkv" . "mpv")
+																("mp4" . "mpv")
+																("flac" . "mpv")
+																("mp3" . "mpv")
+																("pdf" . "zen-browser"))))
+
+(use-package dired-sidebar
+	:commands (dired-sidebar-toggle-sidebar))
 
 (use-package eglot
-  :ensure nil
-  :custom
-  (eglot-events-buffer-size 0)
-  (eglot-autoshutdown t)
-  (eglot-report-progress nil)
+	:ensure nil
+	:custom
+	(eglot-events-buffer-size 0)
+	(eglot-autoshutdown t)
+	(eglot-report-progress nil)
 	:config
-  (add-to-list 'eglot-server-programs '(markdown-mode . ("harper-ls" "--stdio"))))
+	(add-to-list 'eglot-server-programs '(markdown-mode . ("harper-ls" "--stdio"))))
 
 (setq-default eglot-workspace-configuration
-              '(:harper-ls (:userDictPath ""
-                            :fileDictPath ""
-                            :linters (:SpellCheck t
-                                      :SpelledNumbers :json-false
-                                      :AnA t
-                                      :SentenceCapitalization t
-                                      :UnclosedQuotes t
-                                      :WrongQuotes :json-false
-                                      :LongSentences t
-                                      :RepeatedWords t
-                                      :Spaces t
-                                      :Matcher t
-                                      :CorrectNumberSuffix t)
-                            :codeActions (:ForceStable :json-false)
-                            :markdown (:IgnoreLinkTitle :json-false)
-                            :diagnosticSeverity "hint"
-                            :isolateEnglish :json-false
-                            :dialect "American"
-                            :maxFileLength 120000)))
+							'(:harper-ls (:userDictPath ""
+														:fileDictPath ""
+														:linters (:SpellCheck t
+																			:SpelledNumbers :json-false
+																			:AnA t
+																			:SentenceCapitalization t
+																			:UnclosedQuotes t
+																			:WrongQuotes :json-false
+																			:LongSentences t
+																			:RepeatedWords t
+																			:Spaces t
+																			:Matcher t
+																			:CorrectNumberSuffix t)
+														:codeActions (:ForceStable :json-false)
+														:markdown (:IgnoreLinkTitle :json-false)
+														:diagnosticSeverity "hint"
+														:isolateEnglish :json-false
+														:dialect "American"
+														:maxFileLength 120000)))
 
 (use-package elfeed
-  :config
-  (setq elfeed-search-feed-face ":foreground #b3b8c3 :weight bold")
-  (setq elfeed-db-directory "~/.config/emacs/files/elfeed/database"))
+	:config
+	(setq elfeed-search-feed-face ":foreground #b3b8c3 :weight bold")
+	(setq elfeed-db-directory "~/.config/emacs/files/elfeed/database"))
 
 (defun elfeed-mark-all-as-read ()
-  (interactive)
-  (elfeed-untag elfeed-search-entries 'unread)
-  (elfeed-search-update :force))
+	(interactive)
+	(elfeed-untag elfeed-search-entries 'unread)
+	(elfeed-search-update :force))
 
 (use-package elfeed-goodies
-  :init
-  (elfeed-goodies/setup)
-  :config
-  (setq elfeed-goodies/entry-pane-size 0.5))
+	:init
+	(elfeed-goodies/setup)
+	:config
+	(setq elfeed-goodies/entry-pane-size 0.5))
 
 (use-package elfeed-org
-  :config
-  (setq rmh-elfeed-org-files (list "~/.config/emacs/files/elfeed/elfeed.org"))
-  (elfeed-org))
+	:config
+	(setq rmh-elfeed-org-files (list "~/.config/emacs/files/elfeed/elfeed.org"))
+	(elfeed-org))
 
 (use-package eww
-  :ensure nil
-  :config
-  (setq
-  browse-url-browser-function 'eww-browse-url
-  browse-url-secondary-browser-function 'browse-url-xdg-open
-  shr-use-fonts nil
-  shr-indentation 2
-  shr-width 100
-  eww-auto-rename-buffer 'title
-  eww-download-directory "~/Pobrane"
-  eww-bookmarks-directory "~/.config/emacs/files/"
-  eww-search-prefix "https://frogfind.com/?q=")
-  :hook
-  (eww-after-render-hook . eww-readable))
+	:ensure nil
+	:config
+	(setq
+	browse-url-browser-function 'eww-browse-url
+	browse-url-secondary-browser-function 'browse-url-xdg-open
+	shr-use-fonts nil
+	shr-indentation 2
+	shr-width 100
+	eww-auto-rename-buffer 'title
+	eww-download-directory "~/Pobrane"
+	eww-bookmarks-directory "~/.config/emacs/files/"
+	eww-search-prefix "https://frogfind.com/?q=")
+	:hook
+	(eww-after-render-hook . eww-readable))
 
 (defun eww-new ()
-  (interactive)
-  (let ((url (read-from-minibuffer "Enter URL or keywords: ")))
-    (switch-to-buffer (generate-new-buffer "eww"))
-    (eww-mode)
-    (eww url)))
+	(interactive)
+	(let ((url (read-from-minibuffer "Enter URL or keywords: ")))
+		(switch-to-buffer (generate-new-buffer "eww"))
+		(eww-mode)
+		(eww url)))
 
 (use-package ghostel
-  :ensure t)
+	:ensure t)
 
 (use-package evil-ghostel
-  :after (ghostel evil)
-  :hook (ghostel-mode . evil-ghostel-mode))
+	:after (ghostel evil)
+	:hook (ghostel-mode . evil-ghostel-mode))
 
 (use-package hl-todo
-  :hook ((org-mode . hl-todo-mode)
-         (markdown-mode . hl-todo-mode)
-         (prog-mode . hl-todo-mode))
-  :config
-  (setq hl-todo-highlight-punctuation ":"
-        hl-todo-keyword-faces
-        '(("TODO" . (:foreground "#1a1b26" :background "#f7768e" :weight bold))
-          ("WAIT" . (:foreground "#1a1b26" :background "#e0af68" :weight bold))
-          ("FIXME" . (:foreground "#1a1b26" :background "#7aa2f7" :weight bold))
-          ("CANCELED" . (:foreground "#1a1b26" :background "#73daca" :weight bold))
-          ("DONE" . (:foreground "#1a1b26" :background "#9ece6a" :weight bold)))))
+	:hook ((org-mode . hl-todo-mode)
+				 (markdown-mode . hl-todo-mode)
+				 (prog-mode . hl-todo-mode))
+	:config
+	(setq hl-todo-highlight-punctuation ":"
+				hl-todo-keyword-faces
+				'(("TODO" . (:foreground "#1a1b26" :background "#f7768e" :weight bold))
+					("WAIT" . (:foreground "#1a1b26" :background "#e0af68" :weight bold))
+					("FIXME" . (:foreground "#1a1b26" :background "#7aa2f7" :weight bold))
+					("CANCELED" . (:foreground "#1a1b26" :background "#73daca" :weight bold))
+					("DONE" . (:foreground "#1a1b26" :background "#9ece6a" :weight bold)))))
 
 (use-package indent-guide
-  :hook
-  (prog-mode . indent-guide-mode)
-  :config
-  (setq indent-guide-char "│"))
+	:hook
+	(prog-mode . indent-guide-mode)
+	:config
+	(setq indent-guide-char "│"))
 
-(use-package ispell
-  :ensure nil
-  :config
-  (setq ispell-program-name "hunspell"
-        ispell-dictionary "pl_PL,en_US"
-        ispell-personal-dictionary "~/.config/emacs/files/hunspell_personal"
-        ispell-silently-savep t)
-  :custom
-  (ispell-set-spellchecker-params)
-  (ispell-hunspell-add-multi-dic "pl_PL,en_US"))
+(use-package flyspell
+	:ensure nil
+	:config
+	(setq ispell-program-name "hunspell"
+				ispell-dictionary "pl_PL,en_US"
+				ispell-personal-dictionary "~/.config/emacs/files/hunspell_personal"
+				ispell-silently-savep t)
+	:custom
+	(ispell-set-spellchecker-params)
+	(ispell-hunspell-add-multi-dic "pl_PL,en_US"))
 
 (defun kill-other-buffers ()
-  "Kill all other buffers."
-  (interactive)
-  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+	"Kill all other buffers."
+	(interactive)
+	(mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
 (use-package magit)
 
 (use-package markdown-mode
-  :commands gfm-mode markdown-mode
-  :mode
-  ("README\\.md\\'" . gfm-mode)
-  ("\\.md\\'" . markdown-mode)
-  ("\\.markdown\\'" . markdown-mode)
-  :init
-  (setq markdown-unordered-list-item-prefix "  -"
+	:commands gfm-mode markdown-mode
+	:mode
+	("README\\.md\\'" . gfm-mode)
+	("\\.md\\'" . markdown-mode)
+	("\\.markdown\\'" . markdown-mode)
+	:init
+	(setq markdown-unordered-list-item-prefix "  -"
 				markdown-hide-urls t
 				markdown-list-indent-width 2
-        markdown-enable-highlighting-syntax t
+				markdown-enable-highlighting-syntax t
 				markdown-max-image-size '( 600 . 600)
 				markdown-command (concat "pandoc" " --from=markdown --to=html")))
-
-;; https://emacs.stackexchange.com/questions/5465/how-to-migrate-markdown-files-to-emacs-org-mode-format
-(defun markdown-convert-buffer-to-org ()
-    "Convert the current buffer's content from markdown to orgmode format and save it with the current buffer's file name but with .org extension."
-    (interactive)
-    (shell-command-on-region (point-min) (point-max)
-                             (format "pandoc -f markdown -t org -o %s"
-                                     (concat (file-name-sans-extension (buffer-file-name)) ".org"))))
 
 ;; https://www.reddit.com/r/emacs/comments/yzjmmf/comment/ix1y211
 (defvar my-min-max-window nil)
 (defun my-min-max-window()
-  (interactive)
-  (if (and (one-window-p) my-min-max-window)
-      (window-state-put my-min-max-window)
-    (setq my-min-max-window (window-state-get))
+	(interactive)
+	(if (and (one-window-p) my-min-max-window)
+			(window-state-put my-min-max-window)
+		(setq my-min-max-window (window-state-get))
 		(visual-fill-column-mode)
-    ;; (markdown-toggle-markup-hiding)
-    (typopunct-mode)
-    (global-visual-line-mode)
-    (delete-other-windows)))
+		(global-visual-line-mode)
+		(delete-other-windows)))
 
 (use-package nix-ts-mode
  :mode "\\.nix\\'")
 
 (use-package org
-  :ensure nil
-  :config
-  (setq org-ellipsis " ▾")
-  (setq org-src-preserve-indentation t)
-  (setq calendar-week-start-day 1)
-  (setq org-log-done 'time)
-  (setq org-log-into-drawer t)
-  (setq org-hide-emphasis-markers t)
-  (customize-set-variable 'org-blank-before-new-entry
-                          '((heading . nil)
-                          (plain-list-item . nil)))
-  (setq org-agenda-start-with-log-mode t)
-  (setq org-agenda-files
-    '("~/Dokumenty/notatki/02-agenda/Taski.org"
-      "~/Dokumenty/notatki/02-agenda/Powtarzalne.org"
-      "~/Dokumenty/notatki/02-agenda/Daty.org"
-      "~/Dokumenty/notatki/02-agenda/Wydarzenia.org"))
-  (setq org-agenda-span 10
-      org-agenda-start-on-weekday nil
-      org-agenda-start-day "-2d")
-  (setq org-agenda-prefix-format
-      (quote
-      ((agenda . "%-20c%?-12t% s")
-          (timeline . "% s")
-          (todo . "%-12c")
-          (tags . "%-12c")
-          (search . "%-12c"))))
-  (setq org-agenda-deadline-leaders (quote (":" "D%2d: " "")))
-  (setq org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
-  (setq org-agenda-current-time-string "← now")
-  (setq org-agenda-time-grid '((daily today require-timed) (800 1000 1200 1400 1600 1800 2000)
-                              " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
-  (add-hook 'org-mode-hook 'org-indent-mode)
-  (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/Dokumenty/notatki/02-agenda/Taski.org" "Inbox")
-          "** TODO %?\n  %i\n ")))
-  (setq org-refile-targets
-  '(("Archiwum.org" :maxlevel . 1)))
-  (advice-add 'org-refile :after 'org-save-all-org-buffers)
-  (setq org-todo-keywords
-  '((sequence "TODO(t)" "WAIT(w)" "FIXME(f)" "|" "CANCELED(c)" "DONE(d)"))))
+	:ensure nil
+	:config
+	(setq org-ellipsis " ▾")
+	(setq org-src-preserve-indentation t)
+	(setq calendar-week-start-day 1)
+	(setq org-log-done 'time)
+	(setq org-log-into-drawer t)
+	(setq org-hide-emphasis-markers t)
+	(customize-set-variable 'org-blank-before-new-entry
+													'((heading . nil)
+													(plain-list-item . nil)))
+	(setq org-agenda-start-with-log-mode t)
+	(setq org-agenda-files
+		'("~/Dokumenty/notatki/02-agenda/Taski.org"
+			"~/Dokumenty/notatki/02-agenda/Powtarzalne.org"
+			"~/Dokumenty/notatki/02-agenda/Daty.org"
+			"~/Dokumenty/notatki/02-agenda/Wydarzenia.org"))
+	(setq org-agenda-span 10
+			org-agenda-start-on-weekday nil
+			org-agenda-start-day "-2d")
+	(setq org-agenda-prefix-format
+			(quote
+			((agenda . "%-20c%?-12t% s")
+					(timeline . "% s")
+					(todo . "%-12c")
+					(tags . "%-12c")
+					(search . "%-12c"))))
+	(setq org-agenda-deadline-leaders (quote (":" "D%2d: " "")))
+	(setq org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
+	(setq org-agenda-current-time-string "← now")
+	(setq org-agenda-time-grid '((daily today require-timed) (800 1000 1200 1400 1600 1800 2000)
+															" ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
+	(add-hook 'org-mode-hook 'org-indent-mode)
+	(setq org-capture-templates
+			'(("t" "Todo" entry (file+headline "~/Dokumenty/notatki/02-agenda/Taski.org" "Inbox")
+					"** TODO %?\n  %i\n ")))
+	(setq org-refile-targets
+	'(("Archiwum.org" :maxlevel . 1)))
+	(advice-add 'org-refile :after 'org-save-all-org-buffers)
+	(setq org-todo-keywords
+	'((sequence "TODO(t)" "WAIT(w)" "FIXME(f)" "|" "CANCELED(c)" "DONE(d)"))))
 
 (use-package org-tempo
-  :ensure nil)
+	:ensure nil)
 
 (use-package org-habit
-  :ensure nil
-  :config
-  (setq org-habit-graph-column 60))
+	:ensure nil
+	:config
+	(setq org-habit-graph-column 60))
+
+(use-package popper
+	:init
+	(setq popper-reference-buffers
+				'("\\*Messages\\*"
+					"Output\\*$"
+					"\\*Async Shell Command\\*"
+					ghostel-mode
+					help-mode
+					compilation-mode))
+	(popper-mode +1)
+	(popper-echo-mode +1))                ; For echo area hints
 
 (use-package rainbow-delimiters
-  :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
-         (clojure-mode . rainbow-delimiters-mode)))
+	:hook ((emacs-lisp-mode . rainbow-delimiters-mode)
+				 (clojure-mode . rainbow-delimiters-mode)))
 
 (use-package rainbow-mode
-  :ensure t
-  :hook (prog-mode org-mode markdown-mode))
+	:ensure t
+	:hook prog-mode org-mode markdown-mode)
 
 (use-package sudo-edit)
 
 (use-package treesit
-  :ensure nil
-  :defer
+	:ensure nil
+	:defer
 	:config
 	(setq treesit-language-source-alist
 		'((bash "https://github.com/tree-sitter/tree-sitter-bash")
@@ -747,45 +750,45 @@
 			(nix "https://github.com/nix-community/tree-sitter-nix")
 			(lua "https://github.com/tree-sitter-grammars/tree-sitter-lua")
 			(markdown "https://github.com/ikatyang/tree-sitter-markdown")))
-  :custom
-  (treesit-font-lock-level 4))
+	:custom
+	(treesit-font-lock-level 4))
 
 (use-package treesit-auto
-  :custom
-  (treesit-auto-install 'prompt)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+	:custom
+	(treesit-auto-install 'prompt)
+	:config
+	(treesit-auto-add-to-auto-mode-alist 'all)
+	(global-treesit-auto-mode))
 
 (use-package typopunct
-  :load-path "~/.config/emacs/lisp/typopunct"
-  :custom
-  (typopunct-buffer-language 'english))
+	:load-path "~/.config/emacs/lisp/typopunct"
+	:custom
+	(typopunct-buffer-language 'english))
 
 (use-package undo-tree
-  :defer t
-  :hook
-  (after-init . global-undo-tree-mode)
-  :init
-  (setq undo-tree-visualizer-timestamps t
-        undo-tree-visualizer-diff t
-        undo-limit 800000
-        undo-strong-limit 12000000
-        undo-outer-limit 120000000)
-  :config
-  (setq undo-tree-history-directory-alist '(("." . "~/.config/emacs/tmp/undo"))))
+	:defer t
+	:hook
+	(after-init . global-undo-tree-mode)
+	:init
+	(setq undo-tree-visualizer-timestamps t
+				undo-tree-visualizer-diff t
+				undo-limit 800000
+				undo-strong-limit 12000000
+				undo-outer-limit 120000000)
+	:config
+	(setq undo-tree-history-directory-alist '(("." . "~/.config/emacs/tmp/undo"))))
 
 (use-package visual-fill-column
-  :custom
-  (visual-fill-column-width 120)
-  (visual-fill-column-center-text t))
+	:custom
+	(visual-fill-column-width 120)
+	(visual-fill-column-center-text t))
 
 (use-package wdired
-  :ensure nil
-  :commands (wdired-change-to-wdired-mode)
-  :config
-  (setq wdired-allow-to-change-permissions t)
-  (setq wdired-create-parent-directories t))
+	:ensure nil
+	:commands (wdired-change-to-wdired-mode)
+	:config
+	(setq wdired-allow-to-change-permissions t)
+	(setq wdired-create-parent-directories t))
 
 (use-package workgroups2
 	:config

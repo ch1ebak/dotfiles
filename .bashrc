@@ -11,7 +11,7 @@ export TERM="wezterm"
 export EDITOR="emacs"
 export FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! -type d \! -name '\''*.tags'\'' -printf '\''%P\n'\'
 export PATH="~/Projekty/scripts:~/.local/scripts:$PATH"
-export MANPAGER='nvim +Man!' 
+export MANPAGER='nvim +Man!'
 
 ## Options
 bind "set colored-stats on"
@@ -88,10 +88,10 @@ alias xbl="brightnessctl --device=intel_backlight set "
 ## Apps
 alias cal="cal -3 -m --color=auto"
 alias dunres="killall -e .dunst-wrapped & sleep 1; dunstify "hello!" &"
-alias em="emacs -nw" 
+alias em="emacs -nw"
 alias lg="lazygit"
-alias n="nvim" 
-alias n.="nvim ." 
+alias n="nvim"
+alias n.="nvim ."
 alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
 alias y="yazi"
 

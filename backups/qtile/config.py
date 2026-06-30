@@ -19,7 +19,7 @@ from libqtile.lazy import lazy
 from typing import List
 
 ## Color scheme
-from themes.nvimalt import colors, screens, widget_defaults
+from themes.tokyonight import colors, screens, widget_defaults
 
 # SETTINGS
 ## General
@@ -61,11 +61,11 @@ def autostart():
 ## Groups
 groups = [
     Group("1", label="󰭹", layout='max', matches=[Match(wm_class=["ferdium"])]),
-    Group("2", label="󰈹", layout='max', matches=[Match(wm_class=["firefox"])]),
-    Group("3", label="󰈚", layout='monadtall', matches=[Match(wm_class=["emacs"])]),
-    Group("4", label="󰅴", layout='monadtall', matches=[Match(wm_class=["ghostty"])]),
+    Group("2", label="󰈹", layout='max', matches=[Match(wm_class=["app.zen_browser.zen"])]),
+    Group("3", label="󰈚", layout='monadtall', matches=[Match(wm_class=["Emacs"])]),
+    Group("4", label="󰅴", layout='monadtall', matches=[Match(wm_class=["org.wezfurlong.wezterm"])]),
     Group("5", label="󰝰", layout='monadtall', matches=[Match(wm_class=["pcmanfm"])]),
-    Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre", "qbittorrent", "nwg-look", "NexusMods.App", "eartag"])]),
+    Group("6", label="󰕊", layout='monadtall', matches=[Match(wm_class=["calibre-gui", "qbittorrent", "nwg-look", "NexusMods.App", "eartag"])]),
     Group("7", label="󰓓", layout='max', matches=[Match(wm_class=["Steam", "steam", "lutris", "heroic"])]),
     Group("8", label="󰓇", layout='max', matches=[Match(wm_class=["easyeffects"])]),
     Group("9", label="󰕧", layout='max', matches=[Match(wm_class=["mpv"])])
@@ -104,20 +104,19 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 ## Keybindings
 keys = [
      # Apps
-    Key([mod], "Return", lazy.spawn("ghostty")),
-    Key([mod], "w", lazy.spawn("firefox")),
-    Key([mod, "shift"], "w", lazy.spawn("firefox --private-window")),
+    Key([mod], "Return", lazy.spawn("wezterm")),
+    Key([mod], "w", lazy.spawn("zen-browser")),
+    Key([mod, "shift"], "w", lazy.spawn("zen-browser --private-window")),
     Key([mod], "d", lazy.spawn("emacsclient -c -a 'emacs'")),
-    Key([mod], "d", lazy.spawn("~/.local/scripts/emacs-restart")),
-    Key([mod], "a", lazy.spawn("ghostty -e yazi")),
+    Key([mod, "shift"], "d", lazy.spawn("~/.local/scripts/emacs-restart")),
+    Key([mod], "a", lazy.spawn("wezterm -e yazi")),
     # Key([mod], "a", lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'")),
-    Key([mod, "shift"], "a", lazy.spawn("thunar")),
+    Key([mod, "shift"], "a", lazy.spawn("pcmanfm")),
 
     # Menu
     Key([mod], "s", lazy.spawn("rofi -m 1 -show drun")),
     Key([mod], "u", lazy.spawn("~/Projekty/scripts/rofi-utilities")),
-    Key([mod], "p", lazy.spawn("slock")),
-    Key([mod, "shift"], "p", lazy.spawn("rofi -m 1 -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu")),
+    Key([mod], "p", lazy.spawn("rofi -m 1 -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu")),
 
     # App control
     Key([mod], "q", lazy.window.kill()),

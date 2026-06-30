@@ -43,21 +43,21 @@
             "type": "kernel"
         },
         {
-            "key": "│ {#37}󰇄 apps    {#keys}│",
+            "key": "│ {#31}󰇄 apps    {#keys}│",
             "type": "packages"
         },
         {
-            "key": "│ {#31}󰉉 root    {#keys}│",
+            "key": "│ {#32}󰉉 root    {#keys}│",
             "type": "disk",
             "folders": "/"
         },
         {
-            "key": "│ {#32}󰉉 user    {#keys}│",
+            "key": "│ {#33}󰉉 user    {#keys}│",
             "type": "disk",
             "folders": "/mnt/User"
         },
         {
-            "key": "│ {#33}󰉉 games   {#keys}│",
+            "key": "│ {#34}󰉉 games   {#keys}│",
             "type": "disk",
             "folders": "/mnt/Games"
         },
