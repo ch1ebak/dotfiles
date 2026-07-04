@@ -11,8 +11,8 @@
   shrink = no
   padding = 25
   horizontal_padding = 25
-  # corner_radius = 5
-  corner_radius = 0
+  corner_radius = 5
+  # corner_radius = 0
 
   width = 275
   height = 100

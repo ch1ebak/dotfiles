@@ -175,10 +175,9 @@
 		:global-prefix "M-SPC")
 
 	(me/leader-keys
-		"SPC" '(counsel-M-x :wk "M-x")
+		"SPC" '(execute-extended-command :wk "M-x")
 		"RET" '(counsel-bookmark :wk "Bookmarks")
-		;; "." '(counsel-find-file :wk "Find file")
-		"." '(dired-sidebar-toggle-with-current-directory :wk "Find file")
+		"." '(find-file :wk "Find file")
 		">" '(dired-jump :wk "Dired")
 		"," '(counsel-fzf :wk "FZF")
 		"<" '(counsel-ibuffer :wk "Buffers")
@@ -210,7 +209,7 @@
 		"h d" '(redraw-display :wk "Redraw display (some issues on wayland)")
 		"h l" '(package-upgrade-all :wk "Update packages")
 		"h r" '((lambda () (interactive) (load-file "~/.dotfiles/.config/emacs/init.el")) :wk "Reload emacs config")
-		"h R" '(restart-emacs :wk "Reload emacs config"))
+		"h R" '(TJ/emacs-restart-daemon :wk "Reload emacs config"))
 
 	(me/leader-keys
 		"p" '(:ignore t :wk "Packages")
@@ -298,10 +297,10 @@
 		"A" 'mkdir
 		"M" 'dired-unmark
 		"s" 'dired-sort-toggle-or-edit
-		"c" 'dired-do-copy
-		"C" 'dired-do-copy
+		"c" 'dired-clipboard-copy
+		"x" 'dired-clipboard-cut
 		"r" 'dired-do-rename
-		"R" 'dired-do-rename
+		"p" 'dired-clipboard-paste
 		"h" 'dired-up-directory
 		"l" 'dired-open-file)
 
@@ -326,7 +325,7 @@
 		which-key-min-display-lines 6
 		which-key-side-window-slot -10
 		which-key-side-window-max-height 0.25
-		which-key-idle-delay 0.8
+		which-key-idle-delay 0
 		which-key-max-description-length 25
 		which-key-allow-imprecise-window-fit nil
 		which-key-separator " → " ))
@@ -401,7 +400,7 @@
 
 (load-theme 'doom-tokyo-night :no-confirm)
 
-;; Transparency
+;; Transparency (On NixOS, it only works with the "emacs-gtk" package.)
 (add-to-list 'default-frame-alist '(alpha-background . 80))
 
 (use-package doom-modeline
@@ -506,6 +505,10 @@
 	(interactive)
 	(kill-new default-directory))
 
+(use-package dired-clipboard
+  :load-path "~/.config/emacs/lisp/dired-clipboard"
+  :hook (dired-mode . dired-clipboard-mode))
+
 (use-package dired-open
 	:config
 	(setq dired-open-extensions '(("gif" . "feh")
@@ -516,9 +519,6 @@
 																("flac" . "mpv")
 																("mp3" . "mpv")
 																("pdf" . "zen-browser"))))
-
-(use-package dired-sidebar
-	:commands (dired-sidebar-toggle-sidebar))
 
 (use-package eglot
 	:ensure nil
@@ -736,6 +736,16 @@
 (use-package rainbow-mode
 	:ensure t
 	:hook prog-mode org-mode markdown-mode)
+
+;; https://timothyjohnsonsci.com/writing/2025-12-30-emacs-daemon-restart/
+(defun TJ/emacs-restart-daemon ()
+  "Restart the Emacs daemon cleanly."
+  (interactive)
+  (save-some-buffers t)
+  (let ((cmd (concat invocation-directory invocation-name)))
+    (call-process-shell-command
+     (format "%s --daemon &" cmd))
+    (kill-emacs)))
 
 (use-package sudo-edit)
 
