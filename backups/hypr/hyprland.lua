@@ -1,13 +1,18 @@
--- ==========================================
--- ▗▖ ▗▖▗▖  ▗▖▗▄▄▖ ▗▄▄▖ ▗▖    ▗▄▖ ▗▖  ▗▖▗▄▄▄
--- ▐▌ ▐▌ ▝▚▞▘ ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌  █
--- ▐▛▀▜▌  ▐▌  ▐▛▀▘ ▐▛▀▚▖▐▌   ▐▛▀▜▌▐▌ ▝▜▌▐▌  █
--- ▐▌ ▐▌  ▐▌  ▐▌   ▐▌ ▐▌▐▙▄▄▖▐▌ ▐▌▐▌  ▐▌▐▙▄▄▀
-                                         
--- github.com/ch1ebak/dotfiles
--- ==========================================
+--
+-- ░██     ░██ ░██     ░██ ░█████████  ░█████████  ░██            ░███    ░███    ░██ ░███████   
+-- ░██     ░██  ░██   ░██  ░██     ░██ ░██     ░██ ░██           ░██░██   ░████   ░██ ░██   ░██  
+-- ░██     ░██   ░██ ░██   ░██     ░██ ░██     ░██ ░██          ░██  ░██  ░██░██  ░██ ░██    ░██ 
+-- ░██████████    ░████    ░█████████  ░█████████  ░██         ░█████████ ░██ ░██ ░██ ░██    ░██ 
+-- ░██     ░██     ░██     ░██         ░██   ░██   ░██         ░██    ░██ ░██  ░██░██ ░██    ░██ 
+-- ░██     ░██     ░██     ░██         ░██    ░██  ░██         ░██    ░██ ░██   ░████ ░██   ░██  
+-- ░██     ░██     ░██     ░██         ░██     ░██ ░██████████ ░██    ░██ ░██    ░███ ░███████   
+--
+-- github.com/ch1ebak
 
--- ENVIRONMENT VARIABLES
+
+-- =================================
+-- ===== ENVIRONMENT VARIABLES =====
+-- =================================
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 hl.env("XDG_SESSION_TYPE", "wayland")
@@ -17,7 +22,10 @@ hl.env("GBM_BACKEND", "nvidia-drm")
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 hl.env("LD_LIBRARY_PATH", "/run/opengl-driver/lib:/run/opengl-driver-32/lib btop")
 
--- MONITORS
+
+-- =================================
+-- =========== MONITORS ============
+-- =================================
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({
   output   = "HDMI-A-1",
@@ -33,7 +41,10 @@ hl.monitor({
   scale    = "1",
 })
 
--- AUTOSTART
+
+-- =================================
+-- =========== AUTOSTART ===========
+-- =================================
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 hl.on("hyprland.start", function () 
   hl.exec_cmd("waybar &")
@@ -47,10 +58,12 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("easyeffects --gapplication-service &")
 end)
 
--- LOOK AND FEEL
 
+-- =================================
+-- ========= LOOK AND FEEL =========
+-- =================================
 -- Theme
-require("themes/everforest")
+require("themes/tokyonight")
 
 -- Settings
 hl.config({
@@ -124,9 +137,10 @@ hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
 
 
--- WINDOW AND WORKSPACE RULES
--- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
--- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
+-- =================================
+-- ======== WORKSPACE RULES ========
+-- =================================
+-- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/ and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 
 -- Ignore maximize requests from all apps. You'll probably like this.
 local suppressMaximizeRule = hl.window_rule({
@@ -167,7 +181,9 @@ hl.window_rule({ match = { class = "com.github.wwmm.easyeffects" }, workspace = 
 hl.window_rule({ match = { class = "mpv" }, workspace = 9 })
 
 
--- KEYS
+-- =================================
+-- =========== KEYBINDS ============
+-- =================================
 hl.config({
   input = {
     follow_mouse = 0,

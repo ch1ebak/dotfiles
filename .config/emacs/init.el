@@ -1,20 +1,24 @@
 ;; -*- lexical-binding: t; -*-
 
-;; ============================
-;; ▗▄▄▄▖▗▖  ▗▖ ▗▄▖  ▗▄▄▖ ▗▄▄▖
-;; ▐▌   ▐▛▚▞▜▌▐▌ ▐▌▐▌   ▐▌
-;; ▐▛▀▀▘▐▌  ▐▌▐▛▀▜▌▐▌    ▝▀▚▖
-;; ▐▙▄▄▖▐▌  ▐▌▐▌ ▐▌▝▚▄▄▖▗▄▄▞▘
+;; ░██████████ ░███     ░███    ░███      ░██████    ░██████   
+;; ░██         ░████   ░████   ░██░██    ░██   ░██  ░██   ░██  
+;; ░██         ░██░██ ░██░██  ░██  ░██  ░██        ░██         
+;; ░█████████  ░██ ░████ ░██ ░█████████ ░██         ░████████  
+;; ░██         ░██  ░██  ░██ ░██    ░██ ░██                ░██ 
+;; ░██         ░██       ░██ ░██    ░██  ░██   ░██  ░██   ░██  
+;; ░██████████ ░██       ░██ ░██    ░██   ░██████    ░██████   
 ;;
-;; github.com/ch1ebak/dotfiles
-;; ============================
-
+;; github.com/ch1ebak
+                                                                   
 
 (setq gc-cons-threshold #x40000000)
 
 (setq read-process-output-max (* 1024 1024 4))
 
-;; Use Package
+
+;; ---------------------------------
+;; ---------- USE PACKAGE ----------
+;; ---------------------------------
 (require 'use-package-ensure)
 (setq use-package-always-ensure t
 			package-enable-at-startup nil
@@ -25,7 +29,10 @@
 
 (setq package-quickstart t)
 
-;; Emacs Config
+
+;; ---------------------------------
+;; ------------ OPTIONS ------------
+;; ---------------------------------
 (use-package emacs
 	:ensure nil
 
@@ -56,7 +63,6 @@
 	(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font" :height 105)
 	(set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 105)
 	(set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 105)
-
 
 	(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory)))
 				auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
@@ -91,7 +97,10 @@
 	(setq savehist-save-minibuffer-history t)
 	(add-to-list 'savehist-additional-variables 'kill-ring))
 
-;; Keymaps
+
+;; ---------------------------------
+;; ------------ KEYMAPS ------------
+;; ---------------------------------
 (use-package evil
 		:init
 		(setq evil-want-integration t
@@ -330,7 +339,10 @@
 		which-key-allow-imprecise-window-fit nil
 		which-key-separator " → " ))
 
-;; Completion
+
+;; ---------------------------------
+;; ---------- COMPLETION -----------
+;; ---------------------------------
 (use-package ivy
 	:diminish
 	:bind (("C-s" . swiper)
@@ -387,7 +399,9 @@
 	(ivy-prescient-mode 1))
 
 
-;; UI
+;; ---------------------------------
+;; ----------- INTERFACE -----------
+;; ---------------------------------
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
 
 (use-package catppuccin-theme)
@@ -465,7 +479,10 @@
 	(tab-bar-mode 1)
 	(tab-bar-history-mode 1))
 
-;; Icons
+
+;; ---------------------------------
+;; ------------- ICONS -------------
+;; ---------------------------------
 (use-package nerd-icons)
 
 (use-package nerd-icons-dired
@@ -476,7 +493,10 @@
 	:config
 	(nerd-icons-completion-mode))
 
-;; Packages
+
+;; ---------------------------------
+;; ----------- PACKAGES ------------
+;; ---------------------------------
 (use-package beacon
 	:init
 	(beacon-mode 1))
