@@ -75,8 +75,7 @@ alias fd="fd -Hia --color always"
 alias rg="rg -i --unrestricted --follow --pretty"
 
 ### remove
-alias rm="trash -vi"
-alias tr="trash -vi"
+# alias tr="trash -vi"
 
 ### system
 alias bt="btop"

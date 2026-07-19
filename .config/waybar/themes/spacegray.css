@@ -28,12 +28,7 @@
 }
 
 #waybar {
-	background-color: transparent;
-  color: @fg;
-}
-
-#tray {
-  padding-left: 15px;
+  background-color: @bg;
   color: @fg;
 }
 
@@ -44,33 +39,53 @@
 }
 
 #workspaces button.active {
-  border-radius: 4px;
-  background-color: @c2;
-  color: @bg;
-}
-
-#clock {
-  color: @c6;
+  border-bottom: 2px solid @c2;
+  color: @c2;
 }
 
 #cpu {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-right: 10px;
+  border-bottom: 2px solid @c5;
   color: @c5;
 }
 
 #memory {
-  padding-right: 15px;
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-right: 10px;
+  border-bottom: 2px solid @c1;
   color: @c1;
 }
 
 #battery {
-  padding-right: 15px;
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-right: 10px;
+  border-bottom: 2px solid @c4;
   color: @c4;
 }
 
 #battery.discharging.warning {
-  border-radius: 4px;
-  background-color: @c2;
-  color: @bg;
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-right: 10px;
+  border-bottom: 2px solid @c2;
+  color: @c2;
+}
+
+#clock {
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-right: 10px;
+  border-bottom: 2px solid @c6;
+  color: @c6;
+}
+
+#tray {
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-right: 10px;
+  color: @fg;
 }

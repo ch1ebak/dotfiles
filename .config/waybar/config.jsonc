@@ -2,12 +2,9 @@
   "layer": "top",
   "position": "top",
   "height": 10,
-  "margin-top": 5,
-  "margin-left": 5,
-  "margin-right": 5,
-  "modules-left": ["tray", "ext/workspaces"],
-  "modules-center": ["clock"],
-  "modules-right": ["cpu", "memory", "battery"],
+  "modules-left": ["ext/workspaces"],
+  "modules-center": [],
+  "modules-right": ["cpu", "memory", "battery", "clock", "tray"],
   "tray": {
     "icon-size": 14,
     "spacing": 10
@@ -31,14 +28,14 @@
     "sort-by-id": true
   },
   "clock": {
-    "format": "{:%a %d.%m.%y | %H:%M}"
+    "format": "date: {:%a %d.%m.%y - %H:%M}"
   },
   "cpu": {
     "format": "cpu: {usage}%",
     "tooltip": false
   },
   "memory": {
-    "format": "memory: {percentage}%"
+    "format": "ram: {percentage}%"
   },
   "battery": {
     "interval": 60,
@@ -46,7 +43,7 @@
       "full": 90,
       "warning": 20,
     },
-    "format": "battery: {capacity}%",
+    "format": "bat: {capacity}%",
     "max-length": 25
   }
 }
