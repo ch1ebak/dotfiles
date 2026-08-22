@@ -10,7 +10,7 @@
 export TERM="wezterm"
 export EDITOR="emacs"
 export FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! -type d \! -name '\''*.tags'\'' -printf '\''%P\n'\'
-export PATH="~/Projekty/scripts:~/.local/scripts:$PATH"
+export PATH="~/Projekty/scripts:~/.local/bin:$PATH"
 export MANPAGER='nvim +Man!'
 
 ## Options
@@ -93,6 +93,7 @@ alias n="nvim"
 alias n.="nvim ."
 alias yt-dlp="yt-dlp -f bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
 alias y="yazi"
+alias devsh="cd ~/.config/nix/devenv; devenv shell --from path:/home/karna/.config/nix/devenv/"
 
 ## Git
 alias gc="git clone"

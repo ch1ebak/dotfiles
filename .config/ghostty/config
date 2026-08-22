@@ -1,8 +1,8 @@
-font-family = Cascadia Code
-font-size = 11
+font-family = JetBrainsMono NF
+font-size = 10.5
 font-synthetic-style = true
 
-theme = /home/karna/.config/ghostty/themes/Dracula
+theme = /home/karna/.config/ghostty/themes/studio1804
 
 background-opacity = 0.8
 background-blur = true

@@ -47,14 +47,13 @@ hl.monitor({
 -- =================================
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 hl.on("hyprland.start", function () 
-  hl.exec_cmd("waybar &")
+  hl.exec_cmd("noctalia-shell &")
   hl.exec_cmd("hypridle &")
-  hl.exec_cmd("dunst &")
-  hl.exec_cmd("nm-applet &")
+  -- hl.exec_cmd("dunst &")
+  -- hl.exec_cmd("nm-applet &")
   hl.exec_cmd("dbus-update-activation-environment --systemd --all")
   hl.exec_cmd("brightnessctl --device=intel_backlight set 40%")
   hl.exec_cmd("wl-paste --type text --watch cliphist store")
-  hl.exec_cmd("pkill swaybg; swaybg -m fill -i $(shuf -e -n1 $HOME/Obrazy/wallpapers/dracula/*) &")
   hl.exec_cmd("easyeffects --gapplication-service &")
 end)
 
@@ -63,7 +62,7 @@ end)
 -- ========= LOOK AND FEEL =========
 -- =================================
 -- Theme
-require("themes/tokyonight")
+require("themes/everforest")
 
 -- Settings
 hl.config({
@@ -118,23 +117,23 @@ hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1}
 hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}     } })
 hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
 
-hl.animation({ leaf = "global",        enabled = true,  speed = 10,   bezier = "default" })
-hl.animation({ leaf = "border",        enabled = true,  speed = 5.39, bezier = "easeOutQuint" })
-hl.animation({ leaf = "windows",       enabled = true,  speed = 4.79, spring = "easy" })
-hl.animation({ leaf = "windowsIn",     enabled = true,  speed = 4.1,  spring = "easy",         style = "slide" })
-hl.animation({ leaf = "windowsOut",    enabled = true,  speed = 1.49, bezier = "linear",       style = "slide" })
-hl.animation({ leaf = "fadeIn",        enabled = true,  speed = 1.73, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeOut",       enabled = true,  speed = 1.46, bezier = "almostLinear" })
-hl.animation({ leaf = "fade",          enabled = true,  speed = 3.03, bezier = "quick" })
-hl.animation({ leaf = "layers",        enabled = true,  speed = 3.81, bezier = "easeOutQuint" })
-hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "easeOutQuint", style = "slide" })
-hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "slide" })
-hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 1.79, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "slide" })
-hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "slide" })
-hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "slide" })
-hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
+hl.animation({ leaf = "global",        enabled = true,  speed = 5,   bezier = "default" })
+hl.animation({ leaf = "border",        enabled = true,  speed = 5,   bezier = "easeOutQuint" })
+hl.animation({ leaf = "windows",       enabled = true,  speed = 4,   spring = "easy" })
+hl.animation({ leaf = "windowsIn",     enabled = true,  speed = 4,   spring = "easy",         style = "slide" })
+hl.animation({ leaf = "windowsOut",    enabled = true,  speed = 1,   bezier = "linear",       style = "slide" })
+hl.animation({ leaf = "fadeIn",        enabled = true,  speed = 1,   bezier = "almostLinear" })
+hl.animation({ leaf = "fadeOut",       enabled = true,  speed = 1,   bezier = "almostLinear" })
+hl.animation({ leaf = "fade",          enabled = true,  speed = 3,   bezier = "quick" })
+hl.animation({ leaf = "layers",        enabled = true,  speed = 3,   bezier = "easeOutQuint" })
+hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,   bezier = "easeOutQuint", style = "slide" })
+hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1,   bezier = "linear",       style = "slide" })
+hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 1,   bezier = "almostLinear" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 1,   bezier = "almostLinear" })
+hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1,   bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1,   bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1,   bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 5,   bezier = "quick" })
 
 
 -- =================================
@@ -167,7 +166,7 @@ hl.window_rule({
 hl.window_rule({ match = { class = "ferdium" }, workspace = 1 })
 hl.window_rule({ match = { class = "app.zen_browser.zen" }, workspace = 2 })
 hl.window_rule({ match = { class = "Emacs" }, workspace = 3 })
-hl.window_rule({ match = { class = "org.wezfurlong.wezterm" }, workspace = 4 })
+hl.window_rule({ match = { class = "com.mitchellh.ghostty" }, workspace = 4 })
 hl.window_rule({ match = { class = "pcmanfm" }, workspace = 5 })
 hl.window_rule({ match = { class = "rawtherapee" }, workspace = 6 })
 hl.window_rule({ match = { class = "Vial" }, workspace = 6 })
@@ -211,18 +210,17 @@ local mainMod = "SUPER"
 hl.bind(mainMod .. " + ", hl.dsp.exec_cmd(""))
 hl.bind(mainMod .. " + SHIFT + ", hl.dsp.exec_cmd(""))
 
-hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("wezterm"))
+hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("ghostty"))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("rofi -show drun"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("app.zen_browser.zen"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("app.zen_browser.zen --private-window"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("emacsclient -c -a 'emacs'"))
 hl.bind(mainMod .. " + SHIFT + D", hl.dsp.exec_cmd("/home/$USER/.local/scripts/emacs-restart"))
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("wezterm -e yazi"))
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("ghostty -e yazi"))
 -- hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("emacsclient -c -a 'emacs' --eval '(dired nil)'"))
 hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd("pcmanfm"))
 hl.bind(mainMod .. " + U", hl.dsp.exec_cmd("/home/$USER/Projekty/scripts/rofi-utilities"))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("rofi -m 1 -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu"))
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("rofi -m 1 -show power-menu -modi power-menu:~/.config/rofi/modules/rofi-power-menu"))
 
 -- App control
 local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())

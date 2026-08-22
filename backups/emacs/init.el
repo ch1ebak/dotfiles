@@ -412,7 +412,7 @@
 				doom-themes-enable-italic t)
 	(doom-themes-org-config))
 
-(load-theme 'doom-tokyo-night :no-confirm)
+(load-theme 'everforest-hard-dark :no-confirm)
 
 ;; Transparency (On NixOS, it only works with the "emacs-gtk" package.)
 (add-to-list 'default-frame-alist '(alpha-background . 80))
