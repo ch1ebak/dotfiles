@@ -39,14 +39,14 @@
 
 # Color scheme
 [urgency_low]
-   background = "#151515"
-   foreground = "#E1E1E1"
-   frame_color = "#E1E1E1"
+   background = "#000000"
+   foreground = "#ffffff"
+   frame_color = "#2fafff"
 [urgency_normal]
-   background = "#151515"
-   foreground = "#E1E1E1"
-   frame_color = "#E1E1E1"
+   background = "#000000"
+   foreground = "#ffffff"
+   frame_color = "#2fafff"
 [urgency_critical]
-   background = "#151515"
-   foreground = "#E1E1E1"
-   frame_color = "#E1E1E1"
+   background = "#000000"
+   foreground = "#ffffff"
+   frame_color = "#2fafff"

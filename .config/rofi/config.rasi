@@ -4,4 +4,6 @@ configuration {
   kb-accept-entry: "Return";
 }
 
-@theme "~/.config/rofi/themes/grayscale"
+//@theme "~/.config/rofi/themes/spacegray"
+
+@theme "/home/karna/.config/rofi/themes/spacegray"
