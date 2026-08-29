@@ -13,7 +13,6 @@ return {
 			css = { "rustywind" },
 			json = { "jq" },
 			lua = { "stylua" },
-			markdown = { "markdownfmt" },
 			nix = { "nixfmt" },
 			rust = { "rustfmt" },
 			sh = { "shellcheck" },
