@@ -88,6 +88,5 @@ vim.lsp.enable({
 	"jqls",
 	"lua_ls",
 	"nixd",
-	"rust_analyzer",
 	"tailwindcss",
 })

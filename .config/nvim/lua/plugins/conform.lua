@@ -14,7 +14,6 @@ return {
 			json = { "jq" },
 			lua = { "stylua" },
 			nix = { "nixfmt" },
-			rust = { "rustfmt" },
 			sh = { "shellcheck" },
 		},
 	},

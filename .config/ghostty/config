@@ -2,7 +2,7 @@ font-family = JetBrainsMono NF
 font-size = 10.5
 font-synthetic-style = true
 
-theme = /home/karna/.config/ghostty/themes/Spacegray
+theme = Modus Vivendi
 
 background-opacity = 0.8
 background-blur = true

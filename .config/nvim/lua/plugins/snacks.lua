@@ -9,7 +9,6 @@ return {
 		image = { enabled = true },
 		notifier = { enabled = true },
 		quickfile = { enabled = true },
-		terminal = { enabled = true },
 		indent = {
 			enabled = true,
 			animate = { enabled = false },
@@ -21,7 +20,7 @@ return {
 				explorer = { hidden = true },
 			},
 			layout = {
-				preset = "ivy",
+				preset = "default",
 				cycle = true,
 			},
 			matcher = {
@@ -62,13 +61,6 @@ return {
 				Snacks.picker.projects()
 			end,
 			desc = "[Snacks] Projects",
-		},
-		{
-			"<leader>tt",
-			function()
-				Snacks.terminal()
-			end,
-			desc = "[Snacks] Terminal",
 		},
 		{
 			"<leader>,",
